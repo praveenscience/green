@@ -8,6 +8,40 @@ angular.module 'greenApp'
   $scope.form = {}
   $scope.sections = []
 
+
+
+  # Main Form
+  master =
+    title: ''
+    description: ''
+    form_type: ''
+    results_viewable: true
+    template: false
+    fields: []
+
+  # Fields
+  field =
+    label: null
+    help_text: ''
+    type: ''
+    required: ''
+    sequence: 0
+    edit_mode: true
+    choices: [
+      label: "Option"
+    ]
+    validation:
+      required: false
+      type: ''
+      category: ''
+      data: ''
+      message: ''
+
+  # Choices
+  choice =
+    label: ''
+
+
   $scope.init = ->
     return unless formId
     $scope.getCurrenForm()
@@ -15,11 +49,16 @@ angular.module 'greenApp'
   $scope.getCurrenForm = ->
     $http.get("api/forms/#{formId}")
       .success( (data) ->
-        $scope.form = data
         $scope.originalForm = angular.copy(data)
+        $scope.form = data
         $scope.form.sections = []
         $scope.loadSections()
       )
+
+  $scope.loadFromCreate = ->
+    # master.fields.push angular.copy(field)
+    $scope.form.sections[0].fields = []
+    $scope.form.sections[0].fields.push("Siidd")
 
   $scope.loadSections = ->
     i = 0
@@ -28,8 +67,12 @@ angular.module 'greenApp'
     while i < len
       $http.get("api/sections/#{$scope.originalForm.sections[i]}")
         .success (data, status) ->
+          data.fields.push(angular.copy(field))
           $scope.form.sections.push(data)
-          $scope.sections.push(data)
+
+          if i is len - 2
+            $scope.loadFromCreate()
+
       i++
 
   $scope.addSectionToForm = (sectionId, formId) ->
@@ -62,11 +105,8 @@ angular.module 'greenApp'
       )
     return
 
-
   $scope.loadSection = (section) ->
     section.active = true
-    console.log section
-
 
 
   $scope.init()

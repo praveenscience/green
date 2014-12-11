@@ -1,36 +1,88 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-
 <div class="container">
-
-<div class="row">
-  <div class="col-lg-4 g-c-sidebar">
-    <ul class="g-c-section-list">
-      <li ng-repeat="section in form.sections" data-section-id="{{section._id}}" ng-click="loadSection(section)" ng-class="{active: section.active}"> {{section.name}} </li>
-      <li class="g-c-section-text-input">
-        <form ng-submit="addNewSection()">
-          <input type="text" required class="form-control" ng-model="newSection" placeholder='+ Add new section' />
-          <input type="submit" name="" hidden>
-        </form>
-      </li>
-    </ul>
-  </div>
-  <div class="col-lg-8 g-c-content">
-    <tabset class="g-c-section-content">
+  <div class="row">
+    <div class="col-lg-4 g-c-sidebar">
+      <ul class="g-c-section-list">
+        <li ng-repeat="section in form.sections" data-section-id="{{section._id}}" ng-click="loadSection(section)" ng-class="{active: section.active}"> {{section.name}} </li>
+        <li class="g-c-section-text-input">
+          <form ng-submit="addNewSection()">
+            <input type="text" required class="form-control" ng-model="newSection" placeholder='+ Add new section' />
+            <input type="submit" name="" hidden>
+          </form>
+        </li>
+      </ul>
+    </div>
+    <div class="col-lg-8 g-c-content">
+      <tabset class="g-c-section-content">
       <tab ng-repeat="section in form.sections" active="section.active" disabled="section.disabled">
-        <h3 class="pull-left">{{section.name}}</h3>
-        <a href="" ng-click="removeSection(section)" class="pull-right">Remove</a>
+      <h3>{{section.name}}</h3>
+      <a href="" ng-click="removeSection(section)" class="">Remove</a>
+
+
+      <div class="ui-sortable sortableList" ui-sortable="sortableOptions" ng-model="section.fields">
+        <div class="form-horizontal formFieldWrap" ng-repeat="field in section.fields">
+          <div class="formSection"  ng-if="field.edit_mode">
+
+            <div class="formSort"><div class="draghandle"></div></div>
+
+            <div class="formFieldActions">
+              <button class="btn btn-small" ng-if="form.fields.length > 1" href="#" ng-click="removeField(field.sequence)">Trash</button>
+            </div>
+
+            <div class="formField">
+              <div class="form-group">
+                <label for="" class="col-sm-3 control-label">Question Title</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="" placeholder="Untitled question">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="" class="col-sm-3 control-label">Help Text</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" id="" placeholder="Give some details ">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="" class="col-sm-3 control-label">Question Type</label>
+                <div class="col-sm-8">
+                  <select name="" id="" class="form-control">
+                      <option value="text">Text</option>
+                      <option value="textarea">Pharagraph</option>
+                      <option value="select">Multiple Choice</option>
+                      <option value="checkbox">Checkboxes</option>
+                      <option value="radiobutton">Radio Buttons</option>
+                  </select>
+                </div>
+              </div>
+
+            <div class="form-group">
+              <div class="col-sm-3"></div>
+              <div class="col-sm-9">
+                <button class="btn btn-info btn-sm" type="button" ng-disabled="!isValidField(field)" ng-click="toggleField(field.sequence)" > Done </button>
+                <input type="checkbox" class="checkbox-small" name="optionsCheckboxes" type="checkbox" id="option6" ng-model="field.required">
+
+                  <label for="" class="smallText">Make this as required field</label>
+              </div>
+            </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+
+
+
       </tab>
-    </tabset>
+      </tabset>
+    </div>
   </div>
-</div>
-
-
-
-<!--   <ul class="list-group">
+  <!--   <ul class="list-group">
     <li class="list-group-item" ng-repeat="user in users">
-        <strong>{{user.name}}</strong><br>
-        <span class="text-muted">{{user.email}}</span>
-        <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+      <strong>{{user.name}}</strong><br>
+      <span class="text-muted">{{user.email}}</span>
+      <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
     </li>
   </ul> -->
 </div>

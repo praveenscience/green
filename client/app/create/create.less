@@ -59,3 +59,95 @@
   margin-left: -16px;
   z-index: 1;
 }
+
+.sortableList {
+  counter-reset: fieldNumber;
+  .formFieldWrap {
+    position: relative;
+    &:before {
+      counter-increment: fieldNumber;
+      content: counter(fieldNumber);
+      position: absolute;
+      bottom: 10px;
+      right: 30px;
+      display: block;
+      width: 30px;
+      height: 30px;
+      background: #eee;
+      z-index: 1;
+      text-align: center;
+      line-height: 30px;
+      font-size: 15px;
+      color: $mutedColor;
+      border-radius: 100%;
+      border: solid 1px #ddd;
+    }
+  }
+}
+
+
+.formSection {
+  background-color: #fff;
+  box-shadow: 0 0 8px #AAA;
+  margin: 10px 0;
+  position: relative;
+  input[type="text"] {
+    min-height: 30px;
+    border: solid 1px #AAA;
+  }
+  .dashed {
+    border: dashed 1px #DCDCDC;
+  }
+  .control-group {
+    margin-bottom: 5px;
+  }
+  .control-label, label {
+    font-weight: normal;
+    color: $mutedColor;
+  }
+  .draghandle {
+    background: url(data:image/png;charset=utf-8;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAGCAYAAADOic7aAAAAH0lEQVQY02M4cODAfyhmgGKy+AzUNIgqmKoGDa4wAgBEaBrozyRdGQAAAABJRU5ErkJggg==) no-repeat 0 0;
+    margin-bottom: 6px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2px;
+    height: 6px;
+    width: 18px;
+  }
+  .formField {
+    padding: 10px 30px 10px 20px;
+  }
+
+  .controls {
+    margin-left: 115px;
+  }
+  .formSort {
+    cursor: move;
+    height: 6px;
+    padding: 15px 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .addElement {
+    cursor: pointer;
+  }
+  .actionInput {
+    margin-bottom: 7px;
+    .k-ico-close {
+      font-size: 10px;
+      color: #AAA;
+      margin-left: 10px;
+      padding: 7px;
+      &:hover {
+        cursor: pointer;
+        background: #eee;
+        color: $grayDark;
+        padding: 6px;
+        text-decoration: none;
+        border: solid 1px #DCDCDC;
+        border-radius: 2px;
+      }
+    }
+  }
+}

@@ -6,7 +6,8 @@ var mongoose = require('mongoose'),
 var SectionSchema = new Schema({
   name: String,
   info: String,
-  active: Boolean
+  active: Boolean,
+  fields: [{ type: Schema.Types.ObjectId, ref: 'Field' }]
 });
 
 module.exports = mongoose.model('Section', SectionSchema);

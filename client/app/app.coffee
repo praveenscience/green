@@ -6,7 +6,8 @@ angular.module 'greenApp', [
   'ngSanitize',
   'ngRoute',
   'btford.socket-io',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ui.sortable'
 ]
 .config ($routeProvider, $locationProvider, $httpProvider) ->
   $routeProvider

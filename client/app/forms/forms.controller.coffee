@@ -9,6 +9,10 @@ angular.module 'greenApp'
     $scope.forms = forms
     socket.syncUpdates 'form', $scope.forms
 
+  $scope.removeForm = (form) ->
+    $http.delete '/api/forms/' + form._id
+
+
   $scope.addform = ->
     return if $scope.newform is ''
     $http.post('/api/forms',
