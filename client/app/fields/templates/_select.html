@@ -1,0 +1,13 @@
+<div data-option="select" ng-switch-when="select">
+  <div class="col-lg-1">
+  </div>
+  <div class="col-lg-10">
+    <div class="multipleOptions" ng-repeat="choice in field.choices">
+      <input type="text" values="option1" class="form-control" ng-model="choice.label" ng-focus="choice.focus">
+      <div class="multipleOptionsActions">
+        <a href="" class="js_clone_element btn btn-xs btn-info" href='' ng-click="addChoice(field.sequence)"> + </a>
+        <a href="" class="js_delete_element btn btn-xs btn-danger" href='' ng-click="removeChoice(field.sequence, field.choices.indexOf(choice))"> x </a>
+      </div>
+    </div>
+  </div>
+</div>

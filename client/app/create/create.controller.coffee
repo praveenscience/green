@@ -63,7 +63,6 @@ angular.module 'greenApp'
   $scope.loadSections = ->
     i = 0
     len = $scope.originalForm.sections.length
-    console.log $scope.originalForm
     while i < len
       $http.get("api/sections/#{$scope.originalForm.sections[i]}")
         .success (data, status) ->
@@ -107,6 +106,29 @@ angular.module 'greenApp'
 
   $scope.loadSection = (section) ->
     section.active = true
+
+  $scope.addField = (section) ->
+    section.fields.push angular.copy(field)
+    $scope.fixSequence(section)
+
+  $scope.fixSequence = (section) ->
+    if section.fields.length isnt 0
+      $.each section.fields, (index, field) -> field.sequence = index
+
+  $scope.removeField = (field, section) ->
+    currentField = section.fields.indexOf(field)
+    section.fields.splice(currentField, 1)
+    $scope.fixSequence(section)
+
+  $scope.toggleField = (sequence, section) ->
+    if sequence isnt undefined
+      $.each section.fields, ->
+        if @.sequence is sequence
+          @.edit_mode = !@.edit_mode
+          return false
+
+  $scope.isValidField = (field) ->
+    field.label not in [undefined, '', null] and field.type not in ['', undefined]
 
 
   $scope.init()

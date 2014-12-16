@@ -85,6 +85,10 @@ module.exports = function (grunt) {
           '<%= yeoman.client %>/{app,components}/**/*.less'],
         tasks: ['injector:less']
       },
+      webfont: {
+        files: ['<%= yeoman.client %>/assets/fonts/{,*/}*.svg'],
+        tasks: ['webfont:icons']
+      },
       less: {
         files: [
           '<%= yeoman.client %>/{app,components}/**/*.less'],
@@ -130,6 +134,29 @@ module.exports = function (grunt) {
         }
       }
     },
+
+    webfont: {
+      icons: {
+        src: '<%= yeoman.client %>/assets/fonts/icons/*.svg',
+        dest: '<%= yeoman.client %>/assets/fonts/',
+        destCss: '<%= yeoman.client %>/app/common/',
+        syntax: 'bootstrap',
+
+        options: {
+          stylesheet: 'less',
+          relativeFontPath: '../assets/fonts/',
+          destHtml: '<%= yeoman.client %>/assets/fonts/',
+          font: 'icons',
+          hashes: false,
+          templateOptions: {
+            classPrefix: 'icon-'
+          }
+
+        },
+
+      }
+    },
+
 
     // Make sure code styles are up to par and there are no obvious mistakes
     jshint: {
@@ -690,7 +717,7 @@ module.exports = function (grunt) {
     'cdnify',
     'cssmin',
     'uglify',
-    'rev',
+    //'rev',
     'usemin'
   ]);
 

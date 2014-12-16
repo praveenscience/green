@@ -151,3 +151,79 @@
     }
   }
 }
+
+// Form create styles
+.form-control {
+  &.dashed {
+    border: dashed 1px #ccc !important;
+  }
+}
+
+.multipleOptions {
+  .fakeRadioCheckbox {
+    float: left;
+    margin-right: 5px;
+    margin-top: 11px;
+    display: inline-block;
+  }
+  input[type="text"] {
+    width: 300px;
+    float: left;
+  }
+  .multipleOptionsActions {
+    float: left;
+    margin-left: 10px;
+    margin-top: 5px;
+  }
+}
+
+
+.formSectionPrev {
+  border-left: solid 3px @brand-primary;
+  position: relative;
+  .formFieldActions {
+    display: none;
+  }
+  &:hover {
+    background: #f8f8f8;
+    cursor: move;
+    .formFieldActions {
+      display: block;
+    }
+  }
+  .formFieldPrev {
+    padding: 15px 120px 10px 20px;
+    border-bottom: solid 1px #eee;
+  }
+}
+
+
+.formDetails {
+  padding: 0;
+  .formTitle {
+    font-weight: 400;
+    font-size: 14px;
+  }
+  .formDesc {
+    padding: 7px;
+  }
+}
+
+.addNewField {
+  margin-top: 20px;
+}
+
+
+.formFieldActions {
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  .btn {
+    padding: 6px 8px;
+    border-radius: 3px;
+    background: #eee;
+    &:hover {
+      background: #eee;
+    }
+  }
+}

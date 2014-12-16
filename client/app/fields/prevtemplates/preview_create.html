@@ -1,0 +1,19 @@
+<div>
+  <div data-option="text" ng-switch-when="text">
+    <div class="form-group">
+      <label for="{{'form_'+form.id+'_field_'+field.id}}"><span ng-bind-html="field.label"></span></label>
+      <abbr title="#{_('views.forms.create.required_field')}" ng-if="field.required"> *</abbr>
+      <input type="email" class="form-control" ng-model="field.response" id="{{'form_'+form.id+'_field_'+field.id}}">
+      <small class="help-block" ng-bind-html="field.help_text"></small>
+    </div>
+  </div>
+
+
+  <div ng-switch-when="textarea" data-option="textarea">
+    <div class="col-lg-1"> </div>
+    <div class="col-lg-10">
+      <textarea name="" id="" rows="2" class="dashed form-control vertical-resize span12"></textarea>
+    </div>
+  </div>
+</div>
+
