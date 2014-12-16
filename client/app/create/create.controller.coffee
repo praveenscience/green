@@ -130,6 +130,14 @@ angular.module 'greenApp'
   $scope.isValidField = (field) ->
     field.label not in [undefined, '', null] and field.type not in ['', undefined]
 
+  $scope.addChoice = (field) ->
+    field.choices = [] if field.choices is undefined
+    field.choices.push angular.copy(choice)
+
+  $scope.removeChoice = (field, index) ->
+    field.choices.splice index, 1
+
+
 
   $scope.init()
 

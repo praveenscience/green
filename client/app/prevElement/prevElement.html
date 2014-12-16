@@ -2,18 +2,55 @@
   <div data-option="text" ng-switch-when="text">
     <div class="form-group">
       <label for="{{'form_'+form.id+'_field_'+field.id}}"><span ng-bind-html="field.label"></span></label>
-      <abbr title="#{_('views.forms.create.required_field')}" ng-if="field.required"> *</abbr>
-      <input type="email" class="form-control" ng-model="field.response" id="{{'form_'+form.id+'_field_'+field.id}}">
+      <abbr title="Required" ng-if="field.required"> *</abbr>
+      <input type="text" class="form-control" ng-model="field.response" id="{{'form_'+form.id+'_field_'+field.id}}">
       <small class="help-block" ng-bind-html="field.help_text"></small>
     </div>
   </div>
 
 
-  <div ng-switch-when="textarea" data-option="textarea">
-    <div class="col-lg-1"> </div>
-    <div class="col-lg-10">
-      <textarea name="" id="" rows="2" class="dashed form-control vertical-resize span12"></textarea>
+  <div data-option="textarea" ng-switch-when="textarea">
+    <div class="form-group">
+      <label for="{{'form_'+form.id+'_field_'+field.id}}"><span ng-bind-html="field.label"></span></label>
+      <abbr title="Required" ng-if="field.required"> *</abbr>
+      <textarea class="form-control" ng-model="field.response" id="{{'form_'+form.id+'_field_'+field.id}}"></textarea>
+      <small class="help-block" ng-bind-html="field.help_text"></small>
     </div>
   </div>
+
+
+  <div data-option="select" ng-switch-when="select">
+    <div class="form-group">
+      <label for="{{'form_'+form.id+'_field_'+field.id}}"><span ng-bind-html="field.label"></span></label>
+      <abbr title="Required" ng-if="field.required"> *</abbr>
+        <select ng-model="field.response" id="{{'form_'+form.id+'_field_'+field.id}}" ng-options="choice.label for choice in field.choices" class="form-control">
+          <option value="">–– Select one ––</option>
+        </select>
+      <small class="help-block" ng-bind-html="field.help_text"></small>
+    </div>
+  </div>
+
+
+
+<!--   br
+  select ng-model="field.response" id="{{'form_'+form.id+'_field_'+field.id}}" ng-options="choice.label for choice in field.choices"
+    option value=""
+      = _('views.common.select_one')
+  span.help-block ng-bind-html="field.help_text"
+  div.alert.alert-error.smallText.error-block.noMargin ng-if="field.validation.invalid"
+    = _('views.forms.create.required_field')
+    a.close href='' ng-click="field.validation.invalid = false" == "&times;"
+
+ -->
+
+<!--   div.alert.alert-error.smallText.error-block  ng-if="field.validation.invalid && field.validation.message != null"
+    span ng-bind-html="field.validation.message"
+    a.close href='' ng-click="field.validation.invalid = false" == "&times;"
+  div.alert.alert-error.smallText.error-block ng-if="field.validation.invalid && field.validation.message == null"
+    = _('views.forms.create.required_field')
+    a.close href='' ng-click="field.validation.invalid = false" == "&times;"
+
+ -->
+
 </div>
 
