@@ -34,11 +34,7 @@ exports.update = function(req, res) {
   Form.findById(req.params.id, function (err, form) {
     if (err) { return handleError(res, err); }
     if(!form) { return res.send(404); }
-
-    console.log(req.body)
     var updated = _.merge(form, req.body);
-    console.log("–––––––––––––––––––")
-    console.log(updated)
     updated.save(function (err) {
       console.log(err);
       if (err) { return handleError(res, err); }
@@ -47,18 +43,12 @@ exports.update = function(req, res) {
   });
 };
 
-
-
-
-
-
 exports.updatesection = function(req, res) {
   if(req.body._id) { delete req.body._id; }
   Form.findById(req.params.id, function (err, form) {
     if (err) { return handleError(res, err); }
     if(!form) { return res.send(404); }
     form.sections.push(req.body.sections)
-    // var updated = _.merge(form, req.body);
     form.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, form);

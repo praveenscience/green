@@ -24,7 +24,7 @@
       <label for="{{'form_'+form.id+'_field_'+field.id}}"><span ng-bind-html="field.label"></span></label>
       <abbr title="Required" ng-if="field.required"> *</abbr>
         <select ng-model="field.response" id="{{'form_'+form.id+'_field_'+field.id}}" ng-options="choice.label for choice in field.choices" class="form-control">
-          <option value="">–– Select one ––</option>
+          <option value="">– Select one –</option>
         </select>
       <small class="help-block" ng-bind-html="field.help_text"></small>
     </div>

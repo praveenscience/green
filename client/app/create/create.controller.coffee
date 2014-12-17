@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'CreateController', ($scope, $http, $routeParams) ->
+.controller 'CreateController', ($scope, $http, $routeParams, sectionData) ->
 
   formId = $routeParams.id
   $scope.originalForm = {}
@@ -30,8 +30,8 @@ angular.module 'greenApp'
     choices: [
       label: "Option"
     ]
-    validation:
-      required: false
+    field_validation:
+      is_required: false
       type: ''
       category: ''
       data: ''
@@ -58,7 +58,6 @@ angular.module 'greenApp'
   $scope.loadFromCreate = ->
     # master.fields.push angular.copy(field)
     $scope.form.sections[0].fields = []
-    $scope.form.sections[0].fields.push("Siidd")
 
   $scope.loadSections = ->
     i = 0
@@ -68,10 +67,8 @@ angular.module 'greenApp'
         .success (data, status) ->
           data.fields.push(angular.copy(field))
           $scope.form.sections.push(data)
-
           if i is len - 2
             $scope.loadFromCreate()
-
       i++
 
   $scope.addSectionToForm = (sectionId, formId) ->
@@ -136,6 +133,10 @@ angular.module 'greenApp'
 
   $scope.removeChoice = (field, index) ->
     field.choices.splice index, 1
+
+
+  $scope.submitSection = (section, sectionId) ->
+    sectionData.create(section)
 
 
 

@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 
 var OptionSchema = new Schema({
   name: String,
-  info: String,
+  value: Number,
   active: Boolean
 });
 

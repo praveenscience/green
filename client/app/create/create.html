@@ -1,7 +1,7 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="container">
-  <div class="row">
-    <div class="col-lg-4 g-c-sidebar">
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="col-lg-3 g-c-sidebar">
       <ul class="g-c-section-list">
         <li ng-repeat="section in form.sections" data-section-id="{{section._id}}" ng-click="loadSection(section)" ng-class="{active: section.active}"> {{section.name}} </li>
         <li class="g-c-section-text-input">
@@ -12,7 +12,7 @@
         </li>
       </ul>
     </div>
-    <div class="col-lg-8 g-c-content">
+    <div class="col-lg-7 g-c-content">
       <tabset class="g-c-section-content">
       <tab ng-repeat="section in form.sections" active="section.active" disabled="section.disabled">
       <h3>{{section.name}}</h3>
@@ -84,16 +84,22 @@
               </div>
             </div>
             <div class="formFieldPrev js_form_template">
-<prev-element field="field"></prev-element>
+              <prev-element field="field"></prev-element>
             </div>
           </div>
         </div>
         <div class="addNewField">
           <div class="btn-toolbar clearfix">
-            <a href="" class="btn btn-sm btn-info" ng-click="addField(section)" type="button" href=''>
+            <a href="" class="btn btn-sm btn-default" ng-click="addField(section)" type="button" href=''>
 <em class="icon icon-plus"></em> Add New Field
             </a>
           </div>
+        </div>
+      </div>
+      <div class="formSubmit">
+      <br><br><br>
+        <div class="pull-right">
+          <button class="btn btn-success" ng-click="submitSection(section, section._id)">Update this section</button>
         </div>
       </div>
 </tab>
