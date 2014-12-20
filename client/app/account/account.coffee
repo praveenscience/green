@@ -3,7 +3,7 @@
 angular.module 'greenApp'
 .config ($routeProvider) ->
   $routeProvider
-  .when '/login',
+  .when '/',
     templateUrl: 'app/account/login/login.html'
     controller: 'LoginCtrl'
 

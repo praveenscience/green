@@ -5,6 +5,7 @@ var Section = require('./section.model');
 var Field = require('../field/field.model');
 var Option = require('../option/option.model');
 var async = require('async');
+var mongoose = require('mongoose');
 
 // Get list of sections
 exports.index = function(req, res) {
@@ -111,15 +112,15 @@ exports.updatefields = function(req, res) {
 
           newField.choices = []
 
-          console.log(newField)
-          console.log('–––––––––––––––––––––––')
 
-          var fieldId = newField._id
+          var fieldId = newField._id || mongoose.Types.ObjectId()
           delete newField._id
 
-          Field.update({_id: fieldId}, newField, {upsert: true}, function (err, fieldN) {
-            fieldsArray.push(fieldN.id);
-            cb(null)
+          Field.update({_id: fieldId}, newField, {upsert: true}).exec(function (err, fieldN) {
+            fieldsArray.push(fieldId);
+            if(newField.sequence == (fieldsLength - 1)){
+              cb(null)
+            }
           });
 
 
@@ -137,7 +138,6 @@ exports.updatefields = function(req, res) {
       },
       function(cb) {
         section.fields = fieldsArray
-        console.log(section)
         section.save(function(err) {
           if (err) {
             return handleError(res, err);

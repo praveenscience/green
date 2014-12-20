@@ -2,6 +2,12 @@
 
 angular.module 'greenApp'
 .controller 'LoginCtrl', ($scope, Auth, $location, $window) ->
+
+  rand = Math.floor((Math.random()*4)+1)
+
+  $scope.loginBgStyle =
+    "background-image": "url(assets/images/login-#{rand}.jpeg)"
+
   $scope.user = {}
   $scope.errors = {}
   $scope.login = (form) ->
@@ -14,7 +20,7 @@ angular.module 'greenApp'
         password: $scope.user.password
 
       .then ->
-        $location.path '/'
+        $location.path '/forms'
 
       .catch (err) ->
         $scope.errors.other = err.message

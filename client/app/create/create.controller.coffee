@@ -8,8 +8,6 @@ angular.module 'greenApp'
   $scope.form = {}
   $scope.sections = []
 
-
-
   # Main Form
   master =
     title: ''

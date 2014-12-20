@@ -12,7 +12,7 @@ angular.module 'greenApp', [
 .config ($routeProvider, $locationProvider, $httpProvider) ->
   $routeProvider
   .otherwise
-    redirectTo: '/'
+    redirectTo: '/forms'
 
   $locationProvider.html5Mode true
   $httpProvider.interceptors.push 'authInterceptor'
@@ -27,7 +27,7 @@ angular.module 'greenApp', [
   # Intercept 401s and redirect you to login
   responseError: (response) ->
     if response.status is 401
-      $location.path '/login'
+      $location.path '/'
       # remove any stale tokens
       $cookieStore.remove 'token'
 
