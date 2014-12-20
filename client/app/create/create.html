@@ -1,7 +1,8 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="container-fluid">
-  <div class="row-fluid">
+<div class="container">
+  <div class="row">
     <div class="col-lg-3 g-c-sidebar">
+      <h4 class="g-c-section-heading">Sections</h4>
       <ul class="g-c-section-list">
         <li ng-repeat="section in form.sections" data-section-id="{{section._id}}" ng-click="loadSection(section)" ng-class="{active: section.active}"> {{section.name}} </li>
         <li class="g-c-section-text-input">
@@ -12,11 +13,21 @@
         </li>
       </ul>
     </div>
-    <div class="col-lg-7 g-c-content">
+    <div class="col-lg-8 g-c-content">
       <tabset class="g-c-section-content">
       <tab ng-repeat="section in form.sections" active="section.active" disabled="section.disabled">
-      <h3>{{section.name}}</h3>
-      <a href="" ng-click="removeSection(section)" class="">Remove</a>
+        <div class="row g-c-seciton-meta">
+          <div class="col-lg-10">
+            <input type="text" ng-model="section.name" class="form-control inlineInput">
+          </div>
+          <div class="col-lg-2">
+            <div class="pull-right">
+              <a href="" ng-click="removeSection(section)" class="btn btn-danger btn-sm"><em class="icon icon-remove"></em></a>
+            </div>
+          </div>
+        </div>
+
+
       <div class="ui-sortable sortableList" ui-sortable="sortableOptions" ng-model="section.fields">
         <div class="formFieldWrap" ng-repeat="field in section.fields">
           <div class="form-horizontal">

@@ -16,7 +16,8 @@ angular.module 'greenApp'
   $scope.addform = ->
     return if $scope.newform is ''
     $http.post('/api/forms',
-      name: "My new form!!"
+      name: $scope.newform
+      status: 'Unpublished'
     ).success( (data, status, headers, config) ->
       $scope.newform = ''
       $location.path("/forms/edit/#{data._id}")
