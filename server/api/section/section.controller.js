@@ -77,34 +77,38 @@ exports.updatefields = function(req, res) {
       return res.send(404);
     }
 
-    var newSection = req.body.data;
+    var newSection = req.body;
     var newFields = newSection.fields;
     var fieldsLength = newFields.length;
     var newField = null;
     var newOptions = null;
     var fieldsArray = []
-    var newOptionsArray = []
+    var choicesArray = []
     var preparedFields = []
     var createdNewField = {}
 
     async.series([
       function(cb) {
-
         async.each(newFields, function(newField, cb1) {
 
           if (newField.choices != undefined && newField.choices.length != 0) {
-
-            async.each(newField.choices, function(newOption, cb) {
-              var option = new Choice(newOption);
-              option.save(function(err, optionN) {
-                if (!err) {
-                  newOptionsArray.push(optionN._id)
-                }
-              })
-
+            async.each(newField.choices, function(newChoice, cb) {
+              var choiceId = newChoice._id || mongoose.Types.ObjectId();
+              delete newChoice._id
+              Choice.update({
+                  _id: choiceId
+                }, newChoice, {
+                  upsert: true
+                })
+                .exec(function(err, choiceN) {
+                  choicesArray.push(choiceId);
+                  if (newField.sequence == (fieldsLength - 1)) {
+                    cb(null)
+                  }
+                });
             }, function(err) {
-
             });
+
           }
 
           newField.choices = []

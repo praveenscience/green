@@ -31,10 +31,10 @@ angular.module 'greenApp'
           required: false
           sequence: 0
           edit_mode: true
-          choices: [
+          choices: [{
             label: "Option 1"
             points: 0
-          ]
+          }]
           field_validation:
             is_required: false
             type: ''
