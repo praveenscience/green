@@ -81,13 +81,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <div class="js_form_template" ng-switch="field.type">
-                    <div ng-include="'app/fields/templates/_text.html'"></div>
-                    <div ng-include="'app/fields/templates/_textarea.html'"></div>
-                    <div ng-include="'app/fields/templates/_checkbox.html'"></div>
-                    <div ng-include="'app/fields/templates/_radio.html'"></div>
-                    <div ng-include="'app/fields/templates/_select.html'"></div>
-                  </div>
+                  <field-element field="field"></field-element>
                 </div>
                 <div class="form-group">
                   <div class="col-lg-1"></div>
