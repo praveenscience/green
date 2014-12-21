@@ -4,45 +4,52 @@ var _ = require('lodash');
 var Form = require('./form.model');
 var Section = require('../section/section.model');
 var Field = require('../field/field.model');
-var Option = require('../option/option.model');
+var Choice = require('../choice/choice.model');
 var auth = require('../../auth/auth.service');
 
 // Get list of forms
 exports.index = function(req, res) {
-  Form.find().populate('author').exec(function (err, forms) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, forms);
-  });
+  Form.find()
+    .populate('author')
+    .exec(function(err, forms) {
+      if (err) {
+        return handleError(res, err);
+      }
+      return res.json(200, forms);
+    });
 };
 
 // Get a single form
 exports.show = function(req, res) {
-  Form.findById(req.params.id).lean()
+  Form.findById(req.params.id)
+    .lean()
     .populate('sections')
-    .exec(function (err, form) {
-    if(err) { return handleError(res, err); }
-    if(!form) { return res.send(404); }
-
-    Section.populate(form, {
-      path: 'sections.fields',
-      model: Field
-    }, function(err, formFields) {
-
-      Option.populate(formFields, {
-        path: 'fields.choices',
-        model: Option
-      }, function(err, formOptions){
-        return res.json(formOptions);
+    .exec(function(err, form) {
+      if (err) {
+        return handleError(res, err);
+      }
+      if (!form) {
+        return res.send(404);
+      }
+      Section.populate(form, {
+        path: 'sections.fields',
+        model: Field
+      }, function(err, formFields) {
+        Choice.populate(formFields, {
+          path: 'sections.fields.choices',
+          model: Choice
+        }, function(err, formOptions) {
+          return res.json(formOptions);
+        })
       })
-    })
-  });
+    });
 };
 
 // Creates a new form in the DB.
 exports.create = function(req, res) {
   var data = req.body;
 
-  var choice = new Option(data.sections[0].fields[0].choices[0]);
+  var choice = new Choice(data.sections[0].fields[0].choices[0]);
 
   choice.save(function(err, optn) {
     if (err) return handleError(err);
@@ -74,57 +81,83 @@ exports.create = function(req, res) {
 
 // Updates an existing form in the DB.
 exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
-  Form.findById(req.params.id, function (err, form) {
-    if (err) { return handleError(res, err); }
-    if(!form) { return res.send(404); }
+  if (req.body._id) {
+    delete req.body._id;
+  }
+  Form.findById(req.params.id, function(err, form) {
+    if (err) {
+      return handleError(res, err);
+    }
+    if (!form) {
+      return res.send(404);
+    }
     var updated = _.merge(form, req.body);
-    updated.save(function (err) {
-      console.log(err);
-      if (err) { return handleError(res, err); }
+    updated.save(function(err) {
+      if (err) {
+        return handleError(res, err);
+      }
       return res.json(200, form);
     });
   });
 };
 
 exports.updatesection = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
-  Form.findById(req.params.id, function (err, form) {
-    if (err) { return handleError(res, err); }
-    if(!form) { return res.send(404); }
+  if (req.body._id) {
+    delete req.body._id;
+  }
+  Form.findById(req.params.id, function(err, form) {
+    if (err) {
+      return handleError(res, err);
+    }
+    if (!form) {
+      return res.send(404);
+    }
     form.sections.push(req.body.sections)
-    form.save(function (err) {
-      if (err) { return handleError(res, err); }
+    form.save(function(err) {
+      if (err) {
+        return handleError(res, err);
+      }
       return res.json(200, form);
     });
   });
 };
 
-
 exports.removesection = function(req, res) {
-    if(req.body._id) { delete req.body._id; }
-      Form.findById(req.params.id, function (err, form) {
-        if (err) { return handleError(res, err); }
-        if(!form) { return res.send(404); }
+  if (req.body._id) {
+    delete req.body._id;
+  }
+  Form.findById(req.params.id, function(err, form) {
+    if (err) {
+      return handleError(res, err);
+    }
+    if (!form) {
+      return res.send(404);
+    }
 
-        form.sections.splice(form.sections.indexOf(req.body.sections), 1)
-        // var updated = _.merge(form, req.body);
-        form.save(function (err) {
-          if (err) { return handleError(res, err); }
-          return res.json(200, form);
-        });
+    form.sections.splice(form.sections.indexOf(req.body.sections), 1)
+      // var updated = _.merge(form, req.body);
+    form.save(function(err) {
+      if (err) {
+        return handleError(res, err);
+      }
+      return res.json(200, form);
+    });
   });
 }
 
-
-
 // Deletes a form from the DB.
 exports.destroy = function(req, res) {
-  Form.findById(req.params.id, function (err, form) {
-    if(err) { return handleError(res, err); }
-    if(!form) { return res.send(404); }
+  Form.findById(req.params.id, function(err, form) {
+    if (err) {
+      return handleError(res, err);
+    }
+    if (!form) {
+      return res.send(404);
+    }
     form.remove(function(err) {
-      if(err) { return handleError(res, err); }
+      if (err) {
+        return handleError(res, err);
+      }
       return res.send(204);
     });
   });

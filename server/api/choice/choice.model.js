@@ -3,9 +3,9 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-var OptionSchema = new Schema({
+var ChoiceSchema = new Schema({
   label: String,
   points: Number
 });
 
-module.exports = mongoose.model('Option', OptionSchema);
+module.exports = mongoose.model('Choice', ChoiceSchema);

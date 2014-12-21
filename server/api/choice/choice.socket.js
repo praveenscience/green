@@ -4,21 +4,21 @@
 
 'use strict';
 
-var Option = require('./option.model');
+var choice = require('./choice.model');
 
 exports.register = function(socket) {
-  Option.schema.post('save', function (doc) {
+  choice.schema.post('save', function (doc) {
     onSave(socket, doc);
   });
-  Option.schema.post('remove', function (doc) {
+  choice.schema.post('remove', function (doc) {
     onRemove(socket, doc);
   });
 }
 
 function onSave(socket, doc, cb) {
-  socket.emit('option:save', doc);
+  socket.emit('choice:save', doc);
 }
 
 function onRemove(socket, doc, cb) {
-  socket.emit('option:remove', doc);
+  socket.emit('choice:remove', doc);
 }

@@ -3,7 +3,7 @@
 var _ = require('lodash');
 var Section = require('./section.model');
 var Field = require('../field/field.model');
-var Option = require('../option/option.model');
+var Choice = require('../choice/choice.model');
 var async = require('async');
 var mongoose = require('mongoose');
 
@@ -19,15 +19,17 @@ exports.index = function(req, res) {
 
 // Get a single section
 exports.show = function(req, res) {
-  Section.findById(req.params.id).populate('fields').exec(function(err, section) {
-    if (err) {
-      return handleError(res, err);
-    }
-    if (!section) {
-      return res.send(404);
-    }
-    return res.json(section);
-  });
+  Section.findById(req.params.id)
+    .populate('fields')
+    .exec(function(err, section) {
+      if (err) {
+        return handleError(res, err);
+      }
+      if (!section) {
+        return res.send(404);
+      }
+      return res.json(section);
+    });
 };
 
 // Creates a new section in the DB.
@@ -75,8 +77,6 @@ exports.updatefields = function(req, res) {
       return res.send(404);
     }
 
-
-
     var newSection = req.body.data;
     var newFields = newSection.fields;
     var fieldsLength = newFields.length;
@@ -87,17 +87,15 @@ exports.updatefields = function(req, res) {
     var preparedFields = []
     var createdNewField = {}
 
-
-
     async.series([
       function(cb) {
 
         async.each(newFields, function(newField, cb1) {
 
-          if (newField.options != undefined && newField.options.length != 0) {
+          if (newField.choices != undefined && newField.choices.length != 0) {
 
-            async.each(newField.options, function(newOption, cb) {
-              var option = new Option(newOption);
+            async.each(newField.choices, function(newOption, cb) {
+              var option = new Choice(newOption);
               option.save(function(err, optionN) {
                 if (!err) {
                   newOptionsArray.push(optionN._id)
@@ -109,20 +107,22 @@ exports.updatefields = function(req, res) {
             });
           }
 
-
           newField.choices = []
 
-
-          var fieldId = newField._id || mongoose.Types.ObjectId()
+          var fieldId = newField._id || mongoose.Types.ObjectId();
           delete newField._id
 
-          Field.update({_id: fieldId}, newField, {upsert: true}).exec(function (err, fieldN) {
-            fieldsArray.push(fieldId);
-            if(newField.sequence == (fieldsLength - 1)){
-              cb(null)
-            }
-          });
-
+          Field.update({
+              _id: fieldId
+            }, newField, {
+              upsert: true
+            })
+            .exec(function(err, fieldN) {
+              fieldsArray.push(fieldId);
+              if (newField.sequence == (fieldsLength - 1)) {
+                cb(null)
+              }
+            });
 
           // var createdField = new Field(newField);
 
@@ -132,9 +132,7 @@ exports.updatefields = function(req, res) {
           //   cb(null);
           // });
 
-
-        }, function(err) {
-        })
+        }, function(err) {})
       },
       function(cb) {
         section.fields = fieldsArray

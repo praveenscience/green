@@ -25,6 +25,10 @@
     <div class="multipleOptions" ng-repeat="choice in field.choices">
       <span class="optionIndex">{{$index + 1}}. </span>
       <input type="text" values="option1" class="form-control" ng-model="choice.label" ng-focus="choice.focus">
+
+      <input type="number" values="0" class="form-control pointsInput" ng-model="choice.points" min='0'>
+
+
       <div class="multipleOptionsActions">
         <a href="" class="js_clone_element btn btn-xs btn-info" href='' ng-click="addChoice(field)" tooltip="Add another option"> <em class="icon icon-plus muted"></em> </a>
         <span ng-if="field.choices.length > 1">
@@ -44,9 +48,13 @@
     <div class="multipleOptions" ng-repeat="choice in field.choices">
       <input name="optionsRadio" type="radio" id="option1" class="fakeRadioCheckbox" >
       <input type="text" values="option1" class="form-control" ng-model="choice.label" ng-focus="choice.focus">
+      <input type="number" values="0" class="form-control pointsInput" ng-model="choice.points" min='0'>
+
       <div class="multipleOptionsActions">
-        <a href="" class="js_clone_element btn btn-xs btn-info" href='' ng-click="addChoice(field)"> + </a>
-        <a href="" class="js_delete_element btn btn-xs btn-danger" href='' ng-click="removeChoice(field, field.choices.indexOf(choice))"> x </a>
+        <a href="" class="js_clone_element btn btn-xs btn-info" href='' ng-click="addChoice(field)" tooltip="Add another option"> <em class="icon icon-plus muted"></em> </a>
+        <span ng-if="field.choices.length > 1">
+        <a href="" class="js_delete_element btn btn-xs btn-danger" href='' tooltip="Remove this option" ng-click="removeChoice(field, field.choices.indexOf(choice))"> <em class="icon icon-remove muted"></em> </a>
+        </span>
       </div>
     </div>
   </div>
@@ -61,9 +69,13 @@
     <div class="multipleOptions" ng-repeat="choice in field.choices">
       <input name="optionsCheckboxes" type="checkBox" id="option1" class="fakeRadioCheckbox" >
       <input type="text" values="option1" class="form-control" ng-model="choice.label" ng-focus="choice.focus">
+      <input type="number" values="0" class="form-control pointsInput" ng-model="choice.points" min='0'>
+
       <div class="multipleOptionsActions">
-        <a href="" class="js_clone_element btn btn-xs btn-info" href='' ng-click="addChoice(field)"> + </a>
-        <a href="" class="js_delete_element btn btn-xs btn-danger" href='' ng-click="removeChoice(field, field.choices.indexOf(choice))"> x </a>
+        <a href="" class="js_clone_element btn btn-xs btn-info" href='' ng-click="addChoice(field)" tooltip="Add another option"> <em class="icon icon-plus muted"></em> </a>
+        <span ng-if="field.choices.length > 1">
+        <a href="" class="js_delete_element btn btn-xs btn-danger" href='' tooltip="Remove this option" ng-click="removeChoice(field, field.choices.indexOf(choice))"> <em class="icon icon-remove muted"></em> </a>
+        </span>
       </div>
     </div>
   </div>

@@ -10,7 +10,7 @@ var FieldSchema = new Schema({
   required: String,
   sequence: Number,
   edit_mode: Boolean,
-  choices: [{ type: Schema.Types.ObjectId, ref: 'Option' }],
+  choices: [{ type: Schema.Types.ObjectId, ref: 'Choice' }],
   field_validation: {
     is_required: String,
     type: String,

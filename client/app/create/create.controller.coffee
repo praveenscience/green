@@ -28,6 +28,7 @@ angular.module 'greenApp'
     choices: [
       label: "Option"
       points: 0
+      focus: true
     ]
     field_validation:
       is_required: false

@@ -52,5 +52,42 @@
 
  -->
 
+
+
+
+  <div data-option="checkbox" ng-switch-when="checkbox">
+    <div class="form-group">
+      <label for="{{'form_'+form.id+'_field_'+field.id}}"><span ng-bind-html="field.label"></span></label>
+      <abbr title="Required" ng-if="field.required"> *</abbr>
+      <div class="inputLabel inline" ng-repeat="choice in field.choices">
+        <input type="checkBox" ng-model="choice.selected" value="{{choice.id}}" id="{{'form_'+form.id+'_field_'+field.id+'_choice_'+choice.id}}" />
+        <label ng-bind-html="choice.label" for="{{'form_'+form.id+'_field_'+field.id+'_choice_'+choice.id}}"></label>
+      </div>
+      <small class="help-block" ng-bind-html="field.help_text"></small>
+    </div>
+  </div>
+
+
+
+  <!-- div.alert.alert-error.smallText.error-block.noMargin ng-if="field.validation.invalid"
+    = _('views.forms.create.required_field')
+    a.close href='' ng-click="field.validation.invalid = false" == "&times;"
+ -->
+
+
+ <div data-option="radiobutton" ng-switch-when="radiobutton">
+    <div class="form-group">
+      <label for="{{'form_'+form.id+'_field_'+field.id}}"><span ng-bind-html="field.label"></span></label>
+      <abbr title="Required" ng-if="field.required"> *</abbr>
+      <div class="inputLabel inline" ng-repeat="choice in field.choices">
+        <input type="radio" name="{{'form_'+form.id+'_field_'+field.id}}" ng-model="choice.selected" value="{{choice.id}}" id="{{'form_'+form.id+'_field_'+field.id+'_choice_'+choice.id}}" />
+        <label ng-bind-html="choice.label" for="{{'form_'+form.id+'_field_'+field.id+'_choice_'+choice.id}}"></label>
+      </div>
+      <small class="help-block" ng-bind-html="field.help_text"></small>
+    </div>
+  </div>
+
+
+
 </div>
 
