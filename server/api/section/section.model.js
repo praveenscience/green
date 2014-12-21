@@ -4,9 +4,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var SectionSchema = new Schema({
-  name: String,
-  info: String,
-  active: Boolean,
+  title: String,
   fields: [{ type: Schema.Types.ObjectId, ref: 'Field' }]
 });
 

@@ -8,7 +8,6 @@ var expressJwt = require('express-jwt');
 var compose = require('composable-middleware');
 var User = require('../api/user/user.model');
 var validateJwt = expressJwt({ secret: config.secrets.session });
-var uwshib = require('passport-uwshib');
 
 
 /**

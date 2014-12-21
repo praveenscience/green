@@ -27,6 +27,7 @@ angular.module 'greenApp'
     edit_mode: true
     choices: [
       label: "Option"
+      points: 0
     ]
     field_validation:
       is_required: false
@@ -47,27 +48,10 @@ angular.module 'greenApp'
   $scope.getCurrenForm = ->
     $http.get("api/forms/#{formId}")
       .success( (data) ->
+        console.log data
         $scope.originalForm = angular.copy(data)
         $scope.form = data
-        $scope.form.sections = []
-        $scope.loadSections()
       )
-
-  $scope.loadFromCreate = ->
-    # master.fields.push angular.copy(field)
-    $scope.form.sections[0].fields = []
-
-  $scope.loadSections = ->
-    i = 0
-    len = $scope.originalForm.sections.length
-    while i < len
-      $http.get("api/sections/#{$scope.originalForm.sections[i]}")
-        .success (data, status) ->
-          data.fields.push(angular.copy(field))
-          $scope.form.sections.push(data)
-          if i is len - 2
-            $scope.loadFromCreate()
-      i++
 
   $scope.addSectionToForm = (sectionId, formId) ->
     $http.put("api/forms/s/#{formId}", {
@@ -86,7 +70,7 @@ angular.module 'greenApp'
 
   $scope.addNewSection = ->
     newSection = {
-      name: $scope.newSection
+      title: $scope.newSection
     }
 
     return if $scope.newSection is ''
@@ -104,23 +88,13 @@ angular.module 'greenApp'
 
   $scope.addField = (section) ->
     section.fields.push angular.copy(field)
-    $scope.fixSequence(section)
-
-  $scope.fixSequence = (section) ->
-    if section.fields.length isnt 0
-      $.each section.fields, (index, field) -> field.sequence = index
 
   $scope.removeField = (field, section) ->
     currentField = section.fields.indexOf(field)
     section.fields.splice(currentField, 1)
-    $scope.fixSequence(section)
 
-  $scope.toggleField = (sequence, section) ->
-    if sequence isnt undefined
-      $.each section.fields, ->
-        if @.sequence is sequence
-          @.edit_mode = !@.edit_mode
-          return false
+  $scope.toggleField = (field, section) ->
+    field.edit_mode = !field.edit_mode;
 
   $scope.isValidField = (field) ->
     field.label not in [undefined, '', null] and field.type not in ['', undefined]
@@ -136,11 +110,7 @@ angular.module 'greenApp'
   $scope.submitSection = (section, sectionId) ->
     sectionData.create(section)
 
-
-
   $scope.init()
-
-
 
   # $http.get '/api/users'
   # .success (users) ->

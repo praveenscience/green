@@ -1,10 +1,9 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="container">
+<div class="container page-container">
 
 <div class="row">
   <div class="col-lg-12">
-
     <table class="table table-striped">
       <thead>
         <tr>
@@ -14,16 +13,24 @@
           <th> Certification Name </th>
           <th> Status </th>
           <th> Created by </th>
-          <th> </th>
+          <th> Created on </th>
+          <th> Actions </th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="form in forms">
-          <td> {{$index}}</td>
+          <td> {{$index + 1}}</td>
           <td> <a href="/forms/edit/{{form._id}}">{{form.name}}</a></td>
           <td> {{form.status}}</td>
           <td> {{form.author.name}}</td>
-          <td> <a href="" ng-click="removeForm(form)">Remove</a></td>
+          <td> {{getFormatedDate(form.created)}}</td>
+          <td>
+
+          <a href="" class="btn btn-info btn-xs" ng-click="previewForm(form)"><em class="icon icon-eye"></em></a>
+          &nbsp;&nbsp;&nbsp;
+          <a href="" class="btn btn-danger btn-xs" ng-click="removeForm(form)"><em class="icon icon-remove"></em></a>
+
+          </td>
         </tr>
       </tbody>
     </table>

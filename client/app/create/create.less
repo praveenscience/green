@@ -23,21 +23,37 @@
 .g-c-seciton-meta {
   margin-bottom: 30px;
   margin-top: 20px;
+}
 
-  .inlineInput {
-    padding: 0;
-    border: 0;
-    box-shadow: none;
-    font-size: 23px;
-    font-weight: 200;
-    padding: 5px 10px;
-    border-bottom: solid 1px #ddd;
-    &:hover {
-      border-bottom: solid 1px @darkgray-light;
-    }
-    &:focus {
-      border-bottom: solid 1px @darkgray-light;
-    }
+.formTitle {
+
+}
+
+.form-meta {
+  margin: -30px -15px 30px;
+  overflow: hidden;
+  background: #f8f8f8;
+  padding: 30px 15px;
+  border-radius: 5px 5px 0 0;
+  border-bottom: solid 1px #eee;
+}
+
+.page-container input.inlineInput {
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  font-size: 23px;
+  font-weight: 200;
+  padding: 5px 10px;
+  border-bottom: solid 1px #ddd;
+  &:hover {
+    border-bottom: solid 1px @darkgray-light;
+  }
+  &:focus {
+    border-bottom: solid 1px @darkgray-light;
+  }
+  &.flag {
+    background: transparent;
   }
 }
 
@@ -86,8 +102,6 @@
   }
 }
 
-
-
 .g-c-content {
   border-left: solid 1px #ddd;
   min-height: 600px;
@@ -111,19 +125,19 @@
       background: #eee;
       z-index: 1;
       text-align: center;
-      line-height: 30px;
-      font-size: 15px;
-      color: $mutedColor;
+      line-height: 28px;
+      font-size: 13px;
       border-radius: 100%;
       border: solid 1px #ddd;
+      color: #888;
     }
   }
 }
 
-
 .formSection {
   background-color: #fff;
-  box-shadow: 0 0 8px #AAA;
+  box-shadow: 0 0 5px #CACACA;
+  border-radius: 2px;
   margin: 10px 0;
   position: relative;
   input[type="text"] {
@@ -156,6 +170,9 @@
     .control-label {
       max-width: 140px;
       color: @mediumgray-dark;
+    }
+    select {
+      max-width: 200px;
     }
   }
 
@@ -200,6 +217,16 @@
   }
 }
 
+.optionIndex {
+  float: left;
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  width: 20px;
+  font-size: 15px;
+  color: #888;
+}
+
 .multipleOptions {
   overflow: hidden;
   display: block;
@@ -217,8 +244,16 @@
   }
   .multipleOptionsActions {
     float: left;
-    margin-left: 10px;
+    margin-left: 20px;
     margin-top: 5px;
+    a {
+      display: inline-block;
+      margin-right: 10px;
+      border-radius: 3px;
+      em {
+        font-size: 10px;
+      }
+    }
   }
 }
 
@@ -237,8 +272,11 @@
     }
   }
   .formFieldPrev {
-    padding: 15px 120px 10px 20px;
+    padding: 15px 100px 10px 20px;
     border-bottom: solid 1px #eee;
+    select {
+      max-width: 300px;
+    }
   }
 }
 
@@ -261,11 +299,12 @@
 .formFieldActions {
   position: absolute;
   top: 10px;
-  right: 30px;
+  right: 20px;
   .btn {
-    padding: 6px 8px;
+    padding: 4px 7px;
     border-radius: 3px;
     background: #eee;
+    margin-right: 4px;
     em {
       color: #888;
     }

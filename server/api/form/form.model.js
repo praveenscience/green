@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 
 var FormSchema = new Schema({
   name: String,
-  info: String,
+  description: String,
   sections: [{
     type: Schema.Types.ObjectId,
     ref: 'Section'

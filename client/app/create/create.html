@@ -1,10 +1,28 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="container">
+<div class="container page-container">
+  <div class="row">
+  <div class="form-meta">
+    <div class="col-lg-8">
+      <div class="form-title">
+        <input type="text" ng-model="form.name" class="form-control inlineInput flag">
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="form-actions pull-right">
+        <button class="btn btn-info btn-sm">Preivew</button>
+        &nbsp;&nbsp;&nbsp;
+        <button class="btn btn-success btn-sm">Publish</button>
+        &nbsp;&nbsp;&nbsp;
+        <button class="btn btn-danger btn-sm"><em class="icon icon-remove"></em></button>
+      </div>
+    </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-lg-3 g-c-sidebar">
       <h4 class="g-c-section-heading">Sections</h4>
       <ul class="g-c-section-list">
-        <li ng-repeat="section in form.sections" data-section-id="{{section._id}}" ng-click="loadSection(section)" ng-class="{active: section.active}"> {{section.name}} </li>
+        <li ng-repeat="section in form.sections" data-section-id="{{section._id}}" ng-click="loadSection(section)" ng-class="{active: section.active}"> {{section.title}} </li>
         <li class="g-c-section-text-input">
           <form ng-submit="addNewSection()">
             <input type="text" required class="form-control" ng-model="newSection" placeholder='+ Add new section' />
@@ -13,12 +31,12 @@
         </li>
       </ul>
     </div>
-    <div class="col-lg-8 g-c-content">
+    <div class="col-lg-9 g-c-content">
       <tabset class="g-c-section-content">
       <tab ng-repeat="section in form.sections" active="section.active" disabled="section.disabled">
         <div class="row g-c-seciton-meta">
           <div class="col-lg-10">
-            <input type="text" ng-model="section.name" class="form-control inlineInput">
+            <input type="text" ng-model="section.title" class="form-control inlineInput">
           </div>
           <div class="col-lg-2">
             <div class="pull-right">
@@ -27,11 +45,10 @@
           </div>
         </div>
 
-
       <div class="ui-sortable sortableList" ui-sortable="sortableOptions" ng-model="section.fields">
         <div class="formFieldWrap" ng-repeat="field in section.fields">
           <div class="form-horizontal">
-            <div class="formSection"  ng-if="field.edit_mode">
+            <div class="formSection animate-if"  ng-if="field.edit_mode" >
               <div class="formSort"><div class="draghandle"></div></div>
               <div class="formFieldActions">
                 <button class="btn btn-small inlineText" type="button" ng-if="section.fields.length > 1" ng-click="removeField(field, section)">
@@ -48,7 +65,7 @@
                 <div class="form-group">
                   <label for="" class="col-lg-3 control-label">Help Text</label>
                   <div class="col-lg-8">
-                    <input type="text" class="form-control" id="" placeholder="Give some details "  ng-model="field.help_text">
+                    <input type="text" class="form-control" id="" placeholder="Give some details" ng-model="field.help_text">
                   </div>
                 </div>
                 <div class="form-group">
@@ -75,7 +92,8 @@
                 <div class="form-group">
                   <div class="col-lg-1"></div>
                   <div class="col-lg-9">
-                    <button class="btn btn-info btn-sm" type="button" ng-disabled="!isValidField(field)" ng-click="toggleField(field.sequence, section)" > Done </button>
+                    <button class="btn btn-info btn-sm" type="button" ng-disabled="!isValidField(field)" ng-click="toggleField(field)" > Done </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="checkbox" class="checkbox-small" name="optionsCheckboxes" type="checkbox" id="option6" ng-model="field.required">
                     <label for="" class="smallText">Make this as required field</label>
                   </div>
@@ -86,7 +104,7 @@
           <div class="formSectionPrev" ng-if="!field.edit_mode">
             <div class="formFieldActions">
               <div class="hList">
-                <button class="btn btn-small" type="button" ng-click="toggleField(field.sequence, section)">
+                <button class="btn btn-small" type="button" ng-click="toggleField(field)">
                 <em class="icon icon-pencil"></em>
                 </button>
                 <button class="btn btn-small inlineText" type="button" ng-if="section.fields.length > 1" ng-click="removeField(field, section)">

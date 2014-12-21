@@ -2,10 +2,14 @@
 
 var _ = require('lodash');
 var Form = require('./form.model');
+var Section = require('../section/section.model');
+var Field = require('../field/field.model');
+var Option = require('../option/option.model');
+var auth = require('../../auth/auth.service');
 
 // Get list of forms
 exports.index = function(req, res) {
-  Form.find(function (err, forms) {
+  Form.find().populate('author').exec(function (err, forms) {
     if(err) { return handleError(res, err); }
     return res.json(200, forms);
   });
@@ -13,18 +17,58 @@ exports.index = function(req, res) {
 
 // Get a single form
 exports.show = function(req, res) {
-  Form.findById(req.params.id, function (err, form) {
+  Form.findById(req.params.id).lean()
+    .populate('sections')
+    .exec(function (err, form) {
     if(err) { return handleError(res, err); }
     if(!form) { return res.send(404); }
-    return res.json(form);
+
+    Section.populate(form, {
+      path: 'sections.fields',
+      model: Field
+    }, function(err, formFields) {
+
+      Option.populate(formFields, {
+        path: 'fields.choices',
+        model: Option
+      }, function(err, formOptions){
+        return res.json(formOptions);
+      })
+    })
   });
 };
 
 // Creates a new form in the DB.
 exports.create = function(req, res) {
-  Form.create(req.body, function(err, form) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, form);
+  var data = req.body;
+
+  var choice = new Option(data.sections[0].fields[0].choices[0]);
+
+  choice.save(function(err, optn) {
+    if (err) return handleError(err);
+    var field = data.sections[0].fields[0];
+    field.choices = []
+    field.choices.push(optn._id);
+    var fieldObj = new Field(field);
+    fieldObj.save(function(err, fld) {
+      if (err) return handleError(err);
+      var section = data.sections[0];
+      section.fields = []
+      section.fields.push(fld._id);
+      var sectionObj = new Section(section);
+      sectionObj.save(function(err, sect) {
+        if (err) return handleError(err);
+        var form = data
+        form.sections = []
+        form.sections.push(sect._id);
+        form.author = req.user._id
+        var formObj = new Form(form);
+        formObj.save(function(err, frm) {
+          if (err) return handleError(err);
+          return res.json(201, frm);
+        })
+      });
+    });
   });
 };
 

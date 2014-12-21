@@ -3,6 +3,10 @@
 angular.module 'greenApp'
 .controller 'FormsController', ($scope, $http, socket, $location) ->
 
+  $scope.getFormatedDate = (date) ->
+    d = new Date(date)
+    d.toUTCString()
+
   $scope.forms = []
 
   $http.get('/api/forms').success (forms) ->
@@ -12,17 +16,40 @@ angular.module 'greenApp'
   $scope.removeForm = (form) ->
     $http.delete '/api/forms/' + form._id
 
-
   $scope.addform = ->
     return if $scope.newform is ''
-    $http.post('/api/forms',
+
+    formSkl =
       name: $scope.newform
       status: 'Unpublished'
-    ).success( (data, status, headers, config) ->
-      $scope.newform = ''
-      $location.path("/forms/edit/#{data._id}")
-      return
-    )
+      sections: [{
+        title: "Untitled section"
+        fields: [{
+          label: "Untitled filed"
+          help_text: 'help text goes here'
+          type: 'text'
+          required: false
+          sequence: 0
+          edit_mode: true
+          choices: [
+            label: "Option 1"
+            points: 0
+          ]
+          field_validation:
+            is_required: false
+            type: ''
+            category: ''
+            data: ''
+            message: ''
+        }]
+      }]
+
+    $http.post('/api/forms', formSkl)
+      .success( (data, status, headers, config) ->
+        $scope.newform = ''
+        $location.path("/forms/edit/#{data._id}")
+        return
+      )
     return
 
   $scope.deleteform = (form) ->
