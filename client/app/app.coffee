@@ -8,7 +8,8 @@ angular.module 'greenApp', [
   'ngAnimate',
   'btford.socket-io',
   'ui.bootstrap',
-  'ui.sortable'
+  'ui.sortable',
+  'angular-ladda'
 ]
 .config ($routeProvider, $locationProvider, $httpProvider) ->
   $routeProvider

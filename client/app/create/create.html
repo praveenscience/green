@@ -2,12 +2,12 @@
 <div class="container page-container">
   <div class="row">
   <div class="form-meta">
-    <div class="col-lg-8">
+    <div class="col-lg-8 col-sm-8">
       <div class="form-title">
         <input type="text" ng-model="form.name" class="form-control inlineInput flag">
       </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-4 col-sm-4">
       <div class="form-actions pull-right">
         <button class="btn btn-info btn-sm">Preivew</button>
         &nbsp;&nbsp;&nbsp;
@@ -19,7 +19,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-3 g-c-sidebar">
+    <div class="col-lg-3 col-sm-3 g-c-sidebar">
       <h4 class="g-c-section-heading">Sections</h4>
       <ul class="g-c-section-list">
         <li ng-repeat="section in form.sections" data-section-id="{{section._id}}" ng-click="loadSection(section)" ng-class="{active: section.active}"> {{section.title}} </li>
@@ -31,19 +31,47 @@
         </li>
       </ul>
     </div>
-    <div class="col-lg-9 g-c-content">
+    <div class="col-lg-9 col-sm-9 g-c-content">
       <tabset class="g-c-section-content">
       <tab ng-repeat="section in form.sections" active="section.active" disabled="section.disabled">
+
+
         <div class="row g-c-seciton-meta">
-          <div class="col-lg-10">
+          <div class="col-lg-8 col-sm-8">
             <input type="text" ng-model="section.title" class="form-control inlineInput">
           </div>
-          <div class="col-lg-2">
+          <div class="col-lg-4 col-sm-4">
+                <span class="last-save-text text-muted">
+                  <span ng-if='enableSaveButton'> Upto data!</span>
+                  <span ng-if='!enableSaveButton'> Section changed!</span>
+                </span>
+
+
+<!--             <span class="last-save-text text-muted text-small">
+              <strong>Last Saved on </strong> {{getFormatedDate(section.updated)}}
+            </span> -->
             <div class="pull-right">
-              <a href="" ng-click="removeSection(section)" class="btn btn-danger btn-sm"><em class="icon icon-remove"></em></a>
+              <div class="formSubmit">
+                <div class="pull-right">
+                  <button class="btn btn-success" ng-click="submitSection(section, section._id)" ladda="sectionSaving" data-style="expand-left"
+                  ng-disabled="enableSaveButton"
+                  >Save</button>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <a href="" ng-click="removeSection(section)" class="btn btn-danger btn-sm"><em class="icon icon-remove"></em></a>
+                </div>
+                <div class="clearfix"></div>
+
+              </div>
             </div>
           </div>
         </div>
+<!--
+        <div class="row">
+          <div class="col-lg-1 col-sm-11">
+
+          </div>
+        </div>
+ -->
 
       <div class="ui-sortable sortableList" ui-sortable="sortableOptions" ng-model="section.fields">
         <div class="formFieldWrap" ng-repeat="field in section.fields">
@@ -57,20 +85,20 @@
               </div>
               <div class="formField">
                 <div class="form-group">
-                  <label for="" class="col-lg-3 control-label">Question Title</label>
-                  <div class="col-lg-8">
+                  <label for="" class="col-lg-3 col-sm-3 control-label">Question Title</label>
+                  <div class="col-lg-8 col-sm-8">
                     <input type="text" class="form-control" id="" placeholder="Untitled question" ng-model="field.label">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="" class="col-lg-3 control-label">Help Text</label>
-                  <div class="col-lg-8">
+                  <label for="" class="col-lg-3 col-sm-3 control-label">Help Text</label>
+                  <div class="col-lg-8 col-sm-8">
                     <input type="text" class="form-control" id="" placeholder="Give some details" ng-model="field.help_text">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="" class="col-lg-3 control-label">Question Type</label>
-                  <div class="col-lg-8">
+                  <label for="" class="col-lg-3 col-sm-3 control-label">Question Type</label>
+                  <div class="col-lg-8 col-sm-8">
                     <select name="" id="" class="form-control" ng-model="field.type">
                       <option value="text">Text</option>
                       <option value="textarea">Pharagraph</option>
@@ -84,8 +112,8 @@
                   <field-element field="field"></field-element>
                 </div>
                 <div class="form-group">
-                  <div class="col-lg-1"></div>
-                  <div class="col-lg-9">
+                  <div class="col-lg-1 col-sm-1"></div>
+                  <div class="col-lg-9 col-sm-9">
                     <button class="btn btn-info btn-sm" type="button" ng-disabled="!isValidField(field)" ng-click="toggleField(field)" > Done </button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="checkbox" class="checkbox-small" name="optionsCheckboxes" type="checkbox" id="option6" ng-model="field.required">
@@ -117,12 +145,6 @@
 <em class="icon icon-plus"></em> Add New Field
             </a>
           </div>
-        </div>
-      </div>
-      <div class="formSubmit">
-      <br><br><br>
-        <div class="pull-right">
-          <button class="btn btn-success" ng-click="submitSection(section, section._id)">Update this section</button>
         </div>
       </div>
 </tab>

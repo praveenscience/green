@@ -7,6 +7,8 @@ angular.module 'greenApp'
   $scope.originalForm = {}
   $scope.form = {}
   $scope.sections = []
+  $scope.sectionSaving = false
+  $scope.enableSaveButton = true
 
   # Main Form
   master =
@@ -41,6 +43,10 @@ angular.module 'greenApp'
   choice =
     label: ''
 
+
+  $scope.getFormatedDate = (date) ->
+    d = new Date(date)
+    d.toUTCString()
 
   $scope.init = ->
     return unless formId
@@ -108,8 +114,17 @@ angular.module 'greenApp'
     field.choices.splice index, 1
 
 
+  $scope.$watch('form.sections', (old, newValue) ->
+    $scope.enableSaveButton = false
+  , true)
+
   $scope.submitSection = (section, sectionId) ->
+    $scope.sectionSaving = true
     sectionData.create(section)
+      .success( (data, status) ->
+        $scope.sectionSaving = false
+        $scope.enableSaveButton = true
+      )
 
   $scope.init()
 

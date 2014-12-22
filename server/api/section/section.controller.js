@@ -70,6 +70,8 @@ exports.updatefields = function(req, res) {
   }
   Section.findById(req.params.id, function(err, section) {
 
+
+
     if (err) {
       return handleError(res, err);
     }
@@ -120,6 +122,7 @@ exports.updatefields = function(req, res) {
     var _updateSection = function(fieldsArr, callbackSections) {
       section.fields = []
       section.fields = fieldsArr
+      section.updated = Date.now()
       section.save(function(err) {
         if (err) {
           return handleError(res, err);
