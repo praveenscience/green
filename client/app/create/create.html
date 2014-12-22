@@ -9,11 +9,11 @@
     </div>
     <div class="col-lg-4 col-sm-4">
       <div class="form-actions pull-right">
-        <button class="btn btn-info btn-sm">Preivew</button>
+        <a class="btn btn-info btn-sm" href="/forms/{{form._id}}" tooltip="See how the form looks!" tooltip-append-to-body="true"  tooltip-placement="top">Preview</a>
         &nbsp;&nbsp;&nbsp;
-        <button class="btn btn-success btn-sm">Publish</button>
+        <button class="btn btn-success btn-sm" tooltip="Publish your form" tooltip-append-to-body="true" >Publish</button>
         &nbsp;&nbsp;&nbsp;
-        <button class="btn btn-danger btn-sm"><em class="icon icon-remove"></em></button>
+        <button class="btn btn-danger btn-sm" tooltip-append-to-body="true"  tooltip="Remove this form! Can't be reverted!"><em class="icon icon-remove"></em></button>
       </div>
     </div>
     </div>
@@ -34,16 +34,14 @@
     <div class="col-lg-9 col-sm-9 g-c-content">
       <tabset class="g-c-section-content">
       <tab ng-repeat="section in form.sections" active="section.active" disabled="section.disabled">
-
-
-        <div class="row g-c-seciton-meta">
+        <div class="row g-c-seciton-meta" sticky-media="(min-width:640px)">
           <div class="col-lg-8 col-sm-8">
             <input type="text" ng-model="section.title" class="form-control inlineInput">
           </div>
           <div class="col-lg-4 col-sm-4">
                 <span class="last-save-text text-muted">
-                  <span ng-if='enableSaveButton'> Upto data!</span>
-                  <span ng-if='!enableSaveButton'> Section changed!</span>
+                  <span ng-if='enableSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(section.updated)}}" tooltip-position="left"> Upto data!</span>
+                  <span ng-if='!enableSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(section.updated)}}" tooltip-position="left"> Section changed!</span>
                 </span>
 
 
@@ -57,7 +55,7 @@
                   ng-disabled="enableSaveButton"
                   >Save</button>
                   &nbsp;&nbsp;&nbsp;&nbsp;
-                  <a href="" ng-click="removeSection(section)" class="btn btn-danger btn-sm"><em class="icon icon-remove"></em></a>
+                  <a tooltip-append-to-body="true"  tooltip="Remove this section!" href="" ng-click="removeSection(section)" class="btn btn-danger btn-sm"><em class="icon icon-remove"></em></a>
                 </div>
                 <div class="clearfix"></div>
 

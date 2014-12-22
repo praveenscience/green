@@ -9,6 +9,7 @@ angular.module 'greenApp', [
   'btford.socket-io',
   'ui.bootstrap',
   'ui.sortable',
+  'sticky',
   'angular-ladda'
 ]
 .config ($routeProvider, $locationProvider, $httpProvider) ->
