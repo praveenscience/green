@@ -48,6 +48,13 @@ angular.module 'greenApp'
     d = new Date(date)
     d.toUTCString()
 
+  $scope.pluralize = (points) ->
+    console.log points
+    if points == 1
+      'point'
+    else
+      'points'
+
   $scope.init = ->
     return unless formId
     $scope.getCurrenForm()

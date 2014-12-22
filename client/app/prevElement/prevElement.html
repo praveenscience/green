@@ -1,28 +1,33 @@
 <div class="js_form_template formShow" ng-switch="field.type">
   <div data-option="text" ng-switch-when="text">
     <div class="form-group">
-      <label for="{{'form_'+form.id+'_field_'+field._id}}"><span ng-bind-html="field.label"></span></label>
+      <label for="{{field._id}}"><span ng-bind-html="field.label"></span></label>
       <abbr title="Required" ng-if="field.required"> *</abbr>
-      <input type="text" class="form-control" ng-model="field.response" id="{{'form_'+form.id+'_field_'+ field._id}}">
+      <strong class="text-muted">&mdash;  [{{field.choice[0].points || 0}} {{field.choice[0].points == 1 ? 'point' : 'points'}}]</strong>
+      <input type="text" class="form-control" ng-model="field.response" id="{{field._id}}">
       <small class="help-block" ng-bind-html="field.help_text"></small>
     </div>
   </div>
 
   <div data-option="textarea" ng-switch-when="textarea">
     <div class="form-group">
-      <label for="{{'form_'+form.id+'_field_'+field._id}}"><span ng-bind-html="field.label"></span></label>
+      <label for="{{field._id}}"><span ng-bind-html="field.label"></span></label>
       <abbr title="Required" ng-if="field.required"> *</abbr>
-      <textarea class="form-control" ng-model="field.response" id="{{'form_'+form.id+'_field_'+field._id}}"></textarea>
+      <strong class="text-muted">&mdash;  [{{field.choice[0].points || 0}} {{field.choice[0].points == 1 ? 'point' : 'points'}}]</strong>
+      <textarea class="form-control" ng-model="field.response" id="{{field._id}}"></textarea>
       <small class="help-block" ng-bind-html="field.help_text"></small>
     </div>
   </div>
 
   <div data-option="select" ng-switch-when="select">
     <div class="form-group">
-      <label for="{{'form_'+form.id+'_field_'+field._id}}"><span ng-bind-html="field.label"></span></label>
+      <label for="{{field._id}}"><span ng-bind-html="field.label"></span></label>
       <abbr title="Required" ng-if="field.required"> *</abbr>
-        <select ng-model="field.response" id="{{'form_'+form.id+'_field_'+field._id}}" ng-options="choice.label for choice in field.choices" class="form-control">
+        <select ng-model="field.response" id="field._id" class="form-control">
           <option value="">– Select one –</option>
+          <option value="{choice._id}" ng-repeat="choice in field.choices">
+            {{choice.label}} &mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]
+          </option>
         </select>
       <small class="help-block" ng-bind-html="field.help_text"></small>
     </div>
@@ -58,8 +63,8 @@
       <label for="{{'form_'+form.id+'_field_'+field._id}}"><span ng-bind-html="field.label"></span></label>
       <abbr title="Required" ng-if="field.required"> *</abbr>
       <div class="inputLabel inline" ng-repeat="choice in field.choices">
-        <input type="checkBox" ng-model="choice.selected" value="{{choice.id}}" id="{{'form_'+form.id+'_field_'+field._id+'_choice_'+choice.id}}" />
-        <label ng-bind-html="choice.label" for="{{'form_'+form.id+'_field_'+field._id+'_choice_'+choice.id}}"></label>
+        <input type="checkBox" ng-model="choice.selected" value="{{choice._id}}" id="{{choice._id}}" />
+        <label ng-bind-html="choice.label" for="{{choice._id}}"></label> <strong class="text-muted">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
       </div>
       <small class="help-block" ng-bind-html="field.help_text"></small>
     </div>
@@ -78,8 +83,8 @@
       <label for="{{'form_'+form.id+'_field_'+field._id}}"><span ng-bind-html="field.label"></span></label>
       <abbr title="Required" ng-if="field.required"> *</abbr>
       <div class="inputLabel inline" ng-repeat="choice in field.choices">
-        <input type="radio" name="{{'form_'+form.id+'_field_'+field._id}}" ng-model="choice.selected" value="{{choice.id}}" id="{{'form_'+form.id+'_field_'+field._id+'_choice_'+choice.id}}" />
-        <label ng-bind-html="choice.label" for="{{'form_'+form.id+'_field_'+field._id+'_choice_'+choice.id}}"></label>
+        <input type="radio" name="{{field._id}}" ng-model="choice.selected" value="{{choice._id}}" id="{{choice._id}}" />
+        <label ng-bind-html="choice.label" for="{{choice._id}}"></label> <strong class="text-muted">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
       </div>
       <small class="help-block" ng-bind-html="field.help_text"></small>
     </div>
