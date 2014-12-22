@@ -14,8 +14,14 @@ angular.module 'greenApp'
       method: "GET"
       url: "/api/forms/#{formId}"
     .success (data, status) ->
-      console.log data
-      $scope.form = data;
+      $scope.form = data
+      $scope.form.sections[0].active = true
+
+  $scope.toggleClass = (section) ->
+    for key, val of $scope.form.sections
+      $scope.form.sections[key].active = false
+
+    section.active = true
 
 
 
