@@ -20,7 +20,7 @@ angular.module 'greenApp'
     return if $scope.newform is ''
 
     formSkl =
-      name: $scope.newform
+      name: 'Untitled form'
       status: 'Unpublished'
       sections: [{
         title: "Untitled section"

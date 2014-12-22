@@ -76,79 +76,64 @@ exports.updatefields = function(req, res) {
     if (!section) {
       return res.send(404);
     }
-
     var newSection = req.body;
-    var newFields = newSection.fields;
-    var fieldsLength = newFields.length;
-    var newField = null;
-    var newOptions = null;
-    var fieldsArray = []
-    var choicesArray = []
-    var preparedFields = []
-    var createdNewField = {}
+    section.title = newSection.title;
 
-    async.series([
-      function(cb) {
-        async.each(newFields, function(newField, cb1) {
-
-          if (newField.choices != undefined && newField.choices.length != 0) {
-            async.each(newField.choices, function(newChoice, cb) {
-              var choiceId = newChoice._id || mongoose.Types.ObjectId();
-              delete newChoice._id
-              Choice.update({
-                  _id: choiceId
-                }, newChoice, {
-                  upsert: true
-                })
-                .exec(function(err, choiceN) {
-                  choicesArray.push(choiceId);
-                  if (newField.sequence == (fieldsLength - 1)) {
-                    cb(null)
-                  }
-                });
-            }, function(err) {
+    var _updateFields = function(callback) {
+      var fields = req.body.fields
+      var fieldsArray = []
+      async.each(fields, function(field, callbackFields){
+        var choicesArray = []
+        async.each(field.choices, function(choice, callbackOpitons) {
+          var choiceId = choice._id || mongoose.Types.ObjectId();
+          delete choice._id
+          Choice.update({
+              _id: choiceId
+            }, choice, {
+              upsert: true
+            })
+            .exec(function(err, choiceN) {
+              choicesArray.push(choiceId);
+              callbackOpitons();
             });
-
-          }
-
-          newField.choices = []
-
-          var fieldId = newField._id || mongoose.Types.ObjectId();
-          delete newField._id
-
+        }, function(err){
+          field.choices = []
+          field.choices = choicesArray
+          var fieldId = field._id || mongoose.Types.ObjectId();
+          delete field._id
           Field.update({
               _id: fieldId
-            }, newField, {
+            }, field, {
               upsert: true
             })
             .exec(function(err, fieldN) {
               fieldsArray.push(fieldId);
-              if (newField.sequence == (fieldsLength - 1)) {
-                cb(null)
-              }
+              callbackFields();
             });
+          });
 
-          // var createdField = new Field(newField);
+      }, function(err) {
+        callback(null, fieldsArray);
+      })
+    }
 
-          // createdField.save(function(err, fieldN){
-          //   console.log(err)
-          //   fieldsArray.push(fieldN.id);
-          //   cb(null);
-          // });
+    var _updateSection = function(fieldsArr, callbackSections) {
+      section.fields = []
+      section.fields = fieldsArr
+      section.save(function(err) {
+        if (err) {
+          return handleError(res, err);
+        }
+        callbackSections(null, section)
+      });
+    }
 
-        }, function(err) {})
-      },
-      function(cb) {
-        section.fields = fieldsArray
-        section.save(function(err) {
-          if (err) {
-            return handleError(res, err);
-          }
-          return res.json(200, section);
-        });
-        cb(null);
-      }
-    ])
+    async.waterfall([
+      _updateFields,
+      _updateSection
+    ], function(err, section){
+      return res.json(200, section);
+    })
   });
 };
 
