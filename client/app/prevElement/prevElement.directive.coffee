@@ -7,3 +7,9 @@ angular.module 'greenApp'
   replace: true
   scope:
     field: "="
+  controller: ($scope) ->
+    $scope.findMax = (array) ->
+      max = _.max(array, (a) ->
+          return a.points
+        )
+      return max.points
