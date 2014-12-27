@@ -12,7 +12,7 @@ var FieldSchema = new Schema({
   edit_mode: Boolean,
   is_bonus: {
     type: Boolean,
-    "default": false
+    default: false
   },
   choices: [{ type: Schema.Types.ObjectId, ref: 'Choice' }],
   field_validation: {

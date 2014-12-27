@@ -28,6 +28,7 @@ angular.module 'greenApp'
     required: ''
     sequence: 0
     edit_mode: true
+    is_bonus: false
     choices: [
       label: "Option"
       points: 0
@@ -43,6 +44,15 @@ angular.module 'greenApp'
   # Choices
   choice =
     label: ''
+
+  $scope.sortableOptions =
+    containment: "parent"
+    # Update Sequence
+    stop: (e, ui) ->
+      console.log "Do noting.."
+
+  # $scope.fixSequence = ->
+  #   $scope.submitSection()
 
 
   $scope.getFormatedDate = (date) ->
