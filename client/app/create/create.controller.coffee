@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'CreateController', ($scope, $http, $routeParams, sectionData, formData) ->
+.controller 'CreateController', ($scope, $http, $routeParams, sectionData, formData, SweetAlert) ->
 
   formId = $routeParams.id
   $scope.originalForm = {}
@@ -10,6 +10,7 @@ angular.module 'greenApp'
   $scope.sectionSaving = false
   $scope.enableSaveButton = true
   $scope.formSaving = false
+  $scope.isCollapsed = true
 
   # Main Form
   master =
@@ -24,7 +25,7 @@ angular.module 'greenApp'
   field =
     label: null
     help_text: ''
-    type: ''
+    type: 'text'
     required: ''
     sequence: 0
     edit_mode: true
@@ -47,12 +48,7 @@ angular.module 'greenApp'
 
   $scope.sortableOptions =
     containment: "parent"
-    # Update Sequence
     stop: (e, ui) ->
-      console.log "Do noting.."
-
-  # $scope.fixSequence = ->
-  #   $scope.submitSection()
 
 
   $scope.getFormatedDate = (date) ->
@@ -72,25 +68,40 @@ angular.module 'greenApp'
 
   $scope.getCurrenForm = ->
     $http.get("api/forms/#{formId}")
-      .success( (data) ->
+      .success (data) ->
         $scope.originalForm = angular.copy(data)
         $scope.form = data
-      )
 
   $scope.addSectionToForm = (sectionId, formId) ->
     $http.put("api/forms/s/#{formId}", {
         sections: sectionId._id
-      }).success( (data, status) ->
-        console.log data
-      )
+      }).success (data, status) ->
+
 
   $scope.removeSection = (section) ->
-    $http.delete("api/forms/s/#{formId}", {
-        sections: section._id
-      }).success( (data, status) ->
-        $scope.form.sections.splice($scope.form.sections.indexOf(section), 1)
-        console.log data
-      )
+    SweetAlert.swal({
+      title: "Are you sure?",
+      text: "You will not be able to recover this section!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel!",
+      closeOnConfirm: false,
+      closeOnCancel: true
+    },
+    (isConfirm) ->
+      if (isConfirm)
+        $http.delete("api/forms/s/#{formId}", {
+          sections: section._id
+        }).success (data, status) ->
+          $scope.form.sections.splice($scope.form.sections.indexOf(section), 1)
+          SweetAlert.swal("Deleted!", "Your imaginary file has been deleted.", "success");
+
+    );
+
+
+
 
   $scope.addNewSection = ->
     newSection = {

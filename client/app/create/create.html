@@ -6,19 +6,46 @@
         <div class="form-title">
           <input type="text" ng-model="form.name" class="form-control inlineInput flag">
         </div>
+
+        <div collapse="isCollapsed">
+          <div class="from-settings">
+            <div class="form-group">
+              <label for="formDescription">Describe this form</label>
+              <textarea name="formDescription" id="formDescription" cols="30" rows="3" class="form-control"></textarea>
+            </div>
+            <hr>
+            <div class="from-group pull-right">
+
+              <button class="btn btn-danger btn-sm" tooltip-append-to-body="true"  tooltip="Remove this form! Can't be reverted!"><em class="icon icon-remove"></em></button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+              <button class="btn btn-success" tooltip="Publish your form" tooltip-append-to-body="true" >Publish</button>
+
+
+
+            </div>
+
+          </div>
+        </div>
+
       </div>
       <div class="col-lg-4 col-sm-4">
-        <button class="btn btn-success" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true"
-        ng-disabled="enableSaveButton"
-        >Save</button>
+
         <div class="form-actions pull-right">
+          <button class="btn btn-success btn-sm" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true"
+          ng-disabled="enableSaveButton"
+          >Save</button>
+          &nbsp;&nbsp;&nbsp;
           <a class="btn btn-default btn-sm" href="/forms/{{form._id}}" tooltip="See how the form looks!" tooltip-append-to-body="true"  tooltip-placement="top">Preview</a>
           &nbsp;&nbsp;&nbsp;
-          <button class="btn btn-default btn-sm" tooltip="Publish your form" tooltip-append-to-body="true" >Publish</button>
-          &nbsp;&nbsp;&nbsp;
-          <button class="btn btn-default btn-sm" tooltip-append-to-body="true"  tooltip="Remove this form! Can't be reverted!"><em class="icon icon-remove"></em></button>
+
+
+
+          <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed"><em class="icon icon-cog"></em></button>
         </div>
       </div>
+
+
     </div>
   </div>
   <div class="row">

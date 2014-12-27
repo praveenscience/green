@@ -9,7 +9,9 @@ angular.module 'greenApp', [
   'btford.socket-io',
   'ui.bootstrap',
   'ui.sortable',
-  'angular-ladda'
+  'angular-ladda',
+  'ngSweetAlert'
+
 ]
 .config ($routeProvider, $locationProvider, $httpProvider) ->
   $routeProvider
