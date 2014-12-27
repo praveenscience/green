@@ -84,19 +84,30 @@
     position: relative;
     min-width: 40px;
     min-height: 30px;
+    height: 30px;
 
     span {
-      font-size: 0;
-      transition: all 0.3s linear;
-      -webkit-transition: all 0.3s linear;
+      display: inline-block;
+      width: 0px;
+      overflow: hidden;
+      height: 30px;
+      padding: 6px 0 6px 0;
+      word-wrap: break-word;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      transition: all 0.3s ease-in;
+      -webkit-transition: all 0.3s ease-in;
     }
 
     &.active {
-      transition: all 0.3s linear;
-      -webkit-transition: all 0.3s linear;
+      transition: all 0.3s ease-in;
+      -webkit-transition: all 0.3s ease-in;
+      height: 30px;
 
       span {
         display: inline-block;
+        width: auto;
+        height: auto;
         margin-left: 40px;
         font-size: 14px;
         color: #888;
@@ -120,6 +131,8 @@
         border-color: transparent transparent #fff;
         bottom: -22px;
         left: 3px;
+        transition: all 0.3s ease-in;
+        -webkit-transition: all 0.3s ease-in;
       }
     }
 
