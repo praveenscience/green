@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'CreateController', ($scope, $http, $routeParams, sectionData) ->
+.controller 'CreateController', ($scope, $http, $routeParams, sectionData, formData) ->
 
   formId = $routeParams.id
   $scope.originalForm = {}
@@ -9,6 +9,7 @@ angular.module 'greenApp'
   $scope.sections = []
   $scope.sectionSaving = false
   $scope.enableSaveButton = true
+  $scope.formSaving = false
 
   # Main Form
   master =
@@ -62,7 +63,6 @@ angular.module 'greenApp'
   $scope.getCurrenForm = ->
     $http.get("api/forms/#{formId}")
       .success( (data) ->
-        console.log data
         $scope.originalForm = angular.copy(data)
         $scope.form = data
       )
@@ -131,6 +131,13 @@ angular.module 'greenApp'
       .success( (data, status) ->
         $scope.sectionSaving = false
         $scope.enableSaveButton = true
+      )
+
+  $scope.submitForm = (form) ->
+    $scope.formSaving = true
+    formData.update(form)
+      .success( (data, status) ->
+        $scope.formSaving = false
       )
 
   $scope.init()

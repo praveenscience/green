@@ -6,6 +6,10 @@ var mongoose = require('mongoose'),
 var FormSchema = new Schema({
   name: String,
   description: String,
+  updated: {
+    type: Date,
+    "default": Date.now
+  },
   sections: [{
     type: Schema.Types.ObjectId,
     ref: 'Section'
@@ -24,7 +28,6 @@ var FormSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   }
-
 });
 
 module.exports = mongoose.model('Form', FormSchema);

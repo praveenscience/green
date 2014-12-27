@@ -10,6 +10,10 @@ var FieldSchema = new Schema({
   required: String,
   sequence: Number,
   edit_mode: Boolean,
+  is_bonus: {
+    type: Boolean,
+    "default": false
+  },
   choices: [{ type: Schema.Types.ObjectId, ref: 'Choice' }],
   field_validation: {
     is_required: String,

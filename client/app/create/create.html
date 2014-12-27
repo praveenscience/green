@@ -8,12 +8,18 @@
         </div>
       </div>
       <div class="col-lg-4 col-sm-4">
+
+
+<button class="btn btn-success" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true"
+                ng-disabled="enableSaveButton"
+                >Save</button>
+
         <div class="form-actions pull-right">
-          <a class="btn btn-info btn-sm" href="/forms/{{form._id}}" tooltip="See how the form looks!" tooltip-append-to-body="true"  tooltip-placement="top">Preview</a>
+          <a class="btn btn-default btn-sm" href="/forms/{{form._id}}" tooltip="See how the form looks!" tooltip-append-to-body="true"  tooltip-placement="top">Preview</a>
           &nbsp;&nbsp;&nbsp;
-          <button class="btn btn-success btn-sm" tooltip="Publish your form" tooltip-append-to-body="true" >Publish</button>
+          <button class="btn btn-default btn-sm" tooltip="Publish your form" tooltip-append-to-body="true" >Publish</button>
           &nbsp;&nbsp;&nbsp;
-          <button class="btn btn-danger btn-sm" tooltip-append-to-body="true"  tooltip="Remove this form! Can't be reverted!"><em class="icon icon-remove"></em></button>
+          <button class="btn btn-default btn-sm" tooltip-append-to-body="true"  tooltip="Remove this form! Can't be reverted!"><em class="icon icon-remove"></em></button>
         </div>
       </div>
     </div>
@@ -98,10 +104,13 @@
                 <div class="form-group">
                   <div class="col-lg-1 col-sm-1"></div>
                   <div class="col-lg-9 col-sm-9">
-                    <button class="btn btn-info btn-sm" type="button" ng-disabled="!isValidField(field)" ng-click="toggleField(field)" > Done </button>
+                    <button class="btn btn-info btn-sm" type="button" ng-disabled="!isValidField(field)" ng-click="toggleField(field)" > Add </button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="checkbox" class="checkbox-small" name="optionsCheckboxes" type="checkbox" id="option6" ng-model="field.required">
-                    <label for="" class="smallText">Make this as required field</label>
+                    <input type="checkbox" class="checkbox-small" name="bonusCheckboxe" type="checkbox" id="bonusCheckboxe" ng-model="field.is_bonus">
+                    <label for="bonusCheckboxe" class="smallText">Bonus quesiton</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" class="checkbox-small" name="requiredChecbox" type="checkbox" id="requiredChecbox" ng-model="field.required">
+                    <label for="requiredChecbox" class="smallText">Make this as required field</label>
                   </div>
                 </div>
               </div>

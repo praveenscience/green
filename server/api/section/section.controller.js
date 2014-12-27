@@ -69,9 +69,6 @@ exports.updatefields = function(req, res) {
     delete req.body._id;
   }
   Section.findById(req.params.id, function(err, section) {
-
-
-
     if (err) {
       return handleError(res, err);
     }
