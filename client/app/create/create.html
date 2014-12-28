@@ -23,9 +23,7 @@
       </div>
       <div class="col-lg-4 col-sm-4">
         <div class="form-actions pull-right">
-          <button class="btn btn-success btn-sm" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true"
-          ng-disabled="enableSaveButton"
-          >Save</button>
+          <button class="btn btn-success btn-sm" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true">Save</button>
           &nbsp;&nbsp;&nbsp;
           <a class="btn btn-default btn-sm" href="/forms/{{form._id}}" tooltip="See how the form looks!" tooltip-append-to-body="true"  tooltip-placement="top">Preview</a>
           &nbsp;&nbsp;&nbsp;
@@ -53,7 +51,7 @@
       <div class="row g-c-seciton-meta" sticky-media="(min-width:640px)">
         <div class="col-lg-8 col-sm-8">
           <input type="text" ng-model="section.title" class="form-control inlineInput">
-          <strong class="section-points">({{section.possible_points}} possible points and {{section.bonus_points}} bonus)</strong>
+          <strong class="section-points">({{section.possible_points}} Possible Points, {{section.bonus_points}} Bonus)</strong>
         </div>
         <div class="col-lg-4 col-sm-4">
           <span class="last-save-text text-muted">

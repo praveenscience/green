@@ -30,7 +30,7 @@
   <div class="col-lg-12 col-sm-12">
   <div class="form-show-container">
   <div ng-repeat="section in form.sections" ng-if='section.active'>
-    <strong class="section-points">({{section.possible_points}} possible points and {{section.bonus_points}} bonus)</strong>
+    <strong class="section-points">({{section.possible_points}} Possible Points, {{section.bonus_points}} Bonus)</strong>
     <div class="" ng-repeat="field in section.fields">
       <div>
         <prev-element field="field"></prev-element>

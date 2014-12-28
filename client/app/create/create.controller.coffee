@@ -154,7 +154,6 @@ angular.module 'greenApp'
     field.choices.splice index, 1
 
   $scope.submitSection = (section, sectionId) ->
-    console.log section
     $scope.sectionSaving = true
     sectionData.create(section)
       .success (data, status) ->

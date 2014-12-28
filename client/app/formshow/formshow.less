@@ -2,7 +2,16 @@
 @wiz-line-bg: #CDCDCD;
 @wiz-bubble-bg: #AAB2BD;
 @wiz-bubble-text: #E6E9ED;
+@wiz-bubble-active-bg: #37BC9B;
 @wiz-acitve-text: #434A54;
+
+
+// @wiz-bg: #80CCED;
+// @wiz-line-bg: #6BB8DA;
+// @wiz-bubble-bg: #E9573F;
+
+// @wiz-bubble-text: #E6E9ED;
+// @wiz-acitve-text: #fff;
 
 
 .form-show {
@@ -74,10 +83,10 @@
   &:before {
     content: '';
     display: block;
-    top: 37.5px;
+    top: 37px;
     left: 0;
     right: 0;
-    height: 1px;
+    height: 2px;
     background: @wiz-line-bg;
     position: absolute;
     z-index: 1;
@@ -136,7 +145,7 @@
         -webkit-transition: all 0.3s linear;
       }
       &:before {
-        background: @bluejeans-dark;
+        background: @wiz-bubble-active-bg;
         color: #fff;
       }
       &:after {
