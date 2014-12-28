@@ -5,7 +5,7 @@ angular.module 'greenApp'
 
   formId = $routeParams.id
   $scope.originalForm = {}
-  $scope.form = {}
+  $scope.form = []
   $scope.sections = []
   $scope.sectionSaving = false
   $scope.enableSaveButton = true
@@ -50,17 +50,46 @@ angular.module 'greenApp'
     containment: "parent"
     stop: (e, ui) ->
 
+  $scope.getAlertSettings = (item) ->
+    title: "Are you sure?",
+    text: "You will not be able to recover this #{item}!",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Yes, delete it!",
+    cancelButtonText: "No, cancel!",
+    closeOnConfirm: true,
+    closeOnCancel: true
+
 
   $scope.getFormatedDate = (date) ->
     d = new Date(date)
     d.toUTCString()
 
   $scope.pluralize = (points) ->
-    console.log points
     if points == 1
       'point'
     else
       'points'
+
+  $scope.findMaxPoints = (array) ->
+    max = _.max(array, (a) ->
+        return a.points
+      )
+    return max.points
+
+
+  $scope.calculateSecitonPoints = ->
+    return if $scope.form.sections is undefined
+    for skey, sval of $scope.form.sections
+      $scope.form.sections[skey].bonus_points = 0
+      $scope.form.sections[skey].possible_points = 0
+      for key, fld of sval.fields
+        if $scope.form.sections[skey].fields[key].is_bonus
+          $scope.form.sections[skey].bonus_points += $scope.findMaxPoints(fld.choices)
+        else
+          $scope.form.sections[skey].possible_points += $scope.findMaxPoints(fld.choices)
+    return
 
   $scope.init = ->
     return unless formId
@@ -77,31 +106,14 @@ angular.module 'greenApp'
         sections: sectionId._id
       }).success (data, status) ->
 
-
   $scope.removeSection = (section) ->
-    SweetAlert.swal({
-      title: "Are you sure?",
-      text: "You will not be able to recover this section!",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#DD6B55",
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "No, cancel!",
-      closeOnConfirm: false,
-      closeOnCancel: true
-    },
-    (isConfirm) ->
-      if (isConfirm)
-        $http.delete("api/forms/s/#{formId}", {
-          sections: section._id
-        }).success (data, status) ->
-          $scope.form.sections.splice($scope.form.sections.indexOf(section), 1)
-          SweetAlert.swal("Deleted!", "Your imaginary file has been deleted.", "success");
+    SweetAlert.swal($scope.getAlertSettings('section'), (isConfirm) -> _handleSectionDelete(isConfirm, section))
 
-    );
-
-
-
+  _handleSectionDelete = (isConfirm, section) ->
+    if (isConfirm)
+      sectionData.delete(formId, section)
+      .success (data, status) ->
+        $scope.form.sections.splice($scope.form.sections.indexOf(section), 1)
 
   $scope.addNewSection = ->
     newSection = {
@@ -141,32 +153,23 @@ angular.module 'greenApp'
   $scope.removeChoice = (field, index) ->
     field.choices.splice index, 1
 
-
-  $scope.$watch('form.sections', (old, newValue) ->
-    $scope.enableSaveButton = false
-  , true)
-
   $scope.submitSection = (section, sectionId) ->
+    console.log section
     $scope.sectionSaving = true
     sectionData.create(section)
-      .success( (data, status) ->
+      .success (data, status) ->
         $scope.sectionSaving = false
         $scope.enableSaveButton = true
-      )
 
   $scope.submitForm = (form) ->
     $scope.formSaving = true
     formData.update(form)
-      .success( (data, status) ->
+      .success (data, status) ->
         $scope.formSaving = false
-      )
+
+  $scope.$watch('form.sections', (old, newValue) ->
+    $scope.enableSaveButton = false
+    $scope.calculateSecitonPoints()
+  , true)
 
   $scope.init()
-
-  # $http.get '/api/users'
-  # .success (users) ->
-  #   $scope.users = users
-
-  # $scope.delete = (user) ->
-  #   User.remove id: user._id
-  #   _.remove $scope.users, user

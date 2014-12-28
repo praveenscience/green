@@ -9,3 +9,8 @@ angular.module 'greenApp'
       data: section
     return sec
 
+  delete: (formId, section) ->
+    $http.delete("api/forms/s/#{formId}", {
+      sections: section._id
+    })
+

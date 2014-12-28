@@ -5,6 +5,14 @@ var mongoose = require('mongoose'),
 
 var SectionSchema = new Schema({
   title: String,
+  bonus_points: {
+    type: Number,
+    "default": 0
+  },
+  possible_points: {
+    type: Number,
+    "default": 0
+  },
   created: {
     type: Date,
     "default": Date.now
