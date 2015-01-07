@@ -13,6 +13,10 @@ var UserSchema = new Schema({
     default: 'user'
   },
   hashedPassword: String,
+  forms: {
+    type: Schema.Types.ObjectId,
+    ref: 'Form'
+  },
   provider: String,
   salt: String,
   twitter: {},
