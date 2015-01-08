@@ -2,7 +2,7 @@
   <div data-option="text" ng-switch-when="text">
     <div class="form-group">
       <label for="{{field._id}}" class="prev-field-label">
-        <strong class="bonus-label label label-info" ng-if="field.is_bonus">Bonus</strong> <br ng-if="field.is_bonus">
+        <strong class="bonus-label label label-info" ng-if="field.is_bonus">Bonus</strong> <!-- <br ng-if="field.is_bonus"> -->
         <span ng-bind-html="field.label"></span>
       </label>
       <abbr title="Required" ng-if="field.required"> *</abbr>
@@ -15,7 +15,7 @@
   <div data-option="textarea" ng-switch-when="textarea">
     <div class="form-group">
       <label for="{{field._id}}" class="prev-field-label">
-        <strong class="bonus-label label label-info" ng-if="field.is_bonus">Bonus</strong> <br ng-if="field.is_bonus">
+        <strong class="bonus-label label label-info" ng-if="field.is_bonus">Bonus</strong> <!-- <br ng-if="field.is_bonus"> -->
         <span ng-bind-html="field.label"></span>
       </label>
       <abbr title="Required" ng-if="field.required"> *</abbr>
@@ -28,7 +28,7 @@
   <div data-option="select" ng-switch-when="select">
     <div class="form-group">
       <label for="{{field._id}}" class="prev-field-label">
-        <strong class="bonus-label label label-info" ng-if="field.is_bonus">Bonus</strong> <br ng-if="field.is_bonus">
+        <strong class="bonus-label label label-info" ng-if="field.is_bonus">Bonus</strong> <!-- <br ng-if="field.is_bonus"> -->
         <span ng-bind-html="field.label"></span>
         <abbr title="Required" ng-if="field.required"> *</abbr>
       </label>
@@ -71,7 +71,7 @@
   <div data-option="checkbox" ng-switch-when="checkbox">
     <div class="form-group">
       <label for="{{field._id}}" class="prev-field-label">
-        <strong class="bonus-label label label-info" ng-if="field.is_bonus">Bonus</strong> <br ng-if="field.is_bonus">
+        <strong class="bonus-label label label-info" ng-if="field.is_bonus">Bonus</strong> <!-- <br ng-if="field.is_bonus"> -->
         <span ng-bind-html="field.label"></span>
         <abbr title="Required" ng-if="field.required"> *</abbr>
       </label>
@@ -97,7 +97,7 @@
  <div data-option="radiobutton" ng-switch-when="radiobutton">
     <div class="form-group">
       <label for="{{field._id}}" class="prev-field-label">
-        <strong class="bonus-label label label-info" ng-if="field.is_bonus">Bonus</strong> <br ng-if="field.is_bonus">
+        <strong class="bonus-label label label-info" ng-if="field.is_bonus">Bonus</strong> <!-- <br ng-if="field.is_bonus"> -->
         <span ng-bind-html="field.label"></span>
         <abbr title="Required" ng-if="field.required"> *</abbr>
       </label>
