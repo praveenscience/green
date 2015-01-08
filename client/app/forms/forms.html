@@ -9,7 +9,7 @@
 
 <div class="row">
   <div class="col-lg-9 oh">
-    <form class="form">
+    <form class="form" ng-if="isAdmin()" >
   <!--       <input type="text" class="form-control" placeholder="Add a new thing here." ng-model="newform"> -->
       <button type="submit" class="btn btn-primary" ng-click="addform()"> <em class="icon icon-plus"></em>  Add new form</button>
     </form>
@@ -40,17 +40,17 @@
           <th> Status </th>
           <th> Created by </th>
           <th> Created on </th>
-          <th> Actions </th>
+          <th ng-if="isAdmin()"> Actions </th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="form in forms">
           <td> {{$index + 1}}</td>
-          <td> <a href="/forms/edit/{{form._id}}">{{form.name}}</a></td>
+          <td> <a ng-href="{{isAdmin() ? '/forms/edit/' : 'forms/'}}{{form._id}}">{{form.name}}</a></td>
           <td> {{form.status}}</td>
           <td> {{form.author.name}}</td>
           <td> {{getFormatedDate(form.created)}}</td>
-          <td>
+          <td ng-if="isAdmin()" >
 
           <a href="forms/{{form._id}}" class="btn btn-info btn-xs" ng-click="previewForm(form)
           " tooltip="Preview this form" tooltip-append-to-body="true"><em class="icon icon-eye"></em></a>

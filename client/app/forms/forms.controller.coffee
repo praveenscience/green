@@ -1,7 +1,9 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'FormsController', ($scope, $http, socket, $location) ->
+.controller 'FormsController', ($scope, $http, socket, $location, Auth) ->
+
+  $scope.isAdmin = Auth.isAdmin
 
   $scope.getFormatedDate = (date) ->
     d = new Date(date)
