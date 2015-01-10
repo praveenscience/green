@@ -32,7 +32,6 @@ angular.module 'greenApp'
 
         if field.choices.length isnt 0 and field.response is undefined
           if field.type is 'radiobutton'
-            console.log field
             response.response = field.response if field.response
           else
             # Checkbox case - multiselect

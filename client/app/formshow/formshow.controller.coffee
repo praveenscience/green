@@ -5,6 +5,7 @@ angular.module 'greenApp'
 
   $scope.form = null;
   formId = $routeParams.id
+  $scope.formSaving = false;
 
   $scope.init = ->
     _loadFormData()
@@ -44,8 +45,17 @@ angular.module 'greenApp'
       $scope.form.sections[key].active = false
     section.active = true
 
+  $scope.moveToNextStep = ($index, section) ->
+    console.log $index;
+    for key, val of $scope.form.sections
+      $scope.form.sections[key].active = false
+    $scope.form.sections[$index + 1].active = true
+
   $scope.saveFormResuts = (e) ->
+    $scope.formSaving = true
     e.preventDefault()
     formData.respond($scope.form)
+      .success (data, status) ->
+        $scope.formSaving = false
 
   $scope.init()
