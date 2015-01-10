@@ -1,7 +1,10 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'CreateController', ($scope, $http, $routeParams, sectionData, formData, SweetAlert) ->
+.controller 'CreateController', ($scope, $http, $routeParams, sectionData, formData, SweetAlert, Auth) ->
+
+  $scope.isAdmin = Auth.isAdmin
+  $scope.formShow = false
 
   formId = $routeParams.id
   $scope.originalForm = {}

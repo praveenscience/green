@@ -1,0 +1,5 @@
+<label for="{{field._id}}" class="prev-field-label">
+  <strong class="bonus-label label label-info" ng-if="field.is_bonus">Bonus</strong>
+  <strong class="bonus-label label label-warning" ng-if="field.has_condition && isAdmin()">Conditional</strong> <!-- <br ng-if="field.is_bonus"> -->
+  <span ng-bind-html="field.label"></span>
+</label>

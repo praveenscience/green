@@ -8,7 +8,7 @@
       <div class="form-group">
         <label for="">Question</label>
         <!-- size as size.name for size in sizes -->
-        <select name="" id="" class="form-control" style='max-width: 100%;' ng-options="item.label for item in availableFields" ng-model="field.condition.field">
+        <select name="" id="" class="form-control" style='max-width: 100%;' ng-options="item.label for item in availableFields" ng-model="selectedField" ng-change="field.condition.field = selectedField._id">
         </select>
       </div>
     </div>
@@ -16,7 +16,7 @@
       <label for="">Option</label>
       <select name="" id="" class="form-control" ng-model="field.condition.choice">
         <option value=''>-- Select Option --</option>
-        <option value="{{opt._id}}" ng-repeat="opt in selectedField.choices">{{opt.label}} </option>
+        <option value="{{opt._id}}" ng-repeat="opt in selectedField.choices" ng-selected="opt._id == field.condition.choice">{{opt.label}} </option>
       </select>
     </div>
   </div>

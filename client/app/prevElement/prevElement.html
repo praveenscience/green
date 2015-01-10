@@ -1,10 +1,7 @@
-<div class="js_form_template formShow" ng-switch="field.type">
+<div class="js_form_template formShow" ng-switch="field.type" ng-if="!formShow || !field.has_condition">
   <div data-option="text" ng-switch-when="text">
     <div class="form-group">
-      <label for="{{field._id}}" class="prev-field-label">
-        <strong class="bonus-label label label-info" ng-if="field.is_bonus">Bonus</strong> <!-- <br ng-if="field.is_bonus"> -->
-        <span ng-bind-html="field.label"></span>
-      </label>
+      <type-badge></type-badge>
       <abbr title="Required" ng-if="field.required"> *</abbr>
       <strong class="text-muted">&mdash;  [{{field.choice[0].points || 0}} {{field.choice[0].points == 1 ? 'point' : 'points'}}]</strong>
       <input type="text" class="form-control" ng-model="field.response" id="{{field._id}}">
@@ -14,10 +11,7 @@
 
   <div data-option="textarea" ng-switch-when="textarea">
     <div class="form-group">
-      <label for="{{field._id}}" class="prev-field-label">
-        <strong class="bonus-label label label-info" ng-if="field.is_bonus">Bonus</strong> <!-- <br ng-if="field.is_bonus"> -->
-        <span ng-bind-html="field.label"></span>
-      </label>
+      <type-badge></type-badge>
       <abbr title="Required" ng-if="field.required"> *</abbr>
       <strong class="text-muted">&mdash;  [{{field.choice[0].points || 0}} {{field.choice[0].points == 1 ? 'point' : 'points'}}]</strong>
       <textarea class="form-control" ng-model="field.response" id="{{field._id}}"></textarea>
@@ -27,12 +21,8 @@
 
   <div data-option="select" ng-switch-when="select">
     <div class="form-group">
-      <label for="{{field._id}}" class="prev-field-label">
-        <strong class="bonus-label label label-info" ng-if="field.is_bonus">Bonus</strong> <!-- <br ng-if="field.is_bonus"> -->
-        <span ng-bind-html="field.label"></span>
-        <abbr title="Required" ng-if="field.required"> *</abbr>
-      </label>
-
+      <type-badge></type-badge>
+      <abbr title="Required" ng-if="field.required"> *</abbr>
       <strong class="text-muted possible-points">[Points possible - {{findMax(field.choices)}}]</strong>
         <select id="field._id" class="form-control" ng-model="field.response">
           <option value="">– Select one –</option>
@@ -69,11 +59,8 @@
 
   <div data-option="checkbox" ng-switch-when="checkbox">
     <div class="form-group">
-      <label for="{{field._id}}" class="prev-field-label">
-        <strong class="bonus-label label label-info" ng-if="field.is_bonus">Bonus</strong> <!-- <br ng-if="field.is_bonus"> -->
-        <span ng-bind-html="field.label"></span>
-        <abbr title="Required" ng-if="field.required"> *</abbr>
-      </label>
+      <type-badge></type-badge>
+      <abbr title="Required" ng-if="field.required"> *</abbr>
 
       <strong class="text-muted possible-points">[Points possible - {{findMax(field.choices)}}]</strong>
 
@@ -95,14 +82,9 @@
 
  <div data-option="radiobutton" ng-switch-when="radiobutton">
     <div class="form-group">
-      <label class="prev-field-label">
-        <strong class="bonus-label label label-info" ng-if="field.is_bonus">Bonus</strong> <!-- <br ng-if="field.is_bonus"> -->
-        <span ng-bind-html="field.label"></span>
-        <abbr title="Required" ng-if="field.required"> *</abbr>
-      </label>
-
+      <type-badge></type-badge>
+      <abbr title="Required" ng-if="field.required"> *</abbr>
       <strong class="text-muted possible-points">[Points possible - {{findMax(field.choices)}}]</strong>
-
       <div class="inputLabel inline" ng-repeat="choice in field.choices">
         <input type="radio" name="{{field._id}}" ng-model="field.response" value="{{choice._id}}" id="{{choice._id}}" />
         <label ng-bind-html="choice.label" for="{{choice._id}}"></label> <strong class="text-muted">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
@@ -110,7 +92,6 @@
       <small class="help-block" ng-bind-html="field.help_text"></small>
     </div>
   </div>
-
 
 
 </div>

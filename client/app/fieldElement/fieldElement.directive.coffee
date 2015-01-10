@@ -10,16 +10,12 @@ angular.module 'greenApp'
   controller: ($scope) ->
     # $scope.selectedField = null
 
+    $scope.selectedField = _.find($scope.section.fields, (val) ->
+        val._id is $scope.field.condition.field
+      )
+
     $scope.availableFields = _.filter($scope.section.fields, (val) ->
         return val.type in ['radiobutton', 'select', 'checkbox'])
-
-
-    $scope.updateAvailableFieldChoices = () ->
-      setTimeout ->
-        console.log $scope.selectedField
-      , 10
-      $scope.field.condition.field = $scope.selectedField._id
-
 
 
 

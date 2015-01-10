@@ -5,6 +5,7 @@ angular.module 'greenApp'
 
   $scope.form = null;
   formId = $routeParams.id
+  $scope.formShow = true
   $scope.formSaving = false;
 
   $scope.init = ->
@@ -16,7 +17,12 @@ angular.module 'greenApp'
         if !Auth.isAdmin()
           formData.getFormUserResponse(formId)
             .success (results, resultsStatus) ->
-              _formatForm(data, results)
+              if results.length != 0
+                console.log results
+                _formatForm(data, results)
+              else
+                $scope.form = data
+                $scope.form.sections[0].active = true
         else
           $scope.form = data
           $scope.form.sections[0].active = true
@@ -52,7 +58,7 @@ angular.module 'greenApp'
 
   $scope.saveFormResuts = (e) ->
     e.preventDefault()
-    return Auth.isAdmin()
+    # return Auth.isAdmin()
     $scope.formSaving = true
     formData.respond($scope.form)
       .success (data, status) ->
