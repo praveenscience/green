@@ -34,10 +34,9 @@
       </label>
 
       <strong class="text-muted possible-points">[Points possible - {{findMax(field.choices)}}]</strong>
-
-        <select ng-model="field.response" id="field._id" class="form-control">
+        <select id="field._id" class="form-control" ng-model="field.response">
           <option value="">– Select one –</option>
-          <option value="{choice._id}" ng-repeat="choice in field.choices">
+          <option ng-repeat="choice in field.choices" value="{{choice._id}}" ng-selected="choice._id == field.response">
             {{choice.label}} &mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]
           </option>
         </select>
@@ -105,7 +104,7 @@
       <strong class="text-muted possible-points">[Points possible - {{findMax(field.choices)}}]</strong>
 
       <div class="inputLabel inline" ng-repeat="choice in field.choices">
-        <input type="radio" name="{{field._id}}" ng-model="choice.selected" value="{{choice._id}}" id="{{choice._id}}" />
+        <input type="radio" name="{{field._id}}" ng-model="field.response" value="{{choice._id}}" id="{{choice._id}}" />
         <label ng-bind-html="choice.label" for="{{choice._id}}"></label> <strong class="text-muted">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
       </div>
       <small class="help-block" ng-bind-html="field.help_text"></small>

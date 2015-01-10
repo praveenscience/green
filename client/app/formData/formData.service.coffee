@@ -31,9 +31,9 @@ angular.module 'greenApp'
           result_id: ""
 
         if field.choices.length isnt 0 and field.response is undefined
-          if field.type in ['radio', 'select']
-            $.each field.choices, (index, choice) ->
-              response.response = choice._id if choice.selected
+          if field.type is 'radiobutton'
+            console.log field
+            response.response = field.response if field.response
           else
             # Checkbox case - multiselect
             selections = []
@@ -41,12 +41,7 @@ angular.module 'greenApp'
               selections.push choice._id if choice.selected
             response.response = selections
         else
-          response.response = if typeof field.response is "object"
-            # Is a date
-            $filter('date')(field.response, "fullDate")
-          else
-            # Normal case
-            field.response
+          response.response = field.response
 
         # Add to responses
         responses.push response

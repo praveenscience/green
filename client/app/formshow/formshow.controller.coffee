@@ -21,17 +21,17 @@ angular.module 'greenApp'
 
 
   _formatForm = (data, results) ->
-    form = angular.copy(data)
+    form = data
     for index, field of results[0].results
       sectionIndex = _.findIndex form.sections, (s) -> s._id is field.section_id
       fieldIndex = _.findIndex form.sections[sectionIndex].fields, (s) -> s._id is field.field_id
-
       if field.response instanceof Array
         $.each field.response, (index, choice) ->
           choicesId = _.findIndex form.sections[sectionIndex].fields[fieldIndex].choices, (s) -> s._id is choice
           form.sections[sectionIndex].fields[fieldIndex].choices[choicesId].selected = true
       else
         form.sections[sectionIndex].fields[fieldIndex].response = field.response
+
 
     $scope.form = form
     $scope.form.sections[0].active = true
