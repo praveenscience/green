@@ -34,15 +34,9 @@ exports.create = function(req, res) {
 
 // Updates an existing result in the DB.
 exports.update = function(req, res) {
-
-  // if(req.body._id) { delete req.body._id; }
-
   var formId = req.body.form_id;
   var userId = req.user._id;
 
-  console.log(req.body);
-
-  //var choiceId = choice._id || mongoose.Types.ObjectId();
   var result = {
     user_id: userId,
     form_id: formId,

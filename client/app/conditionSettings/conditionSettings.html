@@ -1,0 +1,23 @@
+<div class="field-condition">
+  <div class="row field-condition-flag">
+    <input type="checkbox" class="checkbox-small" name="addClarification" type="checkbox" id="addClarification" ng-model="field.has_condition">
+    <label for="addClarification" class="smallText">Show this question on condition</label>
+  </div>
+  <div class="row field-condition-questions" ng-if='field.has_condition'>
+    <div class="col-lg-7 col-sm-7">
+      <div class="form-group">
+        <label for="">Question</label>
+        <!-- size as size.name for size in sizes -->
+        <select name="" id="" class="form-control" style='max-width: 100%;' ng-options="item.label for item in availableFields" ng-model="field.condition.field">
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-5 col-sm-5">
+      <label for="">Option</label>
+      <select name="" id="" class="form-control" ng-model="field.condition.choice">
+        <option value=''>-- Select Option --</option>
+        <option value="{{opt._id}}" ng-repeat="opt in selectedField.choices">{{opt.label}} </option>
+      </select>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 <div class="js_form_template" >
   <div ng-switch="field.type">
+    <!-- Text input -->
     <div data-option="text" ng-switch-when="text">
       <div class="col-lg-1">
       </div>
@@ -7,12 +8,14 @@
         <input type="text" class="form-control dashed" />
       </div>
     </div>
+    <!-- Text area  -->
     <div ng-switch-when="textarea" data-option="textarea">
       <div class="col-lg-1"> </div>
       <div class="col-lg-10">
         <textarea name="" id="" rows="2" class="dashed form-control vertical-resize span12"></textarea>
       </div>
     </div>
+    <!-- Select -->
     <div data-option="select" ng-switch-when="select">
       <div class="col-lg-1">
       </div>
@@ -30,6 +33,7 @@
         </div>
       </div>
     </div>
+    <!-- Radio button -->
     <div data-option="radiobutton" ng-switch-when="radiobutton">
       <div class="col-lg-1">
       </div>
@@ -45,8 +49,10 @@
             </span>
           </div>
         </div>
+        <condition-settings></condition-settings>
       </div>
     </div>
+    <!-- Checkboxes -->
     <div data-option="checkbox" ng-switch-when="checkbox">
       <div class="col-lg-1">
       </div>

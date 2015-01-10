@@ -13,13 +13,13 @@ angular.module 'greenApp'
   _loadFormData = ->
     formData.getForm(formId)
       .success (data, status) ->
-        formData.getFormUserResponse(formId)
-          .success (results, resultsStatus) ->
-            #$scope.form = data
-            #$scope.form.sections[0].active = true
-            _formatForm(data, results)
-
-
+        if !Auth.isAdmin()
+          formData.getFormUserResponse(formId)
+            .success (results, resultsStatus) ->
+              _formatForm(data, results)
+        else
+          $scope.form = data
+          $scope.form.sections[0].active = true
 
   _formatForm = (data, results) ->
     form = data
@@ -46,14 +46,14 @@ angular.module 'greenApp'
     section.active = true
 
   $scope.moveToNextStep = ($index, section) ->
-    console.log $index;
     for key, val of $scope.form.sections
       $scope.form.sections[key].active = false
     $scope.form.sections[$index + 1].active = true
 
   $scope.saveFormResuts = (e) ->
-    $scope.formSaving = true
     e.preventDefault()
+    return Auth.isAdmin()
+    $scope.formSaving = true
     formData.respond($scope.form)
       .success (data, status) ->
         $scope.formSaving = false

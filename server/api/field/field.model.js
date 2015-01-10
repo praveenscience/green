@@ -10,6 +10,14 @@ var FieldSchema = new Schema({
   required: String,
   sequence: Number,
   edit_mode: Boolean,
+  condition: {
+    field: { type: Schema.Types.ObjectId, ref: 'Field' },
+    choice: { type: Schema.Types.ObjectId, ref: 'Choice' }
+  },
+  has_condition: {
+    type: Boolean,
+    default: false
+  },
   is_bonus: {
     type: Boolean,
     default: false

@@ -30,6 +30,10 @@ angular.module 'greenApp'
     sequence: 0
     edit_mode: true
     is_bonus: false
+    has_condition: false
+    condition:
+      field: ''
+      choice: ''
     choices: [
       label: "Option"
       points: 0
