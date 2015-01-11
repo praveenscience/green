@@ -113,7 +113,7 @@
                 <div class="form-group">
                   <div class="col-lg-1 col-sm-1"></div>
                   <div class="col-lg-9 col-sm-9">
-                    <button class="btn btn-info btn-sm" type="button" ng-disabled="!isValidField(field)" ng-click="toggleField(field)" > Add </button>
+                    <button class="btn btn-info btn-sm" type="button" ng-disabled="!isValidField(field)" ng-click="toggleField(field, section)" > Add </button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="checkbox" class="checkbox-small" name="bonusCheckboxe" type="checkbox" id="bonusCheckboxe" ng-model="field.is_bonus">
                     <label for="bonusCheckboxe" class="smallText">Bonus quesiton</label>
@@ -128,7 +128,7 @@
           <div class="formSectionPrev" ng-if="!field.edit_mode">
             <div class="formFieldActions">
               <div class="hList">
-                <button class="btn btn-small" type="button" ng-click="toggleField(field)">
+                <button class="btn btn-small" type="button" ng-click="toggleField(field, section)">
                 <em class="icon icon-pencil"></em>
                 </button>
                 <button class="btn btn-small inlineText" type="button" ng-if="section.fields.length > 1" ng-click="removeField(field, section)">

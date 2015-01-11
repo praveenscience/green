@@ -5,7 +5,15 @@ var mongoose = require('mongoose'),
 
 var ChoiceSchema = new Schema({
   label: String,
-  points: Number
+  points: Number,
+  is_condition: {
+    type: Boolean,
+    default: false
+  },
+  show_field: {
+    type: String,
+    default: ''
+  }
 });
 
 module.exports = mongoose.model('Choice', ChoiceSchema);

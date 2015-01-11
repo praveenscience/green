@@ -11,8 +11,8 @@ var FieldSchema = new Schema({
   sequence: Number,
   edit_mode: Boolean,
   condition: {
-    field: { type: Schema.Types.ObjectId, ref: 'Field' },
-    choice: { type: Schema.Types.ObjectId, ref: 'Choice' }
+    field: { type: String, default: '' },
+    choice: { type: String, default: '' }
   },
   has_condition: {
     type: Boolean,

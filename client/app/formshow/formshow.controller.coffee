@@ -3,7 +3,7 @@
 angular.module 'greenApp'
 .controller 'FormshowCtrl', ($scope, $http, $routeParams, formData, Auth) ->
 
-  $scope.form = null;
+  $scope.form = {};
   formId = $routeParams.id
   $scope.formShow = true
   $scope.formSaving = false;
@@ -18,7 +18,6 @@ angular.module 'greenApp'
           formData.getFormUserResponse(formId)
             .success (results, resultsStatus) ->
               if results.length != 0
-                console.log results
                 _formatForm(data, results)
               else
                 $scope.form = data
@@ -42,6 +41,12 @@ angular.module 'greenApp'
 
     $scope.form = form
     $scope.form.sections[0].active = true
+
+    # $scope.$watch('form.sections', (old, newValue) ->
+
+
+    # , true)
+
 
 
     #$scope.form.sections[0].active = true

@@ -41,6 +41,8 @@ angular.module 'greenApp'
       label: "Option"
       points: 0
       focus: true
+      is_condition: false
+      show_field: ''
     ]
     field_validation:
       is_required: false
@@ -51,7 +53,11 @@ angular.module 'greenApp'
 
   # Choices
   choice =
-    label: ''
+    label: "Option"
+    points: 0
+    focus: true
+    is_condition: false
+    show_field: ''
 
   $scope.sortableOptions =
     containment: "parent"
@@ -149,11 +155,13 @@ angular.module 'greenApp'
 
   $scope.toggleField = (field, section) ->
     field.edit_mode = !field.edit_mode;
+    $scope.submitSection(section)
 
   $scope.isValidField = (field) ->
     field.label not in [undefined, '', null] and field.type not in ['', undefined]
 
   $scope.addChoice = (field) ->
+    console.log field
     field.choices = [] if field.choices is undefined
     field.choices.push angular.copy(choice)
 
@@ -164,6 +172,7 @@ angular.module 'greenApp'
     $scope.sectionSaving = true
     sectionData.create(section)
       .success (data, status) ->
+        section = data
         $scope.sectionSaving = false
         $scope.enableSaveButton = true
 

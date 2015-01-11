@@ -34,7 +34,7 @@
     <strong class="section-points">({{section.possible_points}} Possible Points, {{section.bonus_points}} Bonus)</strong>
     <div class="" ng-repeat="field in section.fields">
       <div>
-        <prev-element field="field"></prev-element>
+        <prev-element field="field" page="true" form="form" section="section"></prev-element>
       </div>
     </div>
     <div class="row">
