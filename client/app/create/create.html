@@ -27,6 +27,7 @@
           <em class="text-muted icon icon-cog"></em> Form settings / Publishing
         </li>
       </ul>
+      <br>
       <h4 class="g-c-section-heading">Sections</h4>
       <ul class="g-c-section-list">
         <li ng-repeat="section in form.sections" data-section-id="{{section._id}}" ng-click="loadSection(section)" ng-class="{active: section.active}"> {{section.title}} </li>
@@ -47,7 +48,7 @@
 
       <div ng-if="formSettings.active" class="row g-c-section-content">
         <div class="col-lg-12 col-sm-12">
-          <h3>Form settings / Publishing</h3>
+          <h4 class="g-c-section-heading">Form settings / Publishing</h4>
 
           <div class="from-settings">
             <div class="form-group">
