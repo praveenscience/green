@@ -5,8 +5,7 @@ angular.module 'greenApp'
 
   $scope.form = {};
   formId = $routeParams.id
-  $scope.formShow = true
-  $scope.formSaving = false;
+  $scope.page = true
 
   $scope.init = ->
     _loadFormData()
