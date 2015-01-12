@@ -41,6 +41,10 @@
       <div class="pull-right">
         <a href=""> Cancel </a>
         &nbsp;&nbsp;&nbsp;&nbsp;
+
+        <button class="btn btn-success btn-info" type="submit" ladda="formSaving" data-style="expand-left" tooltip="Last saved at {{form.updated}}" tooltip-append-to-body="true">Save as draft</button>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;
         <button class="btn btn-success" type="submit" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true" ng-if="$index != form.sections.length - 1">Save</button>
 
         <button class="btn btn-success btn-lg" type="submit" ladda="formSaving" data-style="expand-left" tooltip="Submit this form!" tooltip-append-to-body="true" ng-if="$index == form.sections.length - 1">Submit</button>

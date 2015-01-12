@@ -37,13 +37,18 @@
       <h4 class="g-c-section-heading">Sections</h4>
       <ul class="g-c-section-list">
         <li ng-repeat="section in form.sections" data-section-id="{{section._id}}" ng-click="loadSection(section)" ng-class="{active: section.active}"> {{section.title}} </li>
-        <li class="g-c-section-text-input">
-          <form ng-submit="addNewSection()">
-            <input type="text" required class="form-control" ng-model="newSection" placeholder='+ Add new section' />
-            <input type="submit" name="" hidden>
-          </form>
-        </li>
       </ul>
+      <div class="addNewSection">
+        <form ng-submit="addNewSection()">
+
+          <div class="input-group">
+            <input type="text" required class="form-control" ng-model="newSection" placeholder='+ Add new section' />
+            <span class="input-group-btn">
+              <button class="btn btn-info" type="button">Add</button>
+            </span>
+          </div>
+        </form>
+      </div>
     </div>
     <div class="col-lg-9 col-sm-9 g-c-content">
       <tabset class="g-c-section-content">
@@ -153,7 +158,9 @@
               <li><a href="#" ng-click="addCustomField(section, 'Y-N-NE', 'radiobutton')">Radio &mdash; Y, N, NE</a></li>
               <li><a href="#" ng-click="addCustomField(section, 'Y-N-NE-NA', 'radiobutton')">Radio &mdash; Y, N, NE, NA</a></li>
               <li class="divider"></li>
-              <li><a href="#">Separated link</a></li>
+              <li><a href="#" ng-click="addCustomField(section, 'Y-N', 'checkbox')">Checkbox &mdash; Y, N </a></li>
+              <li><a href="#" ng-click="addCustomField(section, 'Y-N-NE', 'checkbox')">Checkbox &mdash; Y, N, NE</a></li>
+              <li><a href="#" ng-click="addCustomField(section, 'Y-N-NE-NA', 'checkbox')">Checkbox &mdash; Y, N, NE, NA</a></li>
             </ul>
           </div>
           </div>

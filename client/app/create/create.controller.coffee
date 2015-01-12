@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'CreateController', ($scope, $http, $routeParams, sectionData, formData, SweetAlert, Auth) ->
+.controller 'CreateController', ($scope, $http, $routeParams, sectionData, formData, SweetAlert, Auth, Utils) ->
 
   $scope.isAdmin = Auth.isAdmin
   $scope.formShow = false
@@ -101,18 +101,6 @@ angular.module 'greenApp'
     containment: "parent"
     stop: (e, ui) ->
 
-  $scope.getAlertSettings = (item) ->
-    title: "Are you sure?",
-    text: "You will not be able to recover this #{item}!",
-    type: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#DD6B55",
-    confirmButtonText: "Yes, delete it!",
-    cancelButtonText: "No, cancel!",
-    closeOnConfirm: true,
-    closeOnCancel: true
-
-
   $scope.getFormatedDate = (date) ->
     d = new Date(date)
     d.toUTCString()
@@ -124,11 +112,8 @@ angular.module 'greenApp'
       'points'
 
   $scope.findMaxPoints = (array) ->
-    max = _.max(array, (a) ->
-        return a.points
-      )
-    return max.points
-
+    max = _.max(array, (a) -> return a.points)
+    max.points
 
   $scope.calculateSecitonPoints = ->
     return if $scope.form.sections is undefined
@@ -152,13 +137,15 @@ angular.module 'greenApp'
         $scope.originalForm = angular.copy(data)
         $scope.form = data
 
-  $scope.addSectionToForm = (sectionId, formId) ->
+  $scope.addSectionToForm = (section, formId) ->
     $http.put("api/forms/s/#{formId}", {
-        sections: sectionId._id
+        sections: section._id
       }).success (data, status) ->
+        $scope.form.sections.push(section)
 
   $scope.removeSection = (section) ->
-    SweetAlert.swal($scope.getAlertSettings('section'), (isConfirm) -> _handleSectionDelete(isConfirm, section))
+    SweetAlert.swal(Utils.getAlertSettings('section'), (isConfirm) ->
+      _handleSectionDelete(isConfirm, section))
 
   _handleSectionDelete = (isConfirm, section) ->
     if (isConfirm)
@@ -174,9 +161,7 @@ angular.module 'greenApp'
     return if $scope.newSection is ''
     $http.post('/api/sections', newSection)
       .success( (data, status, headers, config) ->
-        $scope.newSection = ''
         $scope.addSectionToForm(data, formId)
-        $scope.form.sections.push(newSection)
         return
       )
     return
