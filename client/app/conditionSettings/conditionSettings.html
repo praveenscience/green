@@ -14,7 +14,7 @@
     </div>
     <div class="col-lg-5 col-sm-5">
       <label for="">Option</label>
-      <select name="" id="" class="form-control" ng-model="field.condition.choice">
+      <select name="" id="" class="form-control" ng-model="field.condition.choice" ng-change='watchOptionsChange(field, choice, section)'>
         <option value=''>-- Select Option --</option>
         <option value="{{opt._id}}" ng-repeat="opt in selectedField.choices" ng-selected="opt._id == field.condition.choice">{{opt.label}} </option>
       </select>

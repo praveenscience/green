@@ -26,7 +26,7 @@ angular.module 'greenApp'
 
   # Fields
   field =
-    label: null
+    label: 'Untitle question'
     help_text: ''
     type: 'text'
     required: ''
@@ -196,8 +196,6 @@ angular.module 'greenApp'
     newField.type = type
     newField.choices = options
     section.fields.push angular.copy(newField)
-
-
 
   $scope.removeField = (field, section) ->
     currentField = section.fields.indexOf(field)

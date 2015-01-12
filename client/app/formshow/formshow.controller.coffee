@@ -29,23 +29,34 @@ angular.module 'greenApp'
   _formatForm = (data, results) ->
     form = data
     for index, field of results[0].results
-      sectionIndex = _.findIndex form.sections, (s) -> s._id is field.section_id
-      fieldIndex = _.findIndex form.sections[sectionIndex].fields, (s) -> s._id is field.field_id
+      section = _.find form.sections, (s) -> s._id is field.section_id
+      secField = _.find section.fields, (s) -> s._id is field.field_id
       if field.response instanceof Array
         $.each field.response, (index, choice) ->
-          choicesId = _.findIndex form.sections[sectionIndex].fields[fieldIndex].choices, (s) -> s._id is choice
-          form.sections[sectionIndex].fields[fieldIndex].choices[choicesId].selected = true
+          choice = _.findIndex secField.choices, (s) ->
+            s._id is choice
+          choice.selected = true
       else
-        form.sections[sectionIndex].fields[fieldIndex].response = field.response
+        if field.response != ''
+          secField.response = field.response
+          _showHiddenField(field.field_id, field.response, section)
 
     $scope.form = form
     $scope.form.sections[0].active = true
+
+  _showHiddenField = (fieldId, response,section) ->
+    return if !fieldId
+
+    fieldTobeShown = _.find section.fields, (v) ->
+      v.has_condition is true and v.condition.choice is response
+
+    if fieldTobeShown
+      fieldTobeShown.has_condition = false
 
   $scope.watchResponses = (field, section) ->
     if !Auth.isAdmin()
       conditionOption = _.find field.choices, (v) ->
         v.is_condition is true and field.response is v._id
-
       if(conditionOption)
         fieldIndex = _.find section.fields, (v) ->
           v._id is conditionOption.show_field
@@ -55,6 +66,7 @@ angular.module 'greenApp'
         for i, val of section.fields
           if val.condition.field is field._id
             val.has_condition = true
+            val.response = ''
 
   $scope.toggleClass = (section) ->
     for key, val of $scope.form.sections
