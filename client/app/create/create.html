@@ -34,6 +34,11 @@
   </div>
   <div class="row">
     <div class="col-lg-3 col-sm-3 g-c-sidebar">
+      <ul class="g-c-section-list">
+        <li ng-class="{active: formSettings.active}" ng-click="loadFormSettings()">
+          Form settings
+        </li>
+      </ul>
       <h4 class="g-c-section-heading">Sections</h4>
       <ul class="g-c-section-list">
         <li ng-repeat="section in form.sections" data-section-id="{{section._id}}" ng-click="loadSection(section)" ng-class="{active: section.active}"> {{section.title}} </li>
@@ -52,6 +57,11 @@
     </div>
     <div class="col-lg-9 col-sm-9 g-c-content">
       <tabset class="g-c-section-content">
+      <tag active="formSettings.active" disabled="formSettings.disabled">
+        <div class="row g-c-seciton-meta" sticky-media="(min-width:640px)">
+        </div>
+      </tag>
+
       <tab ng-repeat="section in form.sections" active="section.active" disabled="section.disabled">
       <div class="row g-c-seciton-meta" sticky-media="(min-width:640px)">
         <div class="col-lg-8 col-sm-8">

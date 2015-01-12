@@ -14,6 +14,7 @@ angular.module 'greenApp'
   $scope.enableSaveButton = true
   $scope.formSaving = false
   $scope.isCollapsed = true
+  $scope.formSettings = {}
 
   # Main Form
   master =
@@ -168,6 +169,11 @@ angular.module 'greenApp'
 
   $scope.loadSection = (section) ->
     section.active = true
+    $scope.formSettings.active = false
+
+  $scope.loadFormSettings = ->
+    $scope.formSettings.active = true
+    $scope.form.sections.forEach (val) -> val.active = false
 
   $scope.addField = (section) ->
     section.fields.push angular.copy(field)
