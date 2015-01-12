@@ -59,6 +59,44 @@ angular.module 'greenApp'
     is_condition: false
     show_field: ''
 
+  customChoices =
+    N:
+      label: 'No'
+      focus: true
+      is_condition: false
+      show_field: ''
+      points: 0
+    Y:
+      label: 'Yes'
+      focus: true
+      is_condition: false
+      show_field: ''
+      points: 1
+    NE:
+      label: 'Never or None'
+      focus: true
+      is_condition: false
+      show_field: ''
+      points: 1
+    A:
+      label: 'Always or All'
+      focus: false
+      is_condition: false
+      show_field: ''
+      points: 1
+    S:
+      label: 'Sometimes or Some'
+      focus: false
+      is_condition: false
+      show_field: ''
+      points: 1
+    NA:
+      label: 'Not Applicable'
+      focus: false
+      is_condition: false
+      show_field: ''
+      points: 0
+
   $scope.sortableOptions =
     containment: "parent"
     stop: (e, ui) ->
@@ -149,6 +187,18 @@ angular.module 'greenApp'
   $scope.addField = (section) ->
     section.fields.push angular.copy(field)
 
+  $scope.addCustomField = (section, opts, type) ->
+    optionsArr = opts.split('-')
+    options = []
+    optionsArr.forEach (i) ->
+      options.push(customChoices[i])
+    newField = angular.copy(field)
+    newField.type = type
+    newField.choices = options
+    section.fields.push angular.copy(newField)
+
+
+
   $scope.removeField = (field, section) ->
     currentField = section.fields.indexOf(field)
     section.fields.splice(currentField, 1)
@@ -161,7 +211,6 @@ angular.module 'greenApp'
     field.label not in [undefined, '', null] and field.type not in ['', undefined]
 
   $scope.addChoice = (field) ->
-    console.log field
     field.choices = [] if field.choices is undefined
     field.choices.push angular.copy(choice)
 

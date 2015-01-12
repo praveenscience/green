@@ -142,10 +142,20 @@
           </div>
         </div>
         <div class="addNewField">
-          <div class="btn-toolbar clearfix">
-            <a href="" class="btn btn-sm btn-default" ng-click="addField(section)" type="button" href=''>
-<em class="icon icon-plus"></em> Add New Field
-            </a>
+          <div class="btn-group" dropdown>
+            <button type="button" class="btn btn-primary" ng-click="addField(section)">Add New Field</button>
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" dropdown-toggle>
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#" ng-click="addCustomField(section, 'Y-N', 'radiobutton')">Radio &mdash; Y, N </a></li>
+              <li><a href="#" ng-click="addCustomField(section, 'Y-N-NE', 'radiobutton')">Radio &mdash; Y, N, NE</a></li>
+              <li><a href="#" ng-click="addCustomField(section, 'Y-N-NE-NA', 'radiobutton')">Radio &mdash; Y, N, NE, NA</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>
           </div>
         </div>
         <div class="row" sticky-media="(min-width:640px)">

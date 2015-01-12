@@ -23,6 +23,6 @@ angular.module 'greenApp'
           v._id is b.condition.choice
 
         option.is_condition = true
-        option.show_field = b.condition.field
+        option.show_field = scope.field._id
 
     , true

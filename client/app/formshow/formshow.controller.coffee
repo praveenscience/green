@@ -38,18 +38,23 @@ angular.module 'greenApp'
       else
         form.sections[sectionIndex].fields[fieldIndex].response = field.response
 
-
     $scope.form = form
     $scope.form.sections[0].active = true
 
-    # $scope.$watch('form.sections', (old, newValue) ->
+  $scope.watchResponses = (field, section) ->
+    if !Auth.isAdmin()
+      conditionOption = _.find field.choices, (v) ->
+        v.is_condition is true and field.response is v._id
 
-
-    # , true)
-
-
-
-    #$scope.form.sections[0].active = true
+      if(conditionOption)
+        fieldIndex = _.find section.fields, (v) ->
+          v._id is conditionOption.show_field
+        if fieldIndex
+          fieldIndex.has_condition = false
+      else
+        for i, val of section.fields
+          if val.condition.field is field._id
+            val.has_condition = true
 
   $scope.toggleClass = (section) ->
     for key, val of $scope.form.sections
