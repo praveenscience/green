@@ -7,18 +7,6 @@
           <input type="text" ng-model="form.name" class="form-control inlineInput flag">
         </div>
         <div collapse="isCollapsed">
-          <div class="from-settings">
-            <div class="form-group">
-              <label for="formDescription">Describe this form</label>
-              <textarea name="formDescription" id="formDescription" cols="30" rows="3" class="form-control"></textarea>
-            </div>
-            <hr>
-            <div class="from-group pull-right">
-              <button class="btn btn-danger btn-sm" tooltip-append-to-body="true"  tooltip="Remove this form! Can't be reverted!"><em class="icon icon-remove"></em></button>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <button class="btn btn-success" tooltip="Publish your form" tooltip-append-to-body="true" >Publish</button>
-            </div>
-          </div>
         </div>
       </div>
       <div class="col-lg-4 col-sm-4">
@@ -36,7 +24,7 @@
     <div class="col-lg-3 col-sm-3 g-c-sidebar">
       <ul class="g-c-section-list">
         <li ng-class="{active: formSettings.active}" ng-click="loadFormSettings()">
-          Form settings
+          <em class="text-muted icon icon-cog"></em> Form settings / Publishing
         </li>
       </ul>
       <h4 class="g-c-section-heading">Sections</h4>
@@ -56,11 +44,30 @@
       </div>
     </div>
     <div class="col-lg-9 col-sm-9 g-c-content">
-      <tabset class="g-c-section-content">
-      <tag active="formSettings.active" disabled="formSettings.disabled">
-        <div class="row g-c-seciton-meta" sticky-media="(min-width:640px)">
+
+      <div ng-if="formSettings.active" class="row g-c-section-content">
+        <div class="col-lg-12 col-sm-12">
+          <h3>Form settings / Publishing</h3>
+
+          <div class="from-settings">
+            <div class="form-group">
+              <label for="formDescription">Describe this form</label>
+              <textarea name="formDescription" id="formDescription" cols="30" rows="3" class="form-control"></textarea>
+            </div>
+            <hr>
+            <div class="from-group pull-right">
+              <button class="btn btn-danger btn-sm" tooltip-append-to-body="true"  tooltip="Remove this form! Can't be reverted!"><em class="icon icon-remove"></em></button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <button class="btn btn-success" tooltip="Publish your form" tooltip-append-to-body="true" >Publish</button>
+            </div>
+          </div>
+
         </div>
-      </tag>
+      </div>
+
+
+      <tabset class="g-c-section-content">
+
 
       <tab ng-repeat="section in form.sections" active="section.active" disabled="section.disabled">
       <div class="row g-c-seciton-meta" sticky-media="(min-width:640px)">
@@ -196,6 +203,9 @@ ng-disabled="enableSaveButton"
         </div>
       </div>
 </tab>
+
+
+
 </tabset>
     </div>
   </div>
