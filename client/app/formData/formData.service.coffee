@@ -14,6 +14,11 @@ angular.module 'greenApp'
       method: "GET"
       url: "/api/forms/#{formId}"
 
+  removeField: (fieldId) ->
+    $http
+      method: "DELETE"
+      url: "/api/fields/#{fieldId}"
+
   getFormUserResponse: (formId) ->
     $http
       url: "api/results/#{formId}"

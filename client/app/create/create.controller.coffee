@@ -111,6 +111,7 @@ angular.module 'greenApp'
   $scope.sortableOptions =
     containment: "parent"
     stop: (e, ui) ->
+      console.log $scope.form.sections
 
   $scope.getFormatedDate = (date) ->
     d = new Date(date)
@@ -199,6 +200,7 @@ angular.module 'greenApp'
       .success (data, status) ->
         newField = angular.copy(field)
         newField._id = data._id
+        newField.choices[0]._id = data.choices[0]
         section.fields.push angular.copy(newField)
 
   $scope.addNAChoice = (field) ->
@@ -225,8 +227,11 @@ angular.module 'greenApp'
         section.fields.push angular.copy(newField)
 
   $scope.removeField = (field, section) ->
-    currentField = section.fields.indexOf(field)
-    section.fields.splice(currentField, 1)
+    formData.removeField field._id
+      .success (data, status) ->
+        console.log data
+        currentField = section.fields.indexOf(field)
+        section.fields.splice(currentField, 1)
 
   $scope.toggleField = (field, section) ->
     field.edit_mode = !field.edit_mode;

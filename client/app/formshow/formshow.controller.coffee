@@ -36,10 +36,11 @@ angular.module 'greenApp'
       section = _.find form.sections, (s) -> s._id is field.section_id
       secField = _.find section.fields, (s) -> s._id is field.field_id
       if field.response instanceof Array
-        $.each field.response, (index, choice) ->
-          choice = _.findIndex secField.choices, (s) ->
+        for index, choice of field.response
+          choiceI = _.find secField.choices, (s) ->
             s._id is choice
-          choice.selected = true
+          if choiceI
+            choiceI.selected = true
       else
         if field.response != ''
           secField.response = field.response
