@@ -19,6 +19,10 @@ var FormSchema = new Schema({
     type: Date,
     "default": Date.now
   },
+  total_points: {
+    type: Number,
+    default: 0
+  },
   status: {
     type: String,
     "default": "Unpublished",

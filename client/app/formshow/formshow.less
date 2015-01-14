@@ -1,4 +1,4 @@
-@wiz-bg: #E4E4E4;
+@wiz-bg: #efefea;
 @wiz-line-bg: #CDCDCD;
 @wiz-bubble-bg: #AAB2BD;
 @wiz-bubble-text: #E6E9ED;
@@ -59,12 +59,22 @@
 
 }
 
+.form-meta-container {
+  margin: 0 auto;
+  max-width: 940px;
+}
 
+.form-meta {
+  margin: -30px -15px 30px;
+  overflow: hidden;
+  padding: 15px;
+}
 
 .form-title {
   h1 {
     font-size: 24px;
     margin: 0;
+    line-height: 50px;
   }
 }
 
@@ -77,17 +87,17 @@
 .form-sections {
   background: @wiz-bg;
   overflow: hidden;
-  margin: -30px -15px 20px;
+  margin: -30px -20px 20px;
   padding: 22px;
   //border-bottom: solid 1px #eee;
   position: relative;
   &:before {
     content: '';
     display: block;
-    top: 37px;
-    left: 0;
-    right: 0;
-    height: 2px;
+    top: 37.5px;
+    left: 20px;
+    right: 20px;
+    height: 1px;
     background: @wiz-line-bg;
     position: absolute;
     z-index: 1;
@@ -176,4 +186,15 @@
       position: absolute;
     }
   }
+}
+
+.points-gained {
+  font-size: 32px;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.total-point {
+  font-size: 20px;
+  color: #888;
 }

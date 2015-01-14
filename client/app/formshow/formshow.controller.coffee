@@ -7,6 +7,9 @@ angular.module 'greenApp'
   formId = $routeParams.id
   $scope.page = true
 
+  $scope.totalPoints = 0
+  $scope.aquiredPoints = 0
+
   $scope.init = ->
     _loadFormData()
 
@@ -20,9 +23,11 @@ angular.module 'greenApp'
                 _formatForm(data, results)
               else
                 $scope.form = data
+                $scope.form.aquired_points = 0
                 $scope.form.sections[0].active = true
         else
           $scope.form = data
+          $scope.form.aquired_points = 0
           $scope.form.sections[0].active = true
 
   _formatForm = (data, results) ->
@@ -41,6 +46,7 @@ angular.module 'greenApp'
           _showHiddenField(field.field_id, field.response, section)
 
     $scope.form = form
+    $scope.form.aquired_points = 0
     $scope.form.sections[0].active = true
 
   _showHiddenField = (fieldId, response,section) ->
@@ -52,7 +58,38 @@ angular.module 'greenApp'
     if fieldTobeShown
       fieldTobeShown.has_condition = false
 
+  _updateScore = (field, section) ->
+    console.log field
+    if field.type in ['checkbox']
+      selectdOption = _.find field.choices, (v) ->
+        v.selected is true
+    else
+      selectdOption = _.find field.choices, (v) ->
+        field.response is v._id
+
+    if selectdOption instanceof Array
+      selectdOption.map (a, b) -> a.points + b.points
+    else
+      field.aquired_points = selectdOption.points
+
+    _updateSectionScore(section)
+
+  _updateSectionScore = (section) ->
+    section.aquired_points = 0
+    for field, key in section.fields
+      if field.aquired_points
+        section.aquired_points+= field.aquired_points
+    _updateFormScore()
+
+  _updateFormScore = ->
+    return if !$scope.form.sections
+    $scope.form.aquired_points = 0
+    for section, key in $scope.form.sections
+      if section.aquired_points
+        $scope.form.aquired_points += section.aquired_points
+
   $scope.watchResponses = (field, section) ->
+    _updateScore(field, section)
     if !Auth.isAdmin()
       conditionOption = _.find field.choices, (v) ->
         v.is_condition is true and field.response is v._id
@@ -84,5 +121,12 @@ angular.module 'greenApp'
     formData.respond($scope.form)
       .success (data, status) ->
         $scope.formSaving = false
+
+  # $scope.$watch 'form', (old, newValue) ->
+  #   return if !$scope.form.sections
+  #   $scope.form.total_points = 0
+  #   for section, key in $scope.form.sections
+  #     $scope.form.total_points += (section.possible_points + section.bonus_points)
+  # , true
 
   $scope.init()

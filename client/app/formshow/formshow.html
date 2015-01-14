@@ -3,12 +3,22 @@
 
 
   <div class="row">
+  <div class="form-meta-container">
     <div class="form-meta">
-      <div class="col-lg-8 col-sm-8">
+      <div class="col-lg-9 col-sm-9">
         <div class="form-title">
           <h1>{{form.name}}</h1>
         </div>
       </div>
+      <div class="col-lg-3 col-sm-3">
+        <div class="form-stats pull-right">
+          <small class="text-muted">Your score</small>
+          <br>
+          <span class="points-gained">{{form.aquired_points}} </span> <span class="total-point">/ {{form.total_points}}</span>
+        </div>
+      </div>
+
+    </div>
     </div>
   </div>
 

@@ -133,11 +133,19 @@ angular.module 'greenApp'
       $scope.form.sections[skey].possible_points = 0
       for key, fld of sval.fields
         if $scope.form.sections[skey].fields[key].type not in ['text', 'textarea']
-          if $scope.form.sections[skey].fields[key].is_bonus
-            $scope.form.sections[skey].bonus_points += $scope.findMaxPoints(fld.choices)
-          else
-            $scope.form.sections[skey].possible_points += $scope.findMaxPoints(fld.choices)
+          max = $scope.findMaxPoints(fld.choices)
+          if max isnt 'NaN'
+            if $scope.form.sections[skey].fields[key].is_bonus
+              $scope.form.sections[skey].bonus_points += max
+            else
+              $scope.form.sections[skey].possible_points += max
     return
+
+  $scope.updateFormPoints = ->
+    return if !$scope.form.sections
+    $scope.form.total_points = 0
+    for section, key in $scope.form.sections
+      $scope.form.total_points += (section.possible_points + section.bonus_points)
 
   $scope.init = ->
     return unless formId
@@ -189,7 +197,9 @@ angular.module 'greenApp'
   $scope.addField = (section) ->
     formData.addField angular.copy(field)
       .success (data, status) ->
-        section.fields.push angular.copy(data)
+        newField = angular.copy(field)
+        newField._id = data._id
+        section.fields.push angular.copy(newField)
 
   $scope.addNAChoice = (field) ->
     naField = _.findIndex field.choices, (v) ->
@@ -249,6 +259,7 @@ angular.module 'greenApp'
   $scope.$watch('form.sections', (old, newValue) ->
     $scope.enableSaveButton = false
     $scope.calculateSecitonPoints()
+    $scope.updateFormPoints()
   , true)
 
   $scope.init()
