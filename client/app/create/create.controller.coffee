@@ -111,7 +111,6 @@ angular.module 'greenApp'
   $scope.sortableOptions =
     containment: "parent"
     stop: (e, ui) ->
-      console.log $scope.form.sections
 
   $scope.getFormatedDate = (date) ->
     d = new Date(date)
@@ -229,7 +228,6 @@ angular.module 'greenApp'
   $scope.removeField = (field, section) ->
     formData.removeField field._id
       .success (data, status) ->
-        console.log data
         currentField = section.fields.indexOf(field)
         section.fields.splice(currentField, 1)
 

@@ -60,7 +60,6 @@ angular.module 'greenApp'
       fieldTobeShown.has_condition = false
 
   _updateScore = (field, section) ->
-    console.log field
     if field.type in ['checkbox']
       selectdOption = _.find field.choices, (v) ->
         v.selected is true
@@ -71,7 +70,9 @@ angular.module 'greenApp'
     if selectdOption instanceof Array
       selectdOption.map (a, b) -> a.points + b.points
     else
-      field.aquired_points = selectdOption.points
+      field.aquired_points = 0
+      if selectdOption != undefined
+        field.aquired_points = selectdOption.points
 
     _updateSectionScore(section)
 
@@ -93,7 +94,10 @@ angular.module 'greenApp'
     _updateScore(field, section)
     if !Auth.isAdmin()
       conditionOption = _.find field.choices, (v) ->
-        v.is_condition is true and field.response is v._id
+        if field.type in ['checkbox']
+          v.selected is true and v.is_condition is true
+        else
+          v.is_condition is true and field.response is v._id
       if(conditionOption)
         fieldIndex = _.find section.fields, (v) ->
           v._id is conditionOption.show_field
