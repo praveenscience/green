@@ -14,3 +14,13 @@ angular.module 'greenApp'
     cancelButtonText: "No, cancel!",
     closeOnConfirm: true,
     closeOnCancel: true
+
+  getFormatedDate: (date) ->
+    d = new Date(date)
+    d.toUTCString()
+
+  pluralize: (points) ->
+    if points == 1
+      'point'
+    else
+      'points'

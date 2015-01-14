@@ -1,7 +1,7 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="container page-container">
   <div class="row">
-    <div class="form-meta">
+    <div class="form-header-meta">
       <div class="col-lg-8 col-sm-8">
         <div class="form-title">
           <input type="text" ng-model="form.name" class="form-control inlineInput flag">
@@ -14,8 +14,6 @@
           <button class="btn btn-success btn-sm" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true">Save</button>
           &nbsp;&nbsp;&nbsp;
           <a class="btn btn-default btn-sm" href="/forms/{{form._id}}" tooltip="See how the form looks!" tooltip-append-to-body="true"  tooltip-placement="top">Preview</a>
-          &nbsp;&nbsp;&nbsp;
-          <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed"><em class="icon icon-cog"></em></button>
         </div>
       </div>
     </div>
@@ -51,15 +49,56 @@
           <h4 class="g-c-section-heading">Form settings / Publishing</h4>
 
           <div class="from-settings">
+
             <div class="form-group">
               <label for="formDescription">Describe this form</label>
               <textarea name="formDescription" id="formDescription" cols="30" rows="3" class="form-control"></textarea>
             </div>
-            <hr>
-            <div class="from-group pull-right">
-              <button class="btn btn-danger btn-sm" tooltip-append-to-body="true"  tooltip="Remove this form! Can't be reverted!"><em class="icon icon-remove"></em></button>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <button class="btn btn-success" tooltip="Publish your form" tooltip-append-to-body="true" >Publish</button>
+
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">Certification logic</h3>
+              </div>
+              <div class="panel-body">
+                <h6 class="text-muted"> Coming soon!</h6>
+              </div>
+            </div>
+
+            <div class="panel panel-success">
+              <div class="panel-heading">
+                <h3 class="panel-title">Publishing</h3>
+              </div>
+              <div class="panel-body">
+              <div class="col-lg-9 col-sm-9">
+                <div class="form-group">
+                  <label for="">Publish this from</label>
+                  <p class="help-text">Once you publish a form and if there is any response you cannot edit or make changes. Please be certain.</p>
+
+                </div>
+              </div>
+              <div class="col-lg-3 col-sm-3">
+                <button class="btn btn-success" tooltip-append-to-body="true"  tooltip=""><em class="icon icon-thumbs-up"></em> Publish this form</button>
+              </div>
+              </div>
+            </div>
+
+
+            <div class="panel panel-danger">
+              <div class="panel-heading">
+                <h3 class="panel-title">Dange zone</h3>
+              </div>
+              <div class="panel-body">
+              <div class="col-lg-9 col-sm-9">
+                <div class="form-group">
+                  <label for="">Delete this from</label>
+                  <p class="help-text">Once you delete a form, there is no going back. Please be certain.</p>
+
+                </div>
+              </div>
+              <div class="col-lg-3 col-sm-3">
+                <button class="btn btn-danger btn-sm" tooltip-append-to-body="true"  tooltip="Remove this form! Can't be reverted!"><em class="icon icon-remove"></em> Remove this form</button>
+              </div>
+              </div>
             </div>
           </div>
 

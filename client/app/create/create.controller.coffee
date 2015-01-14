@@ -13,7 +13,6 @@ angular.module 'greenApp'
   $scope.sectionSaving = false
   $scope.enableSaveButton = true
   $scope.formSaving = false
-  $scope.isCollapsed = true
   $scope.formSettings =
     active: false
 
@@ -112,15 +111,8 @@ angular.module 'greenApp'
     containment: "parent"
     stop: (e, ui) ->
 
-  $scope.getFormatedDate = (date) ->
-    d = new Date(date)
-    d.toUTCString()
-
-  $scope.pluralize = (points) ->
-    if points == 1
-      'point'
-    else
-      'points'
+  $scope.getFormatedDate = Utils.getFormatedDate
+  $scope.pluralize = Utils.pluralize
 
   $scope.findMaxPoints = (array) ->
     max = _.max(array, (a) -> return a.points)
