@@ -18,6 +18,10 @@ var FieldSchema = new Schema({
     type: Boolean,
     default: false
   },
+  has_na: {
+    type: Boolean,
+    default: false
+  },
   is_bonus: {
     type: Boolean,
     default: false

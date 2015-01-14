@@ -23,10 +23,8 @@ exports.show = function(req, res) {
 
 // Creates a new field in the DB.
 exports.create = function(req, res) {
-
   var data = req.body;
   var choice = new Choice(data.choices[0]);
-
   choice.save(function(err, optn) {
     if (err) return handleError(err);
     var field = data;
@@ -35,10 +33,8 @@ exports.create = function(req, res) {
     var fieldObj = new Field(field);
     fieldObj.save(function(err, fld) {
       if(err) { return handleError(res, err); }
-      console.log(fld);
       return res.json(201, fld);
     });
-
   });
 };
 

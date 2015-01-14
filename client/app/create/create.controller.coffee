@@ -36,6 +36,7 @@ angular.module 'greenApp'
     edit_mode: true
     is_bonus: false
     has_condition: false
+    has_na: false
     condition:
       field: ''
       choice: ''
@@ -45,6 +46,7 @@ angular.module 'greenApp'
       focus: true
       is_condition: false
       show_field: ''
+      is_na: false
     ]
     field_validation:
       is_required: false
@@ -60,6 +62,7 @@ angular.module 'greenApp'
     focus: true
     is_condition: false
     show_field: ''
+    is_na: false
 
   customChoices =
     N:
@@ -68,36 +71,42 @@ angular.module 'greenApp'
       is_condition: false
       show_field: ''
       points: 0
+      is_na: false
     Y:
       label: 'Yes'
       focus: true
       is_condition: false
       show_field: ''
       points: 1
+      is_na: false
     NE:
       label: 'Never or None'
       focus: true
       is_condition: false
       show_field: ''
       points: 1
+      is_na: false
     A:
       label: 'Always or All'
       focus: false
       is_condition: false
       show_field: ''
       points: 1
+      is_na: false
     S:
       label: 'Sometimes or Some'
       focus: false
       is_condition: false
       show_field: ''
       points: 1
+      is_na: false
     NA:
       label: 'Not Applicable'
       focus: false
       is_condition: false
       show_field: ''
       points: 0
+      is_na: true
 
   $scope.sortableOptions =
     containment: "parent"
@@ -182,6 +191,16 @@ angular.module 'greenApp'
       .success (data, status) ->
         section.fields.push angular.copy(data)
 
+  $scope.addNAChoice = (field) ->
+    naField = _.findIndex field.choices, (v) ->
+      v.is_na is true
+    if naField >= 0
+      field.choices.splice naField, 1
+      field.has_na = false
+    else
+      field.has_na = true
+      field.choices.push angular.copy(customChoices['NA'])
+
   $scope.addCustomField = (section, opts, type) ->
     optionsArr = opts.split('-')
     options = []
@@ -214,7 +233,6 @@ angular.module 'greenApp'
     field.choices.splice index, 1
 
   $scope.submitSection = (section, sectionId) ->
-    console.log section
     $scope.sectionSaving = true
     sectionData.create(section)
       .success (data, status) ->

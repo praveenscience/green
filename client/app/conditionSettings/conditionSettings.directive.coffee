@@ -21,8 +21,6 @@ angular.module 'greenApp'
         option = _.findIndex condField.choices, (v) ->
           v._id is field.condition.choice
 
-        console.log field
-
         section.fields[condFieldIndex].choices[option].is_condition = true
         section.fields[condFieldIndex].choices[option].show_field = field._id
 
