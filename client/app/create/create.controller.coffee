@@ -177,7 +177,9 @@ angular.module 'greenApp'
     $scope.formSettings.active = true
 
   $scope.addField = (section) ->
-    section.fields.push angular.copy(field)
+    formData.addField angular.copy(field)
+      .success (data, status) ->
+        section.fields.push angular.copy(data)
 
   $scope.addCustomField = (section, opts, type) ->
     optionsArr = opts.split('-')
@@ -187,7 +189,10 @@ angular.module 'greenApp'
     newField = angular.copy(field)
     newField.type = type
     newField.choices = options
-    section.fields.push angular.copy(newField)
+    formData.addField angular.copy(newField)
+      .success (data, status) ->
+        newField._id = data._id
+        section.fields.push angular.copy(newField)
 
   $scope.removeField = (field, section) ->
     currentField = section.fields.indexOf(field)

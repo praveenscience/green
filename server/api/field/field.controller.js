@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Field = require('./field.model');
+var Choice = require('../choice/choice.model');
 
 // Get list of fields
 exports.index = function(req, res) {
@@ -22,9 +23,22 @@ exports.show = function(req, res) {
 
 // Creates a new field in the DB.
 exports.create = function(req, res) {
-  Field.create(req.body, function(err, field) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, field);
+
+  var data = req.body;
+  var choice = new Choice(data.choices[0]);
+
+  choice.save(function(err, optn) {
+    if (err) return handleError(err);
+    var field = data;
+    field.choices = []
+    field.choices.push(optn._id);
+    var fieldObj = new Field(field);
+    fieldObj.save(function(err, fld) {
+      if(err) { return handleError(res, err); }
+      console.log(fld);
+      return res.json(201, fld);
+    });
+
   });
 };
 
