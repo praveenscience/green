@@ -5,9 +5,7 @@ angular.module 'greenApp'
 
   $scope.isAdmin = Auth.isAdmin
 
-  $scope.getFormatedDate = (date) ->
-    d = new Date(date)
-    d.toUTCString()
+  $scope.getFormatedDate = Utils.getFormatedDate
 
   $scope.forms = []
 
@@ -62,8 +60,6 @@ angular.module 'greenApp'
       return "/forms/results/#{form._id}"
     else
       return "/forms/#{form._id}"
-
-
 
   $scope.removeForm = (form) ->
     SweetAlert.swal(Utils.getAlertSettings('form'), (isConfirm) ->
