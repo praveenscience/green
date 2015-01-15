@@ -255,6 +255,9 @@ angular.module 'greenApp'
     $scope.form.status = 'Published'
     $scope.submitForm($scope.form)
 
+  $scope.unPublishForm = ->
+    $scope.form.status = 'Unpublished'
+    $scope.submitForm($scope.form)
 
   $scope.$watch('form.sections', (old, newValue) ->
     $scope.enableSaveButton = false

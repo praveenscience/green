@@ -55,11 +55,11 @@
               <textarea name="formDescription" id="formDescription" cols="30" rows="3" class="form-control"></textarea>
             </div>
             <div class="pull-right">
-                <button class="btn btn-success btn-sm" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true">Save</button>
+                <button class="btn btn-info" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true">Save</button>
             </div>
-            <br>
-            <br>
             <div class="clearfix"></div>
+            <br />
+            <br />
             <div class="panel panel-info">
               <div class="panel-heading">
                 <h3 class="panel-title">Certification logic</h3>
@@ -78,11 +78,13 @@
                 <div class="form-group">
                   <label for="">Publish this from</label>
                   <p class="help-text">Once you publish a form and if there is any response you cannot edit or make changes. Please be certain.</p>
-
                 </div>
               </div>
               <div class="col-lg-3 col-sm-3">
-                <button class="btn btn-success" tooltip-append-to-body="true"  ng-click="publishForm()" tooltip=""><em class="icon icon-thumbs-up"></em> Publish this form</button>
+                <button class="btn btn-success" tooltip-append-to-body="true"  ng-click="publishForm()" tooltip="" ng-if="form.status == 'Unpublished'"><em class="icon icon-thumbs-up"></em> Publish this form</button>
+
+                <button class="btn btn-warning btn-sm" tooltip-append-to-body="true"  ng-click="unPublishForm()" tooltip="" ng-if="form.status == 'Published'"><em class="icon icon-thumbs-down"></em> Unpublish this form</button>
+
               </div>
               </div>
             </div>
