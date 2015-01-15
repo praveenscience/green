@@ -54,7 +54,12 @@
               <label for="formDescription">Describe this form</label>
               <textarea name="formDescription" id="formDescription" cols="30" rows="3" class="form-control"></textarea>
             </div>
-
+            <div class="pull-right">
+                <button class="btn btn-success btn-sm" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true">Save</button>
+            </div>
+            <br>
+            <br>
+            <div class="clearfix"></div>
             <div class="panel panel-info">
               <div class="panel-heading">
                 <h3 class="panel-title">Certification logic</h3>
@@ -77,7 +82,7 @@
                 </div>
               </div>
               <div class="col-lg-3 col-sm-3">
-                <button class="btn btn-success" tooltip-append-to-body="true"  tooltip=""><em class="icon icon-thumbs-up"></em> Publish this form</button>
+                <button class="btn btn-success" tooltip-append-to-body="true"  ng-click="publishForm()" tooltip=""><em class="icon icon-thumbs-up"></em> Publish this form</button>
               </div>
               </div>
             </div>

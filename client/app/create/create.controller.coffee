@@ -251,6 +251,11 @@ angular.module 'greenApp'
       .success (data, status) ->
         $scope.formSaving = false
 
+  $scope.publishForm = ->
+    $scope.form.status = 'Published'
+    $scope.submitForm($scope.form)
+
+
   $scope.$watch('form.sections', (old, newValue) ->
     $scope.enableSaveButton = false
     $scope.calculateSecitonPoints()
