@@ -55,6 +55,16 @@ angular.module 'greenApp'
       )
     return
 
+  $scope.getFormLink = (form) ->
+    if $scope.isAdmin() and form.status is 'Unpublished'
+      return "/forms/edit/#{form._id}"
+    else if $scope.isAdmin() and form.status is 'Published'
+      return "/forms/results/#{form._id}"
+    else
+      return "/forms/#{form._id}"
+
+
+
   $scope.removeForm = (form) ->
     SweetAlert.swal(Utils.getAlertSettings('form'), (isConfirm) ->
       _handleFormDelete(isConfirm, form))
