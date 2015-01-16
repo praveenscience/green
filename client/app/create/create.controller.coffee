@@ -27,7 +27,7 @@ angular.module 'greenApp'
 
   # Fields
   field =
-    label: 'Untitle question'
+    label: 'Add question text'
     help_text: ''
     type: 'text'
     required: ''

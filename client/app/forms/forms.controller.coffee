@@ -22,7 +22,7 @@ angular.module 'greenApp'
       sections: [{
         title: "Untitled section"
         fields: [{
-          label: "Untitled filed"
+          label: "Add question text"
           help_text: 'help text goes here'
           type: 'text'
           required: false
