@@ -24,6 +24,17 @@ exports.show = function(req, res) {
 
 };
 
+exports.showallresults = function(req, res) {
+  Result.find({
+    form_id: req.params.id
+  }).exec(function(err, result) {
+    if(err) { return handleError(res, err); }
+    if(!result) { return res.send(404); }
+    return res.json(result);
+  });
+}
+
+
 // Creates a new result in the DB.
 exports.create = function(req, res) {
   Result.create(req.body, function(err, result) {
@@ -35,7 +46,9 @@ exports.create = function(req, res) {
 // Updates an existing result in the DB.
 exports.update = function(req, res) {
   var formId = req.body.form_id;
-  var userId = req.user._id;
+  var userId = req.user.id;
+
+  console.log(req.user.id);
 
   var result = {
     user_id: userId,

@@ -57,7 +57,7 @@ angular.module 'greenApp'
     if $scope.isAdmin() and form.status is 'Unpublished'
       return "/forms/edit/#{form._id}"
     else if $scope.isAdmin() and form.status is 'Published'
-      return "/forms/results/#{form._id}"
+      return "/results/#{form._id}"
     else
       return "/forms/#{form._id}"
 

@@ -65,6 +65,10 @@
           <td ng-if="isAdmin()" >
             <a href="forms/{{form._id}}" class="btn btn-info btn-xs" ng-click="previewForm(form)
           " tooltip="Preview this form" tooltip-append-to-body="true"><em class="icon icon-eye"></em></a>
+          &nbsp;&nbsp;&nbsp;
+            <a href="" class="btn btn-danger btn-xs" ng-click="removeForm(form)" tooltip="Remove this form! (think twice)" tooltip-append-to-body="true">
+              <em class="icon icon-remove"></em>
+            </a>
           </td>
         </tr>
       </tbody>
