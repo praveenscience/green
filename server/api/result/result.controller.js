@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Result = require('./result.model');
+var User = require('../user/user.model');
 
 // Get list of results
 exports.index = function(req, res) {
@@ -14,8 +15,8 @@ exports.index = function(req, res) {
 // Get a single result
 exports.show = function(req, res) {
   Result.find({
-    form_id: req.params.id,
-    user_id: req.user._id
+    form: req.params.id,
+    user: req.user._id
   }).exec(function(err, result) {
     if(err) { return handleError(res, err); }
     if(!result) { return res.send(404); }
@@ -26,8 +27,11 @@ exports.show = function(req, res) {
 
 exports.showallresults = function(req, res) {
   Result.find({
-    form_id: req.params.id
-  }).exec(function(err, result) {
+    form: req.params.id
+  })
+  .lean()
+  .populate('form')
+  .exec(function(err, result) {
     if(err) { return handleError(res, err); }
     if(!result) { return res.send(404); }
     return res.json(result);
@@ -45,22 +49,24 @@ exports.create = function(req, res) {
 
 // Updates an existing result in the DB.
 exports.update = function(req, res) {
-  var formId = req.body.form_id;
+  var formId = req.body.form;
   var userId = req.user.id;
-
-  console.log(req.user.id);
-
   var result = {
-    user_id: userId,
-    form_id: formId,
+    user: userId,
+    user_info: {
+      username: req.user.name,
+      email: req.user.email
+    },
+    form: formId,
     updated: Date.now(),
     submitted: req.body.submitted,
+    points: req.body.points,
     results: req.body.results
   }
 
   Result.update({
-    form_id: formId,
-    user_id: userId
+    form: formId,
+    user: userId
   }, result, { upsert: true}).exec(function(err, resl){
     if (err) { return handleError(resl, err); }
     return res.send(200, result);

@@ -1,13 +1,20 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'ResultsCtrl', ($scope, $routeParams, formData) ->
+.controller 'ResultsCtrl', ($scope, $routeParams, formData, Utils) ->
   formId = $routeParams.id
+  $scope.results = []
+
+  $scope.getFormatedDate = Utils.getFormatedDate
 
   $scope.init = ->
+    _loadData()
+
+  _loadData = ->
     formData.results(formId)
       .success (data, status) ->
-        console.log data
+        $scope.results = data
+
 
 
 

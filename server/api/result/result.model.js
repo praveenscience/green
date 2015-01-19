@@ -4,8 +4,13 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var ResultSchema = new Schema({
-  form_id: { type: Schema.Types.ObjectId, ref: 'Form' },
-  user_id: { type: Schema.Types.ObjectId, ref: 'User' },
+  form: { type: Schema.Types.ObjectId, ref: 'Form' },
+  user: { type: Schema.Types.ObjectId, ref: 'User' },
+  user_info: {
+    username: String,
+    email: String
+  },
+  points: Number,
   created: {
     type: Date,
     "default": Date.now

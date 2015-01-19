@@ -32,12 +32,12 @@
     <th>Points</th>
     <th>Actions</th>
   </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+  <tr ng-repeat="result in results">
+    <td> {{$index + 1}} </td>
+    <td> {{result.form.name}} </td>
+    <td> {{result.user_info.username}}</td>
+    <td> {{getFormatedDate(result.updated)}}</td>
+    <td> {{result.points}}</td>
     <td></td>
   </tr>
 </table>

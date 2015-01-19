@@ -62,9 +62,10 @@ angular.module 'greenApp'
         responses.push response
 
     submissionData =
-      form_id: responseForm._id
+      form: responseForm._id
       submitted: responseForm.submitted
       results: responses
+      points: responseForm.aquired_points
 
     $http
       url: "api/results/#{responseForm._id}"

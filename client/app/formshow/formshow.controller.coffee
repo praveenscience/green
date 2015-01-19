@@ -47,7 +47,7 @@ angular.module 'greenApp'
           _showHiddenField(field.field_id, field.response, section)
 
     $scope.form = form
-    $scope.form.aquired_points = 0
+    $scope.form.aquired_points = results[0].points
     $scope.form.sections[0].active = true
 
   _showHiddenField = (fieldId, response,section) ->
