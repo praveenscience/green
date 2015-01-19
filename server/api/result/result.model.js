@@ -10,6 +10,11 @@ var ResultSchema = new Schema({
     username: String,
     email: String
   },
+  status: {
+    type: String,
+    "default": "draft",
+    enum: ['draft', 'submitted']
+  },
   points: Number,
   created: {
     type: Date,

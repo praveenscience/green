@@ -30,6 +30,7 @@
     <th>User</th>
     <th>Date</th>
     <th>Points</th>
+    <th>Responses</th>
     <th>Actions</th>
   </tr>
   <tr ng-repeat="result in results">
@@ -38,6 +39,7 @@
     <td> {{result.user_info.username}}</td>
     <td> {{getFormatedDate(result.updated)}}</td>
     <td> {{result.points}}</td>
+    <td> <a href=""> View user responses</a></td>
     <td></td>
   </tr>
 </table>
