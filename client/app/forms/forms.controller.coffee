@@ -19,6 +19,7 @@ angular.module 'greenApp'
     formSkl =
       name: 'Untitled form'
       status: 'Unpublished'
+      certificates: []
       sections: [{
         title: "Untitled section"
         fields: [{

@@ -22,7 +22,9 @@ exports.show = function(req, res) {
 
 // Creates a new certificate in the DB.
 exports.create = function(req, res) {
-  Certificate.create(req.body, function(err, certificate) {
+  var certificate = req.body;
+  certificate.author = req.user._id;
+  Certificate.create(certificate, function(err, certificate) {
     if(err) { return handleError(res, err); }
     return res.json(201, certificate);
   });
@@ -35,6 +37,7 @@ exports.update = function(req, res) {
     if (err) { return handleError(res, err); }
     if(!certificate) { return res.send(404); }
     var updated = _.merge(certificate, req.body);
+    updated.updated = Date.now();
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, certificate);

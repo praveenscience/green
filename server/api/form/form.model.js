@@ -31,7 +31,11 @@ var FormSchema = new Schema({
   author: {
     type: Schema.Types.ObjectId,
     ref: 'User'
-  }
+  },
+  certificates: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Certificate'
+  }]
 });
 
 module.exports = mongoose.model('Form', FormSchema);

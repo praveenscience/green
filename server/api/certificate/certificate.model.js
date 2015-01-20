@@ -7,6 +7,18 @@ var CertificateSchema = new Schema({
   name: String,
   min: Number,
   max: Number,
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  created: {
+    type: Date,
+    default: Date.now()
+  },
+  updated: {
+    type: Date,
+    default: Date.now()
+  },
   logo: {
     type: String,
     default: "http://websiddu.com/logo.svg"

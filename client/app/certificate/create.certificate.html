@@ -1,0 +1,36 @@
+<form class="form" ng-submit="ok()">
+<div class="modal-header">
+    <h3 class="modal-title">Add new certificate</h3>
+</div>
+<div class="modal-body">
+
+    <div class="form-group">
+      <label for="certificate-name">Certificate Name</label>
+      <input type="text" class="form-control" required ng-model="certificate.name"/>
+    </div>
+    <div class="row">
+      <div class="form-group col-lg-6 col-lg-6">
+        <label for="certificate-min">Min</label>
+        <input type="number" class="form-control" required ng-model="certificate.min"/>
+      </div>
+      <div class="form-group col-lg-6 col-lg-6">
+        <label for="certificate-max">Max</label>
+        <input type="number" class="form-control" required ng-model="certificate.max"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="certificate-logo">Logo URL</label>
+      <input type="text" class="form-control" required ng-model="certificate.logo"/>
+    </div>
+    <div class="form-group">
+      <label for="certificate-sign">Signature URL</label>
+      <input type="text" class="form-control" required ng-model="certificate.sign"/>
+    </div>
+</div>
+<div class="modal-footer">
+  <a class="btn btn-link" ng-click="cancel()">Cancel</a>
+  &nbsp;&nbsp;&nbsp;
+  <button class="btn btn-primary" type="submit" ng-if="certificate._id != undefined">Update</button>
+  <button class="btn btn-primary" type="submit" ng-if="certificate._id == undefined">Save &amp; Add</button>
+</div>
+</form>
