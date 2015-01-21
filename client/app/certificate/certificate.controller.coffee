@@ -16,7 +16,6 @@ angular.module 'greenApp'
 
 
   $scope.init = ->
-    console.log "Initi.."
     _loadCertificates()
 
   _loadCertificates = ->
