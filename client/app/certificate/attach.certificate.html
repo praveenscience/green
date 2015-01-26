@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h3 class="modal-title">Attach certificates to form</h3>
+</div>
+<div class="modal-body">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Min</th>
+        <th>Max</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="certificate in certificates">
+        <td>{{certificate.name}}</td>
+        <td>{{certificate.min}}</td>
+        <td>{{certificate.max}}</td>
+        <td> <input type="checkbox" ng-model="certificate.selected" /> </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="modal-footer">
+  <a class="btn btn-link" ng-click="cancel()">Cancel</a>
+  <button class="btn btn-primary">Add</button>
+</div>

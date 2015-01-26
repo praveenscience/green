@@ -24,7 +24,6 @@ angular.module 'greenApp'
         $scope.certificates = data
 
   $scope.editCertificate = (certificate) ->
-    console.log certificate
     modalInstance = $modal.open
       windowClass: 'modal-full'
       templateUrl: '/app/certificate/create.certificate.html'

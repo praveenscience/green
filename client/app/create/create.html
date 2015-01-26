@@ -32,30 +32,26 @@
       </ul>
       <div class="addNewSection">
         <form ng-submit="addNewSection()">
-
           <div class="input-group">
             <input type="text" required class="form-control" ng-model="newSection" placeholder='+ Add new section' />
             <span class="input-group-btn">
-              <button class="btn btn-info" type="button">Add</button>
+            <button class="btn btn-info" type="button">Add</button>
             </span>
           </div>
         </form>
       </div>
     </div>
     <div class="col-lg-9 col-sm-9 g-c-content">
-
       <div ng-if="formSettings.active" class="row g-c-section-content">
         <div class="col-lg-12 col-sm-12">
           <h4 class="g-c-section-heading">Form settings / Publishing</h4>
-
           <div class="from-settings">
-
             <div class="form-group">
               <label for="formDescription">Describe this form</label>
               <textarea name="formDescription" id="formDescription" cols="30" rows="3" class="form-control"></textarea>
             </div>
             <div class="pull-right">
-                <button class="btn btn-info" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true">Save</button>
+              <button class="btn btn-info" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true">Save</button>
             </div>
             <div class="clearfix"></div>
             <br />
@@ -65,58 +61,46 @@
                 <h3 class="panel-title">Certification logic</h3>
               </div>
               <div class="panel-body">
-                <button class="btn btn-info"> + Add certificate</button>
-
+                <button class="btn btn-info" ng-click="attachCertificate()"> + Add certificate</button>
               </div>
             </div>
-
             <div class="panel panel-success">
               <div class="panel-heading">
                 <h3 class="panel-title">Publishing</h3>
               </div>
               <div class="panel-body">
-              <div class="col-lg-9 col-sm-9">
-                <div class="form-group">
-                  <label for="">Publish this from</label>
-                  <p class="help-text">Once you publish a form and if there is any response you cannot edit or make changes. Please be certain.</p>
+                <div class="col-lg-9 col-sm-9">
+                  <div class="form-group">
+                    <label for="">Publish this from</label>
+                    <p class="help-text">Once you publish a form and if there is any response you cannot edit or make changes. Please be certain.</p>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-sm-3">
+                  <button class="btn btn-success" tooltip-append-to-body="true"  ng-click="publishForm()" tooltip="" ng-if="form.status == 'Unpublished'"><em class="icon icon-thumbs-up"></em> Publish this form</button>
+                  <button class="btn btn-warning btn-sm" tooltip-append-to-body="true"  ng-click="unPublishForm()" tooltip="" ng-if="form.status == 'Published'"><em class="icon icon-thumbs-down"></em> Unpublish this form</button>
                 </div>
               </div>
-              <div class="col-lg-3 col-sm-3">
-                <button class="btn btn-success" tooltip-append-to-body="true"  ng-click="publishForm()" tooltip="" ng-if="form.status == 'Unpublished'"><em class="icon icon-thumbs-up"></em> Publish this form</button>
-
-                <button class="btn btn-warning btn-sm" tooltip-append-to-body="true"  ng-click="unPublishForm()" tooltip="" ng-if="form.status == 'Published'"><em class="icon icon-thumbs-down"></em> Unpublish this form</button>
-
-              </div>
-              </div>
             </div>
-
-
             <div class="panel panel-danger">
               <div class="panel-heading">
                 <h3 class="panel-title">Dange zone</h3>
               </div>
               <div class="panel-body">
-              <div class="col-lg-9 col-sm-9">
-                <div class="form-group">
-                  <label for="">Delete this from</label>
-                  <p class="help-text">Once you delete a form, there is no going back. Please be certain.</p>
-
+                <div class="col-lg-9 col-sm-9">
+                  <div class="form-group">
+                    <label for="">Delete this from</label>
+                    <p class="help-text">Once you delete a form, there is no going back. Please be certain.</p>
+                  </div>
                 </div>
-              </div>
-              <div class="col-lg-3 col-sm-3">
-                <button class="btn btn-danger btn-sm" tooltip-append-to-body="true"  tooltip="Remove this form! Can't be reverted!"><em class="icon icon-remove"></em> Remove this form</button>
-              </div>
+                <div class="col-lg-3 col-sm-3">
+                  <button class="btn btn-danger btn-sm" tooltip-append-to-body="true"  tooltip="Remove this form! Can't be reverted!"><em class="icon icon-remove"></em> Remove this form</button>
+                </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
-
-
       <tabset class="g-c-section-content">
-
-
       <tab ng-repeat="section in form.sections" active="section.active" disabled="section.disabled">
       <div class="row g-c-seciton-meta" sticky-media="(min-width:640px)">
         <div class="col-lg-8 col-sm-8">
@@ -213,11 +197,11 @@
         </div>
         <div class="addNewField">
           <div class="btn-group" dropdown>
-            <button type="button" class="btn btn-primary" ng-click="addField(section)">Add New Field</button>
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" dropdown-toggle>
-              <span class="caret"></span>
-              <span class="sr-only">Toggle Dropdown</span>
-            </button>
+<button type="button" class="btn btn-primary" ng-click="addField(section)">Add New Field</button>
+<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" dropdown-toggle>
+<span class="caret"></span>
+<span class="sr-only">Toggle Dropdown</span>
+</button>
             <ul class="dropdown-menu" role="menu">
               <li><a href="#" ng-click="addCustomField(section, 'Y-N', 'radiobutton')">Radio &mdash; Y, N </a></li>
               <li><a href="#" ng-click="addCustomField(section, 'Y-N-NE', 'radiobutton')">Radio &mdash; Y, N, NE</a></li>
@@ -228,34 +212,29 @@
               <li><a href="#" ng-click="addCustomField(section, 'Y-N-NE-NA', 'checkbox')">Checkbox &mdash; Y, N, NE, NA</a></li>
             </ul>
           </div>
-          </div>
         </div>
-        <div class="row" sticky-media="(min-width:640px)">
-          <div class="col-lg-8 col-sm-8">
-          </div>
-          <div class="col-lg-4 col-sm-4">
+      </div>
+      <div class="row" sticky-media="(min-width:640px)">
+        <div class="col-lg-8 col-sm-8">
+        </div>
+        <div class="col-lg-4 col-sm-4">
 <span class="last-save-text text-muted">
 <span ng-if='enableSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(section.updated)}}" tooltip-position="left"> Saved!</span>
 <span ng-if='!enableSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(section.updated)}}" tooltip-position="left"> Changes must be saved!</span>
 </span>
-            <div class="pull-right">
-              <div class="formSubmit">
-                <div class="pull-right">
-<button class="btn btn-success" ng-click="submitSection(section, section._id)" ladda="sectionSaving" data-style="expand-left"
-ng-disabled="enableSaveButton"
->Save</button>
-                </div>
+          <div class="pull-right">
+            <div class="formSubmit">
+              <div class="pull-right">
+<button class="btn btn-success" ng-click="submitSection(section, section._id)" ladda="sectionSaving" data-style="expand-left" ng-disabled="enableSaveButton">Save</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-</tab>
-
-
-
-</tabset>
     </div>
+</tab>
+</tabset>
   </div>
+</div>
 </div>
 <div ng-include="'components/footer/footer.html'"></div>

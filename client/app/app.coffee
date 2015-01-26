@@ -11,8 +11,8 @@ angular.module 'greenApp', [
   'ui.sortable',
   'angular-ladda'
   'ngSweetAlert'
-  'xeditable'
 ]
+
 .config ($routeProvider, $locationProvider, $httpProvider) ->
   $routeProvider
   .otherwise
@@ -37,8 +37,8 @@ angular.module 'greenApp', [
 
     $q.reject response
 
-.run ($rootScope, $location, Auth, editableOptions) ->
-  editableOptions.theme = 'bs3'
+.run ($rootScope, $location, Auth) ->
+  # editableOptions.theme = 'bs3'
   # Redirect to login if route requires auth and you're not logged in
   $rootScope.$on '$routeChangeStart', (event, next) ->
     Auth.isLoggedInAsync (loggedIn) ->
