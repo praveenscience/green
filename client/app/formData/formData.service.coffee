@@ -4,10 +4,17 @@ angular.module 'greenApp'
 .service 'formData', ($http) ->
   # AngularJS will instantiate a singleton by calling 'new' on this function
   update: (form) ->
+    _form = angular.copy(form)
+    if _form.certificates.length > 0
+      certf = []
+      form.certificates.forEach (val) ->
+        certf.push(val._id)
+      _form.certificates  = certf
+
     $http
       url: "api/forms/#{form._id}"
       method: 'PUT'
-      data: form
+      data: _form
 
   getForm: (formId) ->
     $http

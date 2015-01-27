@@ -12,6 +12,12 @@ angular.module 'greenApp'
     certificateData.get()
       .success (data, status) ->
         $scope.certificates = data
+        _updateSelections()
+
+  _updateSelections = ->
+    selectedCertificates.forEach (cert) ->
+      selectedCertificate = _.find $scope.certificates, (v) -> v._id is cert._id
+      selectedCertificate.selected = true
 
   $scope.ok = ->
     selected_cert = []

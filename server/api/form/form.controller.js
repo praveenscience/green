@@ -5,6 +5,7 @@ var Form = require('./form.model');
 var Section = require('../section/section.model');
 var Field = require('../field/field.model');
 var Choice = require('../choice/choice.model');
+var Certificate = require('../certificate/certificate.model');
 var auth = require('../../auth/auth.service');
 
 // Get list of forms
@@ -39,7 +40,12 @@ exports.show = function(req, res) {
           path: 'sections.fields.choices',
           model: Choice
         }, function(err, formOptions) {
-          return res.json(formOptions);
+          Certificate.populate(formOptions, {
+            path: 'certificates',
+            model: Certificate
+          }, function(err, certificatesForm) {
+            return res.json(certificatesForm);
+          })
         })
       })
     });
@@ -93,6 +99,8 @@ exports.update = function(req, res) {
     }
     req.body.sections = undefined;
     form.certificates = undefined;
+    req.body.__v = undefined;
+    console.log(req.body);
     var updated = _.merge(form, req.body);
     updated.save(function(err) {
       if (err) {
