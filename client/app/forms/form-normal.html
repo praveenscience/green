@@ -63,11 +63,11 @@
       <div ng-if="forms.length > 0">
         <div class="item avil-certificate" ng-repeat="form in forms">
           <div class="item-media">
-            <img src="assets/images/green_labs.png" alt="">
+            <img ng-src="{{form.logo}}" alt="">
           </div>
           <div class="item-body">
             <h5>{{form.name}}</h5>
-            <a href="" class="btn btn-xs btn-default">Take this now</a>
+            <a ng-href="{{getFormLink(form)}}" class="btn btn-xs btn-default">Take this now</a>
           </div>
         </div>
       </div>

@@ -6,6 +6,10 @@ var mongoose = require('mongoose'),
 var FormSchema = new Schema({
   name: String,
   description: String,
+  logo: {
+    type: String,
+    "default": 'assets/images/green_labs.png'
+  },
   updated: {
     type: Date,
     "default": Date.now
