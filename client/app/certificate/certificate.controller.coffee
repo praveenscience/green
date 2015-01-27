@@ -58,7 +58,6 @@ angular.module 'greenApp'
         $scope.certificates.push(data)
 
   $scope.removeCertificate = (certificate) ->
-    console.log certificate
     certificateData.remove(certificate._id)
       .success (data, status) ->
         $scope.certificates.splice $scope.certificates.indexOf(certificate), 1

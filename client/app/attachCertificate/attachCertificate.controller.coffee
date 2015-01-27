@@ -1,9 +1,10 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'AttachcertificateCtrl', ($scope, $modalInstance, certificateData) ->
+.controller 'AttachcertificateCtrl', ($scope, $modalInstance, certificateData, selectedCertificates) ->
 
   # $scope.certificate = certificate || {}
+
   $scope.init = ->
     _loadCertificates()
 
@@ -12,9 +13,9 @@ angular.module 'greenApp'
       .success (data, status) ->
         $scope.certificates = data
 
-
   $scope.ok = ->
-    $modalInstance.close();
+    selected_cert = _.find $scope.certificates, (v) -> v.selected is true
+    $modalInstance.close(selected_cert);
 
   $scope.cancel = ->
     $modalInstance.dismiss('cancel');

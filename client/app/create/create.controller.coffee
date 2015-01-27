@@ -264,8 +264,12 @@ angular.module 'greenApp'
       windowClass: 'modal-full'
       templateUrl: '/app/certificate/attach.certificate.html'
       controller: 'AttachcertificateCtrl'
-      # resolve:
-        # certificate: -> certificate
+      resolve:
+        selectedCertificates: -> $scope.form.certificates
+
+    modalInstance.result.then (certificates) ->
+      console.log certificates
+
 
   $scope.$watch('form.sections', (old, newValue) ->
     $scope.enableSaveButton = false
