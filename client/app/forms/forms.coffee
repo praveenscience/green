@@ -3,7 +3,8 @@
 angular.module 'greenApp'
 .config ($routeProvider) ->
   $routeProvider.when '/forms',
-    templateUrl: 'app/forms/forms.html'
+    templateUrl: (urlatt) ->
+      return 'app/forms/forms.html'
     controller: 'FormsController'
     authenticate: true
 

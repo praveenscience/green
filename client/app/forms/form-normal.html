@@ -1,0 +1,76 @@
+<div class="container page-container">
+  <div class="row">
+    <div class="col-lg-7 oh">
+      <h1 class="page-title"> Your Submissions</h1>
+      <div ng-if="forms.length == 0">
+        <div class="empty forms-empty">
+          <img src="assets/images/empty/no_forms_text.svg" alt="" class="empty-hint">
+          <div class="empty-image">
+            <img src="assets/images/empty/no_forms.svg" alt="" class="empty">
+            <div class="empty-text">
+              Your don't have any forms right now!
+            </div>
+          </div>
+        </div>
+      </div>
+      <div ng-if="forms.length > 0">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>
+                #
+              </th>
+              <th> Certification Name </th>
+              <th> Score </th>
+              <th> Submitted on </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="form in forms">
+              <td> {{$index + 1}}</td>
+              <td>
+                <a ng-href="{{getFormLink(form)}}">{{form.name}}</a>
+                <span class="text-info" ng-if="form.status == 'Unpublished'">
+                <em class="icon icon-pencil2"></em>
+                </span>
+              </td>
+              <td>
+                {{form.score}}
+                &nbsp;
+                <span class="text-success" ng-if="form.status == 'Published'" tooltip="Form published on {{getFormatedDate(form.updated)}}">
+                <em class="icon icon-check-alt"></em>
+                </span>
+              </td>
+              <td> {{getFormatedDate(form.created)}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-5 oh">
+      <h1 class="page-title"> Availbale Certification Programs </h1>
+      <div ng-if="forms.length == 0">
+        <div class="empty forms-empty">
+          <img src="assets/images/empty/no_forms_text.svg" alt="" class="empty-hint">
+          <div class="empty-image">
+            <img src="assets/images/empty/no_forms.svg" alt="" class="empty">
+            <div class="empty-text">
+              Your don't have any forms right now!
+            </div>
+          </div>
+        </div>
+      </div>
+      <div ng-if="forms.length > 0">
+        <div class="item avil-certificate" ng-repeat="form in forms">
+          <div class="item-media">
+            <img src="assets/images/green_labs.png" alt="">
+          </div>
+          <div class="item-body">
+            <h5>{{form.name}}</h5>
+            <a href="" class="btn btn-xs btn-default">Take this now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
