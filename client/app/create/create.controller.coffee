@@ -268,8 +268,8 @@ angular.module 'greenApp'
         selectedCertificates: -> $scope.form.certificates
 
     modalInstance.result.then (certificates) ->
-      console.log certificates
-
+      certificates.forEach (cert) ->
+        $scope.form.certificates.push(cert._id)
 
   $scope.$watch('form.sections', (old, newValue) ->
     $scope.enableSaveButton = false

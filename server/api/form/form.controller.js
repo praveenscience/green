@@ -92,6 +92,7 @@ exports.update = function(req, res) {
       return res.send(404);
     }
     req.body.sections = undefined;
+    form.certificates = undefined;
     var updated = _.merge(form, req.body);
     updated.save(function(err) {
       if (err) {

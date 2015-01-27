@@ -3,7 +3,7 @@
 angular.module 'greenApp'
 .controller 'AttachcertificateCtrl', ($scope, $modalInstance, certificateData, selectedCertificates) ->
 
-  # $scope.certificate = certificate || {}
+  $scope.certificates = []
 
   $scope.init = ->
     _loadCertificates()
@@ -14,7 +14,11 @@ angular.module 'greenApp'
         $scope.certificates = data
 
   $scope.ok = ->
-    selected_cert = _.find $scope.certificates, (v) -> v.selected is true
+    selected_cert = []
+    $scope.certificates.forEach (cert) ->
+      if cert.selected is true
+        selected_cert.push(cert)
+
     $modalInstance.close(selected_cert);
 
   $scope.cancel = ->
