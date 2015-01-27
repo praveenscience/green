@@ -269,6 +269,7 @@ angular.module 'greenApp'
 
     modalInstance.result.then (certificates) ->
       $scope.form.certificates = certificates
+      $scope.submitForm $scope.form
 
   $scope.$watch('form.sections', (old, newValue) ->
     $scope.enableSaveButton = false
