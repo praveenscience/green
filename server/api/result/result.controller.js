@@ -38,6 +38,17 @@ exports.showallresults = function(req, res) {
   });
 }
 
+exports.submissions = function(req, res) {
+  Result.find({
+    user_id: req.user._id
+  }).lean().populate('form')
+  .exec(function(err, result) {
+    if(err) { return handleError(res, err); }
+    if(!result) { return res.send(404); }
+    return res.json(result);
+  });
+}
+
 
 // Creates a new result in the DB.
 exports.create = function(req, res) {

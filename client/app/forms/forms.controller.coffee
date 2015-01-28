@@ -11,6 +11,12 @@ angular.module 'greenApp'
 
   $scope.init = ->
     _loadFroms()
+    if !Auth.isAdmin()
+      _loadSubmissions()
+
+  _loadSubmissions = ->
+    $http.get('/api/results/submissions').success (forms) ->
+      $scope.submissions = forms
 
   _loadFroms = ->
     $http.get('/api/forms').success (forms) ->
