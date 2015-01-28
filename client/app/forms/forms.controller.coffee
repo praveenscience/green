@@ -4,14 +4,18 @@ angular.module 'greenApp'
 .controller 'FormsController', ($scope, $http, socket, $location, Auth, SweetAlert, Utils) ->
 
   $scope.isAdmin = Auth.isAdmin
-
   $scope.getFormatedDate = Utils.getFormatedDate
 
   $scope.forms = []
+  $scope.submissions = []
 
-  $http.get('/api/forms').success (forms) ->
-    $scope.forms = forms
-    socket.syncUpdates 'form', $scope.forms
+  $scope.init = ->
+    _loadFroms()
+
+  _loadFroms = ->
+    $http.get('/api/forms').success (forms) ->
+      $scope.forms = forms
+      socket.syncUpdates 'form', $scope.forms
 
   $scope.addform = ->
     return if $scope.newform is ''
@@ -72,5 +76,7 @@ angular.module 'greenApp'
 
   $scope.$on '$destroy', ->
     socket.unsyncUpdates 'form'
+
+  $scope.init()
 
 

@@ -100,7 +100,6 @@ exports.update = function(req, res) {
     req.body.sections = undefined;
     form.certificates = undefined;
     req.body.__v = undefined;
-    console.log(req.body);
     var updated = _.merge(form, req.body);
     updated.save(function(err) {
       if (err) {
