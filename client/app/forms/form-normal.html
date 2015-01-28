@@ -22,8 +22,8 @@
               </th>
               <th> Certification Name </th>
               <th> Score </th>
-              <th> Submitted on </th>
-              <th>Actions</th>
+              <th> Last activity </th>
+              <th> Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -36,13 +36,9 @@
                 </span>
               </td>
               <td>
-                {{form.score}}
-                &nbsp;
-                <span class="text-success" ng-if="submission.status == 'Published'" tooltip="Form published on {{getFormatedDate(submission.updated)}}">
-                <em class="icon icon-check-alt"></em>
-                </span>
+                {{submission.points}}
               </td>
-              <td> {{getFormatedDate(submission.created)}}</td>
+              <td> {{getFormatedDate(submission.updated)}}</td>
               <td><a href='' ng-click="removeResult(submission)" class="btn btn-xs"><em class="icon icon-remove"></em></a></td>
             </tr>
           </tbody>
