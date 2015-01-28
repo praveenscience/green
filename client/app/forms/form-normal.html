@@ -23,25 +23,27 @@
               <th> Certification Name </th>
               <th> Score </th>
               <th> Submitted on </th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="form in forms">
+            <tr ng-repeat="submission in submissions">
               <td> {{$index + 1}}</td>
               <td>
-                <a ng-href="{{getFormLink(form)}}">{{form.name}}</a>
-                <span class="text-info" ng-if="form.status == 'Unpublished'">
+                <a ng-href="{{getFormLink(submission)}}">{{submission.form.name}}</a>
+                <span class="text-info" ng-if="submission.status == 'Unpublished'">
                 <em class="icon icon-pencil2"></em>
                 </span>
               </td>
               <td>
                 {{form.score}}
                 &nbsp;
-                <span class="text-success" ng-if="form.status == 'Published'" tooltip="Form published on {{getFormatedDate(form.updated)}}">
+                <span class="text-success" ng-if="submission.status == 'Published'" tooltip="Form published on {{getFormatedDate(submission.updated)}}">
                 <em class="icon icon-check-alt"></em>
                 </span>
               </td>
-              <td> {{getFormatedDate(form.created)}}</td>
+              <td> {{getFormatedDate(submission.created)}}</td>
+              <td><a href='' ng-click="removeResult(submission)" class="btn btn-xs"><em class="icon icon-remove"></em></a></td>
             </tr>
           </tbody>
         </table>

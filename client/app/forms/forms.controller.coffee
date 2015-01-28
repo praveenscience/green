@@ -76,6 +76,13 @@ angular.module 'greenApp'
     SweetAlert.swal(Utils.getAlertSettings('form'), (isConfirm) ->
       _handleFormDelete(isConfirm, form))
 
+  $scope.removeResult = (result) ->
+    SweetAlert.swal(Utils.getAlertSettings('result'), (isConfirm) ->
+      _handleResultDelete(isConfirm, result))
+
+  _handleResultDelete = (isConfirm, result) ->
+    $http.delete "/api/results/#{result._id}"
+
   _handleFormDelete = (isConfirm, form) ->
     if isConfirm
       $http.delete "/api/forms/#{form._id}"
