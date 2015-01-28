@@ -40,7 +40,7 @@ exports.showallresults = function(req, res) {
 
 exports.submissions = function(req, res) {
   Result.find({
-    user_id: req.user._id
+    user: req.user._id
   }).lean().populate('form')
   .exec(function(err, result) {
     if(err) { return handleError(res, err); }
