@@ -5,7 +5,10 @@ angular.module 'greenApp'
 
   $scope.form = {};
   formId = $routeParams.id
+  resultId = $routeParams.res
   $scope.page = true
+
+  console.log $routeParams
 
   $scope.totalPoints = 0
   $scope.aquiredPoints = 0
@@ -17,14 +20,15 @@ angular.module 'greenApp'
     formData.getForm(formId)
       .success (data, status) ->
         if !Auth.isAdmin()
-          formData.getFormUserResponse(formId)
-            .success (results, resultsStatus) ->
-              if results.length != 0
-                _formatForm(data, results)
-              else
-                $scope.form = data
-                $scope.form.aquired_points = 0
-                $scope.form.sections[0].active = true
+          if resultId != undefined
+            formData.getFormUserResponse(formId)
+              .success (results, resultsStatus) ->
+                if results.length != 0
+                  _formatForm(data, results)
+          else
+            $scope.form = data
+            $scope.form.aquired_points = 0
+            $scope.form.sections[0].active = true
         else
           $scope.form = data
           $scope.form.aquired_points = 0

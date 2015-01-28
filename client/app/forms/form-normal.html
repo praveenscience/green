@@ -30,7 +30,7 @@
             <tr ng-repeat="submission in submissions">
               <td> {{$index + 1}}</td>
               <td>
-                <a ng-href="{{getFormLink(submission)}}">{{submission.form.name}}</a>
+                <a ng-href="{{'/forms/'+ submission.form._id + '/' + submission._id}}">{{submission.form.name}}</a>
                 <span class="text-info" ng-if="submission.status == 'Unpublished'">
                 <em class="icon icon-pencil2"></em>
                 </span>
