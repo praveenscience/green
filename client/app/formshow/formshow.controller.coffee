@@ -128,9 +128,13 @@ angular.module 'greenApp'
     $scope.formSaving = true
     formData.respond($scope.form)
       .success (data, status) ->
+        $scope.formSaving = false
         if resultId is undefined
           $location.path("#{$location.path()}/#{data._id}")
-        $scope.formSaving = false
+        if data.submitted is true
+          $location.path("#{$location.path()}/success")
+
+
 
   # $scope.$watch 'form', (old, newValue) ->
   #   return if !$scope.form.sections

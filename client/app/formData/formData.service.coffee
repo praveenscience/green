@@ -73,6 +73,7 @@ angular.module 'greenApp'
       submitted: responseForm.submitted
       results: responses
       points: responseForm.aquired_points
+      total_points: responseForm.total_points
       results_id: responseForm.results_id if responseForm.results_id isnt undefined
 
     $http

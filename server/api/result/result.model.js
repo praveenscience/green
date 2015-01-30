@@ -16,6 +16,7 @@ var ResultSchema = new Schema({
     enum: ['draft', 'submitted']
   },
   points: Number,
+  total_points: Number,
   created: {
     type: Date,
     "default": Date.now
@@ -28,6 +29,10 @@ var ResultSchema = new Schema({
   submitted: {
     type: Boolean,
     "default": false
+  },
+  certificate: {
+    type: Schema.Types.ObjectId,
+    ref: 'Certificate'
   },
   active: Boolean
 });
