@@ -1,14 +1,12 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'FormshowCtrl', ($scope, $http, $routeParams, formData, Auth) ->
+.controller 'FormshowCtrl', ($scope, $http, $routeParams, formData, Auth, $location) ->
 
   $scope.form = {};
   formId = $routeParams.id
   resultId = $routeParams.res
   $scope.page = true
-
-  console.log $routeParams
 
   $scope.totalPoints = 0
   $scope.aquiredPoints = 0
@@ -21,7 +19,7 @@ angular.module 'greenApp'
       .success (data, status) ->
         if !Auth.isAdmin()
           if resultId != undefined
-            formData.getFormUserResponse(formId)
+            formData.getFormUserResponse(resultId)
               .success (results, resultsStatus) ->
                 if results.length != 0
                   _formatForm(data, results)
@@ -36,6 +34,7 @@ angular.module 'greenApp'
 
   _formatForm = (data, results) ->
     form = data
+    form.results_id = results[0]._id
     for index, field of results[0].results
       section = _.find form.sections, (s) -> s._id is field.section_id
       secField = _.find section.fields, (s) -> s._id is field.field_id
@@ -129,6 +128,8 @@ angular.module 'greenApp'
     $scope.formSaving = true
     formData.respond($scope.form)
       .success (data, status) ->
+        if resultId is undefined
+          $location.path("#{$location.path()}/#{data._id}")
         $scope.formSaving = false
 
   # $scope.$watch 'form', (old, newValue) ->
