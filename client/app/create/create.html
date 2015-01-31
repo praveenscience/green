@@ -1,269 +1,264 @@
 <div class="row-fluid">
-<div ng-include="'components/sidebar/sidebar.html'"></div>
-<style>
-  .main-content-wrap {
-    background: #fff;
-  }
-</style>
-
-<div class="col-lg-10 col-sm-10 main-content-wrap">
-  <div class="row-fluid">
-    <div class="form-header-meta">
-      <div class="col-lg-8 col-sm-8">
-        <div class="form-title">
-          <input type="text" ng-model="form.name" class="form-control inlineInput flag">
-        </div>
-        <div collapse="isCollapsed">
-        </div>
+  <div ng-include="'components/sidebar/sidebar.html'"></div>
+  <div class="col-lg-10 col-sm-10 main-content-wrap create-main-content">
+    <div class="row-fluid">
+      <div class="form-header-meta">
+      <div class="col-lg-3 col-sm-3">
       </div>
-      <div class="col-lg-4 col-sm-4">
-        <div class="form-actions pull-right">
-          <button class="btn btn-success btn-sm" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true">Save</button>
-          &nbsp;&nbsp;&nbsp;
-          <a class="btn btn-default btn-sm" href="/forms/{{form._id}}" tooltip="See how the form looks!" tooltip-append-to-body="true"  tooltip-placement="top">Preview</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row-fluid">
-    <div class="col-lg-3 col-sm-3 g-c-sidebar">
-      <ul class="g-c-section-list">
-        <li ng-class="{active: formSettings.active}" ng-click="loadFormSettings()">
-          <em class="text-muted icon icon-cog"></em> Form settings / Publishing
-        </li>
-      </ul>
-      <br>
-      <h4 class="g-c-section-heading">Sections</h4>
-      <ul class="g-c-section-list">
-        <li ng-repeat="section in form.sections" data-section-id="{{section._id}}" ng-click="loadSection(section)" ng-class="{active: section.active}"> {{section.title}} </li>
-      </ul>
-      <div class="addNewSection">
-        <form ng-submit="addNewSection()">
-          <div class="input-group">
-            <input type="text" required class="form-control" ng-model="newSection" placeholder='+ Add new section' />
-            <span class="input-group-btn">
-            <button class="btn btn-info" type="submit">Add</button>
-            </span>
+        <div class="col-lg-6 col-sm-6">
+          <div class="form-title">
+            <span class="text-muted">Form name </span>
+            <input type="text" ng-model="form.name" class="form-control inlineInput flag">
           </div>
-        </form>
-      </div>
-    </div>
-    <div class="col-lg-8 col-sm-8 g-c-content">
-      <div ng-if="formSettings.active" class="row g-c-section-content">
-        <div class="col-lg-12 col-sm-12">
-          <h4 class="g-c-section-heading">Form settings / Publishing</h4>
-          <div class="from-settings">
-            <div class="form-group">
-              <label for="formDescription">Describe this form</label>
-              <textarea name="formDescription" id="formDescription" cols="30" rows="3" class="form-control" ng-model="form.description"></textarea>
-            </div>
-            <div class="form-group">
-              <label for="">Form logo</label>
-              <input class="form-control" ng-model="form.logo"></label>
-            </div>
-            <div class="pull-right">
-              <button class="btn btn-info" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true">Save</button>
-            </div>
-            <div class="clearfix"></div>
-            <br />
-            <br />
-            <div class="panel panel-info">
-              <div class="panel-heading">
-                <h3 class="panel-title">Certification logic</h3>
-              </div>
-              <div class="panel-body">
-          <table class="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Min</th>
-                <th>Max</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="certificate in form.certificates">
-                <td>{{certificate.name}}</td>
-                <td>{{certificate.min}}</td>
-                <td>{{certificate.max}}</td>
-              </tr>
-            </tbody>
-          </table>
-
-                <button class="btn btn-info" ng-click="attachCertificate()"> + Add certificate</button>
-              </div>
-            </div>
-            <div class="panel panel-success">
-              <div class="panel-heading">
-                <h3 class="panel-title">Publishing</h3>
-              </div>
-              <div class="panel-body">
-                <div class="col-lg-9 col-sm-9">
-                  <div class="form-group">
-                    <label for="">Publish this from</label>
-                    <p class="help-text">Once you publish a form and if there is any response you cannot edit or make changes. Please be certain.</p>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-sm-3">
-                  <button class="btn btn-success" tooltip-append-to-body="true"  ng-click="publishForm()" tooltip="" ng-if="form.status == 'Unpublished'"><em class="icon icon-thumbs-up"></em> Publish this form</button>
-                  <button class="btn btn-warning btn-sm" tooltip-append-to-body="true"  ng-click="unPublishForm()" tooltip="" ng-if="form.status == 'Published'"><em class="icon icon-thumbs-down"></em> Unpublish this form</button>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-danger">
-              <div class="panel-heading">
-                <h3 class="panel-title">Dange zone</h3>
-              </div>
-              <div class="panel-body">
-                <div class="col-lg-9 col-sm-9">
-                  <div class="form-group">
-                    <label for="">Delete this from</label>
-                    <p class="help-text">Once you delete a form, there is no going back. Please be certain.</p>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-sm-3">
-                  <button class="btn btn-danger btn-sm" tooltip-append-to-body="true"  tooltip="Remove this form! Can't be reverted!"><em class="icon icon-remove"></em> Remove this form</button>
-                </div>
-              </div>
-            </div>
+        </div>
+        <div class="col-lg-2 col-sm-2">
+          <br>
+          <div class="form-actions pull-right">
+            <button class="btn btn-success btn-sm" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true">Save</button>
+            &nbsp;&nbsp;&nbsp;
+            <a class="btn btn-default btn-sm" href="/forms/{{form._id}}" tooltip="See how the form looks!" tooltip-append-to-body="true"  tooltip-placement="top">Preview</a>
           </div>
         </div>
       </div>
-      <tabset class="g-c-section-content">
-      <tab ng-repeat="section in form.sections" active="section.active" disabled="section.disabled">
-      <div class="row g-c-seciton-meta" sticky-media="(min-width:640px)">
-        <div class="col-lg-8 col-sm-8">
-          <input type="text" ng-model="section.title" class="form-control inlineInput">
-          <strong class="section-points">({{section.possible_points}} Possible Points, {{section.bonus_points}} Bonus)</strong>
+    </div>
+    <div class="row-fluid">
+      <div class="col-lg-3 col-sm-3 g-c-sidebar">
+        <ul class="g-c-section-list">
+          <li ng-class="{active: formSettings.active}" ng-click="loadFormSettings()">
+            <em class="text-muted icon icon-cog"></em> Form settings / Publishing
+          </li>
+        </ul>
+        <br>
+        <h4 class="g-c-section-heading">Sections</h4>
+        <ul class="g-c-section-list">
+          <li ng-repeat="section in form.sections" data-section-id="{{section._id}}" ng-click="loadSection(section)" ng-class="{active: section.active}"> {{section.title}} </li>
+        </ul>
+        <div class="addNewSection">
+          <form ng-submit="addNewSection()">
+            <div class="input-group">
+              <input type="text" required class="form-control" ng-model="newSection" placeholder='+ Add new section' />
+              <span class="input-group-btn">
+              <button class="btn btn-info" type="submit">Add</button>
+              </span>
+            </div>
+          </form>
         </div>
-        <div class="col-lg-4 col-sm-4">
-          <span class="last-save-text text-muted">
-          <span ng-if='enableSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(section.updated)}}" tooltip-position="left"> Saved!</span>
-          <span ng-if='!enableSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(section.updated)}}" tooltip-position="left"> Changes must be saved!</span>
-          </span>
-          <div class="pull-right">
-            <div class="formSubmit">
+      </div>
+      <div class="col-lg-8 col-sm-8 g-c-content">
+        <div ng-if="formSettings.active" class="row g-c-section-content">
+          <div class="col-lg-12 col-sm-12">
+            <h4 class="g-c-section-heading">Form settings / Publishing</h4>
+            <div class="from-settings">
+              <div class="form-group">
+                <label for="formDescription">Describe this form</label>
+                <textarea name="formDescription" id="formDescription" cols="30" rows="3" class="form-control" ng-model="form.description"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="">Form logo</label>
+                <input class="form-control" ng-model="form.logo"></label>
+              </div>
               <div class="pull-right">
-                <button class="btn btn-success" ng-click="submitSection(section, section._id)" ladda="sectionSaving" data-style="expand-left"
-                ng-disabled="enableSaveButton"
-                >Save</button>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <a tooltip-append-to-body="true"  tooltip="Remove this section!" href="" ng-click="removeSection(section)" class="btn btn-danger btn-sm"><em class="icon icon-remove"></em></a>
+                <button class="btn btn-info" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true">Save</button>
               </div>
               <div class="clearfix"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="ui-sortable sortableList" ui-sortable="sortableOptions" ng-model="section.fields">
-        <div class="formFieldWrap" ng-repeat="field in section.fields">
-          <div class="form-horizontal">
-            <div class="formSection animate-if"  ng-if="field.edit_mode" >
-              <div class="formSort"><div class="draghandle"></div></div>
-              <div class="formFieldActions">
-                <button class="btn btn-small inlineText" type="button" ng-if="section.fields.length > 1" ng-click="removeField(field, section)">
-                <em class="icon icon-remove"></em>
-                </button>
+              <br />
+              <br />
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Certification logic</h3>
+                </div>
+                <div class="panel-body">
+                  <table class="table table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Min</th>
+                        <th>Max</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="certificate in form.certificates">
+                        <td>{{certificate.name}}</td>
+                        <td>{{certificate.min}}</td>
+                        <td>{{certificate.max}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <button class="btn btn-info" ng-click="attachCertificate()"> + Add certificate</button>
+                </div>
               </div>
-              <div class="formField">
-                <div class="form-group">
-                  <label for="" class="col-lg-3 col-sm-3 control-label">Question Title</label>
-                  <div class="col-lg-8 col-sm-8">
-                    <input type="text" class="form-control" id="" placeholder="Untitled question" ng-model="field.label">
-                  </div>
+              <div class="panel panel-success">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Publishing</h3>
                 </div>
-                <div class="form-group">
-                  <label for="" class="col-lg-3 col-sm-3 control-label">Help Text</label>
-                  <div class="col-lg-8 col-sm-8">
-                    <input type="text" class="form-control" id="" placeholder="Give some details" ng-model="field.help_text">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="" class="col-lg-3 col-sm-3 control-label">Question Type</label>
-                  <div class="col-lg-8 col-sm-8">
-                    <select name="" id="" class="form-control" ng-model="field.type">
-                      <option value="text">Text</option>
-                      <option value="textarea">Pharagraph</option>
-                      <option value="select">Multiple Choice</option>
-                      <option value="checkbox">Checkboxes</option>
-                      <option value="radiobutton">Radio Buttons</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <field-element field="field" section='section'></field-element>
-                </div>
-                <div class="form-group">
-                  <div class="col-lg-1 col-sm-1"></div>
+                <div class="panel-body">
                   <div class="col-lg-9 col-sm-9">
-                    <button class="btn btn-info btn-sm" type="button" ng-disabled="!isValidField(field)" ng-click="toggleField(field, section)" > Add </button>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="checkbox" class="checkbox-small" name="bonusCheckboxe" type="checkbox" id="bonusCheckboxe" ng-model="field.is_bonus">
-                    <label for="bonusCheckboxe" class="smallText">Bonus quesiton</label>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="checkbox" class="checkbox-small" name="requiredChecbox" type="checkbox" id="requiredChecbox" ng-model="field.required">
-                    <label for="requiredChecbox" class="smallText">Make this as required field</label>
+                    <div class="form-group">
+                      <label for="">Publish this from</label>
+                      <p class="help-text">Once you publish a form and if there is any response you cannot edit or make changes. Please be certain.</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-3">
+                    <button class="btn btn-success" tooltip-append-to-body="true"  ng-click="publishForm()" tooltip="" ng-if="form.status == 'Unpublished'"><em class="icon icon-thumbs-up"></em> Publish this form</button>
+                    <button class="btn btn-warning btn-sm" tooltip-append-to-body="true"  ng-click="unPublishForm()" tooltip="" ng-if="form.status == 'Published'"><em class="icon icon-thumbs-down"></em> Unpublish this form</button>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-danger">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Dange zone</h3>
+                </div>
+                <div class="panel-body">
+                  <div class="col-lg-9 col-sm-9">
+                    <div class="form-group">
+                      <label for="">Delete this from</label>
+                      <p class="help-text">Once you delete a form, there is no going back. Please be certain.</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-3">
+                    <button class="btn btn-danger btn-sm" tooltip-append-to-body="true"  tooltip="Remove this form! Can't be reverted!"><em class="icon icon-remove"></em> Remove this form</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="formSectionPrev" ng-if="!field.edit_mode">
-            <div class="formFieldActions">
-              <div class="hList">
-                <button class="btn btn-small" type="button" ng-click="toggleField(field, section)">
-                <em class="icon icon-pencil"></em>
-                </button>
-                <button class="btn btn-small inlineText" type="button" ng-if="section.fields.length > 1" ng-click="removeField(field, section)">
-                <em class="icon icon-remove"></em>
-                </button>
+        </div>
+        <tabset class="g-c-section-content">
+        <tab ng-repeat="section in form.sections" active="section.active" disabled="section.disabled">
+        <div class="row g-c-seciton-meta" sticky-media="(min-width:640px)">
+          <div class="col-lg-8 col-sm-8">
+            <span class="text-muted">Seciton title </span>
+            <input type="text" ng-model="section.title" class="form-control inlineInput">
+            <strong class="section-points">({{section.possible_points}} Possible Points, {{section.bonus_points}} Bonus)</strong>
+          </div>
+          <div class="col-lg-4 col-sm-4">
+            <span class="last-save-text text-muted">
+            <span ng-if='enableSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(section.updated)}}" tooltip-position="left"> Saved!</span>
+            <span ng-if='!enableSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(section.updated)}}" tooltip-position="left"> Changes must be saved!</span>
+            </span>
+            <div class="pull-right">
+              <div class="formSubmit">
+                <div class="pull-right">
+                  <button class="btn btn-success" ng-click="submitSection(section, section._id)" ladda="sectionSaving" data-style="expand-left"
+                  ng-disabled="enableSaveButton"
+                  >Save</button>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <a tooltip-append-to-body="true"  tooltip="Remove this section!" href="" ng-click="removeSection(section)" class="btn btn-danger btn-sm"><em class="icon icon-remove"></em></a>
+                </div>
+                <div class="clearfix"></div>
               </div>
-            </div>
-            <div class="formFieldPrev js_form_template">
-<prev-element field="field"></prev-element>
             </div>
           </div>
         </div>
-        <div class="addNewField">
-          <div class="btn-group" dropdown>
+        <div class="ui-sortable sortableList" ui-sortable="sortableOptions" ng-model="section.fields">
+          <div class="formFieldWrap" ng-repeat="field in section.fields">
+            <div class="form-horizontal">
+              <div class="formSection"  ng-if="field.edit_mode" >
+                <div class="formSort"><div class="draghandle"></div></div>
+                <div class="formFieldActions">
+                  <button class="btn btn-small inlineText" type="button" ng-if="section.fields.length > 1" ng-click="removeField(field, section)">
+                  <em class="icon icon-remove"></em>
+                  </button>
+                </div>
+                <div class="formField">
+                  <div class="form-group">
+                    <label for="" class="col-lg-3 col-sm-3 control-label">Question Title</label>
+                    <div class="col-lg-8 col-sm-8">
+                      <input type="text" class="form-control" id="" placeholder="Untitled question" ng-model="field.label">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="" class="col-lg-3 col-sm-3 control-label">Help Text</label>
+                    <div class="col-lg-8 col-sm-8">
+                      <input type="text" class="form-control" id="" placeholder="Give some details" ng-model="field.help_text">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="" class="col-lg-3 col-sm-3 control-label">Question Type</label>
+                    <div class="col-lg-8 col-sm-8">
+                      <select name="" id="" class="form-control" ng-model="field.type">
+                        <option value="text">Text</option>
+                        <option value="textarea">Pharagraph</option>
+                        <option value="select">Multiple Choice</option>
+                        <option value="checkbox">Checkboxes</option>
+                        <option value="radiobutton">Radio Buttons</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <field-element field="field" section='section'></field-element>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-lg-1 col-sm-1"></div>
+                    <div class="col-lg-9 col-sm-9">
+                      <button class="btn btn-info btn-sm" type="button" ng-disabled="!isValidField(field)" ng-click="toggleField(field, section)" > Add </button>
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <input type="checkbox" class="checkbox-small" name="bonusCheckboxe" type="checkbox" id="bonusCheckboxe" ng-model="field.is_bonus">
+                      <label for="bonusCheckboxe" class="smallText">Bonus quesiton</label>
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <input type="checkbox" class="checkbox-small" name="requiredChecbox" type="checkbox" id="requiredChecbox" ng-model="field.required">
+                      <label for="requiredChecbox" class="smallText">Make this as required field</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="formSectionPrev" ng-if="!field.edit_mode">
+              <div class="formFieldActions">
+                <div class="hList">
+                  <button class="btn btn-small" type="button" ng-click="toggleField(field, section)">
+                  <em class="icon icon-pencil"></em>
+                  </button>
+                  <button class="btn btn-small inlineText" type="button" ng-if="section.fields.length > 1" ng-click="removeField(field, section)">
+                  <em class="icon icon-remove"></em>
+                  </button>
+                </div>
+              </div>
+              <div class="formFieldPrev js_form_template">
+<prev-element field="field"></prev-element>
+              </div>
+            </div>
+          </div>
+          <div class="addNewField">
+            <div class="btn-group" dropdown>
 <button type="button" class="btn btn-primary" ng-click="addField(section)">Add New Field</button>
 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" dropdown-toggle>
 <span class="caret"></span>
 <span class="sr-only">Toggle Dropdown</span>
 </button>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#" ng-click="addCustomField(section, 'Y-N', 'radiobutton')">Radio &mdash; Y, N </a></li>
-              <li><a href="#" ng-click="addCustomField(section, 'Y-N-NE', 'radiobutton')">Radio &mdash; Y, N, NE</a></li>
-              <li><a href="#" ng-click="addCustomField(section, 'Y-N-NE-NA', 'radiobutton')">Radio &mdash; Y, N, NE, NA</a></li>
-              <li class="divider"></li>
-              <li><a href="#" ng-click="addCustomField(section, 'Y-N', 'checkbox')">Checkbox &mdash; Y, N </a></li>
-              <li><a href="#" ng-click="addCustomField(section, 'Y-N-NE', 'checkbox')">Checkbox &mdash; Y, N, NE</a></li>
-              <li><a href="#" ng-click="addCustomField(section, 'Y-N-NE-NA', 'checkbox')">Checkbox &mdash; Y, N, NE, NA</a></li>
-            </ul>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#" ng-click="addCustomField(section, 'Y-N', 'radiobutton')">Radio &mdash; Y, N </a></li>
+                <li><a href="#" ng-click="addCustomField(section, 'Y-N-NE', 'radiobutton')">Radio &mdash; Y, N, NE</a></li>
+                <li><a href="#" ng-click="addCustomField(section, 'Y-N-NE-NA', 'radiobutton')">Radio &mdash; Y, N, NE, NA</a></li>
+                <li class="divider"></li>
+                <li><a href="#" ng-click="addCustomField(section, 'Y-N', 'checkbox')">Checkbox &mdash; Y, N </a></li>
+                <li><a href="#" ng-click="addCustomField(section, 'Y-N-NE', 'checkbox')">Checkbox &mdash; Y, N, NE</a></li>
+                <li><a href="#" ng-click="addCustomField(section, 'Y-N-NE-NA', 'checkbox')">Checkbox &mdash; Y, N, NE, NA</a></li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="row" sticky-media="(min-width:640px)">
-        <div class="col-lg-8 col-sm-8">
-        </div>
-        <div class="col-lg-4 col-sm-4">
-<span class="last-save-text text-muted">
-<span ng-if='enableSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(section.updated)}}" tooltip-position="left"> Saved!</span>
-<span ng-if='!enableSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(section.updated)}}" tooltip-position="left"> Changes must be saved!</span>
-</span>
-          <div class="pull-right">
-            <div class="formSubmit">
-              <div class="pull-right">
-<button class="btn btn-success" ng-click="submitSection(section, section._id)" ladda="sectionSaving" data-style="expand-left" ng-disabled="enableSaveButton">Save</button>
+        <div class="row" sticky-media="(min-width:640px)">
+          <div class="col-lg-8 col-sm-8">
+          </div>
+          <div class="col-lg-4 col-sm-4">
+            <span class="last-save-text text-muted">
+            <span ng-if='enableSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(section.updated)}}" tooltip-position="left"> Saved!</span>
+            <span ng-if='!enableSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(section.updated)}}" tooltip-position="left"> Changes must be saved!</span>
+            </span>
+            <div class="pull-right">
+              <div class="formSubmit">
+                <div class="pull-right">
+                  <button class="btn btn-success" ng-click="submitSection(section, section._id)" ladda="sectionSaving" data-style="expand-left" ng-disabled="enableSaveButton">Save</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </tab>
+    </tabset>
     </div>
-</tab>
-</tabset>
   </div>
 </div>
 </div>
-</div>
-<div ng-include="'components/footer/footer.html'"></div>
