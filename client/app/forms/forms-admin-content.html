@@ -4,14 +4,20 @@
   }
 
   .main-content {
-    min-height: 1000px;
+    min-height: 900px;
     background: #fff;
     padding: 30px 20px;
   }
 </style>
 
-<div class="col-lg-10 col-sm-10 main-content-wrap">
+<div class="col-lg-7 col-sm-7 main-content-wrap">
   <div class="main-content">
+
+    <form class="form" ng-if="isAdmin()" >
+      <button type="submit" class="btn btn-primary" ng-click="addform()"> <em class="icon icon-plus"></em>  Add new form</button>
+    </form>
+
+    <br><br>
 
       <div ng-if="forms.length > 0">
         <table class="table table-striped">
@@ -57,6 +63,5 @@
           </tbody>
         </table>
       </div>
-
   </div>
 </div>

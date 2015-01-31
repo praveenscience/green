@@ -9,6 +9,9 @@ angular.module 'greenApp'
   $scope.forms = []
   $scope.submissions = []
 
+  $scope.isActive = (route) ->
+    route is $location.path()
+
   $scope.init = ->
     _loadFroms()
     if !Auth.isAdmin()
