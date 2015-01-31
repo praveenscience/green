@@ -12,7 +12,7 @@ angular.module 'greenApp'
   $scope.isActive = (route) ->
     route is $location.path()
 
-  $scope.currentForm = []
+  $scope.currentForm = null
 
   $scope.init = ->
     _loadFroms()
