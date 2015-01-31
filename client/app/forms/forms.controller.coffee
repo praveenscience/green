@@ -70,7 +70,6 @@ angular.module 'greenApp'
     return
 
   $scope.slideInFormDetails = (curform) ->
-    console.log curform
     $scope.currentForm = curform
 
   $scope.getFormLink = (form) ->
