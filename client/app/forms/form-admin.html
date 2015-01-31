@@ -1,6 +1,6 @@
 <div class="row-fluid">
   <div ng-include="'components/sidebar/sidebar.html'" ng-if="isAdmin()"></div>
-  <div class="col-lg-6 col-sm-6 main-content-wrap">
+  <div ng-class="{'col-lg-6 col-sm-6 main-content-wrap': currentForm, 'col-lg-10 col-sm-10 main-content-wrap': !currentForm}">
     <div class="main-content">
       <br>
       <div class="row-fluid oh">
@@ -21,13 +21,11 @@
       <div class="clearfix"></div>
       <div class="froms-list">
         <div ng-if="forms.length > 0">
-
           <div class="tabled-row-filter">
             <span class="label label-info selected">All</span>
             <span class="label label-info">Published</span>
             <span class="label label-info">UnPublished</span>
           </div>
-
           <div class="row-fluid tabled-row-heading">
             <div class="col-lg-6 col-sm-6"><strong>Certification Name</strong></div>
             <div class="col-lg-3 col-sm-3"><strong>Status</strong></div>
@@ -37,48 +35,46 @@
           <div class="row-fluid tabled-row" ng-repeat="form in forms" ng-click="slideInFormDetails(form)">
             <div class="col-lg-6 col-sm-6">
               <a ng-href="{{getFormLink(form)}}">{{form.name}}</a>
-                <span class="text-info" ng-if="form.status == 'Unpublished'">
-                <em class="icon icon-pencil2"></em>
-            </span>
+              <span class="text-info" ng-if="form.status == 'Unpublished'">
+              <em class="icon icon-pencil2"></em>
+              </span>
+            </div>
+            <div class="col-lg-3 col-sm-3">                  {{form.status}}
+              &nbsp;
+              <span class="text-success" ng-if="form.status == 'Published'" tooltip="Form published on {{getFormatedDate(form.updated)}}">
+              <em class="icon icon-check-alt"></em>
+            </span></div>
+            <div class="col-lg-3 col-sm-3">{{form.author.name}}</div>
           </div>
-          <div class="col-lg-3 col-sm-3">                  {{form.status}}
-            &nbsp;
-            <span class="text-success" ng-if="form.status == 'Published'" tooltip="Form published on {{getFormatedDate(form.updated)}}">
-            <em class="icon icon-check-alt"></em>
-          </span></div>
-          <div class="col-lg-3 col-sm-3">{{form.author.name}}</div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="col-lg-4 col-sm-4 p0">
-  <div class="main-content-slider">
-    <div ng-if="currentForm">
-    <h2 class="slider-title">{{currentForm.name}}</h2>
-    <p class="text-muted">
-      {{currentForm.description}}
-    </p>
-    <div>
-      <span class="text-muted">Last Updated: </span> <span> {{getFormatedDate(currentForm.created)}}</span>
-      <br>
-      <br>
-    </div>
-
-    <div class="row-fluid">
-      <div class="col-lg-12 col-sm-12">
-        <div class="pull-right">
-          <a href="" class="btn btn-sm btn-info"><em class="icon icon-pencil2"></em>&nbsp; Edit form</a>
-          &nbsp;&nbsp;&nbsp;
-          <a href="" class="btn btn-sm btn-warning"><em class="icon icon-eye"></em>&nbsp;  View Responses</a>
+  <div class="col-lg-4 col-sm-4 p0 animate-if" ng-if="currentForm">
+    <div class="main-content-slider animated05 fadeInRight">
+      <div ng-if="currentForm">
+        <h2 class="slider-title">{{currentForm.name}}</h2>
+        <p class="text-muted">
+        {{currentForm.description}}
+        </p>
+        <div>
+          <span class="text-muted">Last Updated: </span> <span> {{getFormatedDate(currentForm.created)}}</span>
+          <br>
+          <br>
+        </div>
+        <div class="row-fluid">
+          <div class="col-lg-12 col-sm-12">
+            <div class="pull-right">
+              <a href="" class="btn btn-sm btn-info"><em class="icon icon-pencil2"></em>&nbsp; Edit form</a>
+              &nbsp;&nbsp;&nbsp;
+              <a href="" class="btn btn-sm btn-warning"><em class="icon icon-eye"></em>&nbsp;  View Responses</a>
+            </div>
+          </div>
+        </div>
+        <div>
+          <img src="assets/images/empty_chart.png" alt="" class="img-responsive">
         </div>
       </div>
     </div>
-    <div>
-      <img src="assets/images/empty_chart.png" alt="" class="img-responsive">
-    </div>
-
   </div>
-  </div>
-</div>
 </div>

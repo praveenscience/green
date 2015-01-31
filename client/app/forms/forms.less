@@ -89,6 +89,8 @@
   .main-content-wrap {
     padding: 0;
     background: #fff;
+    transition: width 0.3s;
+    transition-timing-function: cubic-bezier(0.1, 0.82, 0.25, 1);
   }
 
   .main-content {
@@ -169,3 +171,26 @@
       cursor: pointer;
     }
   }
+
+
+.animate-if.ng-enter, .animate-if.ng-leave {
+  -webkit-transition: width 0.3s;
+  transition: width  0.3s;
+  transition-timing-function: cubic-bezier(0.1, 0.82, 0.25, 1);
+}
+
+.animate-if.ng-enter,
+.animate-if.ng-leave.ng-leave-active {
+  width: 0;
+  .main-content-slider {
+    opacity: 0;
+  }
+}
+
+.animate-if.ng-leave,
+.animate-if.ng-enter.ng-enter-active {
+  width: 33.33333333%;
+  .main-content-slider {
+    opacity: 1;
+  }
+}
