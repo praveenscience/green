@@ -12,6 +12,8 @@ angular.module 'greenApp'
   $scope.isActive = (route) ->
     route is $location.path()
 
+  $scope.currentForm = []
+
   $scope.init = ->
     _loadFroms()
     if !Auth.isAdmin()
@@ -66,6 +68,10 @@ angular.module 'greenApp'
         return
       )
     return
+
+  $scope.slideInFormDetails = (curform) ->
+    console.log curform
+    $scope.currentForm = curform
 
   $scope.getFormLink = (form) ->
     if $scope.isAdmin() and form.status is 'Unpublished'

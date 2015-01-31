@@ -1,31 +1,89 @@
-<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarController">
-  <div class="container">
-    <div class="navbar-header">
-      <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      </button>
-      <a href="/froms" class="navbar-brand green-brand">green</a>
-    </div>
-    <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-      <ul class="nav navbar-nav">
-        <!--         <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
-          <a ng-href="{{item.link}}">{{item.title}}</a>
-        </li> -->
-        <li ng-show="isAdmin()" ng-class="{active: isActive('/forms')}"><a href="/forms">Forms</a></li>
-        <li ng-show="isAdmin()" ng-class="{active: isActive('/certificates')}"><a href="/certificates">Certificates</a></li>
-        <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
-        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>
-        <li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p> </li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></li>
-      </ul>
-    </div>
+<style>
+  .sidebar {
+    background: #303E4C;
+    min-width: 200px;
+    margin-left: -15px;
+    margin-right: -30px;
+    box-shadow: 0 0 14px -4px #aaa;
+    position: fixed;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.42);
+    width: inherit;
+    top: 0;
+    bottom: 0;
+  }
+
+  .sidebar-wrap {
+    z-index: 2;
+  }
+
+  .sb-nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sb-nav li.active {
+    background: #24303c;
+    border-left: 3px solid #4A89DC;
+  }
+
+  .sb-nav li.active a {
+    color: #fff;
+  }
+
+  .sb-nav li.active a em {
+    color: #fff;
+  }
+
+  .sb-nav li a {
+    display: block;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #ddd;
+    transition: all 0.2s linear;
+  }
+
+  .sb-nav li a:hover {
+    text-decoration: none;
+    background: #293643;
+    color: #fff;
+  }
+
+  .sb-nav li a em {
+    vertical-align: -1px;
+    display: inline-block;
+    margin-right: 6px;
+    margin-left: 8px;
+    font-size: 16px;
+    color: #ddd;
+    width: 20px;
+    text-align: center;
+  }
+
+  .sidebar-logo {
+    text-align: center;
+    margin: 20px auto;
+  }
+
+  .sidebar-logo img {
+    width: 60px;
+    text-align: center;
+  }
+
+</style>
+
+<div class="col-lg-2 col-sm-2 sidebar-wrap">
+  <div class="sidebar">
+      <div class="sidebar-logo">
+        <a href=""><img src="assets/images/green-logo.svg" alt=""></a>
+      </div>
+    <br>
+    <ul class="sb-nav">
+        <li ng-show="isAdmin()" ng-class="{active: isActive('/forms')}"><a href="/forms"><em class="icon icon-dashboard"></em> Dashboard</a></li>
+        <li ng-show="isAdmin()" ng-class="{active: isActive('/certificates')}"><a href="/certificates"> <em class="icon  icon-trophy"></em>  Certificates</a></li>
+        <li> <a href=""><em class="icon icon-chart"></em> Reports</a></li>
+        <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin"><em class="icon icon-users2"></em>  Admin</a></li>
+    </ul>
+
   </div>
 </div>
-<div class="top-strip"></div>
