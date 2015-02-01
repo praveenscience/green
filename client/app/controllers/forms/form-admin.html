@@ -1,6 +1,13 @@
 <div class="row-fluid">
   <div ng-include="'components/sidebar/sidebar.html'" ng-if="isAdmin()"></div>
   <div ng-class="{'col-lg-6 col-sm-6 main-content-wrap': currentForm, 'col-lg-10 col-sm-10 main-content-wrap': !currentForm}">
+    <div class="main-content" ng-if="forms.length <= 0">
+      <br><br><br><br>
+      <div class="text-center">
+        <img src="assets/images/form-empty.svg" alt="" class="img-responsive" style="margin: 10px auto;">
+        <button type="submit" class="btn btn-primary" ng-click="addform()"> <em class="icon icon-plus"></em> &nbsp;&nbsp; Add new form</button>
+      </div>
+    </div>
     <div class="main-content">
       <br>
       <div class="row-fluid oh">
@@ -27,13 +34,14 @@
             <span class="label label-info" ng-class="{selected: querys.status == 'Unpublished'}" ng-click="querys.status = 'Unpublished'">UnPublished</span>
           </div>
           <div class="row-fluid tabled-row-heading">
-            <div class="col-lg-5 col-sm-5"><strong>Certification Name</strong></div>
+            <div class="col-lg-4 col-sm-4"><strong>Certification Name</strong></div>
             <div class="col-lg-3 col-sm-3"><strong>Status</strong></div>
             <div class="col-lg-4 col-sm-4"><strong>Created</strong></div>
+            <!-- <div class="col-lg-2 col-sm-2"></div> -->
           </div>
           <div class="clearfix"></div>
           <div class="row-fluid tabled-row" ng-repeat="form in forms | filter: query| filter:querys.status:true" ng-click="slideInFormDetails(form)">
-            <div class="col-lg-5 col-sm-5">
+            <div class="col-lg-4 col-sm-4">
               <a ng-href="{{getFormLink(form)}}">{{form.name}}</a>
               <span class="text-info" ng-if="form.status == 'Unpublished'">
               <em class="icon icon-pencil2"></em>
@@ -45,6 +53,14 @@
               <em class="icon icon-check-alt"></em>
             </span></div>
             <div class="col-lg-4 col-sm-4">{{getFormatedDate(form.created)}}</div>
+            <!--             <div class="col-lg-2 col-sm-2">
+              <a href="forms/{{form._id}}" class="btn btn-info btn-xs" ng-click="previewForm(form)
+              " tooltip="Preview this form" tooltip-append-to-body="true"><em class="icon icon-eye"></em></a>
+              &nbsp;&nbsp;&nbsp;
+              <a href="" class="btn btn-danger btn-xs" ng-click="removeForm(form)" tooltip="Remove this form! (think twice)" tooltip-append-to-body="true">
+                <em class="icon icon-remove"></em>
+              </a>
+            </div> -->
           </div>
         </div>
       </div>
@@ -57,20 +73,22 @@
         <p class="text-muted">
         {{currentForm.description}}
         </p>
-        <div>
-          <span class="text-muted">Last Updated: </span> <span> {{getFormatedDate(currentForm.created)}}</span>
-          <br>
-          <br>
-        </div>
+        <p>
+        <span class="text-muted">Last Updated: </span> <span> {{getFormatedDate(currentForm.created)}}</span>
+        <br>
+        </p>
+        <hr>
         <div class="row-fluid">
           <div class="col-lg-12 col-sm-12">
             <div class="pull-right">
-              <a ng-href="{{getFormLink(currentForm)}}" class="btn btn-sm btn-info"><em class="icon icon-pencil2"></em>&nbsp; Edit form</a>
+              <a ng-href="{{getFormLink(currentForm)}}" class="btn btn-sm btn-info" ng-if="currentForm.status == 'Unpublished'"><em class="icon icon-pencil2"></em>&nbsp; Edit form</a>
               &nbsp;&nbsp;&nbsp;
-              <a href="" class="btn btn-sm btn-warning"><em class="icon icon-eye"></em>&nbsp;  View Responses</a>
+              <a ng-href="{{getFormLink(currentForm)}}" class="btn btn-sm btn-warning" ng-if="currentForm.status == 'Published'"><em class="icon icon-eye"></em>&nbsp;  View Responses</a>
             </div>
           </div>
         </div>
+        <div class="clearfix"></div>
+        <hr>
         <div>
           <img src="assets/images/empty_chart.png" alt="" class="img-responsive">
         </div>

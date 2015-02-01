@@ -247,7 +247,6 @@ angular.module 'greenApp'
         $scope.sectionSaving = false
         $scope.enableSaveButton = true
 
-
   $scope.submitForm = (form) ->
     $scope.formSaving = true
     formData.update(form)
