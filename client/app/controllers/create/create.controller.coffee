@@ -13,6 +13,7 @@ angular.module 'greenApp'
   $scope.sectionSaving = false
   $scope.enableSaveButton = true
   $scope.formSaving = false
+  $scope.enableFormSaveButton = true
   $scope.formSettings =
     active: false
 
@@ -242,14 +243,17 @@ angular.module 'greenApp'
     sectionData.create(section)
       .success (data, status) ->
         section = data
+        $scope.submitForm($scope.form)
         $scope.sectionSaving = false
         $scope.enableSaveButton = true
+
 
   $scope.submitForm = (form) ->
     $scope.formSaving = true
     formData.update(form)
       .success (data, status) ->
         $scope.formSaving = false
+        $scope.enableFormSaveButton = true
 
   $scope.publishForm = ->
     $scope.form.status = 'Published'
@@ -275,6 +279,10 @@ angular.module 'greenApp'
     $scope.enableSaveButton = false
     $scope.calculateSecitonPoints()
     $scope.updateFormPoints()
+  , true)
+
+  $scope.$watch('form', (old, newValue) ->
+    $scope.enableFormSaveButton = false
   , true)
 
   $scope.init()

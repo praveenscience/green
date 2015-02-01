@@ -37,9 +37,12 @@
           </div>
         </div>
         <div class="col-lg-4 col-sm-4">
-          <br>
+          <span class="last-save-text text-muted">
+            <span ng-if='enableFormSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(form.updated)}}" tooltip-position="left">Saved!</span>
+            <span ng-if='!enableFormSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(form.updated)}}" tooltip-position="left"> Changes must be saved!</span>
+          </span>
           <div class="form-actions pull-right">
-            <button class="btn btn-success" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true">Save</button>
+            <button ng-disabled="enableFormSaveButton" class="btn btn-success" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left">Save Form</button>
             &nbsp;&nbsp;&nbsp;
             <a class="btn btn-default" href="/forms/{{form._id}}" tooltip="See how the form looks!" tooltip-append-to-body="true"  tooltip-placement="top">Preview</a>
           </div>
@@ -133,9 +136,12 @@
             <strong class="section-points">({{section.possible_points}} Possible Points, {{section.bonus_points}} Bonus)</strong>
           </div>
           <div class="col-lg-4 col-sm-4">
-
             <div class="pull-right">
               <div class="formSubmit">
+                <span class="last-save-text text-muted">
+                <span ng-if='enableSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(section.updated)}}" tooltip-position="left"> Saved!</span>
+                <span ng-if='!enableSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(section.updated)}}" tooltip-position="left"> Changes must be saved!</span>
+                </span>
                 <div class="pull-right">
                   <button class="btn btn-success" ng-click="submitSection(section, section._id)" ladda="sectionSaving" data-style="expand-left"
                   ng-disabled="enableSaveButton"
