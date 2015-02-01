@@ -48,12 +48,26 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
-}
+  li {
+    border-bottom: solid 1px @sidebar-nav-border;
+    &:first-child {
+      border-top: solid 1px @sidebar-nav-border;
+    }
+  }
 
-.sb-nav li {
-  border-bottom: solid 1px @sidebar-nav-border;
-  &:first-child {
-    border-top: solid 1px @sidebar-nav-border;
+  &.bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    li a {
+      padding: 6px 15px;
+    }
+
+    li.nav-text {
+      border-top: 0;
+      padding: 10px 25px;
+      font-weight: 300;
+    }
   }
 }
 

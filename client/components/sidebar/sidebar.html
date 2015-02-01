@@ -1,7 +1,7 @@
 <div class="col-lg-2 col-sm-2 sidebar-wrap" ng-controller="NavbarController">
   <div class="sidebar">
       <div class="sidebar-logo">
-        <a href=""><img src="assets/images/green-logo.svg" alt=""></a>
+        <a href="/froms"><img src="assets/images/green-logo.svg" alt=""></a>
       </div>
     <br>
     <ul class="sb-nav">
@@ -9,6 +9,18 @@
         <li ng-show="isAdmin()" ng-class="{active: isActive('/certificates')}"><a href="/certificates"> <em class="icon  icon-trophy"></em>  Certificates</a></li>
         <li> <a href=""><em class="icon icon-chart"></em> Reports</a></li>
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin"><em class="icon icon-users2"></em>  Admin</a></li>
+    </ul>
+
+    <ul class="sb-nav bottom">
+
+        <li ng-show="isLoggedIn()" class="nav-text">
+         <span class="text-muted"> Hello, </span>  {{ getCurrentUser().name }}
+        </li>
+
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><em class="icon icon-cog"></em> Account</a></li>
+
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()"><em class="icon  icon-power-off"></em>  Logout</a></li>
+
     </ul>
 
   </div>
