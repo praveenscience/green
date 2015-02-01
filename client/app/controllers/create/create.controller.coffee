@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'CreateController', ($scope, $http, $routeParams, sectionData, formData, SweetAlert, Auth, Utils, $modal) ->
+.controller 'CreateController', ($scope, $http, $routeParams, sectionData, formData, SweetAlert, Auth, Utils, $modal, $location) ->
 
   $scope.isAdmin = Auth.isAdmin
   $scope.formShow = false
@@ -256,7 +256,13 @@ angular.module 'greenApp'
 
   $scope.publishForm = ->
     $scope.form.status = 'Published'
-    $scope.submitForm($scope.form)
+    $scope.formSaving = true
+    formData.update($scope.form)
+      .success (data, status) ->
+        $scope.formSaving = false
+        $scope.enableFormSaveButton = true
+        $location.path('#/forms')
+
 
   $scope.unPublishForm = ->
     $scope.form.status = 'Unpublished'
@@ -265,7 +271,7 @@ angular.module 'greenApp'
   $scope.attachCertificate = ->
     modalInstance = $modal.open
       windowClass: 'modal-full'
-      templateUrl: '/app/certificate/attach.certificate.html'
+      templateUrl: '/app/controllers/certificate/attach.certificate.html'
       controller: 'AttachcertificateCtrl'
       resolve:
         selectedCertificates: -> $scope.form.certificates
