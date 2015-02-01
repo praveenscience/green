@@ -80,9 +80,9 @@ angular.module 'greenApp'
     else
       return "/forms/#{form._id}"
 
-  $scope.removeForm = (form) ->
+  $scope.removeForm = (form, hideSidebar) ->
     SweetAlert.swal(Utils.getAlertSettings('form'), (isConfirm) ->
-      _handleFormDelete(isConfirm, form))
+      _handleFormDelete(isConfirm, form, hideSidebar))
 
   $scope.removeResult = (result) ->
     SweetAlert.swal(Utils.getAlertSettings('result'), (isConfirm) ->
@@ -90,10 +90,16 @@ angular.module 'greenApp'
 
   _handleResultDelete = (isConfirm, result) ->
     $http.delete "/api/results/#{result._id}"
+      .success (data, status) ->
 
-  _handleFormDelete = (isConfirm, form) ->
+
+
+  _handleFormDelete = (isConfirm, form, hideSidebar) ->
     if isConfirm
       $http.delete "/api/forms/#{form._id}"
+        .success (data, status) ->
+          if hideSidebar
+            $scope.currentForm = null
 
   $scope.$on '$destroy', ->
     socket.unsyncUpdates 'form'
