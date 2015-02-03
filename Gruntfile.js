@@ -316,7 +316,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.client %>/assets/images',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
+          src: '{,*/}*.{png,jpg,jpeg,gif,svg}',
           dest: '<%= yeoman.dist %>/public/assets/images'
         }]
       }
@@ -463,8 +463,8 @@ module.exports = function (grunt) {
       dist: [
         'coffee',
         'less',
-        'imagemin',
-        'svgmin'
+        'imagemin'
+        //'svgmin'
       ]
     },
 

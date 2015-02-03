@@ -14,12 +14,10 @@
         </div>
       </div>
       <div ng-if="forms.length > 0">
-        <table class="table table-striped">
+        <table class="table table-wide">
           <thead>
             <tr>
-              <th>
-                #
-              </th>
+              <th> # </th>
               <th> Certification Name </th>
               <th> Score </th>
               <th> Last activity </th>
@@ -72,3 +70,4 @@
     </div>
   </div>
 </div>
+<div ng-include="'components/footer/footer.html'" ng-if="!isAdmin()"></div>
