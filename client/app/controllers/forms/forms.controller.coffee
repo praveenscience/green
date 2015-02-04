@@ -13,6 +13,8 @@ angular.module 'greenApp'
     route is $location.path()
 
   $scope.currentForm = null
+  $scope.filt = {}
+  $scope.filt.status = "Published"
 
   $scope.init = ->
     _loadFroms()

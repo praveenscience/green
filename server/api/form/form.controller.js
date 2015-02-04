@@ -10,7 +10,13 @@ var auth = require('../../auth/auth.service');
 
 // Get list of forms
 exports.index = function(req, res) {
-  Form.find()
+
+  var condition = {}
+  if(req.user.role != "admin") {
+    condition.status = 'Published'
+  }
+
+  Form.find(condition)
     .populate('author')
     .exec(function(err, forms) {
       if (err) {
@@ -18,6 +24,7 @@ exports.index = function(req, res) {
       }
       return res.json(200, forms);
     });
+
 };
 
 // Get a single form

@@ -1,23 +1,15 @@
 <div class="container page-container">
   <div class="row">
-    <div class="col-lg-7 oh">
-      <h1 class="page-title"> Your Submissions</h1>
-      <div ng-if="forms.length == 0">
-        <div class="empty forms-empty">
-          <img src="assets/images/empty/no_forms_text.svg" alt="" class="empty-hint">
-          <div class="empty-image">
-            <img src="assets/images/empty/no_forms.svg" alt="" class="empty">
-            <div class="empty-text">
-              Your don't have any forms right now!
-            </div>
-          </div>
-        </div>
+    <div class="col-lg-7 col-sm-7 oh">
+      <div ng-if="submissions.length == 0">
+        <br><br><br>
+        <img src="assets/images/submissions-empty.svg" alt="" class="img-responsive pull-right" style="margin: 30px auto; max-width: 500px">
       </div>
-      <div ng-if="forms.length > 0">
+      <div ng-if="submissions.length > 0">
+        <h1 class="page-title"> Your Submissions</h1>
         <table class="table table-wide">
           <thead>
             <tr>
-              <th> # </th>
               <th> Certification Name </th>
               <th> Score </th>
               <th> Last activity </th>
@@ -26,7 +18,6 @@
           </thead>
           <tbody>
             <tr ng-repeat="submission in submissions">
-              <td> {{$index + 1}}</td>
               <td>
                 <a ng-href="{{'/forms/'+ submission.form._id + '/' + submission._id}}">{{submission.form.name}}</a>
                 <span class="text-info" ng-if="submission.status == 'Unpublished'">
@@ -37,7 +28,8 @@
                 {{submission.points}}
               </td>
               <td> {{getFormatedDate(submission.updated)}}</td>
-              <td><a href='' ng-click="removeResult(submission)" class="btn btn-xs"><em class="icon icon-remove"></em></a></td>
+              <td><a href='' ng-click="removeResult(submission)" class="btn btn-xs"><em class="icon icon-remove"></em></a>
+              </td>
             </tr>
           </tbody>
         </table>
