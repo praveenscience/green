@@ -22,9 +22,25 @@ angular.module 'greenApp'
             _prepareData(data, results)
 
   _prepareData = (data, results) ->
+    form = data
+    for index, field of results[0].results
+      section = _.find form.sections, (s) -> s._id is field.section_id
+      secField = _.find section.fields, (s) -> s._id is field.field_id
+
+      if field.field_type in ['text', 'textarea']
+        secField.response = field.response
+      else if field.field_type in ['radiobutton', 'select']
+        choice = _.find secField.choices, (s) -> s._id is field.response
+        secField.response = choice.label
+      else if field.field_type is 'checkbox'
+        response = []
+        field.response.forEach (val) ->
+          choice = _.find secField.choices, (s) -> s._id is val
+          if choice
+            response.push(choice.label)
+        secField.response = response.join(', ')
+
     $scope.form = data
-    console.log data
-    console.log results
 
 
 

@@ -24,15 +24,6 @@ exports.show = function(req, res) {
   })
 };
 
-exports.showresponses = function(req, res) {
-  var formId = req.params.id;
-  var resId = req.params.res;
-
-
-
-  return res.json({message: "true"});
-}
-
 exports.showallresults = function(req, res) {
   Result.find({
     form: req.params.id

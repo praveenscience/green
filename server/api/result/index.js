@@ -9,7 +9,6 @@ var router = express.Router();
 router.get('/', auth.isAuthenticated(), controller.index);
 router.get('/submissions', auth.isAuthenticated(), controller.submissions);
 router.get('/:id', auth.isAuthenticated(), controller.show);
-router.get('/:id/:res', auth.isAuthenticated(), controller.showresponses);
 router.get('/:id/all', auth.isAuthenticated(), controller.showallresults);
 router.post('/', auth.isAuthenticated(), controller.create);
 router.put('/:id', auth.isAuthenticated(), controller.update);

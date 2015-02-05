@@ -8,7 +8,7 @@
 
 .response-section {
   margin-bottom: 30px;
-
+  counter-reset: lal;
 }
 
 .response-field {
@@ -17,8 +17,13 @@
   label {
     font-size: 16px;
     font-weight: normal;
+    font-weight: 300;
     color: #666;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
+    counter-increment: lal;
+    &:before {
+      content: counter(lal)". ";
+    }
   }
 }
 
