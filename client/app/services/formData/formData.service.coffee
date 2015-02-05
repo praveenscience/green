@@ -42,6 +42,11 @@ angular.module 'greenApp'
       url: "api/results/#{formId}/all"
       method: 'GET'
 
+  getFormResponse: (formId, resId) ->
+    $http
+      url: "api/results/#{formId}/#{resId}"
+      method: 'GET'
+
   respond: (responseForm) ->
     responses = []
     for sectionIndex, section of responseForm.sections

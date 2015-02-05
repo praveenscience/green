@@ -175,6 +175,7 @@ angular.module 'greenApp'
     $http.post('/api/sections', newSection)
       .success( (data, status, headers, config) ->
         $scope.addSectionToForm(data, formId)
+        $scope.newSection = ''
         return
       )
     return

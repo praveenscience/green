@@ -7,6 +7,7 @@ angular.module 'greenApp'
   resId = $routeParams.res
 
   $scope.results = []
+  $scope.form = null
 
   $scope.getFormatedDate = Utils.getFormatedDate
 
@@ -14,10 +15,16 @@ angular.module 'greenApp'
     _loadData()
 
   _loadData = ->
-    formData.results(formId)
+    formData.getForm(formId)
       .success (data, status) ->
-        $scope.results = data
+        formData.getFormUserResponse(resId)
+          .success (results, status) ->
+            _prepareData(data, results)
 
+  _prepareData = (data, results) ->
+    $scope.form = data
+    console.log data
+    console.log results
 
 
 

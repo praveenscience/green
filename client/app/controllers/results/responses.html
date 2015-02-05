@@ -1,25 +1,36 @@
 <div class="row-fluid">
   <div ng-include="'components/sidebar/sidebar.html'"></div>
-  <div class="col-lg-10 col-sm-10 main-content-wrap">
-    <div class="main-content">
+  <div class="col-lg-10 col-sm-10 main-content-wrap" style="min-height: 800px">
 
-      <div class="row-fulid oh">
-        <div class="col-lg-12 col-sm-12">
-          <h1 class="main-page-title">Responses</h1>
+
+    <div class="row-fluid">
+      <div class="col-lg-3 col-sm-3 g-c-sidebar">
+        <h1 class="main-page-title">Responses</h1>
+        <br><br><br>
+        <ul class="mid-nav">
+          <li ng-repeat="section in form.sections">
+            <a href class="">{{section.title}}</a>
+          </li>
+        </ul>
+
+      </div>
+      <div class="col-lg-9 col-sm-9 g-c-content">
+      <div class="form-header-meta">
+        <h1 class="main-page-title sub"><span class="text-muted">Form –</span>  This is the from name </h1>
+        <!-- <h5 class=""> <span class="text-muted">Submitted by: </span> {{response.name}}</h5> -->
         </div>
-      </div>
-      <br>
+        <div class="responses-container">
+          <div class="response-section" ng-repeat="section in form.sections">
+            <h3 class="response-section-title">{{section.title}}</h3>
+            <div class="response-field" ng-repeat="field in section.fields">
+              <label for="">{{field.label}}</label>
+            </div>
 
-      <div class="row-fluid">
-        <div class="col-lg-12 col-sm-12">
-          <h1 class="main-page-title sub"><span class="text-muted">Form –</span>  This is the from name </h3>
-          <h5 class=""> <span class="text-muted">Submitted by: </span> {{response.name}}</h5>
-      </div>
+          </div>
 
-      <div class="col-lg-12 col-sm-12" ng-if="results.length > 0">
+        </div>
 
       </div>
-    </div>
     </div>
   </div>
 </div>

@@ -124,7 +124,6 @@ angular.module 'greenApp'
 
   $scope.saveFormResuts = (e) ->
     e.preventDefault()
-    # return Auth.isAdmin()
     $scope.formSaving = true
     formData.respond($scope.form)
       .success (data, status) ->
@@ -133,14 +132,5 @@ angular.module 'greenApp'
           $location.path("#{$location.path()}/#{data._id}")
         if data.submitted is true
           $location.path("#{$location.path()}/success")
-
-
-
-  # $scope.$watch 'form', (old, newValue) ->
-  #   return if !$scope.form.sections
-  #   $scope.form.total_points = 0
-  #   for section, key in $scope.form.sections
-  #     $scope.form.total_points += (section.possible_points + section.bonus_points)
-  # , true
 
   $scope.init()
