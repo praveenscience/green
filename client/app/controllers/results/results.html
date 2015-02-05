@@ -1,27 +1,19 @@
 <div class="row-fluid">
   <div ng-include="'components/sidebar/sidebar.html'"></div>
   <div class="col-lg-10 col-sm-10 main-content-wrap">
-  <div class="main-content">
+    <div class="main-content">
 
       <div class="row-fulid oh">
         <div class="col-lg-12 col-sm-12">
-          <h1 class="main-page-title">Responses</h1>
+          <h1 class="main-page-title">Results</h1>
         </div>
       </div>
       <br>
 
-
-
-    <div class="row-fluid">
-
-
-
-
-      <div class="col-lg-12 col-sm-12">
-        <h1 class="main-page-title sub"><span class="text-muted">Form –</span>  This is the from name </h3>
+      <div class="row-fluid">
+        <div class="col-lg-12 col-sm-12">
+          <h1 class="main-page-title sub"><span class="text-muted">Form –</span>  This is the from name </h3>
       </div>
-
-
 
       <div class="clearfix"></div>
       <br>
@@ -49,7 +41,7 @@
             <td> {{result.user_info.username}}</td>
             <td> {{getFormatedDate(result.updated)}}</td>
             <td> {{result.points}}</td>
-            <td> <a href=""> View user responses</a></td>
+            <td> <a ng-href="/results/{{result.form._id}}/{{result._id}}"> View user responses</a></td>
             <td></td>
           </tr>
         </table>
