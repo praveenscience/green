@@ -2,7 +2,10 @@
   <div ng-include="'components/sidebar/sidebar.html'"></div>
   <div class="col-lg-6 col-sm-6 main-content-wrap">
     <div class="main-content" ng-if="submissions.length <= 0">
-      <br><br><br><br>
+      <br>
+      <br>
+      <br>
+      <br>
       <div class="text-center">
         <img src="assets/images/submissions-empty.svg" alt="" class="img-responsive pull-right" style="margin: 30px auto; max-width: 500px">
       </div>
@@ -31,10 +34,12 @@
             <span class="label label-info" ng-class="{selected: querys.status == 'Unpublished'}" ng-click="querys.status = 'Unpublished'">Drafts</span>
           </div>
           <div class="row-fluid tabled-row-heading">
-            <div class="col-lg-4 col-sm-4"><strong>Certification Name</strong></div>
-            <div class="col-lg-3 col-sm-3"><strong>Points</strong></div>
-            <div class="col-lg-4 col-sm-4"><strong>Updated</strong></div>
-            <!-- <div class="col-lg-2 col-sm-2"></div> -->
+            <div class="col-lg-4 col-sm-4"><strong>Certification Name</strong>
+            </div>
+            <div class="col-lg-3 col-sm-3"><strong>Points</strong>
+            </div>
+            <div class="col-lg-4 col-sm-4"><strong>Updated</strong>
+            </div>
           </div>
           <div class="clearfix"></div>
           <div class="row-fluid tabled-row" ng-repeat="submission in submissions | filter: query| filter:querys.status:true" ng-click="slideInFormDetails(form)">
@@ -56,31 +61,31 @@
   <div class="col-lg-4 col-sm-4">
     <div class="main-content-right-side">
       <h1 class="main-page-title">Available certifications</h1>
+      <br>
       <div>
-              <div ng-if="forms.length == 0">
-        <div class="empty forms-empty">
-          <img src="assets/images/empty/no_forms_text.svg" alt="" class="empty-hint">
-          <div class="empty-image">
-            <img src="assets/images/empty/no_forms.svg" alt="" class="empty">
-            <div class="empty-text">
-              Your don't have any forms right now!
+        <div ng-if="forms.length == 0">
+          <div class="empty forms-empty">
+            <img src="assets/images/empty/no_forms_text.svg" alt="" class="empty-hint">
+            <div class="empty-image">
+              <img src="assets/images/empty/no_forms.svg" alt="" class="empty">
+              <div class="empty-text">
+                Your don't have any forms right now!
+              </div>
+            </div>
+          </div>
+        </div>
+        <div ng-if="forms.length > 0">
+          <div class="item avil-certificate" ng-repeat="form in forms">
+            <div class="item-media">
+              <img ng-src="{{form.logo}}" alt="">
+            </div>
+            <div class="item-body">
+              <h5>{{form.name}}</h5>
+              <a ng-href="{{getFormLink(form)}}" class="btn btn-xs btn-default">Take this now</a>
             </div>
           </div>
         </div>
       </div>
-      <div ng-if="forms.length > 0">
-        <div class="item avil-certificate" ng-repeat="form in forms">
-          <div class="item-media">
-            <img ng-src="{{form.logo}}" alt="">
-          </div>
-          <div class="item-body">
-            <h5>{{form.name}}</h5>
-            <a ng-href="{{getFormLink(form)}}" class="btn btn-xs btn-default">Take this now</a>
-          </div>
-        </div>
-      </div>
-      </div>
-
     </div>
   </div>
 </div>
