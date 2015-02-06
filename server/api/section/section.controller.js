@@ -81,7 +81,6 @@ exports.updatefields = function(req, res) {
     section.title = newSection.title;
     section.possible_points = newSection.possible_points;
     section.bonus_points = newSection.bonus_points;
-    section.bonus_points = newSection.bonus_points;
 
     var _updateFields = function(callback) {
       var fields = req.body.fields

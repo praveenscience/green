@@ -264,7 +264,6 @@ angular.module 'greenApp'
         $scope.enableFormSaveButton = true
         $location.path('#/forms')
 
-
   $scope.unPublishForm = ->
     $scope.form.status = 'Unpublished'
     $scope.submitForm($scope.form)

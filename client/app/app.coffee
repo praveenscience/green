@@ -11,6 +11,7 @@ angular.module 'greenApp', [
   'ui.sortable',
   'angular-ladda'
   'ngSweetAlert'
+  'ui.select'
 ]
 
 .config ($routeProvider, $locationProvider, $httpProvider) ->

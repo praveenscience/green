@@ -12,12 +12,19 @@
         </select>
       </div>
     </div>
-    <div class="col-lg-5 col-sm-5">
+    <div class="col-lg-5 col-sm-5" ng-if="selectedField.choices">
       <label for="">Option</label>
-      <select name="" id="" class="form-control" ng-model="field.condition.choice" ng-change='watchOptionsChange(field, section)'>
+        {{field.condition.choice}}
+        <ui-select multiple ng-model="field.condition.choice" theme="select2" ng-disabled="disabled" style="width: 300px;">
+          <ui-select-match placeholder="Select options...">{{$item.label}}</ui-select-match>
+          <ui-select-choices repeat="opt in selectedField.choices">
+            {{opt.label}}
+          </ui-select-choices>
+        </ui-select>
+<!--       <select name="" id="" class="form-control" ng-model="field.condition.choice" ng-change='watchOptionsChange(field, section)'>
         <option value=''>-- Select Option --</option>
         <option value="{{opt._id}}" ng-repeat="opt in selectedField.choices" ng-selected="opt._id == field.condition.choice">{{opt.label}} </option>
-      </select>
+      </select> -->
     </div>
   </div>
 </div>
