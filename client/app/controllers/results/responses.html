@@ -7,11 +7,13 @@
       <div class="col-lg-3 col-sm-3 g-c-sidebar">
         <h1 class="main-page-title">Responses</h1>
         <br><br><br>
-        <ul class="mid-nav">
-          <li ng-repeat="section in form.sections">
-            <a href class="">{{section.title}}</a>
-          </li>
-        </ul>
+        <div class="fixed-navigation">
+          <ul class="mid-nav">
+            <li ng-repeat="section in form.sections">
+              <a href ng-click="scrollToSeciton($index, section)" ng-class="{active: section.active}">{{section.title}}</a>
+            </li>
+          </ul>
+        </div>
 
       </div>
       <div class="col-lg-9 col-sm-9 g-c-content">
@@ -20,12 +22,11 @@
         <!-- <h5 class=""> <span class="text-muted">Submitted by: </span> {{response.name}}</h5> -->
         </div>
         <div class="responses-container">
-          <div class="response-section" ng-repeat="section in form.sections">
+          <div class="response-section" id="seciton-{{$index}}" ng-repeat="section in form.sections">
             <h3 class="response-section-title">{{section.title}}</h3>
             <div class="response-field" ng-repeat="field in section.fields">
               <label for="">{{field.label}}</label>
               <p>{{field.response}}</p>
-              <br>
             </div>
 
           </div>

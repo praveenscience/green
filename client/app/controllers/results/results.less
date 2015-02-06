@@ -6,13 +6,20 @@
 
 }
 
+.stuck {
+  position: fixed;
+  top: 0;
+  background: #fff;
+  width: inherit;
+}
+
 .response-section {
   margin-bottom: 30px;
   counter-reset: lal;
 }
 
 .response-field {
-  margin: 15px 10px 15px;
+  margin: 15px 10px 30px;
 
   label {
     font-size: 16px;
@@ -53,15 +60,18 @@
     position: relative;
     transition: all 0.3s ease-in-out 0s;
     &.active {
+      border-top: solid 1px #ddd;
+      border-bottom: solid 1px #ddd;
       &:after {
         content: '';
         display: block;
         position: absolute;
         right: 0;
-        top: 0;
-        bottom: 0;
-        width: 3px;
+        top: -1px;
+        bottom: -1px;
+        width: 4px;
         background: @bluejeans-dark;
+        z-index: 22;
       }
     }
     &:hover {

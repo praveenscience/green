@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'ResponseCtrl', ($scope, $routeParams, formData, Utils) ->
+.controller 'ResponseCtrl', ($scope, $routeParams, formData, Utils, $timeout, $anchorScroll, $location) ->
 
   formId = $routeParams.id
   resId = $routeParams.res
@@ -13,6 +13,34 @@ angular.module 'greenApp'
 
   $scope.init = ->
     _loadData()
+    _initWaypoints()
+
+  $scope.scrollToSeciton = (index, section) ->
+    $('html, body').animate
+      scrollTop: document.getElementById("seciton-#{index}").offsetTop + "px"
+    1000
+
+    $timeout ->
+      $scope.form.sections.forEach (sec) -> sec.active = false
+      section.active = true
+      $scope.$digest();
+    , 0
+
+  _initWaypoints = ->
+    $timeout ->
+      sticky = new Waypoint.Sticky
+        element: $('.fixed-navigation')[0]
+
+      s = $('.response-section').waypoint(
+          handler: (direction) -> _updateCurrent(this.element.id.split('-')[1])
+          offset: 5
+        )
+    , 1000
+
+  _updateCurrent = (id) ->
+    $scope.form.sections.forEach (sec) -> sec.active = false
+    $scope.form.sections[id].active = true
+    $scope.$digest();
 
   _loadData = ->
     formData.getForm(formId)
