@@ -19,7 +19,7 @@
       <div class="col-lg-9 col-sm-9 g-c-content">
       <div class="form-header-meta">
         <h1 class="main-page-title sub"><span class="text-muted">Form –</span>  This is the from name </h1>
-        <!-- <h5 class=""> <span class="text-muted">Submitted by: </span> {{response.name}}</h5> -->
+        <h5 class="main-page-title-info"> <span class="text-muted">Submitted by: </span> {{form.user_info.username}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="text-muted">Submitted on: </span> {{getFormatedDate(form.res_updated)}}</h5>
         </div>
         <div class="responses-container">
           <div class="response-section" id="seciton-{{$index}}" ng-repeat="section in form.sections">

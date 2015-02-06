@@ -73,8 +73,8 @@ angular.module 'greenApp'
             response.push(choice.label)
         secField.response = response.join(', ')
 
+    form.user_info = results[0].user_info
+    form.res_updated = results[0].updated
     $scope.form = data
-
-
 
   $scope.init()
