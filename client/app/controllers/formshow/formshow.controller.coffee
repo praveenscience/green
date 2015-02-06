@@ -101,10 +101,12 @@ angular.module 'greenApp'
           v.selected is true and v.is_condition is true
         else
           v.is_condition is true and field.response is v._id
+
       if(conditionOption)
         fieldIndex = _.find section.fields, (v) ->
           v._id is conditionOption.show_field
         if fieldIndex
+
           fieldIndex.has_condition = false
       else
         for i, val of section.fields
