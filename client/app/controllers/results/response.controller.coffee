@@ -16,15 +16,17 @@ angular.module 'greenApp'
     _initWaypoints()
 
   $scope.scrollToSeciton = (index, section) ->
-    $('html, body').animate
-      scrollTop: document.getElementById("seciton-#{index}").offsetTop + "px"
-    1000
+    $timeout ->
+      $('html, body').animate
+        scrollTop: document.getElementById("seciton-#{index}").offsetTop + "px"
+      100
+    , 10
 
     $timeout ->
       $scope.form.sections.forEach (sec) -> sec.active = false
       section.active = true
       $scope.$digest();
-    , 0
+    , 400
 
   _initWaypoints = ->
     $timeout ->
@@ -54,6 +56,9 @@ angular.module 'greenApp'
     for index, field of results[0].results
       section = _.find form.sections, (s) -> s._id is field.section_id
       secField = _.find section.fields, (s) -> s._id is field.field_id
+
+      secField.total_points = field.total_points || 0
+      secField.points = field.points || 0
 
       if field.field_type in ['text', 'textarea']
         secField.response = field.response
