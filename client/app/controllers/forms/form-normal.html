@@ -53,6 +53,7 @@
               {{submission.points}}
             </div>
             <div class="col-lg-4 col-sm-4">{{getFormatedDate(submission.updated)}}</div>
+            <div class="col-lg-1 col-sm-1"><a href='' ng-click="removeResult(submission)" class="btn btn-xs"><em class="icon icon-remove"></em></a></div>
           </div>
         </div>
       </div>
@@ -65,11 +66,10 @@
       <div>
         <div ng-if="forms.length == 0">
           <div class="empty forms-empty">
-            <img src="assets/images/empty/no_forms_text.svg" alt="" class="empty-hint">
             <div class="empty-image">
               <img src="assets/images/empty/no_forms.svg" alt="" class="empty">
               <div class="empty-text">
-                Your don't have any forms right now!
+                No certificates published yet!
               </div>
             </div>
           </div>

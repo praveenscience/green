@@ -93,6 +93,7 @@ angular.module 'greenApp'
   _handleResultDelete = (isConfirm, result) ->
     $http.delete "/api/results/#{result._id}"
       .success (data, status) ->
+        $scope.submissions.splice($scope.submissions.indexOf(result), 1)
 
 
 
