@@ -12,12 +12,11 @@
         </select>
       </div>
     </div>
-    <div class="col-lg-5 col-sm-5" ng-if="selectedField.choices">
+    <div class="col-lg-5 col-sm-5" ng-if="selectedField.choices.length > 0">
       <label for="">Option</label>
-        {{field.condition.choice}}
-        <ui-select multiple ng-model="field.condition.choice" theme="select2" ng-disabled="disabled" style="width: 300px;">
+        <ui-select multiple ng-model="field.condition.choice" theme="select2" style="width: 300px;">
           <ui-select-match placeholder="Select options...">{{$item.label}}</ui-select-match>
-          <ui-select-choices repeat="opt in selectedField.choices">
+          <ui-select-choices repeat="opt._id as opt in selectedField.choices">
             {{opt.label}}
           </ui-select-choices>
         </ui-select>

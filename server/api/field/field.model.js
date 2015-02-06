@@ -12,7 +12,7 @@ var FieldSchema = new Schema({
   edit_mode: Boolean,
   condition: {
     field: { type: String, default: '' },
-    choice: { type: String, default: '' }
+    choice: [{ type: String, default: '' }]
   },
   has_condition: {
     type: Boolean,
