@@ -38,26 +38,31 @@ angular.module 'greenApp'
     for index, field of results[0].results
       section = _.find form.sections, (s) -> s._id is field.section_id
       secField = _.find section.fields, (s) -> s._id is field.field_id
-      if field.response instanceof Array
+
+
+      if field.field_type is 'checkbox'
         for index, choice of field.response
           choiceI = _.find secField.choices, (s) ->
             s._id is choice
           if choiceI
             choiceI.selected = true
-      else
-        if field.response != ''
-          secField.response = field.response
-          _showHiddenField(field.field_id, field.response, section)
+            console.log choiceI._id
+            _showHiddenField(field.field_id, choiceI._id, section)
+
+      else if field.response != ''
+        secField.response = field.response
+        # _showHiddenField(field.field_id, field.response, section)
 
     $scope.form = form
     $scope.form.aquired_points = results[0].points
     $scope.form.sections[0].active = true
 
-  _showHiddenField = (fieldId, response,section) ->
+  _showHiddenField = (fieldId, response, section) ->
     return if !fieldId
 
     fieldTobeShown = _.find section.fields, (v) ->
-      v.has_condition is true and v.condition.choice is response
+      console.log v.condition.choice
+      v.has_condition is true and response in v.condition.choice
 
     if fieldTobeShown
       fieldTobeShown.has_condition = false

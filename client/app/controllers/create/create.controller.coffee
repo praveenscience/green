@@ -111,6 +111,7 @@ angular.module 'greenApp'
   $scope.sortableOptions =
     containment: "parent"
     stop: (e, ui) ->
+      $scope.fixSequence()
 
   $scope.getFormatedDate = Utils.getFormatedDate
   $scope.pluralize = Utils.pluralize
@@ -149,6 +150,7 @@ angular.module 'greenApp'
       .success (data) ->
         $scope.originalForm = angular.copy(data)
         $scope.form = data
+        $scope.seciton = $scope.form.sections[0]
 
   $scope.addSectionToForm = (section, formId) ->
     $http.put("api/forms/s/#{formId}", {
@@ -182,11 +184,17 @@ angular.module 'greenApp'
 
   $scope.loadSection = (section) ->
     section.active = true
+    $scope.seciton = section
     $scope.formSettings.active = false
 
   $scope.loadFormSettings = ->
     $scope.form.sections.forEach (val) -> val.active = false
     $scope.formSettings.active = true
+
+  $scope.fixSequence = ->
+    if $scope.seciton.fields.length isnt 0
+      $scope.seciton.fields.forEach (field, index) ->
+        field.sequence = index
 
   $scope.addField = (section) ->
     formData.addField angular.copy(field)
@@ -195,6 +203,7 @@ angular.module 'greenApp'
         newField._id = data._id
         newField.choices[0]._id = data.choices[0]
         section.fields.push angular.copy(newField)
+        $scope.fixSequence()
 
   $scope.addNAChoice = (field) ->
     naField = _.findIndex field.choices, (v) ->
@@ -218,12 +227,14 @@ angular.module 'greenApp'
       .success (data, status) ->
         newField._id = data._id
         section.fields.push angular.copy(newField)
+        $scope.fixSequence()
 
   $scope.removeField = (field, section) ->
     formData.removeField field._id
       .success (data, status) ->
         currentField = section.fields.indexOf(field)
         section.fields.splice(currentField, 1)
+        $scope.fixSequence()
 
   $scope.toggleField = (field, section) ->
     field.edit_mode = !field.edit_mode;

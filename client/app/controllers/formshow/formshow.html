@@ -1,75 +1,69 @@
 <div class="row-fluid">
   <div ng-include="'components/sidebar/sidebar.html'"></div>
   <div class="col-lg-10 col-sm-10 main-content-wrap">
-
-  <div class="main-content">
-
-
-  <div class="row-fluid">
-  <div class="form-meta-container">
-    <div class="form-meta">
-      <div class="col-lg-9 col-sm-9">
-        <div class="form-title">
-          <h1>{{form.name}}</h1>
+    <div class="main-content">
+      <div class="row-fluid">
+        <div class="form-meta-container">
+          <div class="form-meta">
+            <div class="col-lg-9 col-sm-9">
+              <div class="form-title">
+                <h1>{{form.name}}</h1>
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-3">
+              <div class="form-stats pull-right">
+                <small class="text-muted">Your score</small>
+                <br>
+                <span class="points-gained">{{form.aquired_points}} </span> <span class="total-point">/ {{form.total_points}}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-lg-3 col-sm-3">
-        <div class="form-stats pull-right">
-          <small class="text-muted">Your score</small>
-          <br>
-          <span class="points-gained">{{form.aquired_points}} </span> <span class="total-point">/ {{form.total_points}}</span>
+      <div class="row-fluid">
+        <div class="form-sections">
+          <div class="col-lg-12 col-sm-12">
+            <div class="form-show-container">
+              <ul class="list-unstyled wiz">
+                <li ng-repeat="section in form.sections" ng-click="toggleClass(section)" ng-class="{active: section.active}">
+                  <span class="wiz-title">{{section.title}}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row-fluid">
+        <div class="col-lg-12 col-sm-12">
+          <div class="form-show-container">
+            <div ng-repeat="section in form.sections" ng-if='section.active'>
+              <form ng-submit="saveFormResuts($event)">
+                <strong class="section-points">({{section.possible_points}} Possible Points, {{section.bonus_points}} Bonus)</strong>
+                <div class="" ng-repeat="field in section.fields | orderBy:'sequence'">
+                  <div>
+                    <prev-element field="field" page="true" form="form" section="section"></prev-element>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="pull-right">
+                    <a href=""> Cancel </a> &nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <button class="btn btn-success btn-info" type="submit" ladda="formSaving" data-style="expand-left" tooltip="Last saved at {{form.updated}}" tooltip-append-to-body="true">Save as draft</button>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-success" type="submit" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true" ng-if="$index != form.sections.length - 1">Save</button>
+
+                    <button class="btn btn-success btn-lg" type="submit" ladda="formSaving" data-style="expand-left" tooltip="Submit this form!" tooltip-append-to-body="true" ng-if="$index == form.sections.length - 1" ng-click="form.submitted = true">Submit</button>
+                    &nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-primary" ng-click="moveToNextStep($index, section)" ng-if="$index != form.sections.length - 1"> Next step &rarr; </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    </div>
   </div>
-  <div class="row-fluid">
-    <div class="form-sections">
-      <div class="col-lg-12 col-sm-12">
-        <div class="form-show-container">
-          <ul class="list-unstyled wiz">
-            <li ng-repeat="section in form.sections" ng-click="toggleClass(section)" ng-class="{active: section.active}">
-              <span class="wiz-title">{{section.title}}</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row-fluid">
-  <div class="col-lg-12 col-sm-12">
-  <div class="form-show-container">
-  <div ng-repeat="section in form.sections" ng-if='section.active'>
-  <form ng-submit="saveFormResuts($event)">
-    <strong class="section-points">({{section.possible_points}} Possible Points, {{section.bonus_points}} Bonus)</strong>
-    <div class="" ng-repeat="field in section.fields">
-      <div>
-        <prev-element field="field" page="true" form="form" section="section"></prev-element>
-      </div>
-    </div>
-    <div class="row">
-      <div class="pull-right">
-        <a href=""> Cancel </a>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-
-        <button class="btn btn-success btn-info" type="submit" ladda="formSaving" data-style="expand-left" tooltip="Last saved at {{form.updated}}" tooltip-append-to-body="true">Save as draft</button>
-
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <button class="btn btn-success" type="submit" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true" ng-if="$index != form.sections.length - 1">Save</button>
-
-        <button class="btn btn-success btn-lg" type="submit" ladda="formSaving" data-style="expand-left" tooltip="Submit this form!" tooltip-append-to-body="true" ng-if="$index == form.sections.length - 1" ng-click="form.submitted = true">Submit</button>
-        &nbsp;&nbsp;&nbsp;
-        <button class="btn btn-primary" ng-click="moveToNextStep($index, section)" ng-if="$index != form.sections.length - 1"> Next step &rarr; </button>
-      </div>
-    </div>
-  </form>
-  </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-
-</div>
 </div>
