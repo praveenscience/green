@@ -1,8 +1,6 @@
 'use strict'
-
 angular.module 'greenApp'
 .service 'Utils', ->
-  # AngularJS will instantiate a singleton by calling 'new' on this function
 
   getAlertSettings: (item) ->
     title: "Are you sure?",
