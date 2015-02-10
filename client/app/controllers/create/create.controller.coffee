@@ -238,7 +238,7 @@ angular.module 'greenApp'
 
   $scope.toggleField = (field, section) ->
     field.edit_mode = !field.edit_mode;
-    $scope.submitSection(section)
+    $scope.submitSection(section, section._id)
 
   $scope.isValidField = (field) ->
     field.label not in [undefined, '', null] and field.type not in ['', undefined]
@@ -254,7 +254,8 @@ angular.module 'greenApp'
     $scope.sectionSaving = true
     sectionData.create(section)
       .success (data, status) ->
-        section = data
+        currentSectionIndex =  _.findIndex $scope.form.sections, (v) -> v._id is sectionId
+        $scope.form.sections[currentSectionIndex].fields = data.fields
         $scope.submitForm($scope.form)
         $scope.sectionSaving = false
         $scope.enableSaveButton = true

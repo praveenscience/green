@@ -135,8 +135,18 @@ exports.updatefields = function(req, res) {
     async.waterfall([
       _updateFields,
       _updateSection
-    ], function(err, section){
-      return res.json(200, section);
+    ], function(err, section) {
+      Section.populate(section, {
+        path: 'fields',
+        model: Field
+      }, function(err, formFields) {
+        Choice.populate(formFields, {
+          path: 'fields.choices',
+          model: Choice
+        }, function(err, formOptions) {
+          return res.json(200, formOptions);
+        })
+      })
     })
   });
 };
