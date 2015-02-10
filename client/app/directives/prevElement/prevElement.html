@@ -24,38 +24,15 @@
       <type-badge></type-badge>
       <abbr title="Required" ng-if="field.required"> *</abbr>
       <strong class="text-muted possible-points">[Points possible - {{findMax(field.choices)}}]</strong>
-        <select id="field._id" class="form-control" ng-model="field.response" ng-change="watchResponses(field, section)">
-          <option value="">– Select one –</option>
-          <option ng-repeat="choice in field.choices" value="{{choice._id}}" ng-selected="choice._id == field.response">
-            {{choice.label}} &mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]
-          </option>
-        </select>
+      <select id="field._id" class="form-control" ng-model="field.response" ng-change="watchResponses(field, section)">
+        <option value="">– Select one –</option>
+        <option ng-repeat="choice in field.choices" value="{{choice._id}}" ng-selected="choice._id == field.response">
+          {{choice.label}} &mdash; [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]
+        </option>
+      </select>
       <small class="help-block" ng-bind-html="field.help_text"></small>
     </div>
   </div>
-
-
-
-<!--   br
-  select ng-model="field.response" id="{{'form_'+form.id+'_field_'+field._id}}" ng-options="choice.label for choice in field.choices"
-    option value=""
-      = _('views.common.select_one')
-  span.help-block ng-bind-html="field.help_text"
-  div.alert.alert-error.smallText.error-block.noMargin ng-if="field.validation.invalid"
-    = _('views.forms.create.required_field')
-    a.close href='' ng-click="field.validation.invalid = false" == "&times;"
-
- -->
-
-<!--   div.alert.alert-error.smallText.error-block  ng-if="field.validation.invalid && field.validation.message != null"
-    span ng-bind-html="field.validation.message"
-    a.close href='' ng-click="field.validation.invalid = false" == "&times;"
-  div.alert.alert-error.smallText.error-block ng-if="field.validation.invalid && field.validation.message == null"
-    = _('views.forms.create.required_field')
-    a.close href='' ng-click="field.validation.invalid = false" == "&times;"
-
- -->
-
 
   <div data-option="checkbox" ng-switch-when="checkbox">
     <div class="form-group">
@@ -65,34 +42,23 @@
       <strong class="text-muted possible-points">[Points possible - {{findMax(field.choices)}}]</strong>
 
       <div class="inputLabel inline" ng-repeat="choice in field.choices">
-        <input type="checkBox" ng-model="choice.selected" value="{{choice._id}}" id="{{choice._id}}" ng-change="watchResponses(field, section)"/>
+        <input type="checkBox" ng-model="choice.selected" value="{{choice._id}}" id="{{choice._id}}" ng-change="watchResponses(field, section)" />
         <label ng-bind-html="choice.label" for="{{choice._id}}"></label> <strong class="text-muted">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
       </div>
       <small class="help-block" ng-bind-html="field.help_text"></small>
     </div>
   </div>
 
-
-
-  <!-- div.alert.alert-error.smallText.error-block.noMargin ng-if="field.validation.invalid"
-    = _('views.forms.create.required_field')
-    a.close href='' ng-click="field.validation.invalid = false" == "&times;"
- -->
-
-
- <div data-option="radiobutton" ng-switch-when="radiobutton">
+  <div data-option="radiobutton" ng-switch-when="radiobutton">
     <div class="form-group">
       <type-badge></type-badge>
       <abbr title="Required" ng-if="field.required"> *</abbr>
       <strong class="text-muted possible-points">[Points possible - {{findMax(field.choices)}}]</strong>
       <div class="inputLabel inline" ng-repeat="choice in field.choices">
-        <input type="radio" name="{{field._id}}" ng-model="field.response" value="{{choice._id}}" id="{{choice._id}}" ng-change="watchResponses(field, section)"/>
+        <input type="radio" name="{{field._id}}" ng-model="field.response" value="{{choice._id}}" id="{{choice._id}}" ng-change="watchResponses(field, section)" />
         <label ng-bind-html="choice.label" for="{{choice._id}}"></label> <strong class="text-muted">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
       </div>
       <small class="help-block" ng-bind-html="field.help_text"></small>
     </div>
   </div>
-
-
 </div>
-
