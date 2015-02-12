@@ -83,10 +83,11 @@ angular.module 'greenApp'
       field.aquired_points = 0
       if selectdOption != undefined
         if selectdOption.is_na is true
+          field.is_na_reduced = field.possible_points
           $scope.form.total_points = $scope.form.total_points - field.possible_points
         else
-          console.log TOTAL_POINTS
-          $scope.form.total_points = TOTAL_POINTS
+          $scope.form.total_points = $scope.form.total_points + (field.is_na_reduced || 0)
+          field.is_na_reduced = 0
 
         field.aquired_points = selectdOption.points
 
