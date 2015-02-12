@@ -26,7 +26,7 @@ angular.module 'greenApp'
   $scope.editCertificate = (certificate) ->
     modalInstance = $modal.open
       windowClass: 'modal-full'
-      templateUrl: '/app/controllers/certificate/create_certificate.html'
+      templateUrl: 'app/controllers/certificate/create_certificate.html'
       controller: 'CreatecertificateCtrl'
       resolve:
         certificate: -> certificate
@@ -43,7 +43,7 @@ angular.module 'greenApp'
   $scope.openNewCertificate = ->
     mdlInstance = $modal.open
       windowClass: 'modal-full'
-      templateUrl: '/app/controllers/certificate/create_certificate.html'
+      templateUrl: 'app/controllers/certificate/create_certificate.html'
       controller: 'CreatecertificateCtrl'
       resolve:
         certificate: -> null

@@ -288,7 +288,7 @@ angular.module 'greenApp'
   $scope.attachCertificate = ->
     modalInstance = $modal.open
       windowClass: 'modal-full'
-      templateUrl: '/app/controllers/certificate/attach.certificate.html'
+      templateUrl: 'app/controllers/certificate/attach_certificate.html'
       controller: 'AttachcertificateCtrl'
       resolve:
         selectedCertificates: -> $scope.form.certificates
