@@ -7,6 +7,7 @@ angular.module 'greenApp'
   formId = $routeParams.id
   resultId = $routeParams.res
   $scope.page = true
+  TOTAL_POINTS = 0
 
   $scope.totalPoints = 0
   $scope.aquiredPoints = 0
@@ -25,6 +26,7 @@ angular.module 'greenApp'
                   _formatForm(data, results)
           else
             $scope.form = data
+            TOTAL_POINTS = $scope.form.total_points
             $scope.form.aquired_points = 0
             $scope.form.sections[0].active = true
         else
@@ -80,6 +82,12 @@ angular.module 'greenApp'
     else
       field.aquired_points = 0
       if selectdOption != undefined
+        if selectdOption.is_na is true
+          $scope.form.total_points = $scope.form.total_points - field.possible_points
+        else
+          console.log TOTAL_POINTS
+          $scope.form.total_points = TOTAL_POINTS
+
         field.aquired_points = selectdOption.points
 
     _updateSectionScore(section)

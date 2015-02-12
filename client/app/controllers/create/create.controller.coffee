@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'CreateController', ($scope, $http, $routeParams, sectionData, formData, SweetAlert, Auth, Utils, $modal, $location) ->
+.controller 'CreateController', ($scope, $http, $routeParams, sectionData, formData, SweetAlert, Auth, Utils, $modal, $location, $timeout) ->
 
   $scope.isAdmin = Auth.isAdmin
   $scope.formShow = false
@@ -36,6 +36,7 @@ angular.module 'greenApp'
     edit_mode: true
     is_bonus: false
     has_condition: false
+    possible_points: 0
     has_na: false
     condition:
       field: ''
@@ -128,6 +129,7 @@ angular.module 'greenApp'
       for key, fld of sval.fields
         if $scope.form.sections[skey].fields[key].type not in ['text', 'textarea']
           max = $scope.findMaxPoints(fld.choices)
+          $scope.form.sections[skey].fields[key].possible_points = max
           if max isnt 'NaN'
             if $scope.form.sections[skey].fields[key].is_bonus
               $scope.form.sections[skey].bonus_points += max
@@ -255,10 +257,13 @@ angular.module 'greenApp'
     sectionData.create(section)
       .success (data, status) ->
         currentSectionIndex =  _.findIndex $scope.form.sections, (v) -> v._id is sectionId
-        $scope.form.sections[currentSectionIndex].fields = data.fields
+        $scope.form.sections[currentSectionIndex].fields = angular.copy(data.fields)
         $scope.submitForm($scope.form)
-        $scope.sectionSaving = false
-        $scope.enableSaveButton = true
+
+        $timeout ->
+          $scope.sectionSaving = false
+          $scope.enableSaveButton = true
+        , 100
 
   $scope.submitForm = (form) ->
     $scope.formSaving = true

@@ -131,7 +131,7 @@
         <tab ng-repeat="section in form.sections" active="section.active" disabled="section.disabled">
         <div class="row g-c-seciton-meta" sticky-media="(min-width:640px)">
           <div class="col-lg-8 col-sm-8">
-            <span class="text-muted">Seciton title </span>
+            <span class="text-muted">Section title </span>
             <input type="text" ng-model="section.title" class="form-control inlineInput">
             <strong class="section-points">({{section.possible_points}} Possible Points, {{section.bonus_points}} Bonus)</strong>
           </div>
@@ -198,10 +198,10 @@
                       <button class="btn btn-info btn-sm" type="button" ng-disabled="!isValidField(field)" ng-click="toggleField(field, section)" > Done </button>
                       &nbsp;&nbsp;&nbsp;&nbsp;
                       <input type="checkbox" class="checkbox-small" name="bonusCheckboxe" type="checkbox" id="bonusCheckboxe" ng-model="field.is_bonus">
-                      <label for="bonusCheckboxe" class="smallText">Bonus quesiton</label>
+                      <label for="bonusCheckboxe" class="smallText">Bonus question</label>
                       &nbsp;&nbsp;&nbsp;&nbsp;
                       <input type="checkbox" class="checkbox-small" name="requiredChecbox" type="checkbox" id="requiredChecbox" ng-model="field.required">
-                      <label for="requiredChecbox" class="smallText">Make this as required field</label>
+                      <label for="requiredChecbox" class="smallText">Required field</label>
                     </div>
                   </div>
                 </div>

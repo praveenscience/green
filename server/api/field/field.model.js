@@ -7,9 +7,14 @@ var FieldSchema = new Schema({
   label: String,
   help_text: String,
   type: String,
+  __v: { type: Number, select: false},
   required: String,
   sequence: Number,
   edit_mode: Boolean,
+  possible_points: {
+    type: Number,
+    default: 0
+  },
   condition: {
     field: { type: String, default: '' },
     choice: [{ type: String, default: '' }]
