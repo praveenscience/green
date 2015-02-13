@@ -36,7 +36,8 @@
 
       <div class="row-fluid">
         <div class="col-lg-12 col-sm-12">
-          <div class="form-show-container form-show">
+          <div class="form-show-container">
+            <div class="form-show">
             <div ng-repeat="section in form.sections" ng-if='section.active'>
               <form ng-submit="saveFormResuts($event)">
                 <strong class="section-points">({{section.possible_points}} Possible Points, {{section.bonus_points}} Bonus)</strong>
@@ -45,7 +46,14 @@
                     <prev-element field="field" page="true" form="form" section="section"></prev-element>
                   </div>
                 </div>
-                <div class="row">
+                <div class="row" ng-if="isAdmin()">
+                <div class="pull-right">
+
+                  <button class="btn  btn-success" ng-click="publishForm()" tooltip-append-to-body="true">Looks good Publish</button>
+                  </div>
+
+                </div>
+                <div class="row" ng-if="!isAdmin()">
                   <div class="pull-right">
                     <a href=""> Cancel </a> &nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -60,6 +68,7 @@
                   </div>
                 </div>
               </form>
+            </div>
             </div>
           </div>
         </div>

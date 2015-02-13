@@ -11,6 +11,7 @@ angular.module 'greenApp'
 
   $scope.totalPoints = 0
   $scope.aquiredPoints = 0
+  $scope.isAdmin = Auth.isAdmin
 
   $scope.init = ->
     _loadFormData()
