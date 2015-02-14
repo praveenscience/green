@@ -64,7 +64,7 @@ angular.module 'greenApp'
         secField.response = field.response
       else if field.field_type in ['radiobutton', 'select']
         choice = _.find secField.choices, (s) -> s._id is field.response
-        secField.response = choice.label
+        secField.response = choice.label if choice
       else if field.field_type is 'checkbox'
         response = []
         field.response.forEach (val) ->

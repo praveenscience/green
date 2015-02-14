@@ -51,12 +51,14 @@ angular.module 'greenApp'
     responses = []
     for sectionIndex, section of responseForm.sections
       for fieldIndex, field of section.fields
+        console.log field.aquired_points
         response =
           section_id: section._id
           field_id: field._id
           field_type: field.type
           response: ""
           result_id: ""
+          aquired_points: field.aquired_points or 0
 
         if field.choices.length isnt 0 and field.response is undefined
           if field.type is 'radiobutton'

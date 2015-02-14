@@ -25,7 +25,7 @@
           <div class="response-section" id="seciton-{{$index}}" ng-repeat="section in form.sections">
             <h3 class="response-section-title">{{section.title}}</h3>
             <div class="response-field" ng-repeat="field in section.fields">
-              {{field}}
+              {{field.type}}
               <label for="">{{field.label}} – </label><span class="label label-points">
               [{{field.points}} out of {{field.possible_points}}]</span>
               <p>{{field.response}}</p>

@@ -7,7 +7,6 @@ angular.module 'greenApp'
   formId = $routeParams.id
   resultId = $routeParams.res
   $scope.page = true
-  TOTAL_POINTS = 0
 
   $scope.totalPoints = 0
   $scope.aquiredPoints = 0
@@ -27,7 +26,6 @@ angular.module 'greenApp'
                   _formatForm(data, results)
           else
             $scope.form = data
-            TOTAL_POINTS = $scope.form.total_points
             $scope.form.aquired_points = 0
             $scope.form.sections[0].active = true
         else
@@ -38,10 +36,15 @@ angular.module 'greenApp'
   _formatForm = (data, results) ->
     form = data
     form.results_id = results[0]._id
+
     for index, field of results[0].results
       section = _.find form.sections, (s) -> s._id is field.section_id
       secField = _.find section.fields, (s) -> s._id is field.field_id
+      secField.aquired_points = field.aquired_points
 
+      section.aquired_points = 0 if section.aquired_points is undefined
+
+      section.aquired_points+= field.aquired_points
 
       if field.field_type is 'checkbox'
         for index, choice of field.response
@@ -49,12 +52,10 @@ angular.module 'greenApp'
             s._id is choice
           if choiceI
             choiceI.selected = true
-            console.log choiceI._id
             _showHiddenField(field.field_id, choiceI._id, section)
-
       else if field.response != ''
         secField.response = field.response
-        # _showHiddenField(field.field_id, field.response, section)
+        _showHiddenField(field.field_id, field.response, section)
 
     $scope.form = form
     $scope.form.aquired_points = results[0].points
@@ -64,7 +65,6 @@ angular.module 'greenApp'
     return if !fieldId
 
     fieldTobeShown = _.find section.fields, (v) ->
-      console.log v.condition.choice
       v.has_condition is true and response in v.condition.choice
 
     if fieldTobeShown
@@ -89,7 +89,6 @@ angular.module 'greenApp'
         else
           $scope.form.total_points = $scope.form.total_points + (field.is_na_reduced || 0)
           field.is_na_reduced = 0
-
         field.aquired_points = selectdOption.points
 
     _updateSectionScore(section)

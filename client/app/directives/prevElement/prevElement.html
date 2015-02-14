@@ -3,7 +3,7 @@
     <div class="form-group">
       <type-badge></type-badge>
       <abbr title="Required" ng-if="field.required"> *</abbr>
-      <strong class="text-muted">&mdash;  [{{field.choice[0].points || 0}} {{field.choice[0].points == 1 ? 'point' : 'points'}}]</strong>
+    <!--   <strong class="text-muted">&mdash;  [{{field.choice[0].points || 0}} {{field.choice[0].points == 1 ? 'point' : 'points'}}]</strong> -->
       <input type="text" class="form-control" ng-model="field.response" id="{{field._id}}">
       <small class="help-block" ng-bind-html="field.help_text"></small>
     </div>
@@ -13,7 +13,7 @@
     <div class="form-group">
       <type-badge></type-badge>
       <abbr title="Required" ng-if="field.required"> *</abbr>
-      <strong class="text-muted">&mdash;  [{{field.choice[0].points || 0}} {{field.choice[0].points == 1 ? 'point' : 'points'}}]</strong>
+      <!-- <strong class="text-muted">&mdash;  [{{field.choice[0].points || 0}} {{field.choice[0].points == 1 ? 'point' : 'points'}}]</strong> -->
       <textarea class="form-control" ng-model="field.response" id="{{field._id}}"></textarea>
       <small class="help-block" ng-bind-html="field.help_text"></small>
     </div>
