@@ -5,7 +5,6 @@
       <br>
       <br>
       <br>
-      <br>
       <div class="text-center">
         <img src="assets/images/submissions-empty.svg" alt="" class="img-responsive pull-right" style="margin: 30px auto; max-width: 500px">
       </div>
@@ -44,7 +43,7 @@
           <div class="clearfix"></div>
           <div class="row-fluid tabled-row" ng-repeat="submission in submissions | filter: query| filter:querys.status:true" ng-click="slideInFormDetails(form)">
             <div class="col-lg-4 col-sm-4">
-              <a ng-href="{{'/forms/'+ submission.form._id + '/' + submission._id}}">{{submission.form.name}}</a>
+              <a ng-href="{{getSubmissionLink(submission)}}">{{submission.form.name}}</a>
               <span class="text-info" ng-if="form.status == 'Unpublished'">
               <em class="icon icon-pencil2"></em>
               </span>

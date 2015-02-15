@@ -22,8 +22,8 @@ angular.module 'greenApp'
       _loadSubmissions()
 
   _loadSubmissions = ->
-    $http.get('/api/results/submissions').success (forms) ->
-      $scope.submissions = forms
+    $http.get('/api/results/submissions').success (submissions) ->
+      $scope.submissions = submissions
 
   _loadFroms = ->
     $http.get('/api/forms').success (forms) ->
@@ -81,6 +81,12 @@ angular.module 'greenApp'
       return "/results/#{form._id}"
     else
       return "/forms/#{form._id}"
+
+  $scope.getSubmissionLink = (submission) ->
+    if submission.status is 'Published'
+      "/forms/#{submission.form._id}/#{submission._id}"
+    else
+      "/results/#{submission.form._id}/#{submission._id}"
 
   $scope.removeForm = (form, hideSidebar) ->
     SweetAlert.swal(Utils.getAlertSettings('form'), (isConfirm) ->

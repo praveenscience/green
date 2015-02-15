@@ -13,6 +13,10 @@ angular.module 'greenApp'
   $scope.aquiredPoints = 0
   $scope.isAdmin = Auth.isAdmin
 
+  $scope.formattedDate = ->
+    date = new Date()
+    return date.toUTCString().substr(5, 11)
+
   $scope.init = ->
     _loadFormData()
 
