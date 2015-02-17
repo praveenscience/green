@@ -4,6 +4,10 @@ var _ = require('lodash');
 var Result = require('./result.model');
 var User = require('../user/user.model');
 var Form = require('../form/form.model');
+var fs = require('fs');
+var pdf = require('html-pdf');
+var path = require('path');
+var NodePDF = require('nodepdf');
 
 // Get list of results
 exports.index = function(req, res) {
@@ -56,6 +60,51 @@ exports.create = function(req, res) {
     return res.json(201, result);
   });
 };
+
+exports.getpdf = function(req, res) {
+  // var htmlPath = path.resolve('server/views/certificate.html');
+
+  var pdfPath = path.resolve('server/views/certificate.pdf');
+  // var html = fs.readFileSync(htmlPath, 'utf8')
+  // var options = { filename: pdfPath, format: 'A4' };
+  // pdf.create(html, options).toFile(function(err, result) {
+  //   if (err) return console.log(err);
+  //   console.log(result.filename);
+  //   return res.download(result.filename);
+  // });
+
+  return res.sendFile(pdfPath);
+
+  // var pdf = new NodePDF(null, pdfPath, {
+  //     'content': '<html><body><h1>Super cool whii sit his not commign.. ??</h1></body></html>',
+  //     'viewportSize': {
+  //         'width': 1440,
+  //         'height': 900
+  //     }
+  // });
+
+  // pdf.on('error', function(msg){
+  //   console.log(msg);
+  // });
+
+
+  // // listen for stdout from phantomjs
+  // pdf.on('stdout', function(stdout){
+  //   console.log(stdout);
+  // });
+
+  // // listen for stderr from phantomjs
+  // pdf.on('stderr', function(stderr){
+  //     console.log(stderr);
+  // });
+
+
+  // pdf.on('done', function(pathToFile){
+
+
+  // });
+
+}
 
 // Updates an existing result in the DB.
 exports.update = function(req, res) {

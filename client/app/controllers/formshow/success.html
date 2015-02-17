@@ -17,13 +17,17 @@
                 </li>
                 <li><a href="">Instagrams</a>
                 </li>
-                <li><a href="">Download as pdf</a>
+                <li><a ng-href="{{'/api/results/'+ results._id +'/certf'}}">Download as pdf</a>
                 </li>
               </ul>
             </div>
 
-            <div class="certificate">
-              <h1 class="certificate-heading">Green Laboratory Certification</h1>
+<!--             <iframe class="page-icon preview-pane" frameborder="0" height="500" width="1000"></iframe> -->
+
+
+            <div class="certificate" id="certificate">
+
+              <center><h1 class="certificate-heading">Green Laboratory Certification</h1><center>
               <div class="certificate-body">
                 <div class="certificate-logo">
                   <img ng-src="{{certificate.logo}}" alt="">
