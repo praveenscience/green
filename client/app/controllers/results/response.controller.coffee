@@ -57,8 +57,8 @@ angular.module 'greenApp'
       section = _.find form.sections, (s) -> s._id is field.section_id
       secField = _.find section.fields, (s) -> s._id is field.field_id
 
-      secField.total_points = field.total_points || 0
-      secField.points = field.points || 0
+      secField.possible_points = field.possible_points
+      secField.aquired_points = field.aquired_points
 
       if field.field_type in ['text', 'textarea']
         secField.response = field.response
