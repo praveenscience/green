@@ -33,8 +33,7 @@ angular.module 'greenApp'
             _generateGraph()
 
   _generateGraph = ->
-    console.log $scope.results.results
-    for i, val  of $scope.results.results
+    for i, val of $scope.results.results
       if $scope.secitons[val.section_id] is undefined
         $scope.secitons[val.section_id] =
           possible_points: 0

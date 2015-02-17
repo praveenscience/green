@@ -8,6 +8,11 @@ angular.module 'greenApp'
 
   $scope.results = []
   $scope.form = null
+  $scope.secitons = []
+  $scope.possiblePoints = 0
+  $scope.aquiredPoints = 0
+  $scope.certificate = null
+
 
   $scope.getFormatedDate = Utils.getFormatedDate
 
@@ -49,7 +54,69 @@ angular.module 'greenApp'
       .success (data, status) ->
         formData.getFormUserResponse(resId)
           .success (results, status) ->
+            $scope.results = results[0]
+            $scope.certificate = results[0].certificate
             _prepareData(data, results)
+            _generateGraph()
+
+
+
+  _generateGraph = ->
+    for i, val of $scope.results.results
+      if $scope.secitons[val.section_id] is undefined
+        $scope.secitons[val.section_id] =
+          possible_points: 0
+          aquired_points: 0
+
+      $scope.aquiredPoints += val.aquired_points
+      $scope.possiblePoints += val.possible_points
+
+      $scope.secitons[val.section_id].possible_points += val.possible_points
+      $scope.secitons[val.section_id].aquired_points += val.aquired_points
+
+
+    dataForGraph = []
+    values = {}
+    values = []
+    l = 1
+    for j, sec of $scope.secitons
+      percentage = 0
+      if sec.possible_points != 0
+        percentage = (sec.aquired_points / sec.possible_points) * 100
+      values.push({
+        x: "Seciton#{l}"
+        y: percentage
+      })
+      l++
+
+
+    dataForGraph = [
+      {
+        key: "Your points"
+        values: values
+      }
+    ]
+
+    _renderGraph(dataForGraph)
+
+  _renderGraph = (data) ->
+    nv.addGraph ->
+      chart = nv.models
+        .discreteBarChart()
+        .x((d) -> d.x)
+        .y((d) -> d.y)
+        .showValues(true)
+
+      #chart.yAxis.scale().domain([0, 100]);
+      chart.forceY([0, 100])
+
+      d3.select('#chart svg').datum(data).call chart
+
+      nv.utils.windowResize chart.update
+
+      chart
+
+
 
   _prepareData = (data, results) ->
     form = data
