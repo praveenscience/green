@@ -323,3 +323,55 @@
     margin-right: 20px;
   }
 }
+
+.graph-heading {
+  font-weight: 300;
+  color: #888;
+  font-size: 20px;
+  margin-left: 40px;
+}
+
+.scoreboard {
+  margin: 30px;
+  height: 150px;
+  width: 150px;
+  border-radius: 100%;
+  border: solid 2px #dcdcdc;
+  position: relative;
+  .aquired_point {
+    top: 0;
+    left: -20px;
+    position: absolute;
+    font-size: 48px;
+    font-weight: 300;
+    display: block;
+    width: 150px;
+    text-align: center;
+    height: 75px;
+    line-height: 75px;
+  }
+  .possible_point {
+    bottom: 0;
+    right: -20px;
+    position: absolute;
+    /* right: 36px; */
+    font-size: 36px;
+    color: #888;
+    display: block;
+    width: 150px;
+    text-align: center;
+    height: 75px;
+    line-height: 75px;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: #dcdcdc;
+    transform: rotate(60deg);
+    left: 72px;
+  }
+}

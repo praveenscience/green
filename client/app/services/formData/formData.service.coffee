@@ -59,6 +59,7 @@ angular.module 'greenApp'
           response: ""
           result_id: ""
           aquired_points: field.aquired_points or 0
+          possible_points: field.possible_points or 0
 
         if field.choices.length isnt 0 and field.response is undefined
           if field.type is 'radiobutton'

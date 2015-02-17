@@ -9,6 +9,65 @@
             <h2 class="success-heading text-center">Congraturlations!! </h2>
             <h4 class="sucess-sub-heading text-center"> You are now certified as a {{certificate.name}} level green lab.</h4>
 
+
+            <!--             <iframe class="page-icon preview-pane" frameborder="0" height="500" width="1000"></iframe> -->
+
+            <!-- From analytics -->
+
+            <div class="stats">
+              <div class="row-fluid">
+                <div class="col-lg-8 col-sm-8">
+                  <div class="graph">
+                    <h3 class="graph-heading"> Your performance..</h3>
+                    <div id="chart" style="height: 300px; margin: 10px 0; ">
+                      <svg></svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-sm-4">
+                  <div class="scoreboard">
+                    <span class="aquired_point">{{aquiredPoints}}</span>
+                    <span class="divider"></span>
+                    <span class="possible_point">{{possiblePoints}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <!-- Certificate -->
+            <div class="certificate" id="certificate">
+
+              <center>
+                <h1 class="certificate-heading">Green Laboratory Certification</h1>
+                <center>
+                  <div class="certificate-body">
+                    <div class="certificate-logo">
+                      <img ng-src="{{certificate.logo}}" alt="">
+                    </div>
+                    <div class="certificate-content">
+                      The University of Washington Environmental Stewardship and Sustainability Office certifies <span class="certificate-name"> Computer Science & Engineering </span> as a Green Laboratory.
+                    </div>
+                  </div>
+                  <div class="certificate-footer">
+                    <div class="certificate-sign">
+                      <img ng-src="{{certificate.sign}}" alt="">
+                      <span>
+                Associate Vice President: Ruth Johnston <br>
+                University of Washington Finance and Facilities
+              </span>
+                    </div>
+                    <div class="certificate-date">
+                      <span>{{formattedDate()}}</span>
+                      <br> Date
+                    </div>
+                  </div>
+
+                  <div class="certificate-bottom-border"></div>
+                  <div class="certificate-caption">Sustainability: It's in our nature</div>
+
+            </div>
+            <!-- Social sharing icons -->
             <div class="success-sharing">
               <ul class="sucess-sharing-list list-unstyled">
                 <li><a href="">Facebook</a>
@@ -22,38 +81,7 @@
               </ul>
             </div>
 
-<!--             <iframe class="page-icon preview-pane" frameborder="0" height="500" width="1000"></iframe> -->
 
-
-            <div class="certificate" id="certificate">
-
-              <center><h1 class="certificate-heading">Green Laboratory Certification</h1><center>
-              <div class="certificate-body">
-                <div class="certificate-logo">
-                  <img ng-src="{{certificate.logo}}" alt="">
-                </div>
-                <div class="certificate-content">
-                  The University of Washington Environmental Stewardship and Sustainability Office certifies <span class="certificate-name"> Computer Science & Engineering </span> as a Green Laboratory.
-                </div>
-              </div>
-              <div class="certificate-footer">
-                <div class="certificate-sign">
-                  <img ng-src="{{certificate.sign}}" alt="">
-                  <span>
-                Associate Vice President: Ruth Johnston <br>
-                University of Washington Finance and Facilities
-              </span>
-                </div>
-                <div class="certificate-date">
-                  <span>{{formattedDate()}}</span>
-                  <br> Date
-                </div>
-              </div>
-
-              <div class="certificate-bottom-border"></div>
-              <div class="certificate-caption">Sustainability: It's in our nature</div>
-
-            </div>
           </div>
         </div>
       </div>
