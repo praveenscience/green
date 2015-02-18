@@ -1,12 +1,12 @@
 <div class="row-fluid">
   <div ng-include="'components/sidebar/sidebar.html'"></div>
   <div class="col-lg-10 col-sm-10 main-content-wrap" style="min-height: 800px">
-
-
     <div class="row-fluid">
       <div class="col-lg-3 col-sm-3 g-c-sidebar">
         <h1 class="main-page-title">Responses</h1>
-        <br><br><br>
+        <br>
+        <br>
+        <br>
         <div class="fixed-navigation">
           <ul class="mid-nav">
             <li ng-repeat="section in form.sections">
@@ -14,12 +14,11 @@
             </li>
           </ul>
         </div>
-
       </div>
       <div class="col-lg-9 col-sm-9 g-c-content">
-      <div class="form-header-meta">
-        <h1 class="main-page-title sub"><span class="text-muted">Form –</span>  This is the from name </h1>
-        <h5 class="main-page-title-info"> <span class="text-muted">Submitted by: </span> {{form.user_info.username}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="text-muted">Submitted on: </span> {{getFormatedDate(form.res_updated)}}</h5>
+        <div class="form-header-meta">
+          <h1 class="main-page-title sub"><span class="text-muted">Form –</span>  This is the from name </h1>
+          <h5 class="main-page-title-info"> <span class="text-muted">Submitted by: </span> {{form.user_info.username}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="text-muted">Submitted on: </span> {{getFormatedDate(form.res_updated)}}</h5>
         </div>
         <div class="responses-container">
           <div class="stats">
@@ -49,9 +48,7 @@
               </div>
             </div>
           </div>
-
-        <div class="clearfix"></div>
-
+          <div class="clearfix"></div>
           <div class="response-section" id="seciton-{{$index}}" ng-repeat="section in form.sections">
             <h3 class="response-section-title">{{section.title}}</h3>
             <div class="response-field" ng-repeat="field in section.fields">
@@ -61,11 +58,8 @@
               </span>
               <p>{{field.response}}</p>
             </div>
-
           </div>
-
         </div>
-
       </div>
     </div>
   </div>
