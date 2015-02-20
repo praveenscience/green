@@ -12,6 +12,16 @@ angular.module 'greenApp'
   $scope.aquiredPoints = 0
   $scope.isAdmin = Auth.isAdmin
 
+
+  $scope.getFormLink = (form) ->
+    if $scope.isAdmin() and form.status is 'Unpublished'
+      return "/forms/edit/#{form._id}"
+    else if $scope.isAdmin() and form.status is 'Published'
+      return "/results/#{form._id}"
+    else
+      return "/forms/#{form._id}"
+
+
   $scope.init = ->
     _loadFormData()
 
