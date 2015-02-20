@@ -51,7 +51,6 @@ angular.module 'greenApp'
     responses = []
     for sectionIndex, section of responseForm.sections
       for fieldIndex, field of section.fields
-        console.log field.aquired_points
         response =
           section_id: section._id
           field_id: field._id

@@ -4,7 +4,7 @@
       <type-badge></type-badge>
       <abbr title="Required" ng-if="field.required"> *</abbr>
     <!--   <strong class="text-muted">&mdash;  [{{field.choice[0].points || 0}} {{field.choice[0].points == 1 ? 'point' : 'points'}}]</strong> -->
-      <input type="text" class="form-control" ng-model="field.response" id="{{field._id}}">
+      <input type="text" class="form-control" ng-model="field.response" id="{{field._id}}" required="{{field.required}}">
       <small class="help-block" ng-bind-html="field.help_text"></small>
     </div>
   </div>
@@ -14,7 +14,7 @@
       <type-badge></type-badge>
       <abbr title="Required" ng-if="field.required"> *</abbr>
       <!-- <strong class="text-muted">&mdash;  [{{field.choice[0].points || 0}} {{field.choice[0].points == 1 ? 'point' : 'points'}}]</strong> -->
-      <textarea class="form-control" ng-model="field.response" id="{{field._id}}"></textarea>
+      <textarea class="form-control" ng-model="field.response" id="{{field._id}}" required="{{field.required}}"></textarea>
       <small class="help-block" ng-bind-html="field.help_text"></small>
     </div>
   </div>
@@ -24,7 +24,7 @@
       <type-badge></type-badge>
       <abbr title="Required" ng-if="field.required"> *</abbr>
       <strong class="text-muted possible-points">[Points possible - {{field.possible_points}}]</strong>
-      <select id="field._id" class="form-control" ng-model="field.response" ng-change="watchResponses(field, section)">
+      <select id="field._id" class="form-control" ng-model="field.response" ng-change="watchResponses(field, section)" required="{{field.required}}">
         <option value="">– Select one –</option>
         <option ng-repeat="choice in field.choices" value="{{choice._id}}" ng-selected="choice._id == field.response">
           {{choice.label}} &mdash; [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]
@@ -42,7 +42,7 @@
       <strong class="text-muted possible-points">[Points possible - {{field.possible_points}}]</strong>
 
       <div class="inputLabel inline" ng-repeat="choice in field.choices">
-        <input type="checkBox" ng-model="choice.selected" value="{{choice._id}}" id="{{choice._id}}" ng-change="watchResponses(field, section)" />
+        <input type="checkBox" ng-model="choice.selected" value="{{choice._id}}" id="{{choice._id}}" ng-change="watchResponses(field, section)" required="{{field.required}}"/>
         <label ng-bind-html="choice.label" for="{{choice._id}}"></label> <strong class="text-muted">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
       </div>
       <small class="help-block" ng-bind-html="field.help_text"></small>
@@ -55,7 +55,7 @@
       <abbr title="Required" ng-if="field.required"> *</abbr>
       <strong class="text-muted possible-points">[Points possible - {{field.possible_points}}]</strong>
       <div class="inputLabel inline" ng-repeat="choice in field.choices">
-        <input type="radio" name="{{field._id}}" ng-model="field.response" value="{{choice._id}}" id="{{choice._id}}" ng-change="watchResponses(field, section)" />
+        <input type="radio" name="{{field._id}}" ng-model="field.response" value="{{choice._id}}" id="{{choice._id}}" ng-change="watchResponses(field, section)" required="{{field.required}}"/>
         <label ng-bind-html="choice.label" for="{{choice._id}}"></label> <strong class="text-muted">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
       </div>
       <small class="help-block" ng-bind-html="field.help_text"></small>
