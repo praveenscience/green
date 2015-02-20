@@ -11,6 +11,7 @@
   top: 0;
   background: #fff;
   width: inherit;
+  margin-left: -1px;
 }
 
 .response-section {
@@ -45,13 +46,15 @@
   list-style-type: none;
   margin: 10px 0;
   padding: 0;
+  position: relative;
   > li {
     margin-bottom: 5px;
+    position: relative;
   }
   > li > a {
     text-align: right;
     display: block;
-    padding: 8px 10px;
+    padding: 8px 24px 10px;
     color: #43434a;
     font-size: 16px;
     font-weight: 300;
@@ -62,11 +65,12 @@
     &.active {
       border-top: solid 1px #ddd;
       border-bottom: solid 1px #ddd;
+      position: relative;
       &:after {
         content: '';
         display: block;
         position: absolute;
-        right: 0;
+        left: 0;
         top: -1px;
         bottom: -1px;
         width: 4px;
@@ -96,4 +100,15 @@
 .main-page-title-info {
   margin: 10px 10px 0;
   font-weight: normal;
+}
+
+.legend-block {
+  display: block;
+  position: absolute;
+  right: 6px;
+  width: 6px;
+  height: 25px;
+  border-radius: 3px;
+  top: 50%;
+  margin-top: -12.5px;
 }

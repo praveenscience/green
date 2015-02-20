@@ -10,6 +10,7 @@
         <div class="fixed-navigation">
           <ul class="mid-nav">
             <li ng-repeat="section in form.sections">
+              <span class="legend-block" ng-style="getBg($index)"> </span>
               <a href ng-click="scrollToSeciton($index, section)" ng-class="{active: section.active}">{{section.title}}</a>
             </li>
           </ul>

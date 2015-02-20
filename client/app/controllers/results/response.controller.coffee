@@ -12,9 +12,13 @@ angular.module 'greenApp'
   $scope.possiblePoints = 0
   $scope.aquiredPoints = 0
   $scope.certificate = null
-
+  $scope.colors = ["#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c", "#98df8a", "#d62728", "#ff9896", "#9467bd", "#c5b0d5", "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f", "#c7c7c7", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5"]
 
   $scope.getFormatedDate = Utils.getFormatedDate
+
+  $scope.getBg = (index) ->
+    background: $scope.colors[index]
+
 
   $scope.init = ->
     _loadData()
@@ -106,6 +110,7 @@ angular.module 'greenApp'
         .x((d) -> d.x)
         .y((d) -> d.y)
         .showValues(true)
+        #.color(colors)
 
       #chart.yAxis.scale().domain([0, 100]);
       chart.forceY([0, 100])
