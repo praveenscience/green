@@ -114,7 +114,8 @@ angular.module 'greenApp'
 
       #chart.yAxis.scale().domain([0, 100]);
       chart.forceY([0, 100])
-
+      chart.yAxis
+        .tickFormat((d) -> d3.format(',.f')(d) + "%");
       d3.select('#chart svg').datum(data).call chart
 
       nv.utils.windowResize chart.update
