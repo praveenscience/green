@@ -377,3 +377,30 @@
   overflow: hidden;
   margin: -20px -15px 35px;
 }
+
+a.showtip {
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    height: 0;
+    width: 0;
+    border: solid 15px transparent;
+    border-bottom: solid 15px #f8f8f8;
+    bottom: -20px;
+    left: -5px;
+  }
+}
+
+.choice-help-text {
+  display: block;
+  padding: 15px 24px 15px;
+  overflow: hidden;
+  background: #f8f8f8;
+  margin-top: 10px;
+  position: relative;
+  textarea.form-control {
+    width: 100%;
+    font-weight: 300;
+  }
+}

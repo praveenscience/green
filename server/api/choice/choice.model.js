@@ -7,6 +7,10 @@ var ChoiceSchema = new Schema({
   label: String,
   points: Number,
   help_text: String,
+  has_helptext: {
+    type: Boolean,
+    default: false
+  },
   is_na: {
     type: Boolean,
     default: false

@@ -46,6 +46,8 @@ angular.module 'greenApp'
       points: 0
       focus: true
       is_condition: false
+      has_helptext: false
+      help_text: ''
       show_field: ''
       is_na: false
     ]
@@ -64,6 +66,8 @@ angular.module 'greenApp'
     is_condition: false
     show_field: ''
     is_na: false
+    has_helptext: false
+    help_text: ''
 
   customChoices =
     N:
@@ -73,6 +77,8 @@ angular.module 'greenApp'
       show_field: ''
       points: 0
       is_na: false
+      has_helptext: false
+      help_text: ''
     Y:
       label: 'Yes'
       focus: true
@@ -80,6 +86,8 @@ angular.module 'greenApp'
       show_field: ''
       points: 1
       is_na: false
+      has_helptext: false
+      help_text: ''
     NE:
       label: 'Never or None'
       focus: true
@@ -87,6 +95,8 @@ angular.module 'greenApp'
       show_field: ''
       points: 1
       is_na: false
+      has_helptext: false
+      help_text: ''
     A:
       label: 'Always or All'
       focus: false
@@ -94,6 +104,8 @@ angular.module 'greenApp'
       show_field: ''
       points: 1
       is_na: false
+      has_helptext: false
+      help_text: ''
     S:
       label: 'Sometimes or Some'
       focus: false
@@ -101,6 +113,8 @@ angular.module 'greenApp'
       show_field: ''
       points: 1
       is_na: false
+      has_helptext: false
+      help_text: ''
     NA:
       label: 'Not Applicable'
       focus: false
@@ -108,6 +122,8 @@ angular.module 'greenApp'
       show_field: ''
       points: 0
       is_na: true
+      has_helptext: false
+      help_text: ''
 
   $scope.sortableOptions =
     containment: "parent"
@@ -197,6 +213,13 @@ angular.module 'greenApp'
     if $scope.seciton.fields.length isnt 0
       $scope.seciton.fields.forEach (field, index) ->
         field.sequence = index
+
+  $scope.addHelptext = (choice) ->
+    choice.has_helptext = true
+
+  $scope.removeHelptext = (choice) ->
+    choice.has_helptext = false
+    choice.help_text = ''
 
   $scope.addField = (section) ->
     formData.addField angular.copy(field)

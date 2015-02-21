@@ -47,6 +47,8 @@
         <condition-settings></condition-settings>
       </div>
     </div>
+
+
     <!-- Radio button -->
     <div data-option="radiobutton" ng-switch-when="radiobutton">
       <div class="col-lg-1">
@@ -57,19 +59,30 @@
           <input type="text" focus-on-show values="option1" class="form-control" ng-model="choice.label" ng-focus="choice.focus">
           <input type="number" values="0" class="form-control pointsInput" ng-model="choice.points" min='0'>
           <div class="multipleOptionsActions">
-            <a href="" class="js_clone_element btn btn-xs btn-info" href='' ng-click="addChoice(field)" tooltip="Add another option"> <em class="icon icon-plus muted"></em> </a>
-            <span ng-if="field.choices.length > 1">
-            <a href="" class="js_delete_element btn btn-xs btn-danger" href='' tooltip="Remove this option" tabindex='-1' ng-click="removeChoice(field, field.choices.indexOf(choice))"> <em class="icon icon-remove muted"></em> </a>
-            </span>
+            <a class="btn btn-xs btn-info" href='' ng-click="addChoice(field)" tooltip="Add another option"> <em class="icon icon-plus muted"></em> </a>
+
+            <a href='' class="btn btn-xs btn-warning" href='' ng-click="addHelptext(choice)" tooltip="Add help text" ng-class="{showtip: choice.has_helptext}"> <em class="icon icon-question muted"></em> </a>
+
+            <a ng-if="field.choices.length > 1" class="btn btn-xs btn-danger" href='' tooltip="Remove this option" tabindex='-1' ng-click="removeChoice(field, field.choices.indexOf(choice))"> <em class="icon icon-remove"></em> </a>
+
             <span ng-if='choice.is_na'>
               <strong for="" class="badge badge-info"> NA </strong>
             </span>
+          </div>
+
+          <div class="clearfix"></div>
+          <div class="choice-help-text" ng-if="choice.has_helptext">
+            <textarea name="" id=""  placeholder="Tell some thing about this option" class="vert form-control" ng-model="choice.help_text"></textarea>
+            <br>
+            <a href="" style="margin-top: 10px; display: inline-block;" ng-click="removeHelptext(choice)">&times; Remove help text</a>
           </div>
         </div>
         <na></na>
         <condition-settings></condition-settings>
       </div>
     </div>
+
+
     <!-- Checkboxes -->
     <div data-option="checkbox" ng-switch-when="checkbox">
       <div class="col-lg-1">
@@ -94,5 +107,6 @@
         <condition-settings></condition-settings>
       </div>
     </div>
+
   </div>
 </div>
