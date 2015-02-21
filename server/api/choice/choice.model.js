@@ -6,10 +6,7 @@ var mongoose = require('mongoose'),
 var ChoiceSchema = new Schema({
   label: String,
   points: Number,
-  __v: {
-    type: Number,
-    select: false
-  },
+  help_text: String,
   is_na: {
     type: Boolean,
     default: false

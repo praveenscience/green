@@ -7,7 +7,6 @@ var FieldSchema = new Schema({
   label: String,
   help_text: String,
   type: String,
-  __v: { type: Number, select: false},
   required: String,
   sequence: Number,
   edit_mode: Boolean,
