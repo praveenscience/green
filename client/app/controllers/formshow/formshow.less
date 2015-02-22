@@ -197,6 +197,27 @@
   }
 }
 
+@tip-background: #AC92EC;
+@tip-border-color: #967ADC;
+
+.inputLabel {
+  .popover.right {
+    margin-left: 17px;
+    margin-top: 5px;
+    background: @tip-background;
+    box-shadow: none;
+    border: solid 1px @tip-border-color;
+    color: #fff;
+    font-weight: 300;
+    > .arrow {
+      border-right-color: @tip-border-color;
+      &:after {
+        border-right-color: @tip-background;
+      }
+    }
+  }
+}
+
 .points-gained {
   font-size: 32px;
   line-height: 1;

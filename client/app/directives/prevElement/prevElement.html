@@ -42,8 +42,10 @@
       <strong class="text-muted possible-points">[Points possible - {{field.possible_points}}]</strong>
 
       <div class="inputLabel inline" ng-repeat="choice in field.choices">
-        <input type="checkBox" ng-model="choice.selected" value="{{choice._id}}" id="{{choice._id}}" ng-change="watchResponses(field, section)" required="{{field.required}}"/>
-        <label ng-bind-html="choice.label" for="{{choice._id}}"></label> <strong class="text-muted">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
+        <div class="pull-left" popover-placement="right" popover="{{choice.help_text}}" popover-trigger="mouseenter">
+          <input type="checkBox" ng-model="choice.selected" value="{{choice._id}}" id="{{choice._id}}" ng-change="watchResponses(field, section)" required="{{field.required}}"/>
+          <label ng-bind-html="choice.label" for="{{choice._id}}"></label> <strong class="text-muted">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
+        </div>
       </div>
       <small class="help-block" ng-bind-html="field.help_text"></small>
     </div>
@@ -54,10 +56,14 @@
       <type-badge></type-badge>
       <abbr title="Required" ng-if="field.required"> *</abbr>
       <strong class="text-muted possible-points">[Points possible - {{field.possible_points}}]</strong>
-      <div class="inputLabel inline" ng-repeat="choice in field.choices">
-        <input type="radio" name="{{field._id}}" ng-model="field.response" value="{{choice._id}}" id="{{choice._id}}" ng-change="watchResponses(field, section)" required="{{field.required}}" />
-        <label ng-bind-html="choice.label" for="{{choice._id}}" ></label> <strong class="text-muted">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
+      <div class="inputLabel inline" ng-repeat="choice in field.choices" >
+        <div class="pull-left" popover-placement="right" popover="{{choice.help_text}}" popover-trigger="mouseenter">
+          <input type="radio" name="{{field._id}}" ng-model="field.response" value="{{choice._id}}" id="{{choice._id}}" ng-change="watchResponses(field, section)" required="{{field.required}}" />
+          <label ng-bind-html="choice.label" for="{{choice._id}}" ></label> <strong class="text-muted">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
+        </div>
+        <div class="clearfix"></div>
       </div>
+
       <small class="help-block" ng-bind-html="field.help_text"></small>
     </div>
   </div>
