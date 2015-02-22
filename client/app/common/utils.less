@@ -44,3 +44,52 @@ textarea.horz {
 textarea.noResize {
   resize: none;
 }
+
+input[type=checkbox],
+input[type=radio] {
+  -webkit-appearance: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  position: relative;
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  background-position: 0 0
+}
+
+input[type=checkbox].small,
+input[type=radio].small {
+  width: 13px;
+  height: 13px;
+  line-height: 15px
+}
+
+input[type=checkbox]:active:not(:disabled),
+input[type=radio]:active:not(:disabled) {
+  background-position: left center
+}
+
+input[type=checkbox]:checked,
+input[type=radio]:checked {
+  background-position: left bottom
+}
+
+input[type=checkbox]:disabled,
+input[type=radio]:disabled {
+  opacity: .75
+}
+
+input[type=radio] {
+  background-image: url(../assets/images/radio.svg);
+  background-repeat: no-repeat;
+  background-size: 18px
+}
+
+input[type=checkbox] {
+  background-image: url(../assets/images/checkbox.svg);
+  background-repeat: no-repeat;
+  background-size: cover
+}
+
+
