@@ -15,7 +15,4 @@ angular.module 'greenApp'
       )
 
     scope.availableFields = _.filter(scope.section.fields, (val) ->
-        return val.type in ['radiobutton', 'select', 'checkbox'])
-
-
-
+        return val.type in ['radiobutton', 'select', 'checkbox']) and val._id != scope.field._id
