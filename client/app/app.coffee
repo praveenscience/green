@@ -5,7 +5,7 @@ angular.module 'greenApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ngAnimate',
+  'ngAnimate'
   'btford.socket-io',
   'ui.bootstrap',
   'ui.sortable',
