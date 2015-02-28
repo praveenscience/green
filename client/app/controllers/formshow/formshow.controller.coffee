@@ -12,6 +12,8 @@ angular.module 'greenApp'
   $scope.aquiredPoints = 0
   $scope.isAdmin = Auth.isAdmin
 
+  $scope.popOupOpen = false
+
 
   $scope.getFormLink = (form) ->
     if $scope.isAdmin() and form.status is 'Unpublished'
@@ -20,7 +22,6 @@ angular.module 'greenApp'
       return "/results/#{form._id}"
     else
       return "/forms/#{form._id}"
-
 
   $scope.init = ->
     _loadFormData()
@@ -117,7 +118,14 @@ angular.module 'greenApp'
       if section.aquired_points
         $scope.form.aquired_points += section.aquired_points
 
-  $scope.watchResponses = (field, section) ->
+  $scope.watchResponses = (field, section, choice) ->
+
+    for key, val of section.fields
+      val.showing_popup = false
+
+    if (field.response is choice._id and field.type != 'checkbox') or (choice.selected is true)
+      field.showing_popup = true
+
     _updateScore(field, section)
     if !Auth.isAdmin()
       conditionOption = _.find field.choices, (v) ->
