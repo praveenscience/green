@@ -45,7 +45,7 @@
 
       <div class="inputLabel inline" ng-repeat="choice in field.choices">
         <div class="pull-left" pop-placement="right" pop="{{choice.help_text}}" pop-show="{{choice.selected === true && field.showing_popup}}">
-          <input type="checkBox" ng-model="choice.selected" value="{{choice._id}}" id="{{choice._id}}" ng-change="watchResponses(field, section, choice)" required="{{field.required}}" />
+          <input type="checkBox" ng-model="choice.selected" value="{{choice._id}}" id="{{choice._id}}" ng-click="watchResponses(field, section, choice)" required="{{field.required}}" />
           <label ng-bind-html="choice.label" for="{{choice._id}}"></label> <strong class="text-muted">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
         </div>
       </div>
@@ -61,7 +61,7 @@
       <strong class="text-muted possible-points">[Points possible - {{field.possible_points}}]</strong>
       <div class="inputLabel inline" ng-repeat="choice in field.choices">
         <div class="pull-left" pop-placement="right" pop="{{choice.help_text}}" pop-show="{{field.response === choice._id && field.showing_popup}}">
-          <input type="radio" name="{{field._id}}" ng-model="field.response" value="{{choice._id}}" id="{{choice._id}}" ng-change="watchResponses(field, section, choice)" required="{{field.required}}" />
+          <input type="radio" name="{{field._id}}" ng-model="field.response" value="{{choice._id}}" id="{{choice._id}}" ng-click="watchResponses(field, section, choice)" required="{{field.required}}" />
           <label ng-bind-html="choice.label" for="{{choice._id}}"></label> <strong class="text-muted">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
         </div>
         <div class="clearfix"></div>
