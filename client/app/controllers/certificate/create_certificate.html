@@ -18,13 +18,21 @@
         <input type="number" class="form-control" required ng-model="certificate.max"/>
       </div>
     </div>
+   <div class="form-group">
+      <label for="certificate-content">Content</label>
+      <textarea type="text" class="form-control vert" required ng-model="certificate.content" style="min-height: 100px;"></textarea>
+    </div>
+
     <div class="form-group">
       <label for="certificate-logo">Logo URL</label>
       <input type="text" class="form-control" required ng-model="certificate.logo"/>
+      <img ng-src="{{certificate.logo}}" alt="" style="height: 100px;" ng-if="certificate.logo">
     </div>
     <div class="form-group">
       <label for="certificate-sign">Signature URL</label>
       <input type="text" class="form-control" required ng-model="certificate.sign"/>
+      <br>
+      <img ng-src="{{certificate.sign}}" alt="" style="width: 140px;" ng-if="certificate.sign">
     </div>
 </div>
 <div class="modal-footer">

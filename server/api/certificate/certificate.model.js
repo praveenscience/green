@@ -23,6 +23,10 @@ var CertificateSchema = new Schema({
     type: String,
     default: "http://websiddu.com/logo.svg"
   },
+  content: {
+    type: String,
+    default: ""
+  },
   sign: {
     type: String,
     default: "http://websiddu.com/logo.svg"

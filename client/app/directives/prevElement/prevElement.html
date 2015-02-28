@@ -45,7 +45,9 @@
 
       <div class="inputLabel inline" ng-repeat="choice in field.choices">
         <div class="pull-left" pop-placement="right" pop="{{choice.help_text}}" pop-show="{{choice.selected === true && field.showing_popup}}">
-          <input type="checkBox" ng-model="choice.selected" value="{{choice._id}}" id="{{choice._id}}" ng-click="watchResponses(field, section, choice)" required="{{field.required}}" />
+          <input type="checkBox" ng-model="choice.selected" value="{{choice._id}}" id="{{choice._id}}" ng-click="watchResponses(field, section, choice)"
+          name="{{field._id}}"
+           />
           <label ng-bind-html="choice.label" for="{{choice._id}}"></label> <strong class="text-muted">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
         </div>
       </div>
