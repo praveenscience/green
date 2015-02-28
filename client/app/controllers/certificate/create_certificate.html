@@ -1,6 +1,6 @@
 <form class="form" ng-submit="ok()">
 <div class="modal-header">
-    <h3 class="modal-title">Add new certificate</h3>
+    <h3 class="modal-title"> <em class="icon icon-trophy"></em> Add/Modify new certificate</h3>
 </div>
 <div class="modal-body">
 
@@ -33,6 +33,10 @@
       <input type="text" class="form-control" required ng-model="certificate.sign"/>
       <br>
       <img ng-src="{{certificate.sign}}" alt="" style="width: 140px;" ng-if="certificate.sign">
+    </div>
+   <div class="form-group">
+      <label for="certificate-designation">Designation of the signer</label>
+      <textarea type="text" class="form-control vert" required ng-model="certificate.designation" style="min-height: 50px;"></textarea>
     </div>
 </div>
 <div class="modal-footer">

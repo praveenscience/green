@@ -31,6 +31,10 @@ var CertificateSchema = new Schema({
     type: String,
     default: "http://websiddu.com/logo.svg"
   },
+  designation: {
+    type: String,
+    default: ""
+  },
   status: {
     type: String,
     "default": "published",
