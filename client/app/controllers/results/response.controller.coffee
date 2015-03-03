@@ -19,7 +19,6 @@ angular.module 'greenApp'
   $scope.getBg = (index) ->
     background: $scope.colors[index]
 
-
   $scope.init = ->
     _loadData()
     _initWaypoints()
@@ -62,8 +61,6 @@ angular.module 'greenApp'
             _prepareData(data, results)
             _generateGraph()
 
-
-
   _generateGraph = ->
     for i, val of $scope.results.results
       if $scope.secitons[val.section_id] is undefined
@@ -76,7 +73,6 @@ angular.module 'greenApp'
 
       $scope.secitons[val.section_id].possible_points += val.possible_points
       $scope.secitons[val.section_id].aquired_points += val.aquired_points
-
 
     dataForGraph = []
     values = {}
