@@ -6,6 +6,12 @@ var Field = require('../field/field.model');
 var Choice = require('../choice/choice.model');
 var async = require('async');
 var mongoose = require('mongoose');
+var marked = require('marked');
+var renderer = new marked.Renderer();
+
+renderer.link = function (href, title, text) {
+  return '<a target="_blank" href="' + href + '" title="'+ title +'">' + text + '</a>';
+}
 
 // Get list of sections
 exports.index = function(req, res) {
@@ -89,7 +95,10 @@ exports.updatefields = function(req, res) {
         var choicesArray = []
         async.each(field.choices, function(choice, callbackOpitons) {
           var choiceId = choice._id || mongoose.Types.ObjectId();
-          delete choice._id
+          delete choice._id;
+          if(choice.help_text != undefined) {
+            choice.help_text_html = marked(choice.help_text, { renderer: renderer });
+          }
           Choice.update({
               _id: choiceId
             }, choice, {

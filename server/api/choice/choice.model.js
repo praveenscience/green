@@ -11,6 +11,10 @@ var ChoiceSchema = new Schema({
     type: Boolean,
     default: false
   },
+  help_text_html: {
+    type: String,
+    default: ''
+  },
   is_na: {
     type: Boolean,
     default: false

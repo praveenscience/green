@@ -15,8 +15,8 @@ angular.module('template/popover/popover-close.html', []).run [
         <div class="arrow"></div>
         <div class="popover-close" ng-click="$parent.$parent.$parent.field.showing_popup = false">&times;</div>
         <div class="popover-inner">
-            <h3 class="popover-title" ng-bind="title" ng-show="title"></h3>
-            <div class="popover-content" ng-bind="content"></div>
+          <h3 class="popover-title" ng-bind="title" ng-show="title"></h3>
+          <div class="popover-content" ng-bind-html="content"></div>
         </div>
       </div>
       """
