@@ -2,14 +2,26 @@
   <div ng-include="'components/sidebar/sidebar.html'"></div>
   <div class="col-lg-10 col-sm-10 main-content-wrap">
     <div class="main-content">
-      <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
-      <ul class="list-group">
-        <li class="list-group-item" ng-repeat="user in users">
-          <strong>{{user.name}}</strong><br>
-          <span class="text-muted">{{user.email}}</span>
-          <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
-        </li>
-      </ul>
+      <div class="row-fulid oh">
+        <div class="col-lg-12 col-sm-12">
+          <h1 class="main-page-title">Manage Users</h1>
+        </div>
+      </div>
+      <br>
+
+      <div class="row-flulid">
+        <div class="col-lg-10 col-sm-10 oh">
+          <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="user in users">
+              <strong>{{user.name}}</strong>
+              <br>
+              <span class="text-muted">{{user.email}}</span>
+              <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>
