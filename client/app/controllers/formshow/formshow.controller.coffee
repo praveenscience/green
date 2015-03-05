@@ -126,7 +126,7 @@ angular.module 'greenApp'
     if field.type is 'select'
       for key, val of field.choices
         if val._id is field.response
-          $scope.popup_content = val.help_text
+          $scope.popup_content = val.help_text_html
           field.showing_popup = true
           break
     else if (field.response is choice._id and field.type != 'checkbox') or (choice.selected is true)

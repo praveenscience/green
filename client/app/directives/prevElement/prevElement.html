@@ -25,7 +25,7 @@
       <abbr title="Required" ng-if="field.required"> *</abbr>
       <strong class="text-muted possible-points">[Points possible - {{field.possible_points}}]</strong>
       <div class="inputLabel">
-        <select id="field._id" class="form-control" ng-model="field.response" ng-change="watchResponses(field, section)" required="{{field.required}}" pop-placement="right" pop="{{popup_content}_html}" pop-show="{{field.showing_popup || false}}">
+        <select id="field._id" class="form-control" ng-model="field.response" ng-change="watchResponses(field, section)" required="{{field.required}}" pop-placement="right" pop="{{popup_content}}" pop-show="{{field.showing_popup || false}}">
           <option value="">– Select one –</option>
           <option ng-repeat="choice in field.choices" value="{{choice._id}}" ng-selected="choice._id == field.response">
             {{choice.label}} &mdash; [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]
@@ -62,8 +62,7 @@
       <abbr title="Required" ng-if="field.required"> *</abbr>
       <strong class="text-muted possible-points">[Points possible - {{field.possible_points}}]</strong>
       <div class="inputLabel inline" ng-repeat="choice in field.choices">
-        {{choice.help_text_html}}
-        <div class="pull-left" pop-placement="right" pop="{{choice_html.help_text}}" pop-show="{{field.response === choice._id && field.showing_popup}}">
+        <div class="pull-left" pop-placement="right" pop="{{choice.help_text_html}}" pop-show="{{field.response === choice._id && field.showing_popup}}">
           <input type="radio" name="{{field._id}}" ng-model="field.response" value="{{choice._id}}" id="{{choice._id}}" ng-click="watchResponses(field, section, choice)" required="{{field.required}}" />
           <label ng-bind-html="choice.label" for="{{choice._id}}"></label> <strong class="text-muted">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
         </div>
