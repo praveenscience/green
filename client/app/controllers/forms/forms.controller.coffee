@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'FormsController', ($scope, $http, socket, $location, Auth, SweetAlert, Utils) ->
+.controller 'FormsController', ($scope, $http, $location, Auth, SweetAlert, Utils) ->
 
   $scope.isAdmin = Auth.isAdmin
   $scope.getFormatedDate = Utils.getFormatedDate
@@ -28,7 +28,6 @@ angular.module 'greenApp'
   _loadFroms = ->
     $http.get('/api/forms').success (forms) ->
       $scope.forms = forms
-      socket.syncUpdates 'form', $scope.forms
 
   $scope.addform = ->
     return if $scope.newform is ''
@@ -109,9 +108,6 @@ angular.module 'greenApp'
         .success (data, status) ->
           if hideSidebar
             $scope.currentForm = null
-
-  $scope.$on '$destroy', ->
-    socket.unsyncUpdates 'form'
 
   $scope.init()
 
