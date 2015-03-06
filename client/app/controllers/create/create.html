@@ -197,10 +197,11 @@
                     <div class="col-lg-9 col-sm-9">
                       <button class="btn btn-info btn-sm" type="button" ng-disabled="!isValidField(field)" ng-click="toggleField(field, section)" > Done </button>
                       &nbsp;&nbsp;&nbsp;&nbsp;
-                      <input type="checkbox" class="checkbox-small" name="bonusCheckboxe" type="checkbox" id="bonusCheckboxe" ng-model="field.is_bonus">
+                      <input type="checkbox" class="checkbox-small" name="bonusCheckboxe" type="checkbox" id="bonusCheckboxe" ng-model="field.is_bonus" ng-true-value="'true'" ng-false-value="'false'">
                       <label for="bonusCheckboxe" class="smallText">Bonus question</label>
                       &nbsp;&nbsp;&nbsp;&nbsp;
-                      <input type="checkbox" class="checkbox-small" name="requiredChecbox" type="checkbox" id="requiredChecbox" ng-model="field.required">
+
+                      <input type="checkbox" class="checkbox-small" name="requiredChecbox" id="requiredChecbox" ng-model="field.required"ng-true-value="'true'" ng-false-value="'false'">
                       <label for="requiredChecbox" class="smallText">Required field</label>
                     </div>
                   </div>
