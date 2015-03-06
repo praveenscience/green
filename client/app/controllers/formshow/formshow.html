@@ -65,17 +65,11 @@
 
                     <button class="btn btn-primary prev" ng-click="moveToPrevStep($index, section)" ng-if="$index != 0">  &larr; Previous step </button>
 
-
                     <button class="btn btn-primary next" ng-click="moveToNextStep($index, section)" ng-if="$index != form.sections.length - 1"> Next step &rarr; </button>
 
-
-
-
                     <a class="btn btn-info pull-right draft" ladda="formSaving" data-style="expand-left" tooltip="Last saved at {{form.updated}}" tooltip-append-to-body="true" ng-click="saveAsDraft($event)" ng-disabled="enableDraft">Save as draft</a>
-                    <br>
-                    <br>
-                    <br>
-                    <div ng-if="$index == form.sections.length - 1" >
+
+                    <div ng-if="$index == form.sections.length - 1" style="margin-top: 40px;">
                     <small class="text-muted pull-right"> Once submitted cannot be edited!</small><br>
                      <button class="btn pull-right btn-success btn-lg" ladda="formSaving" data-style="expand-left" tooltip="Submit this form!" tooltip-append-to-body="true" ng-click="form.submitted = true" type="submit">Submit</button>
                      </div>
