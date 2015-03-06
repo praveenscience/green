@@ -13,6 +13,7 @@ angular.module 'greenApp'
   $scope.isAdmin = Auth.isAdmin
 
   $scope.popOupOpen = false
+  $scope.enableDraft = false
 
 
   $scope.getFormLink = (form) ->
@@ -119,6 +120,7 @@ angular.module 'greenApp'
         $scope.form.aquired_points += section.aquired_points
 
   $scope.watchResponses = (field, section, choice) ->
+    $scope.enableDraft = false
 
     for key, val of section.fields
       val.showing_popup = false
@@ -162,12 +164,27 @@ angular.module 'greenApp'
       $scope.form.sections[key].active = false
     $scope.form.sections[$index + 1].active = true
 
+  $scope.moveToPrevStep = ($index, section) ->
+    for key, val of $scope.form.sections
+      $scope.form.sections[key].active = false
+    $scope.form.sections[$index - 1].active = true
+
+  $scope.saveAsDraft = () ->
+    $scope.form.submitted = false
+    _saveForm()
+
+
+
   $scope.saveFormResuts = (e) ->
     e.preventDefault()
     $scope.formSaving = true
+    _saveForm()
+
+  _saveForm = ->
     formData.respond($scope.form)
       .success (data, status) ->
         $scope.formSaving = false
+        $scope.enableDraft = true
         if resultId is undefined
           $location.path("#{$location.path()}/#{data._id}")
         if data.submitted is true

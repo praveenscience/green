@@ -54,17 +54,33 @@
 
                 </div>
                 <div class="row" ng-if="!isAdmin()">
-                  <div class="pull-right">
-                    <a href=""> Cancel </a> &nbsp;&nbsp;&nbsp;&nbsp;
+                  <div class="pull-left">
 
-                    <button class="btn btn-success btn-info" type="submit" ladda="formSaving" data-style="expand-left" tooltip="Last saved at {{form.updated}}" tooltip-append-to-body="true">Save as draft</button>
+                  </div>
 
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <button class="btn btn-success" type="submit" ladda="formSaving" data-style="expand-left" tooltip="Save this form!" tooltip-append-to-body="true" ng-if="$index != form.sections.length - 1">Save</button>
+                  <div class="pull-right formsubmit-actions">
 
-                    <button class="btn btn-success btn-lg" ladda="formSaving" data-style="expand-left" tooltip="Submit this form!" tooltip-append-to-body="true" ng-if="$index == form.sections.length - 1" ng-click="form.submitted = true" type="submit">Submit</button>
-                    &nbsp;&nbsp;&nbsp;
-                    <button class="btn btn-primary" ng-click="moveToNextStep($index, section)" ng-if="$index != form.sections.length - 1"> Next step &rarr; </button>
+                    <last-save-form-submission></last-save-form-submission>
+                    <div class="clearfix"></div>
+
+                    <button class="btn btn-primary prev" ng-click="moveToPrevStep($index, section)" ng-if="$index != 0">  &larr; Previous step </button>
+
+
+                    <button class="btn btn-primary next" ng-click="moveToNextStep($index, section)" ng-if="$index != form.sections.length - 1"> Next step &rarr; </button>
+
+
+
+
+                    <a class="btn btn-info pull-right draft" ladda="formSaving" data-style="expand-left" tooltip="Last saved at {{form.updated}}" tooltip-append-to-body="true" ng-click="saveAsDraft($event)" ng-disabled="enableDraft">Save as draft</a>
+                    <br>
+                    <br>
+                    <br>
+                    <div ng-if="$index == form.sections.length - 1" >
+                    <small class="text-muted pull-right"> Once submitted cannot be edited!</small><br>
+                     <button class="btn pull-right btn-success btn-lg" ladda="formSaving" data-style="expand-left" tooltip="Submit this form!" tooltip-append-to-body="true" ng-click="form.submitted = true" type="submit">Submit</button>
+                     </div>
+
+
                   </div>
                 </div>
               </form>

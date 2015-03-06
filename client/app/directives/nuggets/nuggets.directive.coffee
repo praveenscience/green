@@ -9,6 +9,14 @@ angular.module 'greenApp'
     </span>
   """
 
+.directive 'lastSaveFormSubmission', ->
+  template: """
+    <span class="last-save-text text-muted">
+    <span ng-if='enableDraft'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(form.updated)}}" tooltip-position="left"> Saved!</span>
+    <span ng-if='!enableDraft'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(form.updated)}}" tooltip-position="left"> Changes must be saved!</span>
+    </span>
+  """
+
 .directive 'focusOnShow', ($timeout) ->
   restrict: 'A'
   link: (scope, element, attrs) ->
