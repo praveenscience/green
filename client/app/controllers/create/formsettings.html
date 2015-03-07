@@ -11,7 +11,9 @@
       </label>
     </div>
     <div class="pull-right">
-      <button class="btn btn-info" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" ng-disabled="enableFormSaveButton">Save</button>
+    <br>
+      <last-save button-enabled="enableFormSaveButton" updated="from.updated"></last-save>
+      <button class="btn btn-info pull-right" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" ng-disabled="enableFormSaveButton">Save</button>
     </div>
     <div class="clearfix"></div>
     <br />
@@ -37,6 +39,7 @@
             </tr>
           </tbody>
         </table>
+
         <button class="btn btn-info" ng-click="attachCertificate()"> + Add/Modify certificate</button>
 
         <br><br>
@@ -44,6 +47,11 @@
 
         <ng-quill-editor ng-model="form.no_certificate" toolbar="true" link-tooltip="true" image-tooltip="true" toolbar-entries="bold list bullet italic underline strike link image" editor-required="true" required="" error-class="input-error"></ng-quill-editor>
 
+        <div class="pull-right">
+        <br>
+          <last-save button-enabled="enableFormSaveButton" updated="from.updated"></last-save>
+          <button class="btn btn-info pull-right" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" ng-disabled="enableFormSaveButton">Save</button>
+        </div>
       </div>
     </div>
 
