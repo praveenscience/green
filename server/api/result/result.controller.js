@@ -151,7 +151,6 @@ exports.update = function(req, res) {
         if(err) { return handleError(res, err); }
         if(submitted == true) {
           Form.findById(formId).populate('certificates').exec(function(err, resultedForm){
-            console.log(resultedForm.certificates);
             return res.json(201, createdItem);
           })
         } else {

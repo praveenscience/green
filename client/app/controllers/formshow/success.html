@@ -4,7 +4,10 @@
     <div class="main-content">
 
       <div class="row">
-        <div class="col-lg-12 col-sm-12">
+        <div class="col-lg-12 col-sm-12" ng-if="!certificate">
+          <div class="" ng-bind-html="form.no_certificate"></div>
+        </div>
+        <div class="col-lg-12 col-sm-12" ng-if="certificate">
           <div class="form-show-container">
             <h2 class="success-heading text-center">Congraturlations!! </h2>
             <h4 class="sucess-sub-heading text-center"> You are now certified as a {{certificate.name}} level green lab.</h4>
