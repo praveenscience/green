@@ -54,13 +54,10 @@
 
                 </div>
                 <div class="row" ng-if="!isAdmin()">
-                  <div class="pull-left">
-
-                  </div>
 
                   <div class="pull-right formsubmit-actions">
 
-                    <last-save-form-submission></last-save-form-submission>
+                    <last-save buttonEnabled="enableDraft" updated="form.updated"></last-save>
                     <div class="clearfix"></div>
 
                     <button class="btn btn-primary prev" ng-click="moveToPrevStep($index, section)" ng-if="$index != 0">  &larr; Previous step </button>
@@ -73,7 +70,6 @@
                     <small class="text-muted pull-right"> Once submitted cannot be edited!</small><br>
                      <button class="btn pull-right btn-success btn-lg" ladda="formSaving" data-style="expand-left" tooltip="Submit this form!" tooltip-append-to-body="true" ng-click="form.submitted = true" type="submit">Submit</button>
                      </div>
-
 
                   </div>
                 </div>

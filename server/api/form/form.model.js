@@ -27,6 +27,10 @@ var FormSchema = new Schema({
     type: Number,
     default: 0
   },
+  no_certificate: {
+    type: String,
+    default: ''
+  },
   status: {
     type: String,
     "default": "Unpublished",
@@ -41,10 +45,5 @@ var FormSchema = new Schema({
     ref: 'Certificate'
   }]
 });
-
-FormSchema.methods = {
-
-
-};
 
 module.exports = mongoose.model('Form', FormSchema);

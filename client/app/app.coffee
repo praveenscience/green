@@ -12,6 +12,7 @@ angular.module 'greenApp', [
   'angular-ladda'
   'ngSweetAlert'
   'ui.select'
+  'ngQuill'
 ]
 
 .config ($routeProvider, $locationProvider, $httpProvider) ->

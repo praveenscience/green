@@ -36,6 +36,7 @@ angular.module 'greenApp'
       name: 'Untitled form'
       status: 'Unpublished'
       certificates: []
+      no_certificate: ""
       sections: [{
         title: "Untitled section"
         fields: [{
