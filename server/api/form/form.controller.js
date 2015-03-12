@@ -22,7 +22,7 @@ exports.index = function(req, res) {
       if (err) {
         return handleError(res, err);
       }
-      return res.json(200, forms);
+      return res.status(200).json(forms);
     });
 
 };
@@ -112,7 +112,7 @@ exports.update = function(req, res) {
       if (err) {
         return handleError(res, err);
       }
-      return res.json(200, form);
+      return res.status(200).json(form);
     });
   });
 };
@@ -133,7 +133,7 @@ exports.updatesection = function(req, res) {
       if (err) {
         return handleError(res, err);
       }
-      return res.json(200, form);
+      return res.status(200).json(form);
     });
   });
 };
@@ -156,7 +156,7 @@ exports.removesection = function(req, res) {
       if (err) {
         return handleError(res, err);
       }
-      return res.json(200, form);
+      return res.status(200).json(form);
     });
   });
 }

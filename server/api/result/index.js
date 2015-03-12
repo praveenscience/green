@@ -10,7 +10,6 @@ router.get('/', auth.isAuthenticated(), controller.index);
 router.get('/submissions', auth.isAuthenticated(), controller.submissions);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.get('/:id/all', auth.isAuthenticated(), controller.showallresults);
-router.get('/:id/certf', controller.getpdf);
 router.post('/', auth.isAuthenticated(), controller.create);
 router.put('/:id', auth.isAuthenticated(), controller.update);
 router.patch('/:id', auth.isAuthenticated(), controller.update);

@@ -23,8 +23,10 @@ exports.show = function(req, res) {
     _id: req.params.id
   }).populate('certificate').exec(function(err, result) {
     if(err) { return handleError(res, err); }
-    if(!result) { return res.send(404); }
-    return res.json(result);
+    if(result.length == 0) {
+      return res.status(404).json(result);
+    }
+    return res.status(200).json(result);
   })
 };
 

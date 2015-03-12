@@ -21,7 +21,7 @@ angular.module 'greenApp'
 
   $scope.init = ->
     _loadData()
-    _initWaypoints()
+
 
   $scope.scrollToSeciton = (index, section) ->
     $timeout ->
@@ -56,10 +56,16 @@ angular.module 'greenApp'
       .success (data, status) ->
         formData.getFormUserResponse(resId)
           .success (results, status) ->
-            $scope.results = results[0]
-            $scope.certificate = results[0].certificate
-            _prepareData(data, results)
-            _generateGraph()
+            if results.length != 0
+              $scope.results = results[0]
+              $scope.certificate = results[0].certificate
+              _prepareData(data, results)
+              _generateGraph()
+              _initWaypoints()
+          .error (data, status) ->
+              $timeout ->
+                $location.path('/forms')
+              , 100
 
   _generateGraph = ->
     for i, val of $scope.results.results
