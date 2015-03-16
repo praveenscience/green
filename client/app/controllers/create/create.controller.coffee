@@ -17,6 +17,34 @@ angular.module 'greenApp'
   $scope.formSettings =
     active: false
 
+  $scope.fieldTypes = [
+    {
+      type: 'text'
+      name: 'Text'
+      icon: 'text'
+    }
+    {
+      type: 'textarea'
+      name: 'Pharagraph'
+      icon: 'paragraph'
+    }
+    {
+      type: 'radiobutton'
+      name: 'Radio Buttons'
+      icon: 'radio'
+    }
+    {
+      type: 'select'
+      name: 'Dropdown'
+      icon: 'dropdown'
+    }
+    {
+      type: 'checkbox'
+      name: 'Checkboxes'
+      icon: 'checkbox'
+    }
+  ]
+
   # Main Form
   master =
     title: ''

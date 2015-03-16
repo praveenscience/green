@@ -27,7 +27,7 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 
 .select2-container .select2-choice {
     display: block;
-    height: 26px;
+    height: 30px;
     padding: 0 0 0 8px;
     overflow: hidden;
     position: relative;
@@ -38,7 +38,7 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
     color: #444;
     text-decoration: none;
 
-    border-radius: 4px;
+    border-radius: 2px;
 
     background-clip: padding-box;
 
@@ -59,7 +59,7 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 .select2-container.select2-drop-above .select2-choice {
     border-bottom-color: #aaa;
 
-    border-radius: 0 0 4px 4px;
+    border-radius: 0 0 2px 2px;
 
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eee), color-stop(0.9, #fff));
     background-image: -webkit-linear-gradient(center bottom, #eee 0%, #fff 90%);
@@ -136,11 +136,11 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
     top: 100%;
 
     background: #fff;
-    color: #000;
+    color: #43434a;
     border: 1px solid #aaa;
     border-top: 0;
 
-    border-radius: 0 0 4px 4px;
+    border-radius: 0 0 2px 2px;
 
     -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
             box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
@@ -151,7 +151,7 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
     border-top: 1px solid #aaa;
     border-bottom: 0;
 
-    border-radius: 4px 4px 0 0;
+    border-radius: 2px 2px 0 0;
 
     -webkit-box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
             box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
@@ -184,7 +184,7 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
     top: 0;
 
     border-left: 1px solid #aaa;
-    border-radius: 0 4px 4px 0;
+    border-radius: 0 2px 2px 0;
 
     background-clip: padding-box;
 
@@ -349,6 +349,10 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
               user-select: none;
 }
 
+.select2-result-label .icon {
+    color: #888;
+}
+
 .select2-results-dept-1 .select2-result-label { padding-left: 20px }
 .select2-results-dept-2 .select2-result-label { padding-left: 40px }
 .select2-results-dept-3 .select2-result-label { padding-left: 60px }
@@ -360,6 +364,9 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 .select2-results .select2-highlighted {
     background: #3875d7;
     color: #fff;
+    .icon {
+        color: #fff;
+    }
 }
 
 .select2-results li em {
