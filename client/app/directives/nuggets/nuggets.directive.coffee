@@ -6,4 +6,3 @@ angular.module 'greenApp'
   link: (scope, element, attrs) ->
     $timeout ->
       element[0].select()
-

@@ -27,6 +27,16 @@ var FormSchema = new Schema({
     type: Number,
     default: 0
   },
+  expires_in: {
+    number: {
+      type: Number,
+      default: null
+    },
+    unit: {
+    type: String,
+    enum: ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds']
+    }
+  },
   no_certificate: {
     type: String,
     default: ''

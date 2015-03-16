@@ -11,7 +11,7 @@
       </label>
     </div>
     <div class="pull-right">
-    <br>
+      <br>
       <last-save button-enabled="enableFormSaveButton" updated="from.updated"></last-save>
       <button class="btn btn-info pull-right" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" ng-disabled="enableFormSaveButton">Save</button>
     </div>
@@ -22,7 +22,10 @@
       <div class="panel-heading">
         <h3 class="panel-title">Certification logic</h3>
       </div>
+
       <div class="panel-body">
+
+
         <table class="table table-striped table-hover">
           <thead>
             <tr>
@@ -42,13 +45,34 @@
 
         <button class="btn btn-info" ng-click="attachCertificate()"> + Add/Modify certificate</button>
 
-        <br><br>
+        <br>
+        <br>
+        <div class="form-group">
+          <label for="">Expires in</label>
+          <div class="row">
+              <div class="col-lg-3 col-sm-6">
+                <input type="number" class="form-control" ng-model="form.expires_in.number">
+              </div>
+              <div class="col-lg-3 col-sm-4">
+                <select name="" id="" class="form-control" ng-model="form.expires_in.unit">
+                  <option value="years">Years</option>
+                  <option value="months">Months</option>
+                  <option value="weeks">Weeks</option>
+                  <option value="days">Days</option>
+                  <option value="hours">Hours</option>
+                  <option value="minutes">Minutes</option>
+                  <option value="seconds">Seconds</option>
+                </select>
+              </div>
+            </div>
+        </div>
+
         <label for="">When no certificate is awarded?</label>
 
         <ng-quill-editor ng-model="form.no_certificate" toolbar="true" link-tooltip="true" image-tooltip="true" toolbar-entries="bold list bullet italic underline strike link image" editor-required="true" required="" error-class="input-error"></ng-quill-editor>
 
         <div class="pull-right">
-        <br>
+          <br>
           <last-save button-enabled="enableFormSaveButton" updated="from.updated"></last-save>
           <button class="btn btn-info pull-right" ng-click="submitForm(form)" ladda="formSaving" data-style="expand-left" ng-disabled="enableFormSaveButton">Save</button>
         </div>
@@ -91,4 +115,3 @@
     </div>
   </div>
 </div>
-
