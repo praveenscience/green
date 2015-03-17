@@ -83,7 +83,7 @@ angular.module 'greenApp'
       return "/forms/#{form._id}"
 
   $scope.getSubmissionLink = (submission) ->
-    if submission.status is 'Published'
+    if submission.status is 'draft'
       "/forms/#{submission.form._id}/#{submission._id}"
     else
       "/results/#{submission.form._id}/#{submission._id}"

@@ -44,8 +44,11 @@
           <div class="row-fluid tabled-row" ng-repeat="submission in submissions | filter: query| filter:querys.status:true" ng-click="slideInFormDetails(form)">
             <div class="col-lg-4 col-sm-4">
               <a ng-href="{{getSubmissionLink(submission)}}">{{submission.form.name}}</a>
-              <span class="text-info" ng-if="form.status == 'Unpublished'">
-              <em class="icon icon-pencil2"></em>
+              <span class="text-info" ng-if="submission.status == 'draft'">
+                <em class="icon icon-wip text-warning" tooltip="Work in progress."tooltip-append-to-body="true"></em>
+              </span>
+              <span class="text-info" ng-if="submission.status == 'submitted'">
+                <em class="icon icon-check-alt text-success" tooltip="Submitted"tooltip-append-to-body="true"></em>
               </span>
             </div>
             <div class="col-lg-3 col-sm-3">

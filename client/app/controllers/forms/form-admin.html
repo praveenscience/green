@@ -54,7 +54,7 @@
             </div>
             <div class="col-lg-3 col-sm-3">                  {{form.status}}
               &nbsp;
-              <span class="text-success" ng-if="form.status == 'Published'" tooltip="Form published on {{getFormatedDate(form.updated)}}">
+              <span class="text-success" ng-if="form.status == 'Published'" tooltip-append-to-body="true" tooltip="Form published on {{getFormatedDate(form.updated)}}">
               <em class="icon icon-check-alt"></em>
             </span></div>
             <div class="col-lg-4 col-sm-4">{{getFormatedDate(form.created)}}</div>

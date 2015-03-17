@@ -39,7 +39,7 @@
           <div class="form-show-container">
             <div class="form-show">
             <div ng-repeat="section in form.sections" ng-if='section.active'>
-              <form ng-submit="saveFormResuts($event)">
+              <form>
                 <strong class="section-points">({{section.possible_points}} Possible Points, {{section.bonus_points}} Bonus)</strong>
                 <div class="" ng-repeat="field in section.fields | orderBy:'sequence'">
                   <div>
@@ -68,7 +68,7 @@
 
                     <div ng-if="$index == form.sections.length - 1" style="margin-top: 40px;">
                     <small class="text-muted pull-right"> Once submitted cannot be edited!</small><br>
-                     <button class="btn pull-right btn-success btn-lg" ladda="formSaving" data-style="expand-left" tooltip="Submit this form!" tooltip-append-to-body="true" ng-click="form.submitted = true" type="submit">Submit</button>
+                     <button class="btn pull-right btn-success btn-lg" ladda="formSaving" data-style="expand-left" tooltip="Submit this form!" tooltip-append-to-body="true" ng-click="updateFormStatus($event)" type="submit">Submit</button>
                      </div>
 
                   </div>

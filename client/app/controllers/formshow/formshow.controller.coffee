@@ -173,7 +173,11 @@ angular.module 'greenApp'
     $scope.form.submitted = false
     _saveForm()
 
-
+  $scope.updateFormStatus = (event) ->
+    event.preventDefault()
+    $scope.form.submitted = true
+    $scope.form.status = 'submitted'
+    _saveForm()
 
   $scope.saveFormResuts = (e) ->
     e.preventDefault()
@@ -181,6 +185,7 @@ angular.module 'greenApp'
     _saveForm()
 
   _saveForm = ->
+    console.log $scope.form
     formData.respond($scope.form)
       .success (data, status) ->
         $scope.formSaving = false
