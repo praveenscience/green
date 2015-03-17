@@ -13,6 +13,7 @@ angular.module 'greenApp', [
   'ngSweetAlert'
   'ui.select'
   'ngQuill'
+  'monospaced.elastic'
 ]
 
 .config ($routeProvider, $locationProvider, $httpProvider) ->
