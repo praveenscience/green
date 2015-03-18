@@ -35,16 +35,17 @@
       <small class="help-block" ng-bind-html="field.help_text"></small>
     </div>
   </div>
-
+  <!-- Check boxes starts from here -->
   <div data-option="checkbox" ng-switch-when="checkbox">
     <div class="form-group">
+
       <type-badge></type-badge>
       <abbr title="Required" ng-if="field.required"> *</abbr>
 
       <strong class="text-muted possible-points">[Points possible - {{field.possible_points}}]</strong>
 
       <div class="inputLabel inline" ng-repeat="choice in field.choices">
-        <div class="pull-left" pop-placement="right" pop="{{choice.help_text_html}}" pop-show="{{choice.selected === true && field.showing_popup}}">
+        <div class="pull-left" pop-placement="right" pop="{{choice.help_text_html}}" pop-show="{{choice.showing_popup === true && field.showing_popup}}">
           <input type="checkBox" ng-model="choice.selected" value="{{choice._id}}" id="{{choice._id}}" ng-click="watchResponses(field, section, choice)"
           name="{{field._id}}"
            />

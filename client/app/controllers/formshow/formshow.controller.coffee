@@ -134,6 +134,13 @@ angular.module 'greenApp'
     else if (field.response is choice._id and field.type != 'checkbox') or (choice.selected is true)
       field.showing_popup = true
 
+    if (field.type is 'checkbox')
+      for key, val of field.choices
+        val.showing_popup = false
+
+      choice.showing_popup = true
+
+
     _updateScore(field, section)
     if !Auth.isAdmin()
       conditionOption = _.find field.choices, (v) ->
