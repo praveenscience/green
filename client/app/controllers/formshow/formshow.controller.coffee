@@ -192,7 +192,6 @@ angular.module 'greenApp'
     _saveForm()
 
   _saveForm = ->
-    console.log $scope.form
     formData.respond($scope.form)
       .success (data, status) ->
         $scope.formSaving = false
