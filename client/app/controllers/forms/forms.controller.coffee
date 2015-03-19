@@ -74,6 +74,11 @@ angular.module 'greenApp'
   $scope.slideInFormDetails = (curform) ->
     $scope.currentForm = curform
 
+  $scope.isExpired = (expires) ->
+    now = new Date()
+    expiresDate = new Date(expires)
+    now > expiresDate
+
   $scope.getFormLink = (form) ->
     if $scope.isAdmin() and form.status is 'Unpublished'
       return "/forms/edit/#{form._id}"

@@ -47,8 +47,15 @@
               <span class="text-info" ng-if="submission.status == 'draft'">
                 <em class="icon icon-wip text-warning" tooltip="Work in progress."tooltip-append-to-body="true"></em>
               </span>
-              <span class="text-info" ng-if="submission.status == 'submitted'">
+              <span class="text-info" ng-if="submission.status == 'submitted' && !isExpired(submission.expires)">
                 <em class="icon icon-check-alt text-success" tooltip="Submitted"tooltip-append-to-body="true"></em>
+              </span>
+
+              <span ng-if="isExpired(submission.expires)">
+              <em class="icon icon-expired text-danger" tooltip="Expired"tooltip-append-to-body="true" style="font-size: 20px;"></em>
+                <br>
+                <strong class="text-muted">Expired</strong> <br>
+                <a ng-href="/forms/{{submission.form._id}}"  class="btn btn-xs btn-info"> Retake this certificaiton</a>
               </span>
             </div>
             <div class="col-lg-2 col-sm-2">
