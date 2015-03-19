@@ -99,6 +99,7 @@ exports.update = function(req, res) {
           certificate = value._id;
       })
       result.certificate = certificate;
+      result.expires = _getDate(resultedForm.expires_in.number, resultedForm.expires_in.unit);
       _updateResults();
     })
   }
@@ -106,6 +107,34 @@ exports.update = function(req, res) {
     _updateResults();
   }
 
+
+  function _getDate(number, unit) {
+    var now = new Date();
+    switch(unit) {
+      case 'years':
+        now.setUTCFullYear(now.getUTCFullYear() + number);
+        break;
+      case 'months':
+        now.setUTCMonth(now.getUTCMonth() + number);
+        break;
+      case 'days':
+        now.setUTCDate(now.getUTCDate() + number);
+        break;
+      case 'hours':
+        now.setUTCHours(now.getUTCHours() + number);
+        break;
+      case 'minutes':
+        now.setUTCMinutes(now.getUTCMinutes() + number);
+        break;
+      case 'seconds':
+        now.setUTCSeconds(now.getUTCSeconds() + number);
+        break;
+      default:
+        return null
+    }
+    console.log(now);
+    return now;
+  }
 
   function _updateResults() {
     if(resultId == undefined) {
@@ -126,7 +155,7 @@ exports.update = function(req, res) {
       }, result).exec(function(err, resl){
         if (err) { return handleError(resl, err); }
         result._id = resultId;
-        return res.json(201, result);
+        return res.status(201).json(result)
       });
     }
   }

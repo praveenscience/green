@@ -10,6 +10,9 @@ var ResultSchema = new Schema({
     username: String,
     email: String
   },
+  expires: {
+    type: Date
+  },
   status: {
     type: String,
     "default": "draft",

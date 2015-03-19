@@ -33,8 +33,8 @@ var FormSchema = new Schema({
       default: null
     },
     unit: {
-    type: String,
-    enum: ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds']
+      type: String,
+      enum: ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds']
     }
   },
   no_certificate: {

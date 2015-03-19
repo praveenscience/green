@@ -15,7 +15,8 @@ angular.module 'greenApp'
 
   getFormatedDate: (date) ->
     d = new Date(date)
-    d.toUTCString()
+    format = d3.time.format("%b %d, %Y at %I:%M %p");
+    format(d)
 
   pluralize: (points) ->
     if points == 1
