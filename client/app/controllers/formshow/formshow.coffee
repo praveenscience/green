@@ -9,10 +9,6 @@ angular.module 'greenApp'
   $routeProvider.when '/forms/:id/:res',
     templateUrl: 'app/controllers/formshow/formshow.html'
     controller: 'FormshowCtrl'
-    # resolve:
-    #   from: 'new'
   $routeProvider.when '/forms/:id',
     templateUrl: 'app/controllers/formshow/formshow.html'
     controller: 'FormshowCtrl'
-    # resolve:
-    #   from: 'submission'
