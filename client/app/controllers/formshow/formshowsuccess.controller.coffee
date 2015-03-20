@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'FormshowSuccessCtrl', ($scope, $timeout, $http, $routeParams, formData, Auth, $location) ->
+.controller 'FormshowSuccessCtrl', ($scope, $timeout, $http, $routeParams, formData, Auth, $location, SweetAlert) ->
 
   $scope.form = {}
   $scope.results = null
@@ -13,6 +13,7 @@ angular.module 'greenApp'
   $scope.aquiredPoints = 0
   $scope.isAdmin = Auth.isAdmin
   $scope.secitons = []
+  $scope.lab_name = null
 
   $scope.formattedDate = ->
     date = new Date()
@@ -20,6 +21,25 @@ angular.module 'greenApp'
 
   $scope.init = ->
     _loadFormData()
+    _showAlert()
+
+  _showAlert = ->
+    SweetAlert.swal {
+      title: 'Name '
+      text: 'Your lab/office name that should be printed on certificate'
+      type: 'input'
+      showCancelButton: true
+      closeOnConfirm: false
+      animation: 'slide-from-top'
+    }, (inputValue) ->
+      if inputValue == false
+        return false
+      if inputValue == ''
+        swal.showInputError 'You need to write something!'
+        return false
+      swal 'Nice!', "You wrote: #{inputValue}, click ok to generate your certificate", 'success'
+      $scope.lab_name = inputValue
+      return
 
   _loadFormData = ->
     formData.getForm(formId)
@@ -77,18 +97,11 @@ angular.module 'greenApp'
         .x((d) -> d.x)
         .y((d) -> d.y)
         .showValues(true)
-
       #chart.yAxis.scale().domain([0, 100]);
       chart.forceY([0, 100])
-
       d3.select('#chart svg').datum(data).call chart
-
       nv.utils.windowResize chart.update
-
       chart
-
-
-
 
   _generatePDF = ->
     $timeout ->

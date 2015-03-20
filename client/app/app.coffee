@@ -10,7 +10,7 @@ angular.module 'greenApp', [
   'ui.bootstrap',
   'ui.sortable',
   'angular-ladda'
-  'ngSweetAlert'
+  'oitozero.ngSweetAlert'
   'ui.select'
   'ngQuill'
   'monospaced.elastic'
