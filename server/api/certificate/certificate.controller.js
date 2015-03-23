@@ -7,7 +7,7 @@ var Certificate = require('./certificate.model');
 exports.index = function(req, res) {
   Certificate.find(function (err, certificates) {
     if(err) { return handleError(res, err); }
-    return res.json(200, certificates);
+    return res.status(200).json(certificates);
   });
 };
 
@@ -16,7 +16,7 @@ exports.show = function(req, res) {
   Certificate.findById(req.params.id, function (err, certificate) {
     if(err) { return handleError(res, err); }
     if(!certificate) { return res.send(404); }
-    return res.json(certificate);
+    return res.status(200).json(certificate);
   });
 };
 
@@ -26,7 +26,7 @@ exports.create = function(req, res) {
   certificate.author = req.user._id;
   Certificate.create(certificate, function(err, certificate) {
     if(err) { return handleError(res, err); }
-    return res.json(201, certificate);
+    return res.status(201).json(certificate);
   });
 };
 
@@ -40,7 +40,7 @@ exports.update = function(req, res) {
     updated.updated = Date.now();
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
-      return res.json(200, certificate);
+      return res.status(200).json(certificate);
     });
   });
 };
