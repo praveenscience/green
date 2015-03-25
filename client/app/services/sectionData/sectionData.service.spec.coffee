@@ -9,6 +9,3 @@ describe 'Service: sectionData', ->
   sectionData = undefined
   beforeEach inject (_sectionData_) ->
     sectionData = _sectionData_
-
-  it 'should do something', ->
-    expect(!!sectionData).toBe true

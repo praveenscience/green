@@ -13,5 +13,3 @@ describe 'Controller: AttachcertificateCtrl', ->
     AttachcertificateCtrl = $controller 'AttachcertificateCtrl',
       $scope: scope
 
-  it 'should ...', ->
-    expect(1).toEqual 1

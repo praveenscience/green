@@ -8,7 +8,7 @@ var Choice = require('../choice/choice.model');
 exports.index = function(req, res) {
   Field.find(function (err, fields) {
     if(err) { return handleError(res, err); }
-    return res.json(200, fields);
+    return res.status(200).json(fields);
   });
 };
 

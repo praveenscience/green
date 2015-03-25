@@ -1,14 +1,14 @@
 'use strict'
 
 angular.module 'greenApp', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'ngRoute',
+  'ngCookies'
+  'ngResource'
+  'ngSanitize'
+  'ngRoute'
   'ngAnimate'
-  'btford.socket-io',
-  'ui.bootstrap',
-  'ui.sortable',
+  'btford.socket-io'
+  'ui.bootstrap'
+  'ui.sortable'
   'angular-ladda'
   'oitozero.ngSweetAlert'
   'ui.select'
