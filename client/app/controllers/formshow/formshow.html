@@ -56,8 +56,7 @@
                 <div class="row" ng-if="!isAdmin()">
 
                   <div class="pull-right formsubmit-actions">
-
-                    <last-save buttonEnabled="enableDraft" updated="form.updated"></last-save>
+                    <last-save button-enabled="enableDraft" updated="form.updated" savedtext="Entries saved!"></last-save>
                     <div class="clearfix"></div>
 
                     <button class="btn btn-primary prev" ng-click="moveToPrevStep($index, section)" ng-if="$index != 0">  &larr; Previous step </button>

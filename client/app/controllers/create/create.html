@@ -60,10 +60,7 @@
           <div class="col-lg-4 col-sm-4">
             <div class="pull-right">
               <div class="formSubmit">
-                <span class="last-save-text text-muted">
-                <span ng-if='enableSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(section.updated)}}" tooltip-position="left"> Saved!</span>
-                <span ng-if='!enableSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(section.updated)}}" tooltip-position="left"> Changes must be saved!</span>
-                </span>
+                <last-save button-enabled="enableSaveButton" updated="section.updated"></last-save>
                 <div class="pull-right">
                   <button class="btn btn-success" ng-click="submitSection(section, section._id)" ladda="sectionSaving" data-style="expand-left"
                   ng-disabled="enableSaveButton"
@@ -168,10 +165,7 @@
           <div class="col-lg-8 col-sm-8">
           </div>
           <div class="col-lg-4 col-sm-4">
-            <span class="last-save-text text-muted">
-            <span ng-if='enableSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(section.updated)}}" tooltip-position="left"> Saved!</span>
-            <span ng-if='!enableSaveButton'  tooltip-append-to-body="true"  tooltip="Last Saved on: {{getFormatedDate(section.updated)}}" tooltip-position="left"> Changes must be saved!</span>
-            </span>
+            <last-save button-enabled="enableSaveButton" updated="section.updated"></last-save>
             <div class="pull-right">
               <div class="formSubmit">
                 <div class="pull-right">

@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'FormshowCtrl', ($scope, $http, $routeParams, formData, Auth, $location) ->
+.controller 'FormshowCtrl', ($scope, $http, $routeParams, formData, Auth, $location, Utils) ->
 
   $scope.form = {};
   formId = $routeParams.id
@@ -15,6 +15,7 @@ angular.module 'greenApp'
   $scope.popOupOpen = false
   $scope.enableDraft = false
 
+  $scope.getFormatedDate = Utils.getFormatedDate
 
   $scope.getFormLink = (form) ->
     if $scope.isAdmin() and form.status is 'Unpublished'
@@ -176,7 +177,8 @@ angular.module 'greenApp'
       $scope.form.sections[key].active = false
     $scope.form.sections[$index - 1].active = true
 
-  $scope.saveAsDraft = () ->
+  $scope.saveAsDraft = (event) ->
+    event.preventDefault()
     $scope.form.submitted = false
     _saveForm()
 
