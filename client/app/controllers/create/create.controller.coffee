@@ -25,7 +25,7 @@ angular.module 'greenApp'
     }
     {
       type: 'textarea'
-      name: 'Pharagraph'
+      name: 'Paragraph'
       icon: 'paragraph'
     }
     {
