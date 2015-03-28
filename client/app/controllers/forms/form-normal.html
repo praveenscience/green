@@ -12,7 +12,7 @@
     <div class="main-content" ng-if="submissions.length > 0">
       <div class="row-fulid oh">
         <div class="col-lg-12 col-sm-12">
-          <h1 class="main-page-title">Your Submission</h1>
+          <h1 class="main-page-title">Your Submissions</h1>
         </div>
       </div>
       <br>
@@ -45,7 +45,7 @@
             <div class="col-lg-5 col-sm-5">
               <a ng-href="{{getSubmissionLink(submission)}}">{{submission.form.name}}</a>
               <span class="text-info" ng-if="submission.status == 'draft'">
-                <em class="icon icon-wip text-warning" tooltip="Work in progress."tooltip-append-to-body="true"></em>
+                <em class="icon icon-wip text-warning" tooltip="Draft in progress"tooltip-append-to-body="true"></em>
               </span>
               <span class="text-info" ng-if="submission.status == 'submitted' && !isExpired(submission.expires)">
                 <em class="icon icon-check-alt text-success" tooltip="Submitted"tooltip-append-to-body="true"></em>
