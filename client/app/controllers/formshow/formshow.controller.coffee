@@ -85,24 +85,23 @@ angular.module 'greenApp'
 
   _updateScore = (field, section) ->
     if field.type in ['checkbox']
-      selectdOption = _.find field.choices, (v) ->
-        v.selected is true
+      selectdOption = _.filter field.choices, 'selected',  true
+      aquired_points = _.sum(selectdOption, 'points')
     else
-      selectdOption = _.find field.choices, (v) ->
-        field.response is v._id
+      selectdOption = _.find field.choices, (v) -> field.response is v._id
+      aquired_points = selectdOption.points
 
-    if selectdOption instanceof Array
-      selectdOption.map (a, b) -> a.points + b.points
-    else
-      field.aquired_points = 0
-      if selectdOption != undefined
-        if selectdOption.is_na is true
-          field.is_na_reduced = field.possible_points
-          $scope.form.total_points = $scope.form.total_points - field.possible_points
-        else
-          $scope.form.total_points = $scope.form.total_points + (field.is_na_reduced || 0)
-          field.is_na_reduced = 0
-        field.aquired_points = selectdOption.points
+    field.aquired_points = 0
+
+    if selectdOption != undefined
+      if selectdOption.is_na is true
+        field.is_na_reduced = field.possible_points
+        $scope.form.total_points = $scope.form.total_points - field.possible_points
+      else
+        $scope.form.total_points = $scope.form.total_points + (field.is_na_reduced || 0)
+        field.is_na_reduced = 0
+
+      field.aquired_points = aquired_points
 
     _updateSectionScore(section)
 
@@ -140,7 +139,6 @@ angular.module 'greenApp'
         val.showing_popup = false
 
       choice.showing_popup = true
-
 
     _updateScore(field, section)
 

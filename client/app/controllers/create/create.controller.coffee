@@ -165,20 +165,25 @@ angular.module 'greenApp'
     max = _.max(array, (a) -> return a.points)
     max.points
 
+  $scope.findSumOfPoints = (array) -> _.sum(array, 'points')
+
   $scope.calculateSecitonPoints = ->
     return if $scope.form.sections is undefined
     for skey, sval of $scope.form.sections
       $scope.form.sections[skey].bonus_points = 0
       $scope.form.sections[skey].possible_points = 0
       for key, fld of sval.fields
-        if $scope.form.sections[skey].fields[key].type not in ['text', 'textarea']
-          max = $scope.findMaxPoints(fld.choices)
-          $scope.form.sections[skey].fields[key].possible_points = max
-          if max isnt 'NaN'
+        if fld.type not in ['text', 'textarea']
+          pts = $scope.findMaxPoints(fld.choices)
+          if fld.type is 'checkbox'
+            pts = $scope.findSumOfPoints(fld.choices)
+
+          $scope.form.sections[skey].fields[key].possible_points = pts
+          if pts isnt 'NaN'
             if $scope.form.sections[skey].fields[key].is_bonus
-              $scope.form.sections[skey].bonus_points += max
+              $scope.form.sections[skey].bonus_points += pts
             else
-              $scope.form.sections[skey].possible_points += max
+              $scope.form.sections[skey].possible_points += pts
     return
 
   $scope.updateFormPoints = ->
