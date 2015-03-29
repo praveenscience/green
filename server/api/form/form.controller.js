@@ -139,24 +139,19 @@ exports.updatesection = function(req, res) {
 };
 
 exports.removesection = function(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
-  }
-  Form.findById(req.params.id, function(err, form) {
-    if (err) {
-      return handleError(res, err);
-    }
-    if (!form) {
-      return res.send(404);
-    }
+  if (req.body._id) delete req.body._id;
 
-    form.sections.splice(form.sections.indexOf(req.body.sections), 1)
-      // var updated = _.merge(form, req.body);
-    form.save(function(err) {
-      if (err) {
-        return handleError(res, err);
-      }
-      return res.status(200).json(form);
+  Form.findById(req.params.id, function(err, form) {
+    if (err)  return handleError(res, err);
+    if (!form) return res.send(404);
+    form.sections.splice(form.sections.indexOf(req.params.sid), 1)
+    Section.findByIdAndRemove(req.params.sid, function(err, sec) {
+      if(err) return res.send(500, err);
+      sec.remove();
+      form.save(function(err) {
+        if (err) return handleError(res, err);
+        return res.status(200).json(form);
+      });
     });
   });
 }

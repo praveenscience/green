@@ -14,6 +14,6 @@ router.patch('/:id', auth.hasRole('admin'),  controller.update);
 router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 
 router.put('/s/:id', auth.isAuthenticated(), controller.updatesection)
-router.delete('/s/:id', auth.isAuthenticated(), controller.removesection)
+router.delete('/s/:id/:sid', auth.isAuthenticated(), controller.removesection)
 
 module.exports = router;

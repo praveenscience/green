@@ -111,6 +111,7 @@ angular.module 'greenApp'
     if isConfirm
       $http.delete "/api/forms/#{form._id}"
         .success (data, status) ->
+          $scope.forms.splice($scope.forms.indexOf(form), 1)
           if hideSidebar
             $scope.currentForm = null
 

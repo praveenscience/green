@@ -1,6 +1,8 @@
 'use strict';
 
 var mongoose = require('mongoose'),
+  async = require('async'),
+  Section = require('../section/section.model'),
   Schema = mongoose.Schema;
 
 var FormSchema = new Schema({
@@ -55,5 +57,31 @@ var FormSchema = new Schema({
     ref: 'Certificate'
   }]
 });
+
+FormSchema
+  .pre('remove', function(next) {
+    var sections = this.sections;
+
+    if (sections && sections.length > 0) {
+
+      async.each(sections, function(sec, callback) {
+        Section.findByIdAndRemove(sec, function(secerr, secobj) {
+          if (!secerr && secobj) {
+            secobj.remove(function(err) {
+              if (!err) callback();
+            });
+          }
+        })
+      }, function(err) {
+        if (!err) {
+          next();
+        }
+      });
+
+    } else {
+      next()
+    }
+
+  });
 
 module.exports = mongoose.model('Form', FormSchema);

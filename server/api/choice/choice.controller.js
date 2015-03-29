@@ -47,7 +47,7 @@ exports.destroy = function(req, res) {
   Choice.findById(req.params.id, function (err, choice) {
     if(err) { return handleError(res, err); }
     if(!choice) { return res.send(404); }
-    Choice.remove(function(err) {
+    choice.remove(function(err) {
       if(err) { return handleError(res, err); }
       return res.send(204);
     });

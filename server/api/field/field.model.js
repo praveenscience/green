@@ -1,7 +1,9 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+  async = require('async'),
+  Choice = require('../choice/choice.model'),
+  Schema = mongoose.Schema;
 
 var FieldSchema = new Schema({
   label: String,
@@ -15,8 +17,14 @@ var FieldSchema = new Schema({
     default: 0
   },
   condition: {
-    field: { type: String, default: '' },
-    choice: [{ type: String, default: '' }]
+    field: {
+      type: String,
+      default: ''
+    },
+    choice: [{
+      type: String,
+      default: ''
+    }]
   },
   has_condition: {
     type: Boolean,
@@ -30,7 +38,10 @@ var FieldSchema = new Schema({
     type: Boolean,
     default: false
   },
-  choices: [{ type: Schema.Types.ObjectId, ref: 'Choice' }],
+  choices: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Choice'
+  }],
   field_validation: {
     is_required: String,
     type: String,
@@ -39,5 +50,30 @@ var FieldSchema = new Schema({
     message: String
   }
 });
+
+FieldSchema
+  .pre('remove', function(next) {
+    var choices = this.choices;
+    if (choices && choices.length > 0) {
+
+      async.each(choices, function(choId, callback) {
+        Choice.findByIdAndRemove(choId, function(choerr, cho) {
+          if (cho && !choerr) {
+            cho.remove(function(err) {
+              if (!err) callback();
+            });
+          }
+        })
+      }, function(err) {
+        if (!err) {
+          next();
+        }
+      });
+
+    } else {
+      next()
+    }
+  });
+
 
 module.exports = mongoose.model('Field', FieldSchema);
