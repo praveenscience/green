@@ -432,6 +432,12 @@ module.exports = function (grunt) {
           remote: 'openshift',
           branch: 'master'
         }
+      },
+      aws: {
+        options: {
+          remote: 'git@ec2-52-10-198-92.us-west-2.compute.amazonaws.com:green.git',
+          branch: 'master'
+        }
       }
     },
 
