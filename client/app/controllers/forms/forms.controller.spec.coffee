@@ -12,6 +12,3 @@ describe 'Controller: FormsController', ->
     scope = $rootScope.$new()
     FormsController = $controller 'FormsController',
       $scope: scope
-
-  it 'should ...', ->
-    expect(1).toEqual 1

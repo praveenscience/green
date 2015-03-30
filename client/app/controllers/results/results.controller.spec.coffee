@@ -12,6 +12,3 @@ describe 'Controller: ResultsCtrl', ->
     scope = $rootScope.$new()
     ResultsCtrl = $controller 'ResultsCtrl',
       $scope: scope
-
-  it 'should ...', ->
-    expect(1).toEqual 1

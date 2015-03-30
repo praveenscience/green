@@ -12,6 +12,3 @@ describe 'Controller: FormshowCtrl', ->
     scope = $rootScope.$new()
     FormshowCtrl = $controller 'FormshowCtrl',
       $scope: scope
-
-  it 'should ...', ->
-    expect(1).toEqual 1

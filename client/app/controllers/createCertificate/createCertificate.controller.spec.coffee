@@ -12,6 +12,3 @@ describe 'Controller: CreatecertificateCtrl', ->
     scope = $rootScope.$new()
     CreatecertificateCtrl = $controller 'CreatecertificateCtrl',
       $scope: scope
-
-  it 'should ...', ->
-    expect(1).toEqual 1
