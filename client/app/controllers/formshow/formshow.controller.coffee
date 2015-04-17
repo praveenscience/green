@@ -137,11 +137,10 @@ angular.module 'greenApp'
     if (field.type is 'checkbox')
       for key, val of field.choices
         val.showing_popup = false
-
       choice.showing_popup = true
-
     _updateScore(field, section)
 
+    ## Show hide conditional field
     conditionOption = _.find field.choices, (v) ->
       if field.type in ['checkbox']
         v.selected is true and v.is_condition is true
@@ -149,11 +148,11 @@ angular.module 'greenApp'
         v.is_condition is true and field.response is v._id
 
     if(conditionOption)
-      fieldIndex = _.find section.fields, (v) ->
-        v._id is conditionOption.show_field
-      if fieldIndex
-
-        fieldIndex.has_condition = false
+      fieldIndexs = []
+      section.fields.forEach (val, index) ->
+        if(val._id in conditionOption.show_field)
+          fieldIndexs.push(val)
+          section.fields[index].has_condition = false
     else
       for i, val of section.fields
         if val.condition.field is field._id

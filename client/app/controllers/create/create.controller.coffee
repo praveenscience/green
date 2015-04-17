@@ -76,7 +76,7 @@ angular.module 'greenApp'
       is_condition: false
       has_helptext: false
       help_text: ''
-      show_field: ''
+      show_field: []
       is_na: false
     ]
     field_validation:
@@ -92,7 +92,7 @@ angular.module 'greenApp'
     points: 0
     focus: true
     is_condition: false
-    show_field: ''
+    show_field: []
     is_na: false
     has_helptext: false
     help_text: ''
@@ -102,7 +102,7 @@ angular.module 'greenApp'
       label: 'No'
       focus: true
       is_condition: false
-      show_field: ''
+      show_field: []
       points: 0
       is_na: false
       has_helptext: false
@@ -111,7 +111,7 @@ angular.module 'greenApp'
       label: 'Yes'
       focus: true
       is_condition: false
-      show_field: ''
+      show_field: []
       points: 1
       is_na: false
       has_helptext: false
@@ -120,7 +120,7 @@ angular.module 'greenApp'
       label: 'Never or None'
       focus: true
       is_condition: false
-      show_field: ''
+      show_field: []
       points: 1
       is_na: false
       has_helptext: false
@@ -129,7 +129,7 @@ angular.module 'greenApp'
       label: 'Always or All'
       focus: false
       is_condition: false
-      show_field: ''
+      show_field: []
       points: 1
       is_na: false
       has_helptext: false
@@ -138,7 +138,7 @@ angular.module 'greenApp'
       label: 'Sometimes or Some'
       focus: false
       is_condition: false
-      show_field: ''
+      show_field: []
       points: 1
       is_na: false
       has_helptext: false
@@ -147,7 +147,7 @@ angular.module 'greenApp'
       label: 'Not Applicable'
       focus: false
       is_condition: false
-      show_field: ''
+      show_field: []
       points: 0
       is_na: true
       has_helptext: false

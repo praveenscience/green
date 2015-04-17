@@ -24,7 +24,7 @@ var ChoiceSchema = new Schema({
     default: false
   },
   show_field: {
-    type: String,
+    type: Array,
     default: ''
   }
 });

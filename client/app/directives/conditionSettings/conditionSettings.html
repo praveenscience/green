@@ -1,6 +1,6 @@
 <div class="field-condition">
   <div class="row field-condition-flag">
-    <input type="checkbox" class="checkbox-small" name="addClarification" type="checkbox" id="addClarification" ng-model="field.has_condition">
+    <input type="checkbox" class="checkbox-small" name="addClarification" type="checkbox" id="addClarification" ng-model="field.has_condition" ng-change="removeAddedField(field, section)">
     &nbsp;
     <label for="addClarification" class="smallText"> Enter a condition to display this question</label>
   </div>
