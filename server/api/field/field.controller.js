@@ -54,27 +54,13 @@ exports.update = function(req, res) {
 
 // Deletes a field from the DB.
 exports.destroy = function(req, res) {
-  Field.findById(req.params.id, function (err, field) {
+  Field.findByIdAndRemove(req.params.id, function (err, field) {
     if(err) { return handleError(res, err); }
     if(!field) { return res.send(404); }
-    var choices = field.choices
-
-    if(choices.length > 0) {
-      Choice.find({_id: {$in: choices}})
-        .remove().exec(function(err) {
-          if (err) { return handleError(res, err); }
-          field.remove(function(err) {
-            if(err) { return handleError(res, err); }
-            return res.send(204);
-          });
-        });
-      }
-    else {
-      field.remove(function(err) {
-        if(err) { return handleError(res, err); }
-        return res.send(204);
-      });
-    }
+    field.remove(function(err) {
+      if(err) { return handleError(res, err); }
+      return res.send(204);
+    });
   });
 };
 

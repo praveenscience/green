@@ -51,29 +51,26 @@ var FieldSchema = new Schema({
   }
 });
 
-FieldSchema
-  .pre('remove', function(next) {
-    var choices = this.choices;
-    if (choices && choices.length > 0) {
-
-      async.each(choices, function(choId, callback) {
-        Choice.findByIdAndRemove(choId, function(choerr, cho) {
-          if (cho && !choerr) {
-            cho.remove(function(err) {
-              if (!err) callback();
-            });
-          }
-        })
-      }, function(err) {
-        if (!err) {
-          next();
+FieldSchema.pre('remove', function(next) {
+  var choices = this.choices;
+  if (choices && choices.length > 0) {
+    async.each(choices, function(choId, callback) {
+      Choice.findByIdAndRemove(choId, function(choerr, cho) {
+        if (cho && !choerr) {
+          cho.remove(function(err) {
+            if (!err) callback();
+          });
         }
-      });
-
-    } else {
-      next()
-    }
-  });
+      })
+    }, function(err) {
+      if (!err) {
+        next();
+      }
+    });
+  } else {
+    next()
+  }
+});
 
 
 module.exports = mongoose.model('Field', FieldSchema);

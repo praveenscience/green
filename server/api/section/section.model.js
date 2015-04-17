@@ -30,28 +30,27 @@ var SectionSchema = new Schema({
 });
 
 
-SectionSchema
-  .pre('remove', function(next) {
-    var fields = this.fields;
+SectionSchema.pre('remove', function(next) {
+  var fields = this.fields;
 
-    if (fields && fields.length > 0) {
-      async.each(fields, function(fldId, callback) {
-        Field.findByIdAndRemove(fldId, function(flderr, fld) {
-          if (fld && !flderr) {
-            fld.remove(function(err) {
-              if (!err) callback();
-            });
-          }
-        })
-      }, function(err) {
-        if (!err) {
-          next();
+  if (fields && fields.length > 0) {
+    async.each(fields, function(fldId, callback) {
+      Field.findByIdAndRemove(fldId, function(flderr, fld) {
+        if (fld && !flderr) {
+          fld.remove(function(err) {
+            if (!err) callback();
+          });
         }
-      });
+      })
+    }, function(err) {
+      if (!err) {
+        next();
+      }
+    });
 
-    } else {
-      next()
-    }
-  });
+  } else {
+    next()
+  }
+});
 
 module.exports = mongoose.model('Section', SectionSchema);
