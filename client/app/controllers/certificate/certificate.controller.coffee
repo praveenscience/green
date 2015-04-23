@@ -13,8 +13,6 @@ angular.module 'greenApp'
     logo: null
     sign: null
 
-
-
   $scope.init = ->
     _loadCertificates()
 

@@ -1,48 +1,79 @@
 <form class="form" ng-submit="ok()">
-<div class="modal-header">
+  <div class="modal-header">
     <h3 class="modal-title"> <em class="icon icon-trophy"></em> Add/Modify new certificate</h3>
-</div>
-<div class="modal-body">
-
-    <div class="form-group">
-      <label for="certificate-name">Certificate Name</label>
-      <input type="text" class="form-control" required ng-model="certificate.name"/>
-    </div>
+  </div>
+  <div class="modal-body">
     <div class="row">
-      <div class="form-group col-lg-6 col-lg-6">
-        <label for="certificate-min">Min</label>
-        <input type="number" class="form-control" required ng-model="certificate.min"/>
+      <div class="col-lg-6 col-md-6">
+        <div class="certificate preview">
+          <h1 class="certificate-heading">Green Laboratory Certification</h1>
+          <div class="certificate-body">
+            <div class="certificate-logo">
+              <img ng-src="{{certificate.logo}}" alt="" ng-if="certificate.logo">
+              <img src="assets/images/certf/default.png" alt="" ng-if="!certificate.logo">
+            </div>
+            <div class="certificate-content">
+              {{certificate.content}}
+              <span ng-if="!certificate.content">
+                The University of Washington Environmental Stewardship and Sustainability Office certifies <span class="certificate-name"> Lab Name </span> as a Green Laboratory.
+              </span>
+            </div>
+          </div>
+          <div class="certificate-footer">
+            <div class="certificate-sign">
+              <img ng-src="{{certificate.sign}}" alt="" ng-if="certificate.sign">
+              <img src="assets/images/certf/default-sign.png" alt="" ng-if="!certificate.sign">
+              <span ng-if="!certificate.designation" class="text-muted">Designation goes here</span>
+              <span ng-if="certificate.designation">
+                {{certificate.designation}}
+              </span>
+            </div>
+            <div class="certificate-date">
+              <span>{{formattedDate()}}</span>
+              <br> Date
+            </div>
+          </div>
+          <div class="certificate-bottom-border"></div>
+          <div class="certificate-caption">Sustainability: It's in our nature</div>
+        </div>
       </div>
-      <div class="form-group col-lg-6 col-lg-6">
-        <label for="certificate-max">Max</label>
-        <input type="number" class="form-control" required ng-model="certificate.max"/>
+      <div class="col-lg-6 col-md-6">
+        <div class="form-group">
+          <label for="certificate-name">Certificate Name</label>
+          <input type="text" class="form-control" required ng-model="certificate.name" />
+        </div>
+        <div class="row">
+          <div class="form-group col-lg-6 col-lg-6">
+            <label for="certificate-min">Min</label>
+            <input type="number" class="form-control" required ng-model="certificate.min" />
+          </div>
+          <div class="form-group col-lg-6 col-lg-6">
+            <label for="certificate-max">Max</label>
+            <input type="number" class="form-control" required ng-model="certificate.max" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="certificate-content">Content</label>
+          <textarea type="text" class="form-control vert" required ng-model="certificate.content" style="min-height: 100px;" placeholder="Content goes here, e.g.. The University of Washington Environmental Stewardship and Sustainability Office certifies {Lab Name} as a Green Laboratory."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="certificate-logo">Logo URL</label>
+          <input type="text" class="form-control" required ng-model="certificate.logo" />
+        </div>
+        <div class="form-group">
+          <label for="certificate-sign">Signature URL</label>
+          <input type="text" class="form-control" required ng-model="certificate.sign" />
+        </div>
+        <div class="form-group">
+          <label for="certificate-designation">Designation of the signer</label>
+          <textarea type="text" class="form-control vert" required ng-model="certificate.designation" style="min-height: 50px;" placeholder="Associate Vice President: Ruth Johnston University of Washington Finance and Facilities"></textarea>
+        </div>
       </div>
     </div>
-   <div class="form-group">
-      <label for="certificate-content">Content</label>
-      <textarea type="text" class="form-control vert" required ng-model="certificate.content" style="min-height: 100px;"></textarea>
-    </div>
-
-    <div class="form-group">
-      <label for="certificate-logo">Logo URL</label>
-      <input type="text" class="form-control" required ng-model="certificate.logo"/>
-      <img ng-src="{{certificate.logo}}" alt="" style="height: 100px;" ng-if="certificate.logo">
-    </div>
-    <div class="form-group">
-      <label for="certificate-sign">Signature URL</label>
-      <input type="text" class="form-control" required ng-model="certificate.sign"/>
-      <br>
-      <img ng-src="{{certificate.sign}}" alt="" style="width: 140px;" ng-if="certificate.sign">
-    </div>
-   <div class="form-group">
-      <label for="certificate-designation">Designation of the signer</label>
-      <textarea type="text" class="form-control vert" required ng-model="certificate.designation" style="min-height: 50px;"></textarea>
-    </div>
-</div>
-<div class="modal-footer">
-  <a class="btn btn-link" ng-click="cancel()">Cancel</a>
-  &nbsp;&nbsp;&nbsp;
-  <button class="btn btn-primary" type="submit" ng-if="certificate._id != undefined">Update</button>
-  <button class="btn btn-primary" type="submit" ng-if="certificate._id == undefined">Save &amp; Add</button>
-</div>
+  </div>
+  <div class="modal-footer">
+    <a class="btn btn-link" ng-click="cancel()">Cancel</a> &nbsp;&nbsp;&nbsp;
+    <button class="btn btn-primary" type="submit" ng-if="certificate._id != undefined">Update</button>
+    <button class="btn btn-primary" type="submit" ng-if="certificate._id == undefined">Save &amp; Add</button>
+  </div>
 </form>

@@ -2,7 +2,6 @@
   <div ng-include="'components/sidebar/sidebar.html'"></div>
   <div class="col-lg-10 col-sm-10 main-content-wrap">
     <div class="main-content">
-
       <div class="row">
         <div class="col-lg-12 col-sm-12" ng-if="!certificate">
           <div class="" ng-bind-html="form.no_certificate"></div>
@@ -37,39 +36,33 @@
                 </div>
               </div>
             </div>
-
             <div class="clearfix"></div>
             <!-- Certificate -->
             <div class="certificate" id="certificate">
-
-              <center>
-                <h1 class="certificate-heading">Green Laboratory Certification</h1>
-                <center>
-                  <div class="certificate-body">
-                    <div class="certificate-logo">
-                      <img ng-src="{{certificate.logo}}" alt="">
-                    </div>
-                    <div class="certificate-content">
-                      The University of Washington Environmental Stewardship and Sustainability Office certifies <span class="certificate-name"> <input type="text" ng-model="lab_name"> </span> as a Green Laboratory.
-                    </div>
-                  </div>
-                  <div class="certificate-footer">
-                    <div class="certificate-sign">
-                      <img ng-src="{{certificate.sign}}" alt="">
-                      <span>
+              <h1 class="certificate-heading">Green Laboratory Certification</h1>
+              <div class="certificate-body">
+                <div class="certificate-logo">
+                  <img ng-src="{{certificate.logo}}" alt="">
+                </div>
+                <div class="certificate-content">
+                  The University of Washington Environmental Stewardship and Sustainability Office certifies <span class="certificate-name"> <input type="text" ng-model="lab_name"> </span> as a Green Laboratory.
+                </div>
+              </div>
+              <div class="certificate-footer">
+                <div class="certificate-sign">
+                  <img ng-src="{{certificate.sign}}" alt="">
+                  <span>
                 Associate Vice President: Ruth Johnston <br>
                 University of Washington Finance and Facilities
               </span>
-                    </div>
-                    <div class="certificate-date">
-                      <span>{{formattedDate()}}</span>
-                      <br> Date
-                    </div>
-                  </div>
-
-                  <div class="certificate-bottom-border"></div>
-                  <div class="certificate-caption">Sustainability: It's in our nature</div>
-
+                </div>
+                <div class="certificate-date">
+                  <span>{{formattedDate()}}</span>
+                  <br> Date
+                </div>
+              </div>
+              <div class="certificate-bottom-border"></div>
+              <div class="certificate-caption">Sustainability: It's in our nature</div>
             </div>
             <!-- Social sharing icons -->
             <div class="success-sharing">
@@ -84,8 +77,6 @@
                 </li>
               </ul>
             </div>
-
-
           </div>
         </div>
       </div>
