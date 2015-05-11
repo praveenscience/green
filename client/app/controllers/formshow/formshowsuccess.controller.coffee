@@ -25,8 +25,8 @@ angular.module 'greenApp'
 
   _showAlert = ->
     SweetAlert.swal {
-      title: 'Name '
-      text: 'Your lab/office name that should be printed on certificate'
+      title: 'Certificate name '
+      text: 'Enter the name of the organization that should be printed on your certificate:'
       type: 'input'
       showCancelButton: true
       closeOnConfirm: false
