@@ -53,6 +53,7 @@ angular.module 'greenApp'
           choices: [{
             label: "Option 1"
             points: 0
+            seq: 0
           }]
           field_validation:
             is_required: false

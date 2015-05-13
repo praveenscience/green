@@ -15,6 +15,10 @@ var ChoiceSchema = new Schema({
     type: String,
     default: ''
   },
+  seq: {
+    type: Number,
+    default: 0
+  },
   is_na: {
     type: Boolean,
     default: false

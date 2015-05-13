@@ -28,7 +28,7 @@
       <div class="col-lg-1">
       </div>
       <div class="col-lg-10">
-        <div class="multipleOptions" ng-repeat="choice in field.choices" ng-class="{choicena: choice.is_na}">
+        <div class="multipleOptions" ng-repeat="choice in field.choices | orderBy:'seq'" ng-class="{choicena: choice.is_na}">
           <span class="optionIndex">{{$index + 1}}. </span>
           <input type="text" values="option1" focus-on-show class="form-control" ng-model="choice.label" ng-focus="choice.focus">
           <input type="number" values="0" class="form-control pointsInput" ng-model="choice.points" min='0'>
@@ -67,7 +67,7 @@
       <div class="col-lg-1">
       </div>
       <div class="col-lg-10">
-        <div class="multipleOptions" ng-repeat="choice in field.choices" ng-class="{choicena: choice.is_na}">
+        <div class="multipleOptions" ng-repeat="choice in field.choices | orderBy:'seq'" ng-class="{choicena: choice.is_na}">
           <input name="optionsRadio" type="radio" id="option1" class="fakeRadioCheckbox"  tabindex="-1">
           <input type="text" focus-on-show values="option1" class="form-control" ng-model="choice.label" ng-focus="choice.focus">
           <input type="number" values="0" class="form-control pointsInput" ng-model="choice.points" min='0'>
@@ -104,7 +104,7 @@
       <div class="col-lg-1">
       </div>
       <div class="col-lg-10">
-        <div class="multipleOptions" ng-repeat="choice in field.choices" ng-class="{choicena: choice.is_na}">
+        <div class="multipleOptions" ng-repeat="choice in field.choices | orderBy:'seq'" ng-class="{choicena: choice.is_na}">
           <input name="optionsCheckboxes" type="checkBox" id="option1" class="fakeRadioCheckbox" tabindex="-1" >
           <input type="text" focus-on-show values="option1" class="form-control" ng-model="choice.label" ng-focus="choice.focus">
           <input type="number" values="0" class="form-control pointsInput" ng-model="choice.points" min='0'>

@@ -9,6 +9,7 @@ angular.module 'greenApp'
   formId = $routeParams.id
   $scope.originalForm = {}
   $scope.form = []
+  $scope.seciton = []
   $scope.sections = []
   $scope.sectionSaving = false
   $scope.enableSaveButton = true
@@ -78,6 +79,7 @@ angular.module 'greenApp'
       help_text: ''
       show_field: []
       is_na: false
+      seq: 0
     ]
     field_validation:
       is_required: false
@@ -96,6 +98,7 @@ angular.module 'greenApp'
     is_na: false
     has_helptext: false
     help_text: ''
+    seq: 0
 
   customChoices =
     N:
@@ -107,6 +110,7 @@ angular.module 'greenApp'
       is_na: false
       has_helptext: false
       help_text: ''
+      seq: 0
     Y:
       label: 'Yes'
       focus: true
@@ -116,6 +120,7 @@ angular.module 'greenApp'
       is_na: false
       has_helptext: false
       help_text: ''
+      seq: 0
     NE:
       label: 'Never or None'
       focus: true
@@ -125,6 +130,7 @@ angular.module 'greenApp'
       is_na: false
       has_helptext: false
       help_text: ''
+      seq: 0
     A:
       label: 'Always or All'
       focus: false
@@ -134,6 +140,7 @@ angular.module 'greenApp'
       is_na: false
       has_helptext: false
       help_text: ''
+      seq: 0
     S:
       label: 'Sometimes or Some'
       focus: false
@@ -143,6 +150,7 @@ angular.module 'greenApp'
       is_na: false
       has_helptext: false
       help_text: ''
+      seq: 0
     NA:
       label: 'Not Applicable'
       focus: false
@@ -152,11 +160,16 @@ angular.module 'greenApp'
       is_na: true
       has_helptext: false
       help_text: ''
+      seq: 0
 
   $scope.sortableOptions =
     containment: "parent"
+    placeholder: "ui-state-highlight"
     stop: (e, ui) ->
       $scope.fixSequence()
+      $timeout ->
+        $scope.submitCurrentSection()
+      , 100
 
   $scope.getFormatedDate = Utils.getFormatedDate
   $scope.pluralize = Utils.pluralize
@@ -247,6 +260,11 @@ angular.module 'greenApp'
       $scope.seciton.fields.forEach (field, index) ->
         field.sequence = index
 
+  $scope.fixChoiceSequence = (field) ->
+    if field.choices.length isnt 0
+      field.choices.forEach (choice, choindex) ->
+        choice.seq = choindex
+
   $scope.addHelptext = (choice) ->
     choice.has_helptext = true
 
@@ -255,6 +273,7 @@ angular.module 'greenApp'
     choice.help_text = ''
 
   $scope.addField = (section) ->
+    field.sequence = section.fields.length
     formData.addField angular.copy(field)
       .success (data, status) ->
         newField = angular.copy(field)
@@ -297,16 +316,24 @@ angular.module 'greenApp'
   $scope.toggleField = (field, section) ->
     field.edit_mode = !field.edit_mode;
     $scope.submitSection(section, section._id)
+    $scope.fixSequence()
 
   $scope.isValidField = (field) ->
     field.label not in [undefined, '', null] and field.type not in ['', undefined]
 
   $scope.addChoice = (field) ->
     field.choices = [] if field.choices is undefined
+    choice.seq = field.choices.length
     field.choices.push angular.copy(choice)
+    $scope.fixChoiceSequence(field)
 
   $scope.removeChoice = (field, index) ->
     field.choices.splice index, 1
+    $scope.fixChoiceSequence(field)
+
+  $scope.submitCurrentSection = ->
+    currSection = _.find $scope.form.sections, (v) -> v.active is true
+    $scope.submitSection(currSection, currSection._id)
 
   $scope.submitSection = (section, sectionId) ->
     $scope.sectionSaving = true
@@ -315,7 +342,6 @@ angular.module 'greenApp'
         currentSectionIndex =  _.findIndex $scope.form.sections, (v) -> v._id is sectionId
         $scope.form.sections[currentSectionIndex].fields = angular.copy(data.fields)
         $scope.submitForm($scope.form)
-
         $timeout ->
           $scope.sectionSaving = false
           $scope.enableSaveButton = true
