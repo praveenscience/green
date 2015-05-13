@@ -316,7 +316,6 @@ angular.module 'greenApp'
   $scope.toggleField = (field, section) ->
     field.edit_mode = !field.edit_mode;
     $scope.submitSection(section, section._id)
-    $scope.fixSequence()
 
   $scope.isValidField = (field) ->
     field.label not in [undefined, '', null] and field.type not in ['', undefined]
@@ -340,12 +339,23 @@ angular.module 'greenApp'
     sectionData.create(section)
       .success (data, status) ->
         currentSectionIndex =  _.findIndex $scope.form.sections, (v) -> v._id is sectionId
-        $scope.form.sections[currentSectionIndex].fields = angular.copy(data.fields)
+        fields = _.sortBy(data.fields, 'sequence')
+        $scope.form.sections[currentSectionIndex].fields = angular.copy(fields)
         $scope.submitForm($scope.form)
         $timeout ->
           $scope.sectionSaving = false
           $scope.enableSaveButton = true
         , 100
+
+  $scope.removeForm = ->
+    SweetAlert.swal(Utils.getAlertSettings('form'), (isConfirm) ->
+      _handleFormDelete(isConfirm))
+
+  _handleFormDelete = (isConfirm) ->
+    if isConfirm
+      $http.delete "/api/forms/#{$scope.form._id}"
+        .success (data, status) ->
+          $location.path('#/forms')
 
   $scope.submitForm = (form) ->
     $scope.formSaving = true
