@@ -132,7 +132,6 @@ exports.update = function(req, res) {
       default:
         return null
     }
-    console.log(now);
     return now;
   }
 

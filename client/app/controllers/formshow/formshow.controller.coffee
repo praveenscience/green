@@ -121,7 +121,6 @@ angular.module 'greenApp'
 
   $scope.watchResponses = (field, section, choice) ->
     $scope.enableDraft = false
-
     for key, val of section.fields
       val.showing_popup = false
 
@@ -147,17 +146,18 @@ angular.module 'greenApp'
       else
         v.is_condition is true and field.response is v._id
 
+    for i, val of section.fields
+      if val.condition.field is field._id
+        val.has_condition = true
+        val.response = ''
+
     if(conditionOption)
       fieldIndexs = []
       section.fields.forEach (val, index) ->
         if(val._id in conditionOption.show_field)
           fieldIndexs.push(val)
           section.fields[index].has_condition = false
-    else
-      for i, val of section.fields
-        if val.condition.field is field._id
-          val.has_condition = true
-          val.response = ''
+
 
   $scope.toggleClass = (section) ->
     for key, val of $scope.form.sections

@@ -28,10 +28,9 @@ angular.module 'greenApp'
         for i, val of section.fields[condFieldIndex].choices
           choice = section.fields[condFieldIndex].choices[i]
           if val._id in field.condition.choice
-            choice.is_condition = true
-            if choice.show_field.indexOf(field._id) < 0
-              choice.show_field.push(field._id)
+            section.fields[condFieldIndex].choices[i].is_condition = true
+            if section.fields[condFieldIndex].choices[i].show_field.indexOf(field._id) < 0
+              section.fields[condFieldIndex].choices[i].show_field.push(field._id)
           else
-            choice.show_field.splice(choice.show_field.indexOf(field._id), 1)
             if choice.show_field.length is 0
-              choice.is_condition = false
+              section.fields[condFieldIndex].choices[i].is_condition = false
