@@ -3,9 +3,14 @@ lock '3.4.0'
 
 set :application, 'green'
 
-set :repo_url, 'git@ec2-52-10-198-92.us-west-2.compute.amazonaws.com:green.git'
+set :repo_url, '/data/repo/green.git'
 
-set :default_env, { path: "$PATH" }
+set :default_env, {
+  'PATH' => "/home/node/bin:$PATH",
+  'NODE_ENV'=> 'production'
+}
+
+set :user, "siddu"
 
 set :deploy_via, :copy
 
@@ -13,7 +18,7 @@ set :deploy_via, :copy
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '~/green'
+set :deploy_to, '/data/www/green'
 
 # Default value for :scm is :git
 set :scm, :git
@@ -37,26 +42,37 @@ set :format, :pretty
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+set :keep_releases, 5
 
 namespace :deploy do
+
+  desc 'Start the serive...'
   task :start do
-    on roles(:app), in: :sequence do
-      run "sudo restart #{application} || sudo start #{application}"
+    on roles(:app) do
+      within release_path do
+        #run "sudo restart #{application} || sudo start #{application}"
+        execute "forever stopall"
+        execute "forever start -l /data/logs/node.log -a /data/www/green/current/server/app.js >> /data/logs/node.log 2>&1"
+      end
     end
   end
 
-  task :stop do
-    on roles(:app), in: :sequence do
-      run "sudo stop #{application}"
-    end
-  end
 
-  task :restart do
-    on roles(:app), in: :sequence do
-      start
-    end
-  end
+
+  # task :stop do
+  #   on roles(:app), in: :sequence do
+  #     run "sudo stop #{application}"
+  #   end
+  # end
+
+  # task :restart do
+  #   on roles(:app), in: :sequence do
+  #     start
+  #   end
+  # end
+
 end
+
+before 'deploy:finished', 'deploy:start'
 
 

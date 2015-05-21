@@ -438,6 +438,12 @@ module.exports = function (grunt) {
           remote: 'git@ec2-52-10-198-92.us-west-2.compute.amazonaws.com:green.git',
           branch: 'master'
         }
+      },
+      green: {
+        options: {
+          remote: 'siddu@greenuw-certs1.s.uw.edu:/data/repo/green.git',
+          branch: 'master'
+        }
       }
     },
 
