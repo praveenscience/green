@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose');
 var passport = require('passport');
+var uwshib = require('passport-uwshib');
 var config = require('../config/environment');
 var jwt = require('jsonwebtoken');
 var expressJwt = require('express-jwt');

@@ -46,6 +46,9 @@ var all = {
     clientSecret: process.env.TWITTER_SECRET || 'secret',
     callbackURL:  (process.env.DOMAIN || '') + '/auth/twitter/callback'
   },
+  uw: {
+    domain: process.env.DOMAIN || 'green-certification.uw.edu'
+  }
 
 };
 
