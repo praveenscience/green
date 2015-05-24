@@ -173,6 +173,21 @@
     width: 18px;
   }
 
+  .draghandle.v-draghandle {
+    height: 6px;
+    width: 18px;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+    display: inline-block;
+    float: left;
+    margin-top: 14px;
+    margin-right: 5px;
+    cursor: move;
+  }
+
   .formField {
     padding: 10px 30px 10px 10px;
     font-size: 14px;
@@ -413,6 +428,13 @@ a.showtip {
 .ui-state-highlight {
   height: 130px;
   margin: 20px 0;
+  background-color: #fbf9ee;
+  border: 1px dashed #ECD967;
+}
+
+.ui-state-option-highlight {
+  height: 50px;
+  margin: 10px 0;
   background-color: #fbf9ee;
   border: 1px dashed #ECD967;
 }

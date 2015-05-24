@@ -9,12 +9,13 @@ angular.module 'greenApp'
   formId = $routeParams.id
   $scope.originalForm = {}
   $scope.form = []
-  $scope.seciton = []
+  $scope.section = []
   $scope.sections = []
   $scope.sectionSaving = false
   $scope.enableSaveButton = true
   $scope.formSaving = false
   $scope.enableFormSaveButton = true
+  $scope.currentChoices = []
   $scope.formSettings =
     active: false
 
@@ -171,6 +172,19 @@ angular.module 'greenApp'
         $scope.submitCurrentSection()
       , 100
 
+  $scope.optionsSortableOptions =
+    containment: 'parent'
+    placeholder: 'ui-state-option-highlight'
+    handle: '> .draghandle'
+    beforeStop: (e, ui) ->
+      $scope.currentField = _.find($scope.section.fields, (v) -> v._id == ui.item[0].dataset.field)
+      for index, val of $scope.currentField.choices
+        val.seq = index
+    stop: (e, ui) ->
+      $timeout ->
+        $scope.submitCurrentSection()
+      , 100
+
   $scope.getFormatedDate = Utils.getFormatedDate
   $scope.pluralize = Utils.pluralize
 
@@ -180,7 +194,7 @@ angular.module 'greenApp'
 
   $scope.findSumOfPoints = (array) -> _.sum(array, 'points')
 
-  $scope.calculateSecitonPoints = ->
+  $scope.calculateSectionPoints = ->
     return if $scope.form.sections is undefined
     for skey, sval of $scope.form.sections
       $scope.form.sections[skey].bonus_points = 0
@@ -214,7 +228,7 @@ angular.module 'greenApp'
       .success (data) ->
         $scope.originalForm = angular.copy(data)
         $scope.form = data
-        $scope.seciton = $scope.form.sections[0]
+        $scope.section = $scope.form.sections[0]
 
   $scope.addSectionToForm = (section, formId) ->
     $http.put("api/forms/s/#{formId}", {
@@ -248,7 +262,7 @@ angular.module 'greenApp'
 
   $scope.loadSection = (section) ->
     section.active = true
-    $scope.seciton = section
+    $scope.section = section
     $scope.formSettings.active = false
 
   $scope.loadFormSettings = ->
@@ -256,8 +270,8 @@ angular.module 'greenApp'
     $scope.formSettings.active = true
 
   $scope.fixSequence = ->
-    if $scope.seciton.fields.length isnt 0
-      $scope.seciton.fields.forEach (field, index) ->
+    if $scope.section.fields.length isnt 0
+      $scope.section.fields.forEach (field, index) ->
         field.sequence = index
 
   $scope.fixChoiceSequence = (field) ->
@@ -391,7 +405,7 @@ angular.module 'greenApp'
 
   $scope.$watch('form.sections', (old, newValue) ->
     $scope.enableSaveButton = false
-    $scope.calculateSecitonPoints()
+    $scope.calculateSectionPoints()
     $scope.updateFormPoints()
   , true)
 

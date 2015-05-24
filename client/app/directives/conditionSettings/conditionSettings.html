@@ -16,7 +16,7 @@
       <label for="">Option</label>
         <ui-select multiple ng-model="field.condition.choice" theme="select2" style="width: 300px;" ng-change='watchOptionsChange(field, section)'>
           <ui-select-match placeholder="Select options...">{{$item.label}}</ui-select-match>
-          <ui-select-choices repeat="opt._id as opt in selectedField.choices">
+          <ui-select-choices repeat="opt._id as opt in selectedField.choices | orderBy:'seq'">
             {{opt.label}}
           </ui-select-choices>
         </ui-select>
