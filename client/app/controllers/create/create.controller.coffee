@@ -72,7 +72,7 @@ angular.module 'greenApp'
       field: ''
       choice: ''
     choices: [
-      label: "Option"
+      label: ""
       points: 0
       focus: true
       is_condition: false
@@ -91,7 +91,7 @@ angular.module 'greenApp'
 
   # Choices
   choice =
-    label: "Option"
+    label: ""
     points: 0
     focus: true
     is_condition: false

@@ -51,7 +51,7 @@ angular.module 'greenApp'
             field: ''
             choice: ''
           choices: [{
-            label: "Option 1"
+            label: ""
             points: 0
             seq: 0
           }]
