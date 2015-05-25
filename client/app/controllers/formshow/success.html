@@ -45,16 +45,18 @@
                   <img ng-src="{{certificate.logo}}" alt="">
                 </div>
                 <div class="certificate-content">
-                  The University of Washington Environmental Stewardship and Sustainability Office certifies <span class="certificate-name"> <input type="text" ng-model="lab_name"> </span> as a Green Laboratory.
+                  <p>
+                    {{certificate.content.split('\{name\}')[0]}}
+                      <span class="certificate-name" contenteditable ng-bind-html="lab_name"></span>
+                    {{certificate.content.split('\{name\}')[1]}}
+                  </p>
                 </div>
               </div>
               <div class="certificate-footer">
                 <div class="certificate-sign">
                   <img ng-src="{{certificate.sign}}" alt="">
-                  <span>
-                Associate Vice President: Ruth Johnston <br>
-                University of Washington Finance and Facilities
-              </span>
+                  <span ng-bind-html="certificate.designation | nl2br">
+                  </span>
                 </div>
                 <div class="certificate-date">
                   <span>{{formattedDate()}}</span>

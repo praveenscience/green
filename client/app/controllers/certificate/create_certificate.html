@@ -15,7 +15,7 @@
             <div class="certificate-content">
               {{certificate.content}}
               <span ng-if="!certificate.content">
-                The University of Washington Environmental Stewardship and Sustainability Office certifies <span class="certificate-name"> Lab Name </span> as a Green Laboratory.
+                The University of Washington Environmental Stewardship and Sustainability Office certifies <span class="certificate-name"> Name </span> as a Green Laboratory.
               </span>
             </div>
           </div>
@@ -54,7 +54,7 @@
         </div>
         <div class="form-group">
           <label for="certificate-content">Content</label>
-          <textarea type="text" class="form-control vert" required ng-model="certificate.content" style="min-height: 100px;" placeholder="Content goes here, e.g.. The University of Washington Environmental Stewardship and Sustainability Office certifies {Lab Name} as a Green Laboratory."></textarea>
+          <textarea type="text" class="form-control vert" required ng-model="certificate.content" style="min-height: 100px;" placeholder="Content goes here, e.g.. The University of Washington Environmental Stewardship and Sustainability Office certifies {name} as a Green Laboratory."></textarea>
         </div>
         <div class="form-group">
           <label for="certificate-logo">Logo URL</label>
