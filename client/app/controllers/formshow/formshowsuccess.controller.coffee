@@ -21,7 +21,7 @@ angular.module 'greenApp'
 
   $scope.init = ->
     _loadFormData()
-    _showAlert()
+    _showAlert() if $scope.certificate
 
   _showAlert = ->
     SweetAlert.swal {
