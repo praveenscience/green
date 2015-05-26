@@ -206,7 +206,7 @@ angular.module 'greenApp'
             pts = $scope.findSumOfPoints(fld.choices)
 
           $scope.form.sections[skey].fields[key].possible_points = pts
-          if pts isnt 'NaN'
+          if pts isnt 'NaN' and !$scope.form.sections[skey].fields[key].has_condition
             if $scope.form.sections[skey].fields[key].is_bonus
               $scope.form.sections[skey].bonus_points += pts
             else

@@ -96,28 +96,43 @@ angular.module 'greenApp'
     if selectdOption != undefined
       if selectdOption.is_na is true
         field.is_na_reduced = field.possible_points
-        $scope.form.total_points = $scope.form.total_points - field.possible_points
+        field.possible_points = 0
+        # $scope.form.total_points = $scope.form.total_points - field.possible_points
       else
-        $scope.form.total_points = $scope.form.total_points + (field.is_na_reduced || 0)
+        # $scope.form.total_points = $scope.form.total_points + (field.is_na_reduced or 0)
+        if field.is_na_reduced
+          field.possible_points = field.is_na_reduced
         field.is_na_reduced = 0
-
       field.aquired_points = aquired_points
+
+      # if selectdOption.show_field.length > 0
+      #   selectdOption.show_field.forEach (field) ->
+      #     index = _.findIndex section.fields, (v) ->
+      #       v._id is field
+      #     if index > -1
+      #       section.fields[index].is_points_added = true
 
     _updateSectionScore(section)
 
   _updateSectionScore = (section) ->
+    section.total_points = 0
     section.aquired_points = 0
+    section.possible_points = 0
     for field, key in section.fields
       if field.aquired_points
         section.aquired_points+= field.aquired_points
+      if field.has_condition is false
+        section.possible_points+= field.possible_points
     _updateFormScore()
 
   _updateFormScore = ->
     return if !$scope.form.sections
     $scope.form.aquired_points = 0
+    $scope.form.total_points = 0
     for section, key in $scope.form.sections
       if section.aquired_points
         $scope.form.aquired_points += section.aquired_points
+      $scope.form.total_points+= section.possible_points
 
   $scope.watchResponses = (field, section, choice) ->
     $scope.enableDraft = false
@@ -137,7 +152,7 @@ angular.module 'greenApp'
       for key, val of field.choices
         val.showing_popup = false
       choice.showing_popup = true
-    _updateScore(field, section)
+
 
     ## Show hide conditional field
     conditionOption = _.find field.choices, (v) ->
@@ -158,6 +173,7 @@ angular.module 'greenApp'
           fieldIndexs.push(val)
           section.fields[index].has_condition = false
 
+    _updateScore(field, section)
 
   $scope.toggleClass = (section) ->
     for key, val of $scope.form.sections
