@@ -10,8 +10,7 @@ angular.module('greenApp').config ($tooltipProvider) ->
 angular.module('template/popover/popover-close.html', []).run [
   '$templateCache'
   ($templateCache) ->
-    $templateCache.put 'template/popover/popover-close.html', """
-      <div class="popover {{placement}}" ng-class="{ in: isOpen, fade: animation() }">
+    $templateCache.put 'template/popover/popover-close.html', """<div class="popover {{placement}}" ng-class="{ in: isOpen, fade: animation() }">
         <div class="arrow"></div>
         <div class="popover-close" ng-click="$parent.$parent.$parent.field.showing_popup = false">&times;</div>
         <div class="popover-inner">
