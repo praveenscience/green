@@ -21,7 +21,7 @@ if(config.env === 'production') {
   var loginCallbackUrl = '/login/callback';
 
   var strategy = new uwshib.Strategy({
-    entityId: domain,
+    entityId: entityId,
     privateKey: privateKey,
     callbackUrl: loginCallbackUrl,
     domain: domain,
