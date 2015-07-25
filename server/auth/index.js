@@ -24,15 +24,37 @@ if(config.env === 'production') {
     entityId: entityId,
     privateKey: privateKey,
     callbackUrl: loginCallbackUrl,
-    domain: domain,
+    domain: entityId,
     acceptedClockSkewMs: 300000
   });
-
 
   passport.use(strategy);
 
   passport.serializeUser(function(user, done){
-    done(null, user);
+
+      User.findOne({
+        email: user.netId + '@uw.edu';
+      }, function(err, user) {
+        if (err) return done(err);
+
+        if (!user) {
+
+          var newuser = new User({
+            name: user.displayName,
+            username: user.netId,
+            email: user.netId + '@uw.edu';
+            role: 'user',
+          });
+
+          newuser.save(function(err) {
+            if (err) return done(err);
+            return done(err, newuser);
+          });
+
+        }
+        return done(null, user);
+      });
+
   });
 
   passport.deserializeUser(function(user, done){
@@ -41,11 +63,11 @@ if(config.env === 'production') {
 
   router.get('/', passport.authenticate(strategy.name), uwshib.backToUrl());
   router.post('/callback', passport.authenticate(strategy.name), function(req, res) {
-    var url = defaultUrl || '/';
-    if (req.session) {
-        url = req.session.authRedirectUrl;
-        delete req.session.authRedirectUrl;
-    }
+    var url = '/';
+    // if (req.session) {
+    //     url = req.session.authRedirectUrl;
+    //     delete req.session.authRedirectUrl;
+    // }
     res.redirect(url);
   });
   router.get(uwshib.urls.metadata, uwshib.metadataRoute(strategy, publicCert));
