@@ -4,16 +4,48 @@ var express = require('express');
 var passport = require('passport');
 var config = require('../config/environment');
 var User = require('../api/user/user.model');
+var fs = require('fs');
 
-// Passport Configuration
-//require('./local/passport').setup(User, config);
-//require('./twitter/passport').setup(User, config);
-require('./uwsaml/passport').setup(User, config);
+
+// require('./uwsaml/passport').setup(User, config);
 
 var router = express.Router();
 
-//router.use('/local', require('./local'));
-//router.use('/twitter', require('./twitter'));
-router.use('/uwsaml', require('./uwsaml'));
+if(config.env === 'production') {
+
+  var publicCert = fs.readFileSync(config.publicCert, 'utf-8');
+  var privateKey = fs.readFileSync(config.privateKey, 'utf-8');
+  var domain = config.domain || "greenuw-certs1.s.uw.edu";
+  var loginCallbackUrl = '/callback';
+
+  var strategy = new uwshib.Strategy({
+    entityId: domain,
+    privateKey: privateKey,
+    callbackUrl: loginCallbackUrl,
+    domain: domain,
+    acceptedClockSkewMs: 300000
+  });
+
+
+  passport.use(strategy);
+
+  passport.serializeUser(function(user, done){
+    done(null, user);
+  });
+
+  passport.deserializeUser(function(user, done){
+    done(null, user);
+  });
+
+  router.get('/', passport.authenticate(strategy.name), uwshib.backToUrl());
+  router.post(loginCallbackUrl, passport.authenticate(strategy.name), uwshib.backToUrl());
+  router.get(uwshib.urls.metadata, uwshib.metadataRoute(strategy, publicCert));
+
+} else {
+  require('./local/passport').setup(User, config);
+  router.use('/local', require('./local'));
+}
+
+// router.use('/uwsaml', require('./uwsaml'));
 
 module.exports = router;
