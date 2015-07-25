@@ -34,7 +34,7 @@ if(config.env === 'production') {
   passport.serializeUser(function(user, done){
 
       User.findOne({
-        email: user.netId + '@uw.edu';
+        email: user.netId + '@uw.edu',
       }, function(err, findeduser) {
         if (err) return done(err);
 
