@@ -50,7 +50,7 @@ if (config.env === 'production') {
   });
 
   var httpServer = http.createServer(function(req, res) {
-    var redirUrl = 'https://' + domain;
+    var redirUrl = 'https://' + config.domain;
     if (config.httpsPort != 443)
       redirUrl += ':' + config.httpsPort;
     redirUrl += req.url;
