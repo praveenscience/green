@@ -57,7 +57,7 @@ if (config.env === 'production') {
     res.end();
   });
 
-  server.listen(httpsPort, function() {
+  server.listen(config.httpsPort, function() {
     console.log('Listening for HTTPS requests on port %d', config.httpsPort)
   });
 
