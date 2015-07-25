@@ -43,7 +43,11 @@ if (config.env === 'production') {
     key: fs.readFileSync(config.privateKey, 'utf-8'),
     cert: fs.readFileSync(config.publicCert, 'utf-8')
   };
-  server = require('https').createServer(options, app);
+  var httpsServer = require('https').createServer(options, app);
+
+  httpsServer.listen(config.httpsPort, function() {
+    console.log('Listening for HTTPS requests on port %d', config.httpsPort)
+  });
 
   var httpServer = http.createServer(function(req, res) {
     var redirUrl = 'https://' + domain;
@@ -57,8 +61,8 @@ if (config.env === 'production') {
     res.end();
   });
 
-  server.listen(config.httpsPort, function() {
-    console.log('Listening for HTTPS requests on port %d', config.httpsPort)
+  httpServer.listen(httpPort, function() {
+    console.log('Listening for HTTP requests on port %d, but will auto-redirect to HTTPS', httpServer.address().port);
   });
 
 } else {
