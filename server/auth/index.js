@@ -6,6 +6,7 @@ var config = require('../config/environment');
 var User = require('../api/user/user.model');
 var fs = require('fs');
 var uwshib = require('passport-uwshib');
+var auth = require('auth.service');
 
 
 // require('./uwsaml/passport').setup(User, config);
@@ -34,15 +35,15 @@ if(config.env === 'production') {
 
       User.findOne({
         email: user.netId + '@uw.edu';
-      }, function(err, user) {
+      }, function(err, findeduser) {
         if (err) return done(err);
 
-        if (!user) {
+        if (!findeduser) {
 
           var newuser = new User({
             name: user.displayName,
             username: user.netId,
-            email: user.netId + '@uw.edu';
+            email: user.netId + '@uw.edu',
             role: 'user',
           });
 
@@ -62,14 +63,7 @@ if(config.env === 'production') {
   });
 
   router.get('/', passport.authenticate(strategy.name), uwshib.backToUrl());
-  router.post('/callback', passport.authenticate(strategy.name), function(req, res) {
-    var url = '/';
-    // if (req.session) {
-    //     url = req.session.authRedirectUrl;
-    //     delete req.session.authRedirectUrl;
-    // }
-    res.redirect(url);
-  });
+  router.post('/callback', passport.authenticate(strategy.name), auth.setTokenCookie);
   router.get(uwshib.urls.metadata, uwshib.metadataRoute(strategy, publicCert));
 
 } else {
