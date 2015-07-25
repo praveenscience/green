@@ -29,13 +29,21 @@ if(config.env === 'production') {
     acceptedClockSkewMs: 300000
   });
 
-  passport.use(strategy, function(user, done){
+  passport.use(strategy);
+
+  router.get('/', passport.authenticate(strategy.name), uwshib.backToUrl());
+  router.post('/callback', passport.authenticate(strategy.name), auth.setTokenCookie);
+  router.get(uwshib.urls.metadata, uwshib.metadataRoute(strategy, publicCert));
+
+
+   passport.serializeUser(function(user, done){
       User.findOne({
         email: user.netId + '@uw.edu',
       }, function(err, findeduser) {
         if (err) return done(err);
 
         if (!findeduser) {
+
           var newuser = new User({
             name: user.displayName,
             username: user.netId,
@@ -46,69 +54,18 @@ if(config.env === 'production') {
 
           newuser.save(function(err) {
             if (err) return done(err);
-            done(err, newuser);
+            return done(err, newuser);
           });
-        }
 
-        done(null, findeduser);
-    });
+        }
+        return done(null, findeduser);
+      });
   });
 
-  //  passport.serializeUser(function(user, done){
-  //     User.findOne({
-  //       email: user.netId + '@uw.edu',
-  //     }, function(err, findeduser) {
-  //       if (err) return done(err);
+  passport.deserializeUser(function(user, done){
+    done(null, user);
+  });
 
-  //       if (!findeduser) {
-
-  //         var newuser = new User({
-  //           name: user.displayName,
-  //           username: user.netId,
-  //           email: user.netId + '@uw.edu',
-  //           role: 'user',
-  //           provider: 'saml'
-  //         });
-
-  //         newuser.save(function(err) {
-  //           if (err) return done(err);
-  //           done(err, newuser);
-  //         });
-
-  //       }
-  //       done(null, {});
-  //     });
-
-  // });
-
-  // passport.deserializeUser(function(user, done){
-  //     User.findOne({
-  //       email: user.netId + '@uw.edu',
-  //     }, function(err, findeduser) {
-  //       if (err) return done(err);
-
-  //       if (!findeduser) {
-  //         var newuser = new User({
-  //           name: user.displayName,
-  //           username: user.netId,
-  //           email: user.netId + '@uw.edu',
-  //           role: 'user',
-  //           provider: 'saml'
-  //         });
-
-  //         newuser.save(function(err) {
-  //           if (err) return done(err);
-  //           done(err, newuser);
-  //         });
-  //       }
-
-  //       done(null, findeduser);
-  //   });
-  // });
-
-  router.get('/', passport.authenticate(strategy.name), uwshib.backToUrl());
-  router.post('/callback', passport.authenticate(strategy.name), auth.setTokenCookie);
-  router.get(uwshib.urls.metadata, uwshib.metadataRoute(strategy, publicCert));
 
 } else {
   require('./local/passport').setup(User, config);
