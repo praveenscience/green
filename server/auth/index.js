@@ -6,7 +6,7 @@ var config = require('../config/environment');
 var User = require('../api/user/user.model');
 var fs = require('fs');
 var uwshib = require('passport-uwshib');
-var auth = require('auth.service');
+var auth = require('./auth.service');
 
 
 // require('./uwsaml/passport').setup(User, config);
@@ -45,6 +45,7 @@ if(config.env === 'production') {
             username: user.netId,
             email: user.netId + '@uw.edu',
             role: 'user',
+            provider: 'saml',
           });
 
           newuser.save(function(err) {
