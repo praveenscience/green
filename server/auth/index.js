@@ -29,9 +29,8 @@ if(config.env === 'production') {
     acceptedClockSkewMs: 300000
   });
 
-  passport.use(strategy);
+  passport.use(strategy, function(user, done){
 
-  passport.serializeUser(function(user, done){
 
       User.findOne({
         email: user.netId + '@uw.edu',
@@ -54,14 +53,19 @@ if(config.env === 'production') {
           });
 
         }
-        return done(null, user);
+        return done(null, findeduser);
       });
 
   });
 
-  passport.deserializeUser(function(user, done){
-    done(null, user);
-  });
+  // passport.serializeUser(function(user, done){
+
+
+  // });
+
+  // passport.deserializeUser(function(user, done){
+  //   done(null, user);
+  // });
 
   router.get('/', passport.authenticate(strategy.name), uwshib.backToUrl());
   router.post('/callback', passport.authenticate(strategy.name), auth.setTokenCookie);
