@@ -29,9 +29,9 @@ if(config.env === 'production') {
     acceptedClockSkewMs: 300000
   });
 
-  passport.use(strategy, function(user, done){
+  passport.use(strategy);
 
-
+   passport.serializeUser(function(user, done){
       User.findOne({
         email: user.netId + '@uw.edu',
       }, function(err, findeduser) {
@@ -44,7 +44,7 @@ if(config.env === 'production') {
             username: user.netId,
             email: user.netId + '@uw.edu',
             role: 'user',
-            provider: 'saml',
+            provider: 'saml'
           });
 
           newuser.save(function(err) {
@@ -57,11 +57,6 @@ if(config.env === 'production') {
       });
 
   });
-
-  // passport.serializeUser(function(user, done){
-
-
-  // });
 
   // passport.deserializeUser(function(user, done){
   //   done(null, user);
