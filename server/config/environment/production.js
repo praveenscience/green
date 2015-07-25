@@ -14,6 +14,7 @@ module.exports = {
   env: 'production',
 
   domain: 'green-certification.uw.edu',
+  entity: 'greenuw-certs1.s.uw.edu',
 
   httpPort: process.env.HTTPPORT || 80,
   httpsPort: process.env.HTTPSPORT || 443,
