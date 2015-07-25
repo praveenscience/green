@@ -1,4 +1,5 @@
 GEM
+  remote: https://rubygems.org/
   specs:
     capistrano (3.4.0)
       i18n
@@ -29,3 +30,6 @@ DEPENDENCIES
   capistrano
   capistrano-node-deploy
   capistrano-npm
+
+BUNDLED WITH
+   1.10.6
