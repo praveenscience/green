@@ -19,14 +19,14 @@ var all = {
   root: path.normalize(__dirname + '/../../..'),
 
   // Server port
-  port: process.env.PORT || 9020,
+  port: process.env.PORT || 80,
 
   // Should we populate the DB with sample data?
   seedDB: false,
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
-    session: 'green-secret'
+    session: 'green-secret-asdfl,xzmncvlsdafouoilnasdf,mahouhpasdf'
   },
 
   // List of user roles

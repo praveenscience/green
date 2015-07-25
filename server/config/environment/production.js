@@ -4,14 +4,21 @@
 // =================================
 module.exports = {
   // Server IP
-  ip:       process.env.OPENSHIFT_NODEJS_IP ||
-            process.env.IP ||
+  ip:       process.env.IP ||
             undefined,
 
   // Server port
-  port:     process.env.OPENSHIFT_NODEJS_PORT ||
-            process.env.PORT ||
+  port:     process.env.PORT ||
             8080,
+
+  env: 'production',
+
+  httpPort: process.env.HTTPPORT || 80,
+  httpsPort: process.env.HTTPSPORT || 443,
+
+  publicCert: process.env.PUBLICCERT || '/usr/local/ssl/certs/green-certification.uw.edu.cert',
+  privateKey: process.env.PRIVATEKEY ||  '/usr/local/ssl/certs/green-certification.uw.edu.key',
+
 
   // MongoDB connection options
   mongo: {
