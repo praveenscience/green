@@ -61,8 +61,8 @@ if (config.env === 'production') {
     res.end();
   });
 
-  httpServer.listen(httpPort, function() {
-    console.log('Listening for HTTP requests on port %d, but will auto-redirect to HTTPS', httpServer.address().port);
+  httpServer.listen(config.httpPort, function() {
+    console.log('Listening for HTTP requests on port %d, but will auto-redirect to HTTPS', config.httpsPort);
   });
 
 } else {
