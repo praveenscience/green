@@ -58,6 +58,24 @@ exports.destroy = function(req, res) {
   });
 };
 
+exports.update = function(req, res) {
+  var userId = req.params.id;
+  var newRole = String(req.body.role);
+
+  User.findById(userId, function (err, user) {
+    if(user) {
+      user.role = newRole;
+      user.save(function(err) {
+        if (err) return validationError(res, err);
+        res.send(200);
+      });
+    } else {
+      res.send(404);
+    }
+  });
+
+}
+
 /**
  * Change a users password
  */

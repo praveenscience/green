@@ -13,7 +13,7 @@ angular.module 'greenApp'
   ###
   login: (user, callback) ->
     deferred = $q.defer()
-    $http.post '/auth/local',
+    $http.post '/login/local',
       email: user.email
       password: user.password
 
