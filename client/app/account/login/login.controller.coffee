@@ -10,6 +10,14 @@ angular.module 'greenApp'
 
   $scope.user = {}
   $scope.errors = {}
+
+  $scope.init = ->
+    hostArray = location.host.split('.');
+    if Auth.isLoggedIn()
+      $location.path '/forms'
+    if hostArray[hostArray.length] is 'edu'
+      $location.path '/login'
+
   $scope.login = (form) ->
     $scope.submitted = true
 
@@ -27,3 +35,5 @@ angular.module 'greenApp'
 
   $scope.loginOauth = (provider) ->
     $window.location.href = '/auth/' + provider
+
+  $scope.init()

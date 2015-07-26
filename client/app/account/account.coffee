@@ -5,12 +5,12 @@ angular.module 'greenApp'
   $routeProvider
   .when '/',
     authenticate: true
-    templateUrl: 'app/account/login/login.html'
+    # templateUrl: 'app/account/login/login.html'
     controller: 'LoginCtrl'
 
-  .when '/login',
-    templateUrl: 'app/account/login/login.html'
-    controller: 'LoginCtrl'
+  # .when '/login',
+  #   templateUrl: 'app/account/login/login.html'
+  #   controller: 'LoginCtrl'
 
   .when '/signup',
     templateUrl: 'app/account/signup/signup.html'
