@@ -35,7 +35,6 @@ if(config.env === 'production') {
   router.post('/callback', passport.authenticate(strategy.name), auth.setTokenCookie);
   router.get(uwshib.urls.metadata, uwshib.metadataRoute(strategy, publicCert));
 
-
    passport.serializeUser(function(user, done){
       User.findOne({
         email: user.netId + '@uw.edu',
@@ -63,7 +62,28 @@ if(config.env === 'production') {
   });
 
   passport.deserializeUser(function(user, done){
-    done(null, user);
+    User.findOne({
+      email: user.netId + '@uw.edu',
+    }, function(err, findeduser) {
+      if (err) return done(err);
+      // if (!findeduser) {
+
+      //   var newuser = new User({
+      //     name: user.displayName,
+      //     username: user.netId,
+      //     email: user.netId + '@uw.edu',
+      //     role: 'user',
+      //     provider: 'saml'
+      //   });
+
+      //   newuser.save(function(err) {
+      //     if (err) return done(err);
+      //     return done(err, newuser);
+      //   });
+
+      // }
+      return done(null, findeduser);
+    });
   });
 
 
