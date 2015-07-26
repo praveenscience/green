@@ -13,10 +13,10 @@ angular.module 'greenApp'
 
   $scope.init = ->
     hostArray = location.host.split('.');
-    if Auth.isLoggedIn()
-      $location.path '/forms'
-    if hostArray[hostArray.length] is 'edu'
-      $location.path '/login'
+    # if Auth.isLoggedIn()
+    #   $location.path '/forms'
+    # if hostArray[hostArray.length - 1] is 'edu'
+    #   $location.path '/login'
 
   $scope.login = (form) ->
     $scope.submitted = true
