@@ -4,6 +4,7 @@ angular.module 'greenApp'
 .controller 'FormsController', ($scope, $http, $location, Auth, SweetAlert, Utils) ->
 
   $scope.isAdmin = Auth.isAdmin
+  $scope.isLoggedIn = Auth.isLoggedIn
   $scope.getFormatedDate = Utils.getFormatedDate
 
   $scope.forms = []

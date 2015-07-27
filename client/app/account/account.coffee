@@ -4,10 +4,9 @@ angular.module 'greenApp'
 .config ($routeProvider) ->
   $routeProvider
   .when '/',
-    templateUrl: (urlatt) ->
-      return 'app/controllers/forms/forms.html'
-    controller: 'FormsController'
     authenticate: true
+    templateUrl: 'app/controllers/forms/forms.html'
+    controller: 'FormsController'
 
   # .when '/login',
   #   templateUrl: 'app/account/login/login.html'

@@ -1,3 +1,5 @@
-<div ng-include="'app/controllers/forms/form-normal.html'" ng-if="!isAdmin()"></div>
-<div ng-include="'app/controllers/forms/form-admin.html'" ng-if="isAdmin()"></div>
+<div ng-if="isLoggedIn()">
+  <div ng-include="'app/controllers/forms/form-normal.html'" ng-if="!isAdmin()"></div>
+  <div ng-include="'app/controllers/forms/form-admin.html'" ng-if="isAdmin()"></div>
+</div>
 
