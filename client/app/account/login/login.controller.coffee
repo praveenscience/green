@@ -34,6 +34,6 @@ angular.module 'greenApp'
         $scope.errors.other = err.message
 
   $scope.loginOauth = (provider) ->
-    $window.location.href = '/auth/' + provider
+    $window.location.href = '/login/' + provider
 
   $scope.init()
