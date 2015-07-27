@@ -18,14 +18,14 @@ if(config.env === 'production') {
   var publicCert = fs.readFileSync(config.publicCert, 'utf-8');
   var privateKey = fs.readFileSync(config.privateKey, 'utf-8');
   var domain = config.domain || "green-certification.uw.edu";
-  var entityId = config.entity || 'greenuw-certs1.s.uw.edu';
+  var entityId = config.entity || 'https://green-certification.uw.edu';
   var loginCallbackUrl = '/login/callback';
 
   var strategy = new uwshib.Strategy({
     entityId: entityId,
     privateKey: privateKey,
     callbackUrl: loginCallbackUrl,
-    domain: entityId,
+    domain: domain,
     acceptedClockSkewMs: 300000
   });
 
