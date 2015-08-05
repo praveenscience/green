@@ -44,7 +44,7 @@ angular.module 'greenApp'
           handler: (direction) -> _updateCurrent(this.element.id.split('-')[1])
           offset: 5
         )
-    , 1000
+    , 800
 
   _updateCurrent = (id) ->
     $scope.form.sections.forEach (sec) -> sec.active = false
@@ -89,7 +89,7 @@ angular.module 'greenApp'
       if sec.possible_points != 0
         percentage = (sec.aquired_points / sec.possible_points) * 100
       values.push({
-        x: "Seciton#{l}"
+        x: "Sec #{l}"
         y: percentage
       })
       l++
@@ -110,6 +110,7 @@ angular.module 'greenApp'
         .discreteBarChart()
         .x((d) -> d.x)
         .y((d) -> d.y)
+        #.staggerLabels(true)
         .showValues(true)
         #.color(colors)
 
@@ -140,7 +141,7 @@ angular.module 'greenApp'
       else if field.field_type in ['radiobutton', 'select']
         choice = _.find secField.choices, (s) -> s._id is field.response
         secField.response = choice.label if choice
-      else if field.field_type is 'checkbox'
+      else if field.field_type is 'checkbox' and field.response
         response = []
         field.response.forEach (val) ->
           choice = _.find secField.choices, (s) -> s._id is val

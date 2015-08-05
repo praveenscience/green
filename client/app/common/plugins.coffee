@@ -58,4 +58,3 @@ angular.module('greenApp').directive 'pop', ($tooltip, $timeout) ->
       return
 
   tooltip
-

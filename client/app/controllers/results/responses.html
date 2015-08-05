@@ -53,7 +53,7 @@
           <div class="response-section" id="seciton-{{$index}}" ng-repeat="section in form.sections">
             <h3 class="response-section-title">{{section.title}}</h3>
             <div class="response-field" ng-repeat="field in section.fields">
-              <label for="">{{field.label}} </label>
+              <label for="" ng-bind-html="field.label"></label>
               <span class="label label-points" ng-if="field.type != 'text'">
                – [{{field.aquired_points}} out of {{field.possible_points}}]
               </span>
