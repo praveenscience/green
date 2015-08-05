@@ -40,10 +40,13 @@ angular.module 'greenApp'
     $timeout ->
       sticky = new Waypoint.Sticky
         element: $('.fixed-navigation')[0]
-      s = $('.response-section').waypoint(
+
+      $('.response-section').each((i, el) ->
+        new Waypoint
+          element: el
           handler: (direction) -> _updateCurrent(this.element.id.split('-')[1])
           offset: 5
-        )
+      )
     , 800
 
   _updateCurrent = (id) ->
