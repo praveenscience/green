@@ -45,7 +45,11 @@ angular.module 'greenApp', [
   # Redirect to login if route requires auth and you're not logged in
   $rootScope.$on '$routeChangeStart', (event, next) ->
     Auth.isLoggedInAsync (loggedIn) ->
-      window.location.href = "/login" if next.authenticate and not loggedIn
+      hostArray = location.host.split('.');
+      if hostArray[hostArray.length - 1] is 'edu'
+        window.location.href = "/login" if next.authenticate and not loggedIn
+      else
+        window.location.href = "/lg" if next.authenticate and not loggedIn
 
 
 

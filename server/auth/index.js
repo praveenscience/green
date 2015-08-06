@@ -88,9 +88,11 @@ if(config.env === 'production') {
 
 
 } else {
-  require('./local/passport').setup(User, config);
-  router.use('/local', require('./local'));
+
 }
+
+ require('./local/passport').setup(User, config);
+ router.use('/local', require('./local'));
 
 // router.use('/uwsaml', require('./uwsaml'));
 
