@@ -146,7 +146,7 @@ exports.getCSV = function(req, res) {
     var fields = ['question', 'response'];
     json2csv({data: newData, fields: fields}, function(err, csv) {
       if (err) console.log(err);
-      fs.writeFile('server/exported-files/' + data.id + '.csv', csv, function(err) {
+      fs.writeFile(__dirname + '/../../exported-files/' + data.id + '.csv', csv, function(err) {
         if (err) throw err;
         return res.status(200).json('exports/' + data.id + '.csv');
       });
