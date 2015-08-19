@@ -22,6 +22,11 @@ angular.module 'greenApp'
   $scope.init = ->
     _loadData()
 
+  $scope.getExportUrl = ->
+    formData.getCsv(resId)
+      .success((data) ->
+        window.location.href = data
+      )
 
   $scope.scrollToSeciton = (index, section) ->
     $timeout ->

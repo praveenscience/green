@@ -42,6 +42,11 @@ angular.module 'greenApp'
       url: "api/results/#{formId}/all"
       method: 'GET'
 
+  getCsv: (resId) ->
+    $http
+      url: "api/results/#{resId}/export"
+      method: 'GET'
+
   respond: (responseForm) ->
     responses = []
     for sectionIndex, section of responseForm.sections

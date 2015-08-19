@@ -35,7 +35,6 @@ require('./config/socketio')(socketio);
 require('./config/express')(app);
 require('./routes')(app);
 
-
 var server;
 
 if (config.env === 'production') {

@@ -3,7 +3,8 @@
 var mongoose = require('mongoose'),
   async = require('async'),
   Section = require('../section/section.model'),
-  Schema = mongoose.Schema;
+  Schema = mongoose.Schema,
+  deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var FormSchema = new Schema({
   name: String,
@@ -80,5 +81,13 @@ FormSchema
       next();
     }
   });
+
+FormSchema.plugin(deepPopulate, {
+  whitelist: [
+    'author',
+    'sections.fields.choices'
+  ]
+});
+
 
 module.exports = mongoose.model('Form', FormSchema);

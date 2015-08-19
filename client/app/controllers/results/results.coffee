@@ -8,3 +8,4 @@ angular.module 'greenApp'
   $routeProvider.when '/results/:id/:res',
     templateUrl: 'app/controllers/results/responses.html'
     controller: 'ResponseCtrl'
+

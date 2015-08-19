@@ -1,7 +1,8 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var ResultSchema = new Schema({
   form: { type: Schema.Types.ObjectId, ref: 'Form' },
@@ -38,6 +39,13 @@ var ResultSchema = new Schema({
     ref: 'Certificate'
   },
   active: Boolean
+});
+
+ResultSchema.plugin(deepPopulate, {
+  whitelist: [
+    'user',
+    'form.sections.fields.choices'
+  ]
 });
 
 module.exports = mongoose.model('Result', ResultSchema);

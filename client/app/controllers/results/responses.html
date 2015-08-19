@@ -20,7 +20,12 @@
         <div class="form-header-meta">
           <h1 class="main-page-title sub"><span class="text-muted">Form –</span>  {{form.name}} </h1>
           <h5 class="main-page-title-info"> <span class="text-muted">Submitted by: </span> {{form.user_info.username}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="text-muted">Submitted on: </span> {{getFormatedDate(form.res_updated)}}</h5>
+          <br>
+          <div class="main-page-title-info">
+            <button ng-click="getExportUrl()" class="btn btn-xs btn-primary">Download as CSV</button>
+          </div>
         </div>
+
         <div class="responses-container">
           <div class="stats">
             <div class="row-fluid">
@@ -52,7 +57,7 @@
           <div class="clearfix"></div>
           <div class="response-section" id="seciton-{{$index}}" ng-repeat="section in form.sections">
             <h3 class="response-section-title">{{section.title}}</h3>
-            <div class="response-field" ng-repeat="field in section.fields">
+            <div class="response-field" ng-repeat="field in section.fields | orderBy:'sequence'">
               <label for="" ng-bind-html="field.label"></label>
               <span class="label label-points" ng-if="field.type != 'text'">
                – [{{field.aquired_points}} out of {{field.possible_points}}]
