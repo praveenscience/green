@@ -27,9 +27,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  capistrano
+  capistrano (~> 3.4.0)
   capistrano-node-deploy
   capistrano-npm
-
-BUNDLED WITH
-   1.10.6
