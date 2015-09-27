@@ -26,7 +26,7 @@
     "passport": "~0.2.2",
     "passport-local": ">=0.1.6",
     "passport-twitter": "latest",
-    "passport-uwshib": "git@github.com:websiddu/passport-uwshib.git",
+    "passport-uwshib": "websiddu/passport-uwshib.git",
     "serve-favicon": ">=2.0.1",
     "socket.io": ">=1.0.6",
     "socket.io-client": ">=1.0.6",
