@@ -10,7 +10,7 @@ var marked = require('marked');
 var renderer = new marked.Renderer();
 
 renderer.link = function (href, title, text) {
-  return '<a target="_blank" href="' + href + '" title="'+ title +'">' + text + '</a>';
+  return '<a target="_blank" href="' + href + '" title="'+ title || "" +'">' + text + '</a>';
 }
 
 // Get list of sections

@@ -10,7 +10,8 @@ angular.module('greenApp').config ($tooltipProvider) ->
 angular.module('template/popover/popover-close.html', []).run [
   '$templateCache'
   ($templateCache) ->
-    $templateCache.put 'template/popover/popover-close.html', """<div class="popover {{placement}}" ng-class="{ in: isOpen, fade: animation() }">
+    $templateCache.put 'template/popover/popover-close.html', '''<div>
+      <div class="popover {{placement}}" ng-class="{ in: isOpen, fade: animation() }">
         <div class="arrow"></div>
         <div class="popover-close" ng-click="$parent.$parent.$parent.field.showing_popup = false">&times;</div>
         <div class="popover-inner">
@@ -18,7 +19,8 @@ angular.module('template/popover/popover-close.html', []).run [
           <div class="popover-content" ng-bind-html="content"></div>
         </div>
       </div>
-      """
+      </div>
+      '''
     return
 ]
 
@@ -32,7 +34,15 @@ angular.module('greenApp').directive 'popPopup', ->
       placement: '@'
       animation: '&'
       isOpen: '='
-    templateUrl: 'template/popover/popover-close.html'
+    template: '''<div class="popover {{placement}}" ng-class="{ in: isOpen, fade: animation() }">
+        <div class="arrow"></div>
+        <div class="popover-close" ng-click="$parent.$parent.$parent.field.showing_popup = false">&times;</div>
+        <div class="popover-inner">
+          <h3 class="popover-title" ng-bind="title" ng-show="title"></h3>
+          <div class="popover-content" ng-bind-html="content"></div>
+        </div>
+      </div>
+      '''
   }
 
 angular.module('greenApp').directive 'pop', ($tooltip, $timeout) ->
