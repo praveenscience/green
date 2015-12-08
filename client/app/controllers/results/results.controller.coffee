@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'ResultsCtrl', ($scope, $routeParams, formData, Utils, $http) ->
+.controller 'ResultsCtrl', ($scope, $routeParams, formData, Utils, $http, SweetAlert) ->
   formId = $routeParams.id
   $scope.results = []
   $scope.form = []
@@ -36,8 +36,10 @@ angular.module 'greenApp'
     $scope.stats.submitted = $scope.stats.all - $scope.stats.draft
 
   $scope.removeResponse = (result) ->
-    $http.delete("api/results/#{result._id}").success( (data, status) ->
-        $scope.results.splice($scope.results.indexOf(result), 1)
+    SweetAlert.swal(Utils.getAlertSettings('result'), (isConfirm) ->
+      if isConfirm
+        $http.delete("api/results/#{result._id}").success (data, status) ->
+            $scope.results.splice($scope.results.indexOf(result), 1)
       )
 
 
