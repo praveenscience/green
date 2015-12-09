@@ -37,7 +37,7 @@ angular.module 'greenApp'
       if inputValue == ''
         swal.showInputError 'You need to write something!'
         return false
-      swal 'Nice!', "You wrote: #{inputValue}, click ok to generate your certificate", 'success'
+      swal 'Thank you', "You wrote: #{inputValue}, click ok to generate your certificate", 'success'
       $scope.lab_name = inputValue
       return
 
