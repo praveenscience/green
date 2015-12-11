@@ -60,6 +60,15 @@
           <div class="response-section" id="seciton-{{$index}}" ng-repeat="section in form.sections">
             <h3 class="response-section-title">{{section.title}}</h3>
             <div class="response-field" ng-repeat="field in section.fields | orderBy:'sequence'">
+            <div ng-if="field.is_bonus">
+              <span class="bonus-label label label-info">
+               Bonus
+              </span>
+              <br>
+              </div>
+              <span class="number">
+                {{$index + 1}}.
+              </span>
               <label for="" ng-bind-html="field.label"></label>
               <span class="label label-points" ng-if="field.type != 'text'">
                – [{{field.aquired_points}} out of {{field.possible_points}}]

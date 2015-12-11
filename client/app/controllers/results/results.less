@@ -52,15 +52,23 @@
 .response-field {
   margin: 15px 10px 30px;
 
+  .number {
+    font-size: 16px;
+    font-weight: normal;
+    font-weight: 300;
+    color: #666;
+  }
+
   label {
     font-size: 16px;
     font-weight: normal;
     font-weight: 300;
     color: #666;
     margin-bottom: 6px;
-    counter-increment: lal;
+    display: inline;
+    // counter-increment: lal;
     &:before {
-      content: counter(lal)". ";
+      // content: counter(lal)". ";
     }
   }
 }
