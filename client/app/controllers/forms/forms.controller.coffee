@@ -110,7 +110,6 @@ angular.module 'greenApp'
           $scope.submissions.splice($scope.submissions.indexOf(result), 1)
 
   _handleFormDelete = (isConfirm, form, hideSidebar) ->
-    console.log isConfirm
     if isConfirm
       $http.delete "/api/forms/#{form._id}"
         .success (data, status) ->
