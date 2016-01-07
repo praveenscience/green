@@ -6,7 +6,8 @@ angular.module 'greenApp'
   $scope.isAdmin = Auth.isAdmin
   $scope.getFormatedDate = Utils.getFormatedDate
   $scope.certificates = []
-  $scope.enableSaveButton = true
+  $scope.enableSaveButton = false
+  $scope.certificateSaving = false
   $scope.certificateTemplate =
     name: ''
     min: null
@@ -17,6 +18,10 @@ angular.module 'greenApp'
   $scope.certificate = null
 
   $scope.init = ->
+    setTimeout ->
+      $scope.enableSaveButton = true
+      $scope.$apply()
+    , 10
     if certificate
       $scope.certificate = certificate
       $scope.updated = certificate.updated
@@ -30,12 +35,11 @@ angular.module 'greenApp'
 
 
   _updateCertificate = (certificate) ->
-    $scope.enableSaveButton = true
+    $scope.certificateSaving = true
     certificateData.update(certificate)
       .success (data, status) ->
+        $scope.certificateSaving = false
         $scope.enableSaveButton = true
-        ctf = _.find $scope.certificates, (v) -> v._id is data._id
-        ctf = data
 
   $scope.updateCertificate = ->
     if $scope.certificate._id != undefined
