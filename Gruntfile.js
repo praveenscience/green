@@ -425,7 +425,7 @@ module.exports = function (grunt) {
       },
       heroku: {
         options: {
-          remote: 'heroku',
+          remote: 'git@heroku.com:greenctf.git',
           branch: 'master'
         }
       },
