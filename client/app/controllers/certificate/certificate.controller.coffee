@@ -1,11 +1,12 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'CertificateCtrl', ($scope, Auth, Utils, certificateData, $modal) ->
+.controller 'CertificateCtrl', ($scope, Auth, Utils, certificateData, $modal, certificate, $location) ->
 
   $scope.isAdmin = Auth.isAdmin
   $scope.getFormatedDate = Utils.getFormatedDate
   $scope.certificates = []
+  $scope.enableSaveButton = true
   $scope.certificateTemplate =
     name: ''
     min: null
@@ -13,51 +14,55 @@ angular.module 'greenApp'
     logo: null
     sign: null
 
+  $scope.certificate = null
+
   $scope.init = ->
-    _loadCertificates()
+    if certificate
+      $scope.certificate = certificate
+      $scope.updated = certificate.updated
+    else
+      _loadCertificates()
 
   _loadCertificates = ->
     certificateData.get()
       .success (data, status) ->
         $scope.certificates = data
 
-  $scope.editCertificate = (certificate) ->
-    modalInstance = $modal.open
-      windowClass: 'modal-full'
-      templateUrl: 'app/controllers/certificate/create_certificate.html'
-      controller: 'CreatecertificateCtrl'
-      resolve:
-        certificate: -> certificate
-
-    modalInstance.result.then (certificate) ->
-      _updateCertificate(certificate)
 
   _updateCertificate = (certificate) ->
+    $scope.enableSaveButton = true
     certificateData.update(certificate)
       .success (data, status) ->
+        $scope.enableSaveButton = true
         ctf = _.find $scope.certificates, (v) -> v._id is data._id
         ctf = data
 
-  $scope.openNewCertificate = ->
-    mdlInstance = $modal.open
-      windowClass: 'modal-full'
-      templateUrl: 'app/controllers/certificate/create_certificate.html'
-      controller: 'CreatecertificateCtrl'
-      resolve:
-        certificate: -> null
+  $scope.updateCertificate = ->
+    if $scope.certificate._id != undefined
+      _updateCertificate($scope.certificate)
+    else
+      $scope.certificate.status = "published"
+      _insertCertificate($scope.certificate)
 
-    mdlInstance.result.then (certificate) ->
-      certificate.status = "published"
-      _insertCertificate(certificate)
+
+  $scope.formattedDate = ->
+    date = new Date()
+    return date.toUTCString().substr(5, 11)
+
 
   _insertCertificate = (certificate) ->
     certificateData.create(certificate)
       .success (data, status) ->
-        $scope.certificates.push(data)
+        $location.path "certificates/#{data._id}"
 
   $scope.removeCertificate = (certificate) ->
     certificateData.remove(certificate._id)
       .success (data, status) ->
         $scope.certificates.splice $scope.certificates.indexOf(certificate), 1
+
+
+  $scope.$watch('certificate', (old, newValue) ->
+    $scope.enableSaveButton = false
+  , true)
 
   $scope.init()

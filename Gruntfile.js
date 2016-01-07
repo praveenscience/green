@@ -725,6 +725,11 @@ module.exports = function (grunt) {
 
   grunt.registerTask('deploy', [
     'build',
+    'buildcontrol:green'
+  ]);
+
+  grunt.registerTask('heroku', [
+    'build',
     'buildcontrol:heroku'
   ]);
 

@@ -1,11 +1,10 @@
 .certificate {
   height: 612px;
-  width: 792px;
   box-shadow: 0 0 8px #eee;
   margin: 30px auto;
   padding: 20px;
-  box-shadow: 0 0 15px #D7D7D7;
   position: relative;
+  background: #fff;
   &.preview {
     width: 100%;
     height: 450px;
@@ -143,3 +142,40 @@
   font-size: 22px;
   font-weight: 300;
 }
+
+.certificate-edit {
+  padding: 0 20px;
+  .certificate {
+    opacity: 0.8;
+    user-select: none;
+  }
+}
+
+.live-preview {
+  background: #f8f8f8;
+  padding-top: 20px;
+  .preview {
+    opacity: 0.8;
+  }
+
+  h4 {
+    position: relative;
+    color: #888;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  &:before {
+    background: #f8f8f8;
+    content: '';
+    position: fixed;
+    top: 3px;
+    display: block;
+    bottom: 0;
+    right: 0;
+    right: 0;
+    width: 42%;
+  }
+}
+

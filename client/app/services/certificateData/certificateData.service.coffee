@@ -20,6 +20,11 @@ angular.module 'greenApp'
       url: "/api/certificates/#{certificateId}"
       method: 'DELETE'
 
+  show: (certificateId) ->
+    $http
+      url: "/api/certificates/#{certificateId}"
+      method: 'GET'
+
   get: ->
     $http
       url: '/api/certificates'
