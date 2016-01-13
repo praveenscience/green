@@ -64,7 +64,7 @@ var prepareDate = function(data) {
     }
   }
 
-  var sortedResult = _.sortByAll(results, ['section_index', 'sequence']);
+  var sortedResult = _.sortBy(results, ['section_index', 'sequence']);
 
   sortedResult.unshift({
       question: 'Submitted at',
