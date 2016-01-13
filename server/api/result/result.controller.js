@@ -36,6 +36,7 @@ var prepareDate = function(data) {
 
     results[i].question = secField.label;
     results[i].section_index = section;
+    results[i].section_title = data.form.sections[section].title;
     results[i].sequence = secField.sequence;
     results[i].possible_points = field.possible_points;
     results[i].aquired_points = field.aquired_points;
@@ -46,7 +47,7 @@ var prepareDate = function(data) {
       choice = _.findIndex(secField.choices, function(s) {
           return s.id === field.response;
         });
-      if (choice > 0) {
+      if (choice > -1) {
         results[i].response = secField.choices[choice].label;
       }
     } else if (field.field_type === 'checkbox' && field.response) {
@@ -143,7 +144,7 @@ exports.getCSV = function(req, res) {
 
   Result.findById(resId).deepPopulate('form.sections.fields.choices').exec(function(err, data) {
     newData = prepareDate(data);
-    var fields = ['question', 'response'];
+    var fields = ['section_index', 'section_title', 'sequence', 'question', 'response'];
     json2csv({data: newData, fields: fields}, function(err, csv) {
       if (err) console.log(err);
       fs.writeFile(__dirname + '/../../exported-files/' + data.id + '.csv', csv, function(err) {
