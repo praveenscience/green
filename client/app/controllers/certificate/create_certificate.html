@@ -60,7 +60,7 @@
                 <div class="live-preview">
                   <h4>Live preview</h4>
                   <div class="certificate preview">
-                    <h1 class="certificate-heading">Green Laboratory Certification</h1>
+                    <h1 class="certificate-heading">Green Certification</h1>
                     <div class="certificate-body">
                       <div class="certificate-logo">
                         <img ng-src="{{certificate.logo}}" alt="" ng-if="certificate.logo">
@@ -69,7 +69,7 @@
                       <div class="certificate-content">
                         {{certificate.content}}
                         <span ng-if="!certificate.content">
-                  The University of Washington Environmental Stewardship and Sustainability Office certifies <span class="certificate-name"> Name </span> as a Green Laboratory.
+                  The University of Washington Environmental Stewardship and Sustainability Office certifies <span class="certificate-name"> Name </span> as {{certificate.name}}.
                         </span>
                       </div>
                     </div>
