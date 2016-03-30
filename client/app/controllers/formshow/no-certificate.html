@@ -1,0 +1,32 @@
+<div class="form-show-container">
+  <h2 class="success-heading text-center">You can do better </h2>
+  <h4 class="sucess-sub-heading text-center"> We cannot award any certificate at this time</h4>
+  <!-- From analytics -->
+  <div class="stats">
+    <div class="row-fluid">
+      <div class="col-lg-8 col-sm-8">
+        <div class="graph">
+          <h3 class="graph-heading"> Your performance..</h3>
+          <div id="chart" style="height: 300px; margin: 10px 0; ">
+            <svg></svg>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-4">
+        <div class="scoreboard">
+          <span class="aquired_point">{{aquiredPoints}}</span>
+          <span class="divider"></span>
+          <span class="possible_point">{{possiblePoints}}</span>
+        </div>
+        <div class="clearfix"></div>
+        <div class="certf">
+          <span class="text-muted">You are not certified yet</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="">
+    <div ng-bind-html="form.no_certificate"></div>
+  </div>
+</div>
