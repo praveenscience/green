@@ -91,14 +91,16 @@ angular.module 'greenApp'
     dataForGraph = []
     values = {}
     values = []
-    l = 1
+    l = 0
     for j, sec of $scope.secitons
       percentage = 0
       if sec.possible_points != 0
         percentage = (sec.aquired_points / sec.possible_points) * 100
       values.push({
-        x: "Sec #{l}"
+        x: $scope.form.sections[l].title #"Sec #{l}"
         y: percentage
+        aquired_points: sec.aquired_points
+        possible_points: sec.possible_points
       })
       l++
 
@@ -118,8 +120,16 @@ angular.module 'greenApp'
         .discreteBarChart()
         .x((d) -> d.x)
         .y((d) -> d.y)
-        #.staggerLabels(true)
+        .staggerLabels(true)
         .showValues(true)
+        .tooltipContent( (key, x, y, e, graph) ->
+          """<h3>#{x}</h3>
+            <div class='tooltip-cont'>
+              <p><strong>#{e.point.aquired_points}</strong><small  class='text-muted'> out of</small> <strong class='text-muted'>#{e.point.possible_points} </strong> <small class='text-muted'> points</small> – <strong>#{parseFloat(y).toFixed(2)}% </strong></p>
+
+            </div>
+          """
+        )
         #.color(colors)
 
       #chart.yAxis.scale().domain([0, 100]);

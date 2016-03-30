@@ -31,7 +31,7 @@
             <div class="row-fluid">
               <div class="col-lg-8 col-sm-8">
                 <div class="graph">
-                  <h3 class="graph-heading"> Your performance..</h3>
+                  <h3 class="graph-heading"> Your performance</h3>
                   <div id="chart" style="height: 250px; margin: 10px 0; ">
                     <svg></svg>
                   </div>
@@ -46,10 +46,10 @@
                 </div>
                 <div class="clearfix"></div>
                 <br>
-                <div class="certf">
-                  <span class="text-muted">You are now..</span>
+                <div class="certf" ng-if="certificate.name">
+                  <span class="text-muted">You are awarded with </span>
                   <h1 class="certf-text"> {{certificate.name}} </h1>
-                  <small class="text-muted">certified green lab</small>
+                  <small class="text-muted">certificate</small>
                 </div>
               </div>
             </div>
