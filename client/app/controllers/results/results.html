@@ -7,6 +7,8 @@
         <div class="col-lg-7 col-sm-7">
           <h1 class="main-page-title">Results – <small> {{form.name}}</small>
           </h1>
+          <br>&nbsp;&nbsp;
+          <a ng-href="forms/{{form._id}}" class="btn btn-default btn-xs">Preview form</a>
         </div>
         <div class="col-lg-5 col-sm-5" ng-if="results.length > 0">
           <ul class="form-results-meta-stats list-unstyled list-inline pull-right">
