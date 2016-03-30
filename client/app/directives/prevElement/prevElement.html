@@ -23,12 +23,15 @@
     <div class="form-group">
       <type-badge></type-badge>
       <abbr title="Required" ng-if="field.required"> *</abbr>
-      <strong class="text-muted possible-points">[Points possible - {{field.possible_points}}]</strong>
+      <strong class="text-muted possible-points" ng-if="field.possible_points > 0">[Points possible - {{field.possible_points}}]</strong>
       <div class="inputLabel">
         <select id="field._id" class="form-control" ng-model="field.response" ng-change="watchResponses(field, section)" required="{{field.required}}" pop-placement="right" pop="{{popup_content}}" pop-show="{{field.showing_popup || false}}">
           <option value="">– Select one –</option>
           <option ng-repeat="choice in field.choices | orderBy:'seq'" value="{{choice._id}}" ng-selected="choice._id == field.response">
-            {{choice.label}} &mdash; [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]
+            {{choice.label}}
+
+            {{ field.possible_points > 0 ?  ' – ' + choice.points + (choice.points == 1 ? ' point' : ' points') : '' }}
+
           </option>
         </select>
       </div>
@@ -42,14 +45,14 @@
       <type-badge></type-badge>
       <abbr title="Required" ng-if="field.required"> *</abbr>
 
-      <strong class="text-muted possible-points">[Points possible - {{field.possible_points}}]</strong>
+      <strong class="text-muted possible-points" ng-if="field.possible_points > 0">[Points possible - {{field.possible_points}}]</strong>
 
       <div class="inputLabel inline" ng-repeat="choice in field.choices | orderBy:'seq'">
         <div class="pull-left" pop-placement="right" pop="{{choice.help_text_html}}" pop-show="{{choice.showing_popup === true && field.showing_popup}}">
           <input type="checkBox" ng-model="choice.selected" value="{{choice._id}}" id="{{choice._id}}" ng-click="watchResponses(field, section, choice)"
           name="{{field._id}}"
            />
-          <label ng-bind-html="choice.label" for="{{choice._id}}"></label> <strong class="text-muted">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
+          <label ng-bind-html="choice.label" for="{{choice._id}}"></label> <strong class="text-muted" ng-if="field.possible_points > 0">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
         </div>
       </div>
       <div class="clearfix"></div>
@@ -61,11 +64,11 @@
     <div class="form-group">
       <type-badge></type-badge>
       <abbr title="Required" ng-if="field.required"> *</abbr>
-      <strong class="text-muted possible-points">[Points possible - {{field.possible_points}}]</strong>
+      <strong class="text-muted possible-points" ng-if="field.possible_points > 0">[Points possible - {{field.possible_points}}]</strong>
       <div class="inputLabel inline" ng-repeat="choice in field.choices | orderBy:'seq'">
         <div class="pull-left" pop-placement="right" pop="{{choice.help_text_html}}" pop-show="{{field.response === choice._id && field.showing_popup}}">
           <input type="radio" name="{{field._id}}" ng-model="field.response" value="{{choice._id}}" id="{{choice._id}}" ng-click="watchResponses(field, section, choice)" required="{{field.required}}" />
-          <label ng-bind-html="choice.label" for="{{choice._id}}"></label> <strong class="text-muted">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
+          <label ng-bind-html="choice.label" for="{{choice._id}}"></label> <strong class="text-muted" ng-if="field.possible_points > 0">&mdash;  [{{choice.points}} {{choice.points == 1 ? 'point' : 'points'}}]</strong>
         </div>
         <div class="clearfix"></div>
       </div>
