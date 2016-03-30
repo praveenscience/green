@@ -126,7 +126,6 @@ angular.module 'greenApp'
           """<h3>#{x}</h3>
             <div class='tooltip-cont'>
               <p><strong>#{e.point.aquired_points}</strong><small  class='text-muted'> out of</small> <strong class='text-muted'>#{e.point.possible_points} </strong> <small class='text-muted'> points</small> – <strong>#{parseFloat(y).toFixed(2)}% </strong></p>
-
             </div>
           """
         )

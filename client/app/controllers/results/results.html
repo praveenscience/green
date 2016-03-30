@@ -59,6 +59,7 @@
               <th>Last updated</th>
               <th>Points</th>
               <th>Responses</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -81,6 +82,9 @@
               <td>
                 <a ng-if="result.status != 'draft'" ng-href="/results/{{result.form._id}}/{{result._id}}"> View user responses</a>
                 <span class="text-muted" ng-if="result.status == 'draft'">Submission pending</span>
+              </td>
+              <td>
+                <a href="" ng-click="removeResponse(result)">Remove</a>
               </td>
             </tr>
           </tbody>

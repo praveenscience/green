@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'ResultsCtrl', ($scope, $routeParams, formData, Utils) ->
+.controller 'ResultsCtrl', ($scope, $routeParams, formData, Utils, $http) ->
   formId = $routeParams.id
   $scope.results = []
   $scope.form = []
@@ -34,5 +34,11 @@ angular.module 'greenApp'
 
     $scope.stats.all = $scope.results.length
     $scope.stats.submitted = $scope.stats.all - $scope.stats.draft
+
+  $scope.removeResponse = (result) ->
+    $http.delete("api/results/#{result._id}").success( (data, status) ->
+        $scope.results.splice($scope.results.indexOf(result), 1)
+      )
+
 
   $scope.init()
