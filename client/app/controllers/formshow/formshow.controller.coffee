@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'FormshowCtrl', ($scope, $http, $routeParams, formData, Auth, $location, Utils) ->
+.controller 'FormshowCtrl', ($scope, $http, $routeParams, formData, Auth, $location, Utils, $window) ->
 
   $scope.form = {};
   formId = $routeParams.id
@@ -24,6 +24,9 @@ angular.module 'greenApp'
       return "/results/#{form._id}"
     else
       return "/forms/#{form._id}"
+
+  $scope.goBack = ->
+    $window.history.back()
 
   $scope.init = ->
     _loadFormData()
