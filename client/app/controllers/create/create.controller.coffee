@@ -206,7 +206,7 @@ angular.module 'greenApp'
             pts = $scope.findSumOfPoints(fld.choices)
 
           $scope.form.sections[skey].fields[key].possible_points = pts
-          if pts isnt 'NaN' and !$scope.form.sections[skey].fields[key].has_condition
+          if pts isnt 'NaN' and !$scope.form.sections[skey].fields[key].has_condition or $scope.form.sections[skey].fields[key].is_bonus
             if $scope.form.sections[skey].fields[key].is_bonus
               $scope.form.sections[skey].bonus_points += pts
             else
@@ -385,7 +385,7 @@ angular.module 'greenApp'
       .success (data, status) ->
         $scope.formSaving = false
         $scope.enableFormSaveButton = true
-        $location.path('#/forms')
+        $location.path('/forms')
 
   $scope.unPublishForm = ->
     $scope.form.status = 'Unpublished'

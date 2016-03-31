@@ -121,10 +121,11 @@ angular.module 'greenApp'
     section.total_points = 0
     section.aquired_points = 0
     section.possible_points = 0
+
     for field, key in section.fields
       if field.aquired_points
         section.aquired_points+= field.aquired_points
-      if field.has_condition is false
+      if field.has_condition is false and field.is_bonus isnt true
         section.possible_points+= field.possible_points
     _updateFormScore()
 
@@ -133,9 +134,11 @@ angular.module 'greenApp'
     $scope.form.aquired_points = 0
     $scope.form.total_points = 0
     for section, key in $scope.form.sections
+      console.log section.possible_points
       if section.aquired_points
         $scope.form.aquired_points += section.aquired_points
       $scope.form.total_points+= section.possible_points
+      $scope.form.total_points+= section.bonus_points
 
   $scope.watchResponses = (field, section, choice) ->
     $scope.enableDraft = false
