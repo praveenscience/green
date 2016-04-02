@@ -88,11 +88,13 @@
         <div class="row-fluid">
           <div class="col-lg-12 col-sm-12">
             <div class="pull-right">
-              <a ng-href="{{getFormLink(currentForm)}}" class="btn btn-sm btn-info" ng-if="currentForm.status == 'Unpublished'"><em class="icon icon-pencil2"></em>&nbsp; Edit form</a> &nbsp;&nbsp;&nbsp;
+              <a ng-href="{{getFormLink(currentForm)}}" class="btn btn-sm btn-info" ng-if="currentForm.status == 'Unpublished'">Edit form</a> &nbsp;&nbsp;&nbsp;
 
-              <a ng-href="forms/{{currentForm._id}}" class="btn btn-sm btn-default" ng-if="currentForm.status == 'Published'"><em class="icon icon-eye"></em>&nbsp;  Preview form</a> &nbsp;&nbsp;&nbsp;
+              <button ng-click="cloneForm(currentForm._id)" class="btn btn-sm btn-default" ng-if="currentForm.status == 'Published'">Clone</button> &nbsp;&nbsp;&nbsp;
 
-              <a ng-href="{{getFormLink(currentForm)}}" class="btn btn-sm btn-info" ng-if="currentForm.status == 'Published'"><em class="icon icon-eye"></em>&nbsp;  View Responses</a> &nbsp;&nbsp;&nbsp;
+              <a ng-href="forms/{{currentForm._id}}" class="btn btn-sm btn-default" ng-if="currentForm.status == 'Published'">Preview form</a> &nbsp;&nbsp;&nbsp;
+
+              <a ng-href="{{getFormLink(currentForm)}}" class="btn btn-sm btn-info" ng-if="currentForm.status == 'Published'">View Responses</a> &nbsp;&nbsp;&nbsp;
 <!--               <a href="" class="btn btn-danger btn-sm" ng-click="removeForm(currentForm, true)" tooltip="Remove this form! (think twice)" tooltip-append-to-body="true">
                 <em class="icon icon-remove"></em>
               </a> -->

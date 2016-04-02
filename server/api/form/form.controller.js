@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
+var mongoose = require('mongoose');
 var Form = require('./form.model');
 var Section = require('../section/section.model');
 var Field = require('../field/field.model');
@@ -173,6 +174,31 @@ exports.destroy = function(req, res) {
     });
   });
 };
+
+exports.clone = function(req, res) {
+   Form.findById(req.params.id, function(err, form) {
+    if (err) {
+      return handleError(res, err);
+    }
+
+    if (!form) {
+      return res.status(404);
+    }
+    var newForm = form;
+    newForm._id = mongoose.Types.ObjectId();
+    newForm.created = new Date();
+    newForm.status = "Unpublished";
+
+    var newFormClass = new Form(newForm);
+    newFormClass.save(function(err, newfrm){
+      if (err) {
+        return handleError(res, err);
+      }
+      return res.status(201).json(newfrm);
+    })
+  });
+}
+
 
 function handleError(res, err) {
   return res.send(500, err);

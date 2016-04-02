@@ -13,6 +13,8 @@ router.put('/:id', auth.hasRole('admin'), controller.update);
 router.patch('/:id', auth.hasRole('admin'),  controller.update);
 router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 
+router.post('/:id/clone', auth.hasRole('admin'), controller.clone);
+
 router.put('/s/:id', auth.isAuthenticated(), controller.updatesection)
 router.delete('/s/:id/:sid', auth.isAuthenticated(), controller.removesection)
 

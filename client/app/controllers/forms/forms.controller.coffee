@@ -103,6 +103,12 @@ angular.module 'greenApp'
     SweetAlert.swal(Utils.getAlertSettings('result'), (isConfirm) ->
       _handleResultDelete(isConfirm, result))
 
+  $scope.cloneForm = (id) ->
+    $http.post "/api/forms/#{id}/clone"
+      .success (data, success) ->
+        $location.path("/forms/edit/#{data._id}")
+
+
   _handleResultDelete = (isConfirm, result) ->
     if isConfirm
       $http.delete "/api/results/#{result._id}"
