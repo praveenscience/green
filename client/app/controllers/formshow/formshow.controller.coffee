@@ -138,7 +138,7 @@ angular.module 'greenApp'
       if section.aquired_points
         $scope.form.aquired_points += section.aquired_points
       $scope.form.total_points+= section.possible_points
-      $scope.form.total_points+= section.bonus_points
+      # $scope.form.total_points+= section.bonus_points
 
   $scope.watchResponses = (field, section, choice) ->
     $scope.enableDraft = false
