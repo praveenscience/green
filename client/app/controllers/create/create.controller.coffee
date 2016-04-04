@@ -175,15 +175,16 @@ angular.module 'greenApp'
   $scope.optionsSortableOptions =
     containment: 'parent'
     placeholder: 'ui-state-option-highlight'
-    handle: '> .draghandle'
-    beforeStop: (e, ui) ->
-      $scope.currentField = _.find($scope.section.fields, (v) -> v._id == ui.item[0].dataset.field)
-      for index, val of $scope.currentField.choices
-        val.seq = index
+    handle: '> .choicedraghandle'
     stop: (e, ui) ->
+      $scope.currentField = _.find($scope.section.fields, (v) -> v._id == ui.item[0].dataset.field)
+      i = 0
+      while i < $scope.currentField.choices.length
+        $scope.currentField.choices[i].seq = i
+        i++
       $timeout ->
         $scope.submitCurrentSection()
-      , 100
+      , 500
 
   $scope.getFormatedDate = Utils.getFormatedDate
   $scope.pluralize = Utils.pluralize
