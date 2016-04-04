@@ -59,28 +59,27 @@ var FormSchema = new Schema({
   }]
 });
 
-FormSchema
-  .pre('remove', function(next) {
-    var sections = this.sections;
-    if (sections && sections.length > 0) {
-      async.each(sections, function(sec, callback) {
-        Section.findByIdAndRemove(sec, function(secerr, secobj) {
-          if (!secerr && secobj) {
-            secobj.remove(function(err) {
-              if (!err) callback();
-            });
-          }
-        })
-      }, function(err) {
-        console.log(err);
-        if (!err) {
-          next();
-        }
-      });
-    } else {
-      next();
-    }
-  });
+// FormSchema
+//   .pre('remove', function(next) {
+//     var sections = this.sections;
+//     if (sections && sections.length > 0) {
+//       async.each(sections, function(sec, callback) {
+//         Section.findByIdAndRemove(sec, function(secerr, secobj) {
+//           if (!secerr && secobj) {
+//             secobj.remove(function(err) {
+//               if (!err) callback();
+//             });
+//           }
+//         })
+//       }, function(err) {
+//         if (!err) {
+//           next();
+//         }
+//       });
+//     } else {
+//       next();
+//     }
+//   });
 
 FormSchema.plugin(deepPopulate, {
   whitelist: [
