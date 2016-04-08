@@ -218,7 +218,7 @@ angular.module 'greenApp'
     return if !$scope.form.sections
     $scope.form.total_points = 0
     for section, key in $scope.form.sections
-      $scope.form.total_points += (section.possible_points + section.bonus_points)
+      $scope.form.total_points += (section.possible_points)
 
   $scope.init = ->
     return unless formId

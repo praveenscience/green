@@ -134,10 +134,9 @@ angular.module 'greenApp'
     $scope.form.aquired_points = 0
     $scope.form.total_points = 0
     for section, key in $scope.form.sections
-      console.log section.possible_points
       if section.aquired_points
         $scope.form.aquired_points += section.aquired_points
-      $scope.form.total_points+= section.possible_points
+      $scope.form.total_points += section.possible_points
       # $scope.form.total_points+= section.bonus_points
 
   $scope.watchResponses = (field, section, choice) ->
