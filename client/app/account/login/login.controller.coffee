@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'greenApp'
-.controller 'LoginCtrl', ($scope, Auth, $location, $window) ->
+.controller 'LoginCtrl', ($scope, Auth, $location, $window, $cookieStore) ->
 
   rand = Math.floor((Math.random()*4)+1)
 
@@ -28,7 +28,16 @@ angular.module 'greenApp'
         password: $scope.user.password
 
       .then ->
-        $location.path '/forms'
+        console.log "Is coming here...."
+        if typeof $cookieStore.get('returnUrl') != 'undefined' and $cookieStore.get('returnUrl') != ''
+          console.log "Inside if the cookies tore"
+          console.log $cookieStore.get('returnUrl')
+          $location.path $cookieStore.get('returnUrl')
+          $cookieStore.remove 'returnUrl'
+        else
+          $location.path '/'
+          console.log $cookieStore.get('returnUrl')
+
 
       .catch (err) ->
         $scope.errors.other = err.message

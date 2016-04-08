@@ -4,6 +4,7 @@ angular.module 'greenApp'
 .config ($routeProvider) ->
   $routeProvider.when '/certificates',
     templateUrl: 'app/controllers/certificate/certificate.html'
+    authenticate: true
     controller: 'CertificateCtrl'
     resolve:
       certificate: ($route) ->
@@ -12,6 +13,7 @@ angular.module 'greenApp'
   .when '/certificates/new',
     templateUrl: 'app/controllers/certificate/create_certificate.html'
     controller: 'CertificateCtrl'
+    authenticate: true
     resolve:
       certificate: ($route) ->
         return null
@@ -19,6 +21,7 @@ angular.module 'greenApp'
   .when '/certificates/:id',
     templateUrl: 'app/controllers/certificate/create_certificate.html'
     controller: 'CertificateCtrl'
+    authenticate: true
     resolve:
       certificate: ($q, $timeout, $route, $http) ->
         deferred = $q.defer()

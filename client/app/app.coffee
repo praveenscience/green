@@ -33,23 +33,36 @@ angular.module 'greenApp', [
 
   # Intercept 401s and redirect you to login
   responseError: (response) ->
-    if response.status is 401
-      $location.path '/'
+    if response.status == 401
+      # Create cookie with location info before redirecting
+      hostArray = location.host.split('.');
+      if hostArray[hostArray.length - 1] is 'edu'
+        if $location.url() isnt '/login'
+          $cookieStore.put 'returnUrl', $location.url()
+        $location.path '/'
+      else
+        if $location.url() != '/lg'
+          $cookieStore.put 'returnUrl', $location.url()
+        $location.path '/lg'
+
       # remove any stale tokens
       $cookieStore.remove 'token'
 
     $q.reject response
 
-.run ($rootScope, $location, Auth) ->
+.run ($rootScope, $location, Auth, $cookieStore) ->
   # editableOptions.theme = 'bs3'
   # Redirect to login if route requires auth and you're not logged in
   $rootScope.$on '$routeChangeStart', (event, next) ->
     Auth.isLoggedInAsync (loggedIn) ->
       hostArray = location.host.split('.');
       if hostArray[hostArray.length - 1] is 'edu'
-        window.location.href = "/login" if next.authenticate and not loggedIn
+        if $location.url() isnt '/login' and !$cookieStore.get('returnUrl')
+          $cookieStore.put('returnUrl', $location.url());
+        if next.authenticate and !loggedIn
+          window.location.href = "/login"
       else
-        window.location.href = "/lg" if next.authenticate and not loggedIn
-
-
-
+        if $location.url() isnt '/lg'
+          $cookieStore.put('returnUrl', $location.url());
+        if next.authenticate and !loggedIn
+          window.location.href = "/lg"
