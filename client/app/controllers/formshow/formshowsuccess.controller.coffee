@@ -21,7 +21,7 @@ angular.module 'greenApp'
 
   $scope.init = ->
     _loadFormData()
-    _showAlert() if $scope.certificate
+
 
   _showAlert = ->
     SweetAlert.swal {
@@ -51,6 +51,7 @@ angular.module 'greenApp'
             $scope.certificate = results[0].certificate
             # _generatePDF()
             _generateGraph()
+            _showAlert() if $scope.certificate
 
   _generateGraph = ->
     for i, val of $scope.results.results
