@@ -57,7 +57,7 @@ function hasRole(roleRequired) {
  * Returns a jwt token signed by the app secret
  */
 function signToken(id) {
-  return jwt.sign({_id: id}, config.secrets.session, {expiresInMinutes: 60 * 5});
+  return jwt.sign({_id: id}, config.secrets.session);
 }
 
 /**
@@ -70,6 +70,17 @@ function setTokenCookie(req, res) {
   var token = signToken(user._id, user.role);
   res.cookie('token', JSON.stringify(token));
   res.redirect('/');
+
+  // return the user to the request page (oAuth) or homepage
+  if (typeof req.cookies.returnUrl != 'undefined')
+  {
+    res.redirect(req.cookies.returnUrl.replace(/"/g, "") || '/');
+  }
+  else
+  {
+    res.redirect('/');
+  }
+
 }
 
 exports.isAuthenticated = isAuthenticated;

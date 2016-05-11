@@ -37,12 +37,14 @@ angular.module 'greenApp', [
       # Create cookie with location info before redirecting
       hostArray = location.host.split('.');
       if hostArray[hostArray.length - 1] is 'edu'
-        if $location.url() isnt '/login'
-          $cookieStore.put 'returnUrl', $location.url()
+        if window.location.pathname != '/' or window.location.pathname != '/login'
+          if window.location.pathname != '/'
+            $cookieStore.put 'returnUrl', window.location.pathname
+
         $location.path '/'
       else
         if $location.url() != '/lg'
-          $cookieStore.put 'returnUrl', $location.url()
+          $cookieStore.put 'returnUrl', window.location.pathname
         $location.path '/lg'
 
       # remove any stale tokens
@@ -57,12 +59,13 @@ angular.module 'greenApp', [
     Auth.isLoggedInAsync (loggedIn) ->
       hostArray = location.host.split('.');
       if hostArray[hostArray.length - 1] is 'edu'
-        if $location.url() isnt '/login' and !$cookieStore.get('returnUrl')
-          $cookieStore.put('returnUrl', $location.url());
+        if(window.location.pathname isnt '/login' or window.location.pathname != '/') and !$cookieStore.get('returnUrl')
+          if window.location.pathname != '/'
+            $cookieStore.put('returnUrl', window.location.pathname);
         if next.authenticate and !loggedIn
           window.location.href = "/login"
       else
         if $location.url() isnt '/lg'
-          $cookieStore.put('returnUrl', $location.url());
+          $cookieStore.put('returnUrl', window.location.pathname);
         if next.authenticate and !loggedIn
           window.location.href = "/lg"
