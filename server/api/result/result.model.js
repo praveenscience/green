@@ -11,6 +11,7 @@ var ResultSchema = new Schema({
     username: String,
     email: String
   },
+  sections: Object,
   expires: {
     type: Date
   },

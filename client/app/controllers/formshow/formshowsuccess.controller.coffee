@@ -48,6 +48,7 @@ angular.module 'greenApp'
           .success (results, resultsStatus) ->
             $scope.results = results[0]
             $scope.form = data
+            $scope.total_points = results[0].total_points
             $scope.certificate = results[0].certificate
             # _generatePDF()
             _generateGraph()
@@ -101,7 +102,6 @@ angular.module 'greenApp'
         .staggerLabels(true)
         .showValues(true)
         .tooltipContent( (key, x, y, e, graph) ->
-          console.log e
           """<h3>#{x}</h3>
             <div class='tooltip-cont'>
               <p><strong>#{e.point.aquired_points}</strong><small  class='text-muted'> out of</small> <strong class='text-muted'>#{e.point.possible_points} </strong> <small class='text-muted'> points</small> – <strong>#{parseFloat(y).toFixed(2)}% </strong></p>
@@ -111,7 +111,7 @@ angular.module 'greenApp'
         #.color(colors)
 
       #chart.yAxis.scale().domain([0, 100]);
-      chart.forceY([0, 100])
+      # chart.forceY([0, 100])
       chart.yAxis
         .tickFormat((d) -> d3.format(',.f')(d) + "%");
 

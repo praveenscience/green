@@ -49,7 +49,13 @@ angular.module 'greenApp'
 
   respond: (responseForm) ->
     responses = []
+    sections = []
     for sectionIndex, section of responseForm.sections
+      sections.push
+        id: section._id
+        possible_points: section.possible_points,
+        aquired_points: section.aquired_points
+
       for fieldIndex, field of section.fields
         response =
           section_id: section._id
@@ -79,6 +85,7 @@ angular.module 'greenApp'
       form: responseForm._id
       submitted: responseForm.submitted
       results: responses
+      sections: sections
       points: responseForm.aquired_points
       total_points: responseForm.total_points
       results_id: responseForm.results_id if responseForm.results_id isnt undefined

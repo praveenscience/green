@@ -51,12 +51,22 @@ angular.module 'greenApp'
 
   _formatForm = (data, results) ->
     form = data
+    form.total_points = results[0].total_points
     form.results_id = results[0]._id
+
+    newsecitons = {}
+
+    for i, sec of results[0].sections
+      newsecitons[sec.id] =
+        possible_points: sec.possible_points
+        aquired_points: sec.aquired_points
 
     for index, field of results[0].results
       section = _.find form.sections, (s) -> s._id is field.section_id
       secField = _.find section.fields, (s) -> s._id is field.field_id
       secField.aquired_points = field.aquired_points
+
+      section.possible_points = newsecitons[field.section_id].possible_points
 
       section.aquired_points = 0 if section.aquired_points is undefined
 
@@ -123,10 +133,13 @@ angular.module 'greenApp'
     section.possible_points = 0
 
     for field, key in section.fields
+
       if field.aquired_points
         section.aquired_points+= field.aquired_points
+
       if field.has_condition is false and field.is_bonus isnt true
-        section.possible_points+= field.possible_points
+        section.possible_points += field.possible_points
+
     _updateFormScore()
 
   _updateFormScore = ->
@@ -136,8 +149,9 @@ angular.module 'greenApp'
     for section, key in $scope.form.sections
       if section.aquired_points
         $scope.form.aquired_points += section.aquired_points
+
       $scope.form.total_points += section.possible_points
-      # $scope.form.total_points+= section.bonus_points
+
 
   $scope.watchResponses = (field, section, choice) ->
     $scope.enableDraft = false

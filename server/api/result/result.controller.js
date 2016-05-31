@@ -174,6 +174,7 @@ exports.update = function(req, res) {
     points: req.body.points,
     total_points: req.body.total_points,
     results: req.body.results,
+    sections: req.body.sections,
     status: req.body.submitted ? 'submitted' : 'draft'
   };
 
