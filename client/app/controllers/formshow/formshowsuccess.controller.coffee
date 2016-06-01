@@ -73,6 +73,11 @@ angular.module 'greenApp'
     l = 0
     for j, sec of $scope.secitons
       percentage = 0
+
+      if sec.possible_points is 0
+        l++
+        continue
+
       if sec.possible_points != 0
         percentage = (sec.aquired_points / sec.possible_points) * 100
       values.push({
@@ -101,6 +106,7 @@ angular.module 'greenApp'
         .y((d) -> d.y)
         .staggerLabels(true)
         .showValues(true)
+        .showXAxis(false)
         .tooltipContent( (key, x, y, e, graph) ->
           """<h3>#{x}</h3>
             <div class='tooltip-cont'>
@@ -110,8 +116,8 @@ angular.module 'greenApp'
         )
         #.color(colors)
 
-      #chart.yAxis.scale().domain([0, 100]);
-      # chart.forceY([0, 100])
+      chart.yAxis.scale().domain([0, 100]);
+      chart.forceY([0, 100])
       chart.yAxis
         .tickFormat((d) -> d3.format(',.f')(d) + "%");
 
